@@ -42,6 +42,19 @@
 - [ ] Site / landing page
 - [ ] [Outro]
 
+## Google Integration Level
+
+- [ ] **Nível 1** — GTM + GA4 + Search Console (padrão mínimo — 2–3h)
+- [ ] **Nível 2** — + Google Ads + Meta Pixel + Looker Studio (1 dia)
+- [ ] **Nível 3** — + GA4 Data API + dashboard admin + Sheets automático (3–5 dias)
+- [ ] **Nível 4** — + Ads API programática + Drive + Gmail + webhooks (2–4 sem)
+
+**Perguntas a responder:**
+- Cliente já tem GA4 e Google Ads? [ ] Sim [ ] Não
+- Tipo de negócio: [e-commerce / serviços / saúde / educação / outro]
+- Precisa de relatório automático? [ ] Sim [ ] Não
+- Tem agendamento? → integrar Google Calendar [ ] Sim [ ] Não
+
 ---
 
 ## Stack

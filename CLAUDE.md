@@ -124,6 +124,29 @@ Status: [X]% concluído
 Bloqueios: [lista | nenhum]
 ```
 
+## Integrações Google (4 Níveis)
+
+Todo projeto recebe ao menos o Nível 1. Escolher o nível certo antes de implementar.
+
+| Nível | O que inclui | Tempo |
+|-------|-------------|-------|
+| **1 — Básico** | GTM + GA4 + Search Console | 2–3h |
+| **2 — Tráfego Pago** | + Google Ads + Meta Pixel + Looker Studio | 1 dia |
+| **3 — Dashboard** | + GA4 Data API + dashboard no admin + Sheets | 3–5 dias |
+| **4 — SaaS Completo** | + Ads API + Drive + Gmail + People + webhooks | 2–4 sem |
+
+**Regras obrigatórias (sempre):**
+1. NUNCA hardcodar credenciais — sempre `.env`
+2. SEMPRE criar `.env.example` com todas as variáveis
+3. SEMPRE try/catch + logging em chamadas de API Google
+4. SEMPRE exponential backoff para rate limits
+5. Cada cliente = um projeto separado no Google Cloud
+6. Escopos mínimos no OAuth
+7. Cache nas chamadas GA4 Data API (dados mudam a cada 4h)
+8. Estrutura: `src/services/google/` com um arquivo por integração
+
+**Perguntas antes de implementar:** ver `contextos/bruto/2026-05-14_biblioteca-google-integrations.md`
+
 ## MCPs recomendados
 
 ### Tier 1 — Essenciais

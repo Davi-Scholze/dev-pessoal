@@ -157,3 +157,4 @@ Se não há task de código ativa, orientar Davi para:
 | Tráfego Pago com IA | `2026-05-13_biblioteca-trafego-pago-ia.md` | `/trafego-pago` |
 | Agências IA e Sistemas Marketing | `2026-05-13_pesquisa-agencias-ia-sistemas-marketing.md` | `/ads-audit` + `/content-creator` |
 | Sistema Produção de Conteúdo | `2026-05-13_referencia-sistema-producao-conteudo.md` | `/content-creator` |
+| **Google Integrations** | `2026-05-14_biblioteca-google-integrations.md` | (4 níveis — consultar antes de qualquer integração Google) |
