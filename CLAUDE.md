@@ -1,7 +1,7 @@
 # CLAUDE.md — Projetos Dev Pessoais
 > Regras globais de IA para todos os projetos pessoais de Davi Scholze.
 > Leia este arquivo no início de cada sessão.
-> Última atualização: 2026-05-13
+> Última atualização: 2026-05-15
 
 ## Quem sou eu
 - **Nome:** Davi Pereira Scholze
@@ -14,7 +14,7 @@
 
 1. `MAPA_PESSOAL.md` — visão geral e estado atual (sempre primeiro)
 2. `REGRAS_SESSAO.md` — regras operacionais de toda sessão
-3. `ferramentas/skills/CATALOGO.md` — skills disponíveis
+3. `.claude/skills/` — skills estruturadas por domínio
 4. CLAUDE.md do projeto específico (se existir)
 
 ## Estrutura deste espaço
@@ -22,27 +22,31 @@
 ```
 Projetos Dev Pessoais/
 ├── CLAUDE.md                  ← você está aqui
-├── MAPA_PESSOAL.md            ← entrada rápida (leia antes de qualquer sessão)
-├── REGRAS_SESSAO.md           ← regras operacionais de toda sessão
+├── MAPA_PESSOAL.md
+├── REGRAS_SESSAO.md
+├── .claude/
+│   ├── agents/        ← 18 agentes especializados (SCHOLZE-STACK)
+│   ├── skills/        ← skills estruturadas (SKILL.md + templates)
+│   ├── hooks/         ← enforcement automático (pre/post tool-use)
+│   ├── commands/      ← slash commands (/scholze-*)
+│   ├── output-styles/
+│   └── settings.json
 ├── Repositorios/
-│   ├── decon-sistema/         ← sistema privado (prioridade 1)
-│   │   └── contextos/bruto/   ← contexto bruto do projeto
-│   │   └── contextos/fluxos/  ← contexto aprovado para dev
-│   ├── grants-etl-pipeline/   ← ETL público
-│   └── dojo-familia-scholze/  ← app artes marciais (prioridade 2)
-│       └── contextos/bruto/
-│       └── contextos/fluxos/
+│   ├── decon-sistema/         ← prioridade 1
+│   ├── dojo-familia-scholze/  ← prioridade 2
+│   └── grants-etl-pipeline/
 ├── contextos/
 │   ├── CONTEXTO_GERAL.md      ← fonte de verdade de todos os projetos
 │   ├── bruto/                 ← contexto bruto recebido em sessões
 │   ├── fluxos/                ← contexto processado, pronto para dev
-│   ├── notebooklm/            ← notebooks NotebookLM
-│   └── prompts/               ← prompts reutilizáveis
+│   ├── integracao-*.md        ← referências de integração (Google/Supabase/Stripe)
+│   └── notebooklm/
 ├── ferramentas/
-│   └── skills/
-│       └── CATALOGO.md        ← todas as skills disponíveis
+│   └── skills/CATALOGO.md     ← skills globais invocáveis (Claude Code)
 └── docs/
-    └── INDEX.md               ← mapa completo de documentação
+    ├── playbooks/
+    ├── decisoes/
+    └── padroes/
 ```
 
 ## Regra de Contexto Bruto
@@ -70,7 +74,7 @@ ENTRADA → contextos/bruto/YYYY-MM-DD_descricao.md  ← salvar imediatamente, s
 4. **Zero credenciais no código** — sempre via `.env`, nunca hardcoded
 5. **Economia de contexto** — leia MAPA_PESSOAL.md antes de qualquer arquivo completo
 6. **Commits em português** — imperativo, padrão: `tipo(escopo): descrição`
-7. **Skills primeiro** — antes de resolver manualmente, verificar `ferramentas/skills/CATALOGO.md`
+7. **Skills primeiro** — verificar `.claude/skills/` antes de resolver manualmente
 8. **Contexto antes de código** — para features complexas, consulte NotebookLM antes de implementar
 9. **Modularização** — arquivos > 400 linhas devem ser sinalizados para refatoração
 10. **Handoff completo** — ao fim de cada sessão, atualizar `contextos/CONTEXTO_GERAL.md`
@@ -124,40 +128,15 @@ Status: [X]% concluído
 Bloqueios: [lista | nenhum]
 ```
 
-## Integrações Google (4 Níveis)
+## Integrações Google
 
-Todo projeto recebe ao menos o Nível 1. Escolher o nível certo antes de implementar.
+Todo projeto recebe ao menos Nível 1 (GTM + GA4 + Search Console).
+Ver `contextos/integracao-google-apis.md` para níveis, SDKs, regras e perguntas de checklist.
 
-| Nível | O que inclui | Tempo |
-|-------|-------------|-------|
-| **1 — Básico** | GTM + GA4 + Search Console | 2–3h |
-| **2 — Tráfego Pago** | + Google Ads + Meta Pixel + Looker Studio | 1 dia |
-| **3 — Dashboard** | + GA4 Data API + dashboard no admin + Sheets | 3–5 dias |
-| **4 — SaaS Completo** | + Ads API + Drive + Gmail + People + webhooks | 2–4 sem |
+## MCPs ativos
 
-**Regras obrigatórias (sempre):**
-1. NUNCA hardcodar credenciais — sempre `.env`
-2. SEMPRE criar `.env.example` com todas as variáveis
-3. SEMPRE try/catch + logging em chamadas de API Google
-4. SEMPRE exponential backoff para rate limits
-5. Cada cliente = um projeto separado no Google Cloud
-6. Escopos mínimos no OAuth
-7. Cache nas chamadas GA4 Data API (dados mudam a cada 4h)
-8. Estrutura: `src/services/google/` com um arquivo por integração
-
-**Perguntas antes de implementar:** ver `contextos/bruto/2026-05-14_biblioteca-google-integrations.md`
-
-## MCPs recomendados
-
-### Tier 1 — Essenciais
-GitHub MCP, PostgreSQL MCP, Slack MCP, Google Drive MCP, Notion MCP, Fetch MCP
-
-### Tier 2 — Marketing (quando houver campanhas)
-- Google Ads MCP: `github.com/cohnen/mcp-google-ads`
-- Meta Ads MCP: `github.com/pipeboard-co/meta-ads-mcp`
-- Puppeteer MCP (carrosséis + screenshots)
-
-Ver `AGENTS.md` para instruções de instalação e tabela completa.
+**Tier 1 (ativos):** filesystem, github, git, memory — ver `.mcp.json`
+**Tier 2 (marketing):** Google Ads MCP, Meta Ads MCP, Puppeteer — ver `AGENTS.md`
 
 ## Pipeline de Conteúdo (carrosséis)
 
@@ -169,7 +148,7 @@ roteiro.md → render.js → Puppeteer → PNG 1350px
 instagram/slide-01.png ... slide-08.png + legenda.md
 ```
 
-## Modelo de Negócio (referência)
+## Modelo de Negócio
 
 | Serviço | Ticket |
 |---------|--------|
@@ -179,24 +158,27 @@ instagram/slide-01.png ... slide-08.png + legenda.md
 | Retainer marketing | R$5.700–R$28.500/mês |
 
 **Fórmula:** Custo real (API) = R$10–50 por entrega. Cobrar 30% do ROI anual recuperado.
-
-Ver `AGENTS.md` para casos reais, nichos lucrativos e modelos de engajamento.
+Ver `docs/playbooks/como-adicionar-cliente.md` e `AGENTS.md` para casos reais.
 
 ## Template para novos clientes
 
 ```
 ferramentas/templates/cliente-novo/  ← copiar para Repositorios/[nome-cliente]/
 ```
+Ou usar: `/scholze-novo-cliente` (cria a pasta completa automaticamente)
 
 ## Referências rápidas
 
 | O que | Onde |
 |-------|------|
 | Regras operacionais de sessão | `REGRAS_SESSAO.md` |
-| Skills disponíveis | `ferramentas/skills/CATALOGO.md` |
+| Skills estruturadas (SCHOLZE-STACK) | `.claude/skills/` |
+| Skills invocáveis (Claude Code) | `ferramentas/skills/CATALOGO.md` |
 | Estado de todos os projetos | `contextos/CONTEXTO_GERAL.md` |
-| Agentes, MCPs e modelo de negócio | `AGENTS.md` |
+| 18 agentes + MCPs + negócio | `AGENTS.md` |
 | NotebookLMs | `contextos/notebooklm/README.md` |
-| Bibliotecas de conhecimento | `contextos/bruto/` (ver REGRAS_SESSAO.md) |
+| Integrações (Google/Supabase/Stripe) | `contextos/integracao-*.md` |
+| Playbooks e padrões | `docs/playbooks/`, `docs/padroes/` |
+| Decisões de arquitetura | `docs/decisoes/README.md` |
 | Template de novo cliente | `ferramentas/templates/cliente-novo/` |
 | Mapa geral | `MAPA_PESSOAL.md` |

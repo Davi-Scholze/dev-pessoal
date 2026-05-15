@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/pre-tool-use/block-dangerous.py\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/post-tool-use/log-metrics.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

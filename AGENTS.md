@@ -1,85 +1,131 @@
-# AGENTS.md — Agentes e MCPs para Projetos Pessoais
-> Guia global de agentes de IA, MCPs e modelos de negócio.
+# AGENTS.md — Agentes, MCPs e Modelo de Negócio
+> Guia global de agentes de IA, MCPs e modelo de negócio.
 > Válido para todos os projetos pessoais de Davi Scholze.
-> Última atualização: 2026-05-13
+> Última atualização: 2026-05-15
 
 ---
 
-## Os 6 Agentes com Maior Demanda (dados reais 2025-2026)
+## 18 Agentes Especializados (SCHOLZE-STACK)
 
-| # | Agente | O que faz | Skill |
-|---|--------|-----------|-------|
-| 1 | **Auditoria de Ads** | Analisa conta Google/Meta, gera relatório de oportunidades | `/ads-audit` |
-| 2 | **Conteúdo Instagram** | Carrosséis, captions, hashtags com identidade da marca | `/content-creator` |
-| 3 | **Relatório Semanal** | Coleta dados de múltiplas plataformas, envia resumo executivo | `/ads-audit` |
-| 4 | **Qualificação de Leads** | Triagem e segmentação automática no CRM | `/agentes-ia` |
-| 5 | **SEO** | Audit, geração de artigos, meta-dados | (manual) |
-| 6 | **Monitoramento de Concorrentes** | Rastreia anúncios e conteúdo semanalmente | `/ads-audit` |
+Cada agente vive em `.claude/agents/<nome>.md`. O `master-orchestrator` é o ponto de entrada padrão.
+
+### Orquestração
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `master-orchestrator` | Sonnet | Primeira parada de qualquer pedido; classifica e despacha |
+| `planner` | Opus | Antes de qualquer feature complexa; produz plano com critérios de aceite |
+| `researcher` | Sonnet | Antes de decisão arquitetural; consulta NotebookLM + web |
+
+### Frontend / Design
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `frontend-designer` | Sonnet | Criar/refatorar componentes React, páginas, layouts |
+| `design-reviewer` | Sonnet | Review de qualquer PR com mudança visual |
+| `animation-engineer` | Sonnet | Micro-interações, transições, Framer Motion / Reanimated |
+
+### Backend / Dados
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `backend-architect` | Opus | Modelagem de schema, contratos de API, decisões arquiteturais |
+| `db-engineer` | Sonnet | Migrations Postgres, RLS, índices, otimizações |
+| `integration-engineer` | Sonnet | Conectar APIs externas (Stripe, Google, WhatsApp) |
+
+### Mobile / Desktop
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `mobile-engineer` | Sonnet | Features React Native + Expo + NativeWind |
+| `desktop-engineer` | Sonnet | Features Tauri 2.0 (Rust + WebView) |
+
+### Qualidade
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `test-architect` | Sonnet | Definir pirâmide de testes; cobertura ausente em área crítica |
+| `e2e-architect` | Sonnet | Criar/atualizar specs Playwright de fluxos críticos |
+| `code-reviewer` | Sonnet | Review de PR contra checklist de qualidade e segurança |
+| `refactor-surgeon` | Opus | Arquivo > 400 linhas; reorganização de módulo |
+
+### Segurança / LGPD
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `security-guardian` | Sonnet | Review de PR que toca auth, dados ou infra |
+| `lgpd-auditor` | Sonnet | PR com formulários, banco ou APIs que coletam dados do usuário |
+
+### DevOps
+
+| Agente | Modelo | Quando invocar |
+|--------|--------|----------------|
+| `devops-engineer` | Sonnet | CI/CD, Docker, deploy Vercel/Fly.io/EAS, observabilidade |
 
 ---
 
 ## MCPs por Tier
 
-### Tier 1 — Essenciais (instalar em qualquer projeto)
-
-| MCP | Função | Instalar |
-|-----|--------|---------|
-| GitHub MCP | Repos, PRs, CI/CD | Via Claude Code settings |
-| PostgreSQL MCP | Banco em linguagem natural | Via Claude Code settings |
-| Slack MCP | Relatórios, alerts, comunicação | Via Claude Code settings |
-| Google Drive MCP | Documentos e planilhas de clientes | Via Claude Code settings |
-| Notion MCP | Base de conhecimento, CRM simples | Via Claude Code settings |
-| Fetch MCP | Buscar conteúdo web para análise | Via Claude Code settings |
-
-### Tier 2 — Marketing (agências e projetos com campanhas)
-
-| MCP | Função | Repositório |
-|-----|--------|------------|
-| Google Ads MCP | list_accounts, execute_gaql_query, get_campaign_performance | github.com/cohnen/mcp-google-ads |
-| Meta Ads MCP | Campanhas Meta, audiences, creative performance | github.com/pipeboard-co/meta-ads-mcp |
-| Puppeteer MCP | Screenshots, carrosséis, automação de browser | Via Claude Code settings |
-| Browserbase MCP | Automação cloud (alternativa ao Puppeteer) | browserbase.com |
-| AdKit | Google Ads + Meta Ads direto no Claude (comercial) | adkit.so |
-| Composio | Hub com 250+ integrações de uma vez | composio.dev |
-
-### Tier 3 — Orquestração (sistemas complexos)
+### Tier 1 — Ativos (configurados em `.mcp.json`)
 
 | MCP | Função |
 |-----|--------|
-| n8n MCP | Acesso direto a workflows n8n via Claude |
-| Airtable MCP | Banco de dados flexível como memória de agente |
-| Claude Squad | Múltiplos agentes Claude Code em paralelo |
-| CC Usage | Dashboard de consumo e custos por cliente |
+| `filesystem` | Acesso ao sistema de arquivos local |
+| `github` | Repos, PRs, issues, CI/CD |
+| `git` | Operações git no repositório atual |
+| `memory` | Memória persistente entre sessões |
 
----
+### Tier 2 — Marketing (adicionar quando houver campanhas)
 
-## Como Instalar MCPs
+| MCP | Função | Repositório |
+|-----|--------|------------|
+| Google Ads MCP | Auditoria e otimização de campanhas | `github.com/cohnen/mcp-google-ads` |
+| Meta Ads MCP | Campanhas Facebook/Instagram | `github.com/pipeboard-co/meta-ads-mcp` |
+| Puppeteer MCP | Screenshots, carrosséis, automação | `@modelcontextprotocol/server-puppeteer` |
+
+### Tier 3 — Orquestração avançada
+
+| MCP | Função |
+|-----|--------|
+| n8n MCP | Workflows n8n via Claude |
+| Airtable MCP | Banco flexível como memória de agente |
+| Claude Squad | Múltiplos agentes em paralelo (tmux + worktrees) |
+
+### Como adicionar MCP ao `.mcp.json`
 
 ```json
-// ~/.claude/settings.json → mcpServers
 {
   "mcpServers": {
-    "google-ads": {
-      "command": "npx",
-      "args": ["-y", "mcp-google-ads"],
-      "env": {
-        "GOOGLE_ADS_DEVELOPER_TOKEN": "",
-        "GOOGLE_ADS_CLIENT_ID": "",
-        "GOOGLE_ADS_CLIENT_SECRET": "",
-        "GOOGLE_ADS_REFRESH_TOKEN": ""
-      }
-    },
     "puppeteer": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
     },
-    "fetch": {
+    "google-ads": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-fetch"]
+      "args": ["-y", "mcp-google-ads"],
+      "env": {
+        "GOOGLE_ADS_DEVELOPER_TOKEN": "${GOOGLE_ADS_TOKEN}",
+        "GOOGLE_ADS_CLIENT_ID": "${GOOGLE_ADS_CLIENT_ID}",
+        "GOOGLE_ADS_CLIENT_SECRET": "${GOOGLE_ADS_CLIENT_SECRET}",
+        "GOOGLE_ADS_REFRESH_TOKEN": "${GOOGLE_ADS_REFRESH_TOKEN}"
+      }
     }
   }
 }
 ```
+
+---
+
+## Os 6 Agentes de Negócio com Maior Demanda
+
+| # | Agente | O que faz | Skill |
+|---|--------|-----------|-------|
+| 1 | Auditoria de Ads | Analisa conta Google/Meta, gera relatório de oportunidades | `/ads-audit` |
+| 2 | Conteúdo Instagram | Carrosséis, captions, hashtags com identidade da marca | `/content-creator` |
+| 3 | Relatório Semanal | Coleta dados de múltiplas plataformas, resumo executivo | `/ads-audit` |
+| 4 | Qualificação de Leads | Triagem e segmentação automática no CRM | `/agentes-ia` |
+| 5 | SEO | Audit, geração de artigos, meta-dados | (manual) |
+| 6 | Monitoramento de Concorrentes | Rastreia anúncios e conteúdo semanalmente | `/ads-audit` |
 
 ---
 
@@ -94,7 +140,7 @@
 
 ---
 
-## Modelo de Negócio (como vender agentes)
+## Modelo de Negócio
 
 ### Tabela de preços de referência
 
@@ -126,7 +172,7 @@
 
 ---
 
-## Ganhos de Produtividade por Tarefa (RSL/A — dados reais)
+## Ganhos de Produtividade (RSL/A — dados reais)
 
 | Tarefa | Antes | Depois |
 |--------|-------|--------|
@@ -147,12 +193,3 @@
 | Marketing digital | Relatórios automáticos, audit ads | R$33.060/mês |
 | Imóveis | Drip campaigns, follow-up | R$2.850–R$5.130/mês |
 | E-commerce | Descrições de produto, SEO | R$1.710–R$2.850/mês |
-
----
-
-## Skills Relacionadas
-
-- `/ads-audit` — auditoria Google Ads e Meta Ads
-- `/content-creator` — pipeline de carrosséis com render.js + Puppeteer
-- `/agentes-ia` — LangGraph, RAG, MCP servers, observabilidade
-- `/trafego-pago` — Google/Meta/TikTok Ads, criativos com IA

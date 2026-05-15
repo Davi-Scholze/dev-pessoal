@@ -1,7 +1,7 @@
 # Regras de Sessão — Projetos Dev Pessoais
 > Leia este arquivo no início de TODA sessão, em QUALQUER projeto.
-> É o complemento operacional do CLAUDE.md.
-> Última atualização: 2026-05-13
+> Complemento operacional do CLAUDE.md.
+> Última atualização: 2026-05-15
 
 ---
 
@@ -16,15 +16,14 @@ Bloqueios: [lista | nenhum]
 
 ---
 
-## Regras de Comportamento (todas as sessões devem seguir)
+## Regras de Comportamento
 
 ### 1. Contexto antes de código
 - Leia `MAPA_PESSOAL.md` antes de qualquer arquivo de projeto
-- Para projetos: leia o `MAPA_DO_PROJETO.md` antes do `CONTEXTO_IA_GESTOR.md`
 - Nunca escale para documentos completos se o mapa já responde
 
 ### 2. Contexto bruto = guardar, não processar
-- Qualquer contexto que chegar em sessão (mensagem longa, áudio transcrito, ideia) → salvar em `contextos/bruto/YYYY-MM-DD_descricao.md` imediatamente
+- Qualquer contexto que chegar em sessão → salvar em `contextos/bruto/YYYY-MM-DD_descricao.md` imediatamente
 - Nunca usar como base para código sem promover a `fluxos/` com OK do Davi
 - Formato de promoção: bruto → fluxos → spec → código
 
@@ -34,127 +33,132 @@ Bloqueios: [lista | nenhum]
 
 ### 4. Passo a passo com aprovação
 - Nunca avançar para próxima etapa sem OK explícito do Davi
-- Em mudanças visuais: ver → analisar → propor → testar → reportar (sempre com Playwright)
+- Em mudanças visuais: ver → analisar → propor → testar → reportar
 
-### 5. Skills primeiro
-Antes de resolver manualmente, verificar se existe skill:
+### 5. Agentes especializados primeiro
+Antes de resolver manualmente, verificar se há um agente em `.claude/agents/`:
 
-**Desenvolvimento**
-- Mobile → `/mobile-dev`
-- Interface web → `/frontend-design`
-- Testes/browser → `/playwright-testing`
-- Agentes IA → `/agentes-ia`
-- Revisão de código → `/code-review`
-- Commits → `/git-flow`
+**Fluxo padrão:** `master-orchestrator` → classifica → despacha para o agente certo
 
-**Negócio / Marketing**
-- Pagamentos → `/payments-br`
-- Tráfego pago → `/trafego-pago`
-- Auditoria de Ads → `/ads-audit`
-- Carrosséis Instagram → `/content-creator`
+| Tarefa | Agente |
+|--------|--------|
+| Feature nova (qualquer) | `master-orchestrator` → `planner` → agente especializado |
+| Decisão de schema/API | `backend-architect` (Opus) |
+| Componente React/UI | `frontend-designer` |
+| Migration/RLS | `db-engineer` |
+| Integração externa | `integration-engineer` |
+| Feature mobile | `mobile-engineer` |
+| Review de PR | `code-reviewer` + `security-guardian` |
+| Arquivo > 400 linhas | `refactor-surgeon` (Opus) |
+| PR com dados de usuário | `lgpd-auditor` |
+| Testes ausentes | `test-architect` |
+| Deploy/CI/CD | `devops-engineer` |
 
-**Design e Referência**
-- Referências design → `/web-design-ref`
-- Diagramas → `/excalidraw-diagram`
-- UIs especiais → `/antigravity`
+### 6. Skills estruturadas (`.claude/skills/`)
+Verificar antes de resolver manualmente:
 
-**Produtividade**
-- Documentos Google → `/google-workspace`
-- NotebookLM → `/notebooklm`
-- Backup de sessão → `/backup-sessao`
-- Browser de dev → `/dev-browser`
+| Domínio | Skills disponíveis |
+|---------|-------------------|
+| Dev base | `spec-driven-dev`, `git-flow-strict`, `conventional-commits`, `code-review-checklist`, `debug-systematic`, `refactor-safely` |
+| Frontend | `design-tokens`, `tailwind-shadcn-scaffold`, `responsive-mobile-first`, `accessibility-axe` |
+| Backend | `api-design-rest`, `db-schema-postgres-rls`, `edge-function-supabase` |
+| Mobile | `expo-scaffold`, `react-native-nativewind` |
+| Segurança/LGPD | `secrets-scan`, `lgpd-ripd`, `lgpd-dsr-endpoint` |
+| Testes | `vitest-unit`, `e2e-runner` |
 
-### 6. Prioridade de projetos
-1. **Decon** — retorno mais rápido, impacto direto na mãe (Denize)
+### 7. Hooks ativos (enforcement automático)
+Os hooks em `.claude/hooks/` rodam automaticamente:
+
+| Hook | Quando roda | O que faz |
+|------|------------|-----------|
+| `block-dangerous.py` | Antes de todo Bash | Bloqueia `rm -rf`, `DROP TABLE`, force push para main |
+| `route-model.py` | Antes de todo Bash | Sugere modelo correto (informativo, não bloqueia) |
+| `check-design-tokens.py` | Pre-commit | Detecta cores hardcoded (`#xxx`, `rgb()`) |
+| `check-secrets.py` | Pre-commit | Detecta credenciais no diff (Stripe, Google, AWS) |
+| `run-tests.sh` | Pre-push | Avisa para rodar lint + testes antes do push |
+| `check-lgpd.py` | Pre-push | Alerta sobre campos PII sem docs LGPD |
+| `log-metrics.py` | Após todo tool-use | Grava uso em `~/.claude/metrics.jsonl` |
+| `observability.py` | Após todo tool-use | Placeholder WebSocket (futura integração) |
+
+### 8. Prioridade de projetos
+1. **Decon** — retorno mais rápido, impacto direto na Denize
 2. **Dojô** — segundo após Decon estável
 3. **Lar Antônia** — manutenção apenas, sem novas features
 
-### 7. Perfil da Denize (usuária final da Decon)
+### 9. Perfil da Denize (usuária final do Decon)
 - Resistente a tecnologia, se perde com mudanças
 - Abordagem: devagar, simples, segura
 - Automações devem ser seguíveis por ela sozinha
 - Nunca mudar coisas que ela já aprendeu sem avisar
 
-### 8. Segurança (inegociável)
+### 10. Segurança (inegociável)
 - Zero credenciais no código — sempre `.env`
 - LGPD em todos os formulários: honeypot + timer 3s + disclaimer
 - Webhooks de pagamento: validar assinatura antes de processar
 - Dados de cartão: nunca logar ou salvar CVV
 
-### 9. Commits (padrão)
+### 11. Commits (padrão)
 ```
 tipo(escopo): descrição curta em português, imperativo
 
-tipos: feat | fix | docs | style | refactor | chore
+tipos: feat | fix | docs | style | refactor | test | chore
 ```
+Ver `docs/padroes/commits.md` para guia completo.
 
-### 10. Handoff ao encerrar
+### 12. Handoff ao encerrar
 - Pausa visual: explicar o que foi feito + pedir OK
 - Após OK: commit + push
-- Atualizar `SESSAO_BACKUP.md` do projeto
+- Atualizar `contextos/CONTEXTO_GERAL.md`
 - Identificar próxima task e entregar handoff
 
 ---
 
 ## MCPs disponíveis
 
-| MCP | Quando usar |
-|-----|------------|
-| GitHub MCP | PRs, CI/CD, code review automatizado |
-| Puppeteer MCP | Gerar carrosséis, screenshots de sites |
-| Fetch MCP | Buscar conteúdo web para análise |
-| Google Ads MCP | Auditoria e otimização de campanhas |
-| Meta Ads MCP | Auditoria Facebook/Instagram Ads |
-
-Ver `AGENTS.md` para instalação e tier completo de MCPs.
+**Tier 1 (ativos):** filesystem, github, git, memory — ver `.mcp.json`
+**Tier 2 (marketing):** Google Ads MCP, Meta Ads MCP, Puppeteer — ver `AGENTS.md`
 
 ---
 
 ## Orientação de Negócio (quando Davi perguntar o que fazer)
 
-Se não há task de código ativa, orientar Davi para:
-
 1. **Decon primeiro** — maior retorno imediato, impacto direto na Denize
 2. **Se Decon estável** → avançar Dojô (fase de planejamento)
-3. **Para novos clientes** → usar template em `ferramentas/templates/cliente-novo/`
+3. **Para novos clientes** → `/scholze-novo-cliente`
 4. **Para gerar conteúdo** → `/content-creator` (carrosséis sem Canva)
 5. **Para auditar anúncios** → `/ads-audit` (10 workflows prontos)
-6. **Para vender sistemas** → Ver `AGENTS.md` (benchmarks e fórmula de proposta)
+6. **Para vender sistemas** → ver `AGENTS.md` (benchmarks e fórmula de proposta)
 
 ---
 
-## Contextos disponíveis (onde está o quê)
+## Contextos disponíveis
 
 | O que preciso | Onde fica |
 |---------------|-----------|
 | Visão geral rápida | `MAPA_PESSOAL.md` |
 | Regras de IA | `CLAUDE.md` |
 | Estado de todos os projetos | `contextos/CONTEXTO_GERAL.md` |
-| Skills disponíveis | `ferramentas/skills/CATALOGO.md` |
-| Contexto bruto não processado | `contextos/bruto/` e `[repo]/contextos/bruto/` |
-| Fluxos aprovados para dev | `contextos/fluxos/` e `[repo]/contextos/fluxos/` |
+| Skills estruturadas | `.claude/skills/` |
+| Skills invocáveis (Claude Code) | `ferramentas/skills/CATALOGO.md` |
+| Contexto bruto não processado | `contextos/bruto/` |
+| Fluxos aprovados para dev | `contextos/fluxos/` |
 | NotebookLMs | `contextos/notebooklm/README.md` |
-| Prompts reutilizáveis | `contextos/prompts/` |
-| Docs gerais | `docs/INDEX.md` |
+| Integrações (Google/Supabase/Stripe) | `contextos/integracao-*.md` |
+| Playbooks e padrões | `docs/playbooks/`, `docs/padroes/` |
+| Decisões de arquitetura | `docs/decisoes/README.md` |
 
 ---
 
-## Bibliotecas de conhecimento disponíveis (contextos/bruto)
+## Bibliotecas de conhecimento (contextos/bruto)
 
-> Estas bibliotecas foram absorvidas e estão prontas para uso quando acionadas.
-> Para usar: mencionar o tema ou acionar a skill correspondente.
-
-| Biblioteca | Arquivo | Skill |
-|-----------|---------|-------|
-| Web Design Internacional | `2026-05-13_biblioteca-web-design-internacional.md` | `/web-design-ref` |
-| Software Gestão de Dojos | `dojo/2026-05-13_biblioteca-software-gestao-dojo.md` | (consultar direto) |
-| Portais Contábeis Internacionais | `decon/2026-05-13_biblioteca-portais-contabeis-internacionais.md` | (consultar direto) |
-| Estrutura de Pastas e Projetos | `2026-05-13_biblioteca-estrutura-pastas-projetos.md` | (padrão em todos os repos) |
-| Claude Code Skills | `2026-05-13_biblioteca-claude-code-skills.md` | (CATALOGO.md) |
-| Agentes de IA | `2026-05-13_biblioteca-agentes-ia.md` | `/agentes-ia` |
-| Fluxos de Dev e Testes | `2026-05-13_biblioteca-fluxos-dev-e-testes.md` | (SDD + testes) |
-| Pagamentos BR/Internacional | `2026-05-13_biblioteca-pagamentos-br-internacional.md` ⚠️ incompleto | `/payments-br` |
-| Tráfego Pago com IA | `2026-05-13_biblioteca-trafego-pago-ia.md` | `/trafego-pago` |
-| Agências IA e Sistemas Marketing | `2026-05-13_pesquisa-agencias-ia-sistemas-marketing.md` | `/ads-audit` + `/content-creator` |
-| Sistema Produção de Conteúdo | `2026-05-13_referencia-sistema-producao-conteudo.md` | `/content-creator` |
-| **Google Integrations** | `2026-05-14_biblioteca-google-integrations.md` | (4 níveis — consultar antes de qualquer integração Google) |
+| Biblioteca | Arquivo |
+|-----------|---------|
+| Web Design Internacional | `2026-05-13_biblioteca-web-design-internacional.md` |
+| Software Gestão de Dojos | `dojo/2026-05-13_biblioteca-software-gestao-dojo.md` |
+| Portais Contábeis Internacionais | `decon/2026-05-13_biblioteca-portais-contabeis-internacionais.md` |
+| Claude Code Skills | `2026-05-13_biblioteca-claude-code-skills.md` |
+| Agentes de IA | `2026-05-13_biblioteca-agentes-ia.md` |
+| Pagamentos BR/Internacional | `2026-05-13_biblioteca-pagamentos-br-internacional.md` |
+| Tráfego Pago com IA | `2026-05-13_biblioteca-trafego-pago-ia.md` |
+| Google Integrations | `2026-05-14_biblioteca-google-integrations.md` |
+| **SCHOLZE-STACK** | `2026-05-15_scholze-stack-sistema-mestre.md` |
