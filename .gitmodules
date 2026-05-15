@@ -1,0 +1,9 @@
+[submodule "Repositorios/decon-sistema"]
+	path = Repositorios/decon-sistema
+	url = https://github.com/Davi-Scholze/decon-sistema.git
+[submodule "Repositorios/dojo-familia-scholze"]
+	path = Repositorios/dojo-familia-scholze
+	url = https://github.com/Davi-Scholze/dojo-familia-scholze.git
+[submodule "Repositorios/grants-etl-pipeline"]
+	path = Repositorios/grants-etl-pipeline
+	url = https://github.com/Davi-Scholze/grants-etl-pipeline.git

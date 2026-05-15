@@ -1,0 +1,27 @@
+{
+  "brand": {
+    "name": "[Nome do Cliente]",
+    "primaryColor": "#XXXXXX",
+    "secondaryColor": "#XXXXXX",
+    "backgroundColor": "#FFFFFF",
+    "accentColor": "#F5F5F5",
+    "font": "Inter",
+    "logo": "./dados/logo.png"
+  },
+  "voice": {
+    "tone": "[ex: profissional e acolhedor]",
+    "persona": "[ex: especialista que simplifica o complexo]",
+    "avoid": ["[gírias]", "[termos técnicos sem explicação]", "[promessas exageradas]"]
+  },
+  "instagram": {
+    "handle": "@[handle]",
+    "niche": "[ex: contabilidade para psicólogas]",
+    "cta": "[ex: Fale comigo pelo WhatsApp]"
+  },
+  "target": {
+    "persona": "[descrição do cliente ideal]",
+    "age": "[faixa etária]",
+    "pain": "[dor principal]",
+    "dream": "[resultado desejado]"
+  }
+}
