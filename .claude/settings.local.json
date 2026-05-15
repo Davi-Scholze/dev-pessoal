@@ -46,7 +46,10 @@
       "Bash(git remote *)",
       "Bash(git submodule *)",
       "Bash(gh auth *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(PYTHONIOENCODING=utf-8 PYTHONUTF8=1 \"C:/Users/usuario/AppData/Local/Programs/Python/Python312/python.exe\" scripts/run.py notebook_manager.py add --url \"https://notebooklm.google.com/notebook/44650f3d-64f6-40b3-b750-fc72f12c9050\" --name \"Google Integrations\" --description \"17 fontes sobre integrações Google: GTM, GA4 Data API, Google Ads API, Google Workspace \\(Calendar, Drive, Sheets, Gmail\\), autenticação Service Account, níveis 1-4 de integração, regras e documentação oficial.\" --topics \"google,gtm,ga4,google-ads,analytics,workspace,calendar,drive,gmail,sheets,service-account,integracao\")",
+      "Bash(find contextos *)",
+      "Bash(dir /s /b contextos)"
     ],
     "additionalDirectories": [
       "C:\\Users\\usuario\\.claude\\skills",
