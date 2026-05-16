@@ -64,4 +64,4 @@ Fórmula: proposta = 30% do ROI anual projetado. Payback típico: 4-6 meses.
 |---|---|
 | 2026-05-15 | Foco inicial: Decon Fase 1 → KOD.AI v0.2.0 → Dojô |
 | 2026-05-15 | SCHOLZE-STACK implantado (E1-E14 concluídos) |
-| 2026-05-15 | KOD.AI clonado em Repositorios/KODAI, instalado na pasta-mãe |
+| 2026-05-15 | KOD.AI clonado, instalado na pasta-mãe; movido para raiz (KODAI/) conforme spec de reestruturação |

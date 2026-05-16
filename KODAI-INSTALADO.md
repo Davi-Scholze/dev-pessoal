@@ -45,24 +45,30 @@
 
 ## Contextos-domínio ativos
 
+> **Nota:** a filosofia de contextos está mudando (spec aprovada 2026-05-15).
+> Camada 3 deixará de entregar domínios pré-prontos; contexto específico
+> passa a ser capturado via `/capturar-contexto-cliente`. Esta seção será
+> reescrita quando RF4 da spec for executado.
+
 | Domínio | Status | Path no KOD.AI |
 |---|---|---|
-| contabilidade-br | STUB | `Repositorios/KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` |
-| dojos-artes-marciais | STUB | `Repositorios/KODAI/3-CONTEXTOS-DOMINIO/dojos-artes-marciais/` |
+| contabilidade-br | STUB (a remover) | `KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` |
+| dojos-artes-marciais | STUB (a remover) | `KODAI/3-CONTEXTOS-DOMINIO/dojos-artes-marciais/` |
 
 ---
 
 ## Packs ativos
 
-Nenhum pack populado ainda — todos STUB. Ver roadmap em `Repositorios/KODAI/docs/PLANNING.md`.
+Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.md`.
 
 ---
 
 ## Fonte do KOD.AI nesta máquina
 
 ```
-C:\Users\usuario\Documents\Projetos Dev Pessoais\Repositorios\KODAI\
+C:\Users\usuario\Documents\Projetos Dev Pessoais\KODAI\
 ```
+(raiz da pasta-mãe — regra: clone do KOD.AI fica na raiz quando a pasta tem múltiplos repos)
 
 ---
 
@@ -80,7 +86,7 @@ C:\Users\usuario\Documents\Projetos Dev Pessoais\Repositorios\KODAI\
 ## Para atualizar o KOD.AI
 
 ```
-cd Repositorios/KODAI
+cd KODAI
 git pull origin main
 ```
 

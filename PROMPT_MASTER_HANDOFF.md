@@ -67,7 +67,7 @@ Foco desta semana: organizar KOD.AI + iniciar Decon Fase 1.
 
 - Stack final Dojô (confirmado? React Native + Expo?)
 - Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens
-- KOD.AI: manter em Repositorios/ ou criar alias na raiz?
+- ~~KOD.AI: manter em Repositorios/ ou criar alias na raiz?~~ RESOLVIDO: movido para raiz `KODAI/` (spec 2026-05-15)
 
 ---
 

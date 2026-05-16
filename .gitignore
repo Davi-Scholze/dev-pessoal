@@ -16,3 +16,7 @@ Downloads/
 # OS
 .DS_Store
 Thumbs.db
+
+# KOD.AI — repo próprio (github.com/Davi-Scholze/kod-ai), versionado separadamente
+# Fica na raiz da pasta-mãe por ser multi-repo; não commitar dentro do dev-pessoal
+KODAI/

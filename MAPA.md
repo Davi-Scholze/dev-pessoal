@@ -28,7 +28,7 @@ Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK instal
 | decon-sistema | `Repositorios/decon-sistema/` | React 19 + Vite + Tailwind v3 | main |
 | dojo-familia-scholze | `Repositorios/dojo-familia-scholze/` | React Native + Expo (a confirmar) | main |
 | grants-etl-pipeline | `Repositorios/grants-etl-pipeline/` | Python + SQL Server + Power BI | main |
-| KOD.AI (fonte) | `Repositorios/KODAI/` | Markdown + YAML | main |
+| KOD.AI (fonte) | `KODAI/` (raiz da pasta-mãe) | Markdown + YAML | main |
 
 ## Onde está cada coisa
 

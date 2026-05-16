@@ -37,4 +37,4 @@
 |---|---|---|
 | Stack final Dojô | React Native + Expo está confirmado? | Antes de iniciar dev |
 | Revogar token GitHub antigo | `ghp_Zht254O3...` referenciado em CONTEXTO_GERAL.md | Asap |
-| KOD.AI na pasta-mãe: manter em Repositorios/ ou promover? | Instalado na pasta-mãe agora via /instalar | Próxima sessão |
+| ~~KOD.AI: manter em Repositorios/ ou promover?~~ RESOLVIDO 2026-05-15 | Movido para raiz da pasta-mãe (KODAI/) conforme spec | ✅ |
