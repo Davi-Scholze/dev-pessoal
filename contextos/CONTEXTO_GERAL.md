@@ -1,7 +1,7 @@
 # Contexto Geral — Projetos Dev Pessoais
 > Fonte de verdade completa. Atualizar ao fim de cada sessão significativa.
 > Para entrada rápida, use MAPA_PESSOAL.md
-> Última atualização: 2026-05-12
+> Última atualização: 2026-05-16
 
 ## Sobre o desenvolvedor
 
@@ -18,8 +18,12 @@
 | Prioridade | Projeto | Motivo |
 |-----------|---------|--------|
 | 1 | **decon-sistema** | Retorno mais rápido, impacto direto na mãe |
-| 2 | **dojo-familia-scholze** | Potencial SaaS, empresa do pai |
-| 3 | **lar-antonia** | Contrato ativo mas baixo potencial de escala |
+| 2 | **KOD.AI** | Meta-ferramenta estratégica — produto que Davi mais usa e pretende vender |
+| 3 | **dojo-familia-scholze** | Potencial SaaS, empresa do pai |
+| 4 | **lar-antonia** | Contrato ativo mas baixo potencial de escala |
+
+> KOD.AI é a ferramenta com que todos os outros são construídos. Decon segue
+> sendo o de maior ROI imediato; KOD.AI é o de maior valor de longo prazo.
 
 ---
 
@@ -111,12 +115,70 @@ Sistema criado anteriormente por Davi para o Lar Antônia. Contrato de manutenç
 
 ---
 
+## Projeto 5 — KOD.AI (meta-ferramenta / produto estratégico)
+
+**Repositório:** github.com/Davi-Scholze/kod-ai
+**Local:** `KODAI/` — **raiz da pasta-mãe**, NÃO em `Repositorios/`
+**Stack:** Markdown + YAML (sistema de regras/skills, não código de app)
+**Versão:** v0.2.0-camada1
+
+### O que é
+"Sistema operacional de IA" — base de regras + skills + mecanismo de captura
+de contexto que prepara qualquer IA (Claude Code, ChatGPT, Gemini) pra
+construir sistemas ponta-a-ponta. É o produto que Davi mais usa e pretende
+vender futuramente.
+
+### Arquitetura (4 camadas)
+- `0-INSTALACAO/` — BOOTSTRAP + perfis + skills de instalação
+- `1-ESQUELETO/` — 12 regras, metodologias, skills universais, templates
+- `2-PACKS/` — capacidades técnicas (HOW) — todos STUB ainda
+- `3-CONTEXTOS-DOMINIO/` — mecanismo de CAPTURA (não entrega domínio pronto)
+
+### Regra de localização do clone (importante)
+- Pasta com vários repos (pasta-mãe) → KOD.AI na **raiz** (irmão dos repos)
+- Projeto solo ou do zero → KOD.AI **dentro** do projeto
+
+### Filosofia central (decisão 2026-05-15)
+KOD.AI entrega só o **geral**. Conhecimento de negócio específico do cliente
+**não vem pronto** — é capturado fresco via skill `/capturar-contexto-cliente`
+(pesquisa → Google Doc → NotebookLM). Ver ADR em
+`KODAI/docs/decisoes/2026-05-15-reestruturacao-instalacao-e-contextos.md`.
+
+### Próximo passo
+Popular `2-PACKS/packs/ia/agente-ia-humanizado` como primeiro pack FUNCIONAL.
+
+---
+
+## Infraestrutura de IA da pasta-mãe (ler antes de tudo)
+
+A pasta `Projetos Dev Pessoais` é uma pasta-mãe com KOD.AI instalado + SCHOLZE-STACK:
+
+| Item | O que é |
+|---|---|
+| `KODAI/` | Repo fonte do KOD.AI (raiz da pasta-mãe; gitignored no dev-pessoal) |
+| `.claude/` | SCHOLZE-STACK — 18 agentes, 20 skills, 8 hooks, commands |
+| `_memoria/` | Memória do negócio (empresa, estrategia, preferencias) — auto-carrega |
+| `identidade/` | design-guide.md (dark minimalist) |
+| `MAPA.md` / `MAPA_PESSOAL.md` | Entrada rápida (MAPA.md = formato KOD.AI) |
+| `PENDENCIAS.md` | Fila priorizada P0-P2 |
+| `PROMPT_MASTER_HANDOFF.md` | Estado vivo detalhado |
+| `KODAI-INSTALADO.md` | Inventário do que o /instalar adicionou |
+
+**Tom de trabalho preferido (de `_memoria/preferencias.md`):** consultivo,
+sem resumos no fim, sem over-engineering, sem emojis, uma pergunta por vez.
+
+---
+
 ## Decisões de arquitetura
 
 | Data | Projeto | Decisão | Motivo |
 |------|---------|---------|--------|
 | 2026-05-12 | Geral | Criada estrutura Projetos Dev Pessoais | Centralizar repos e ferramentas de IA |
 | 2026-05-12 | Geral | Prioridade definida: Decon > Dojô > Lar Antônia | Retorno e impacto |
+| 2026-05-15 | Geral | SCHOLZE-STACK implantado (E1-E14) | Sistema operacional de IA completo na pasta-mãe |
+| 2026-05-15 | KOD.AI | Instalado na pasta-mãe via /instalar (perfil completo) | Dogfooding do próprio produto |
+| 2026-05-15 | KOD.AI | Camada 3 = captura, não entrega domínio pré-pronto | STUB desatualizado é pior que ausência; escalável |
+| 2026-05-16 | KOD.AI | Clone movido para raiz da pasta-mãe (fora de Repositorios/) | Regra de localização: multi-repo → raiz |
 
 ---
 
@@ -135,3 +197,24 @@ Sistema criado anteriormente por Davi para o Lar Antônia. Contrato de manutenç
 - Definida prioridade: Decon > Dojô > Lar Antônia
 - Mapeada visão em fases para Decon (Fase 1: automatizar Domínio)
 - Próximo passo Fase 1: transcrição de áudio real de atendimento da Denize
+
+### 2026-05-15 (SCHOLZE-STACK)
+- Implantado SCHOLZE-STACK completo (E1-E14): 18 agentes, 20 skills, 8 hooks,
+  commands, .mcp.json, contextos de integração, docs/playbooks/decisoes/padroes
+- CLAUDE.md, AGENTS.md, REGRAS_SESSAO.md atualizados
+- Incidente resolvido: hook PreToolUse `.*` com path relativo causou deadlock —
+  lição: settings.json sempre com paths absolutos
+
+### 2026-05-16 (KOD.AI — instalação + reestruturação v0.2.0)
+- KOD.AI clonado, instalado na pasta-mãe via /instalar (perfil completo):
+  criados `_memoria/`, `identidade/`, MAPA.md, PENDENCIAS.md,
+  PROMPT_MASTER_HANDOFF.md, KODAI-INSTALADO.md
+- 1º teste real revelou 3 falhas → spec aprovada → reestruturação via SDD do
+  próprio KOD.AI (7 commits, RF1-RF5):
+  - RF1: regra de localização do clone no /instalar
+  - RF2: BOOTSTRAP.md (caminho primário de instalação)
+  - RF3: skill /capturar-contexto-cliente (STUB)
+  - RF4: Camada 3 inverte filosofia — 8 STUBs removidos, vira captura
+  - RF5: KODAI movido de Repositorios/ para raiz; paths corrigidos; v0.2.0
+- **Próximo passo:** popular `ia/agente-ia-humanizado` (1º pack FUNCIONAL).
+  Decon Fase 1 continua aguardando transcrição de áudio da Denize.
