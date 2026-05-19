@@ -79,7 +79,7 @@ Reportar:
 
 | Tipo | Quando | Onde salva | Commit? |
 |---|---|---|---|
-| **Bruto sagrado** | Vídeo de stakeholder (gravação reunião, demo cliente, video-call salvo) | `inbox-<stakeholder>/videos/<data>-<tema>.<ext>` OU `contextos/<dominio>/raw/<data>-<tema>/` | ✅ Sim — **sagrado** |
+| **Bruto sagrado** | Vídeo de stakeholder (gravação reunião, demo cliente, video-call salvo) | `inbox-<stakeholder>/videos/<data>-<tema>.<ext>` OU `_negocio/contextos/<dominio>/raw/<data>-<tema>/` | ✅ Sim — **sagrado** |
 | **Evidência permanente** | Screen-recording de bug, demo de feature, tutorial gravado | `mapeamento/evidencias/<data>/<tema>.<ext>` OU `docs/evidencias/` | ✅ Sim (mas ver §Tamanho) |
 | **Validação efêmera** | Playwright screen-recording de teste E2E, gravação temporária pra verificar fluxo | `.playwright-mcp/` ou `tmp/` (gitignored) | ❌ Não |
 

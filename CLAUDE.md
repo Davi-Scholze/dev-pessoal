@@ -7,13 +7,13 @@
 - **Nome:** Davi Pereira Scholze
 - **Perfil:** Desenvolvedor especialista em IA, ETL, dados, automação e sistemas web
 - **CLT:** Navortech (trackops — rastreamento veicular), seg–sex 08–16
-- **Tempo:** limitado — leia MAPA_PESSOAL.md para contexto completo
+- **Tempo:** limitado — leia _negocio/MAPA.md para contexto completo
 - **Projetos pessoais:** decon-sistema (prioridade 1), dojo-familia-scholze (prioridade 2), lar-antonia (prioridade 3)
 
 ## Leitura obrigatória (ordem)
 
-1. `MAPA_PESSOAL.md` — visão geral e estado atual (sempre primeiro)
-2. `REGRAS_SESSAO.md` — regras operacionais de toda sessão
+1. `_negocio/MAPA.md` — visão geral e estado atual (sempre primeiro)
+2. `.claude/rules/regras-sessao.md` — regras operacionais de toda sessão
 3. `.claude/skills/` — skills estruturadas por domínio
 4. CLAUDE.md do projeto específico (se existir)
 
@@ -22,8 +22,8 @@
 ```
 Projetos Dev Pessoais/
 ├── CLAUDE.md                  ← você está aqui
-├── MAPA_PESSOAL.md
-├── REGRAS_SESSAO.md
+├── _negocio/MAPA.md
+├── .claude/rules/regras-sessao.md
 ├── .claude/
 │   ├── agents/        ← 18 agentes especializados (SCHOLZE-STACK)
 │   ├── skills/        ← skills estruturadas (SKILL.md + templates)
@@ -35,13 +35,13 @@ Projetos Dev Pessoais/
 │   ├── decon-sistema/         ← prioridade 1
 │   ├── dojo-familia-scholze/  ← prioridade 2
 │   └── grants-etl-pipeline/
-├── contextos/
+├── _negocio/contextos/
 │   ├── CONTEXTO_GERAL.md      ← fonte de verdade de todos os projetos
 │   ├── bruto/                 ← contexto bruto recebido em sessões
 │   ├── fluxos/                ← contexto processado, pronto para dev
 │   ├── integracao-*.md        ← referências de integração (Google/Supabase/Stripe)
 │   └── notebooklm/
-├── ferramentas/
+├── _dev/ferramentas/
 │   └── skills/CATALOGO.md     ← skills globais invocáveis (Claude Code)
 └── docs/
     ├── playbooks/
@@ -54,16 +54,16 @@ Projetos Dev Pessoais/
 Todo contexto que chega em sessão (mensagens longas, descrições de negócio, áudios transcritos, prints, ideias soltas) segue este fluxo:
 
 ```
-ENTRADA → contextos/bruto/YYYY-MM-DD_descricao.md  ← salvar imediatamente, sem processar
+ENTRADA → _negocio/contextos/bruto/YYYY-MM-DD_descricao.md  ← salvar imediatamente, sem processar
                 ↓ (somente com OK explícito do Davi)
-          contextos/fluxos/YYYY-MM-DD_descricao.md  ← processado, estruturado, pronto para dev
+          _negocio/contextos/fluxos/YYYY-MM-DD_descricao.md  ← processado, estruturado, pronto para dev
 ```
 
 **Regras:**
 - Contexto bruto é salvo como recebido — sem reescrever, sem resumir, sem estruturar
 - Nunca usar contexto bruto como base para código sem promovê-lo a fluxo antes
 - A promoção (bruto → fluxo) exige aprovação explícita e acontece em sessão dedicada
-- Cada repositório tem sua própria pasta `contextos/bruto/` e `contextos/fluxos/`
+- Cada repositório tem sua própria pasta `_negocio/contextos/bruto/` e `_negocio/contextos/fluxos/`
 - Nomear arquivos com data: `YYYY-MM-DD_descricao-curta.md`
 
 ## Regras inegociáveis
@@ -72,12 +72,12 @@ ENTRADA → contextos/bruto/YYYY-MM-DD_descricao.md  ← salvar imediatamente, s
 2. **Pausa visual** — antes de cada commit, explicar o que foi feito e pedir aprovação
 3. **Passo a passo** — nunca avançar para a próxima etapa sem aprovação explícita
 4. **Zero credenciais no código** — sempre via `.env`, nunca hardcoded
-5. **Economia de contexto** — leia MAPA_PESSOAL.md antes de qualquer arquivo completo
+5. **Economia de contexto** — leia _negocio/MAPA.md antes de qualquer arquivo completo
 6. **Commits em português** — imperativo, padrão: `tipo(escopo): descrição`
 7. **Skills primeiro** — verificar `.claude/skills/` antes de resolver manualmente
 8. **Contexto antes de código** — para features complexas, consulte NotebookLM antes de implementar
 9. **Modularização** — arquivos > 400 linhas devem ser sinalizados para refatoração
-10. **Handoff completo** — ao fim de cada sessão, atualizar `contextos/CONTEXTO_GERAL.md`
+10. **Handoff completo** — ao fim de cada sessão, atualizar `_negocio/contextos/CONTEXTO_GERAL.md`
 11. **Mobile-first** — em qualquer interface, desenvolver mobile primeiro
 12. **Segurança sempre** — LGPD em formulários, validar webhooks, nunca logar dados sensíveis
 
@@ -131,7 +131,7 @@ Bloqueios: [lista | nenhum]
 ## Integrações Google
 
 Todo projeto recebe ao menos Nível 1 (GTM + GA4 + Search Console).
-Ver `contextos/integracao-google-apis.md` para níveis, SDKs, regras e perguntas de checklist.
+Ver `_negocio/contextos/integracao-google-apis.md` para níveis, SDKs, regras e perguntas de checklist.
 
 ## MCPs ativos
 
@@ -163,7 +163,7 @@ Ver `docs/playbooks/como-adicionar-cliente.md` e `AGENTS.md` para casos reais.
 ## Template para novos clientes
 
 ```
-ferramentas/templates/cliente-novo/  ← copiar para Repositorios/[nome-cliente]/
+_dev/ferramentas/templates/cliente-novo/  ← copiar para Repositorios/[nome-cliente]/
 ```
 Ou usar: `/scholze-novo-cliente` (cria a pasta completa automaticamente)
 
@@ -171,14 +171,14 @@ Ou usar: `/scholze-novo-cliente` (cria a pasta completa automaticamente)
 
 | O que | Onde |
 |-------|------|
-| Regras operacionais de sessão | `REGRAS_SESSAO.md` |
+| Regras operacionais de sessão | `.claude/rules/regras-sessao.md` |
 | Skills estruturadas (SCHOLZE-STACK) | `.claude/skills/` |
-| Skills invocáveis (Claude Code) | `ferramentas/skills/CATALOGO.md` |
-| Estado de todos os projetos | `contextos/CONTEXTO_GERAL.md` |
+| Skills invocáveis (Claude Code) | `_dev/ferramentas/skills/CATALOGO.md` |
+| Estado de todos os projetos | `_negocio/contextos/CONTEXTO_GERAL.md` |
 | 18 agentes + MCPs + negócio | `AGENTS.md` |
-| NotebookLMs | `contextos/notebooklm/README.md` |
-| Integrações (Google/Supabase/Stripe) | `contextos/integracao-*.md` |
+| NotebookLMs | `_negocio/contextos/notebooklm/README.md` |
+| Integrações (Google/Supabase/Stripe) | `_negocio/contextos/integracao-*.md` |
 | Playbooks e padrões | `docs/playbooks/`, `docs/padroes/` |
 | Decisões de arquitetura | `docs/decisoes/README.md` |
-| Template de novo cliente | `ferramentas/templates/cliente-novo/` |
-| Mapa geral | `MAPA_PESSOAL.md` |
+| Template de novo cliente | `_dev/ferramentas/templates/cliente-novo/` |
+| Mapa geral | `_negocio/MAPA.md` |

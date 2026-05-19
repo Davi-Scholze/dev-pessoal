@@ -1,0 +1,36 @@
+name: dev-browser
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Local skill da máquina dev (origem Navortech-TrackOps)
+  path: c:\Users\Usuario\.claude\skills\dev-browser\
+  version: snapshot 2026-05-18
+license:
+  type: derivative-original-author
+  attribution_required: true
+  attribution_text: |
+    Capacidade inspirada em skill local Navortech. Source original era ~38 linhas
+    marketing pra ferramenta npm `dev-browser`; re-implementação universalizada
+    em 2026-05-18 é versão substantiva que envolve Playwright MCP (padrão Claude Code).
+strategy: reimplementation (universalizada + wrapper sobre Playwright MCP)
+absorbed_at: 2026-05-18T20:15:00-03:00
+notes: |
+  Original era pouco substancial (marketing card de ferramenta npm dev-browser).
+  Reescrita aqui como skill propriamente dita com:
+
+  - Workflow 5 etapas (alinhado com metodologias/ver-analisar-propor-testar-reportar)
+  - Política de screenshots (alinha com politicas/imagens.md)
+  - Multi-formato (web, PWA, mobile, breakpoints)
+  - Integração explícita com Playwright MCP
+  - Anti-padrões + pré-requisitos
+  - Cross-links com outras skills KOD.AI
+
+  Premissa: Playwright MCP disponível no ambiente Claude Code do comprador
+  (Anthropic-provided, não bundled aqui).
+anti_verbatim:
+  ngram_check: PASS (re-implementação completa)
+  five_nos_check: PASS
+runtime_deps:
+  - Playwright MCP (servidor MCP padrão Claude Code)
+  - Dev server rodando localmente (npm run dev típico) OU staging acessível

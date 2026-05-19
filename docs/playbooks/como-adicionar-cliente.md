@@ -33,7 +33,7 @@ Prazo de entrega:
 
 ```bash
 # 1. Copiar template
-cp -r ferramentas/templates/cliente-novo/ Repositorios/[nome-cliente]/
+cp -r _dev/ferramentas/templates/cliente-novo/ Repositorios/[nome-cliente]/
 
 # 2. Preencher colchetes no CLAUDE.md do cliente
 # [NOME_CLIENTE], [NICHO], [STACK], [SERVICOS], etc.
@@ -85,7 +85,7 @@ Todo cliente recebe ao menos Nível 1:
    → Nunca commitar
 ```
 
-Ver `contextos/integracao-google-apis.md` para instruções detalhadas.
+Ver `_negocio/contextos/integracao-google-apis.md` para instruções detalhadas.
 
 ---
 
@@ -121,6 +121,6 @@ Checklist antes de começar a desenvolver:
 
 ## Após o Onboarding
 
-- Atualizar `contextos/CONTEXTO_GERAL.md` com o novo cliente
-- Adicionar linha em `MAPA_PESSOAL.md` → seção de projetos ativos
+- Atualizar `_negocio/contextos/CONTEXTO_GERAL.md` com o novo cliente
+- Adicionar linha em `_negocio/MAPA.md` → seção de projetos ativos
 - Agendar check-in mensal no calendário

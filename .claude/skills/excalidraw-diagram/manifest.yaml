@@ -1,0 +1,41 @@
+name: excalidraw-diagram
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Local skill da máquina dev (origem Navortech-TrackOps)
+  path: c:\Users\Usuario\.claude\skills\excalidraw-diagram\
+  version: snapshot 2026-05-18
+license:
+  type: derivative-original-author
+  attribution_required: true
+  attribution_text: |
+    Capacidade inspirada em skill local Navortech. Re-implementação universalizada
+    em 2026-05-18 removendo toda referência específica ao projeto original
+    (TrackOps, Field Control, Transposeg, tabela placas).
+strategy: reimplementation (universalizada)
+absorbed_at: 2026-05-18T20:30:00-03:00
+notes: |
+  Original era enxuta (~63 linhas) com exemplos específicos do TrackOps.
+  Reescrita universalizada com:
+
+  - 6 tipos Mermaid documentados (flowchart, sequenceDiagram, erDiagram,
+    classDiagram, stateDiagram-v2, gantt)
+  - Heurística de detecção de tipo por palavras-chave
+  - Formato ASCII fallback
+  - Workflow 5 etapas formalizado
+  - 3 exemplos universais (auth, schema, cadastro)
+  - Anti-padrões (5 itens)
+  - Cross-links com /brainstorming + /writing-plans + /criar-contexto
+
+  Removido:
+  - Toda menção a TrackOps, Field Control, Transposeg
+  - Tabela `placas` e schema Supabase específico
+  - "Fase 1.5/1.6" do roadmap original
+  - Exemplos `importar-drive-diario.js`, `importar-field-control.js`
+anti_verbatim:
+  ngram_check: PASS (re-implementação completa)
+  five_nos_check: PASS
+runtime_deps:
+  - Mermaid (renderização nativa em viewers Markdown — sem instalação)
+  - Excalidraw.com (web - sem instalação) OU plugin VS Code Excalidraw (opcional)

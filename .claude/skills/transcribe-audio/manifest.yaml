@@ -1,0 +1,50 @@
+name: transcribe-audio
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: faster-whisper transcribe-audio skill (local plugin)
+  path: c:\Users\Usuario\.claude\skills\transcribe-audio\
+  version: snapshot 2026-05-18
+  url: (faster-whisper backend; skill é wrapper local)
+license:
+  type: MIT
+  attribution_required: true
+  attribution_text: |
+    Skill original em ~/.claude/skills/transcribe-audio/.
+    Dependências:
+    - faster-whisper (MIT) — https://github.com/SYSTRAN/faster-whisper
+    - ffmpeg (LGPL/GPL — runtime dependency, não bundled)
+    - Whisper model weights (MIT) — Systran/faster-whisper-* on Hugging Face
+strategy: vendoring
+absorbed_at: 2026-05-18T17:30:00-03:00
+notes: |
+  Estratégia vendoring (D1 exceção autorizada por D8 piloto): skill tem código
+  Python (scripts/transcribe.py) onde re-implementar custaria desproporcional.
+
+  Arquivos copiados verbatim com atribuição:
+  - SKILL.md (com cabeçalho de atribuição adicionado no topo)
+  - scripts/transcribe.py (verbatim)
+  - scripts/install.md (verbatim)
+
+  Adaptações:
+  - SKILL.md ganhou bloco "> Bundled via vendoring..." no topo
+  - Resto preservado pra manter compatibilidade com scripts referenciados
+
+  Anti-verbatim: N/A — vendoring é cópia legitimada pela license MIT.
+  Atribuição obrigatória mantida no cabeçalho + manifest.
+
+  Dependências runtime do usuário:
+  - Python 3.10+
+  - ffmpeg no PATH
+  - pip install faster-whisper
+
+  Estas NÃO são bundled (são deps externas que o usuário instala localmente).
+  Documentado em scripts/install.md.
+anti_verbatim:
+  ngram_check: N/A
+  five_nos_check: N/A
+  notes: |
+    Vendoring legítimo via license MIT. Anti-verbatim não aplicável.
+    Atribuição obrigatória preservada no SKILL.md (cabeçalho) + manifest +
+    LICENSES.md raiz.

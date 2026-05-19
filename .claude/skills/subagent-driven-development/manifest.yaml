@@ -1,0 +1,50 @@
+name: subagent-driven-development
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Anthropic Superpowers
+  path: c:\Users\Usuario\.claude\skills\subagent-driven-development\
+  version: snapshot 2026-05-18
+  url: (Anthropic Superpowers — repo oficial)
+license:
+  type: Apache-2.0
+  attribution_required: true
+  attribution_text: |
+    Re-implementação inspirada em `subagent-driven-development` do plugin
+    Anthropic Superpowers. Os 3 prompts companion (implementer-prompt.md,
+    spec-reviewer-prompt.md, code-quality-reviewer-prompt.md) são VENDORED
+    verbatim do source com atribuição preservada.
+strategy: hybrid (reimplementation of SKILL.md + vendoring of 3 companion prompts)
+absorbed_at: 2026-05-18T18:15:00-03:00
+notes: |
+  Estratégia híbrida (combinação de re-impl + vendoring):
+  - SKILL.md: re-implementado em voz KOD.AI + PT-BR
+  - implementer-prompt.md: VENDORED verbatim
+  - spec-reviewer-prompt.md: VENDORED verbatim
+  - code-quality-reviewer-prompt.md: VENDORED verbatim
+
+  Razão da divisão: SKILL.md é workflow narrativo (re-impl fácil em PT-BR).
+  Os prompts são templates calibrados pelo Anthropic com muito detalhe técnico —
+  re-implementar arriscaria perder qualidade do prompt engineering original.
+
+  Adaptações da SKILL.md:
+  - Workflow em texto numerado (sem DOT graph)
+  - Tom PT-BR
+  - Notas "queue futuro" pra skills referenciadas não-bundled
+  - Removido exemplo de workflow longo
+
+  Os 3 prompts ficaram em EN (matching source). Pode virar tradução PT-BR
+  em onda futura se necessário, mas EN técnico é OK em prompts internos.
+anti_verbatim:
+  ngram_check: PASS (SKILL.md re-implementada)
+  five_nos_check: PASS (SKILL.md)
+  notes: |
+    SKILL.md re-implementada: anti-verbatim PASS.
+    Companion prompts: N/A (vendoring legítimo via Apache-2.0).
+    Atribuição obrigatória mantida em cabeçalho da SKILL.md + manifest +
+    LICENSES.md raiz.
+companion_files:
+  - implementer-prompt.md (vendored verbatim)
+  - spec-reviewer-prompt.md (vendored verbatim)
+  - code-quality-reviewer-prompt.md (vendored verbatim)

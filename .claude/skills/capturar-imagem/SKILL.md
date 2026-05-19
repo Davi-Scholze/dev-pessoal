@@ -121,7 +121,7 @@ Usuário cola print de erro de console / stack trace / página com problema:
 ### Imagem de referência (Pinterest, Behance, etc)
 
 - Tipo (B) Evidência permanente
-- Destino: `identidade/referencias/<data>-<tema>.<ext>` ou `mapeamento/referencias/`
+- Destino: `_negocio/identidade/referencias/<data>-<tema>.<ext>` ou `mapeamento/referencias/`
 - Metadata: URL original + por que essa referência + onde aplicar
 
 ### Screenshot de teste UI (resultado de /ver)

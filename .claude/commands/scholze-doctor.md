@@ -19,8 +19,8 @@ Health-check da pasta-mãe contra o checklist do SCHOLZE-STACK (Seção 20).
 - [ ] CLAUDE.md ≤ 200 linhas
 
 ### Documentação
-- [ ] `MAPA_PESSOAL.md` existe e foi atualizado nos últimos 30 dias
-- [ ] `REGRAS_SESSAO.md` existe
+- [ ] `_negocio/MAPA.md` existe e foi atualizado nos últimos 30 dias
+- [ ] `.claude/rules/regras-sessao.md` existe
 - [ ] `AGENTS.md` existe com referência aos 18 agentes
 - [ ] `docs/playbooks/` com pelo menos 2 playbooks
 - [ ] `docs/decisoes/README.md` existe

@@ -20,3 +20,14 @@ Thumbs.db
 # KOD.AI — repo próprio (github.com/Davi-Scholze/kod-ai), versionado separadamente
 # Fica na raiz da pasta-mãe por ser multi-repo; não commitar dentro do dev-pessoal
 KODAI/
+
+# === Adicionado por KOD.AI /faxina em 2026-05-21 ===
+.faxina-quarentena/
+
+# === Adicionado por KOD.AI /organizar em 2026-05-21 ===
+.organizar-rollback-*.md
+
+# === Adicionado por sanitizacao 2026-05-21 (secret hygiene) ===
+# settings.local.json contem permissoes-com-historico-de-comandos do Claude Code;
+# alguns comandos podem ter PAT/credenciais em texto plano. NUNCA commitar.
+.claude/settings.local.json

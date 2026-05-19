@@ -1,0 +1,58 @@
+name: notebooklm
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: "Please Prompto! - NotebookLM Research Assistant"
+  path: c:\Users\Usuario\.claude\skills\notebooklm\
+  version: snapshot 2026-05-18
+  copyright: "Copyright (c) 2025 Please Prompto!"
+license:
+  type: MIT
+  attribution_required: true
+  attribution_text: |
+    Original work by "Please Prompto!" (MIT License, Copyright (c) 2025).
+    LICENSE file preservada verbatim na pasta da skill.
+strategy: vendoring (seletivo)
+absorbed_at: 2026-05-18T19:00:00-03:00
+notes: |
+  Vendoring SELETIVO: copiados apenas arquivos essenciais runtime + docs +
+  LICENSE; pulados caches/auxiliares.
+
+  Bundled (~169KB):
+  - SKILL.md (com cabeçalho de atribuição novo)
+  - LICENSE (verbatim — obrigatório por MIT)
+  - README.md (verbatim)
+  - AUTHENTICATION.md (verbatim)
+  - CHANGELOG.md (verbatim)
+  - requirements.txt (verbatim)
+  - scripts/ (14 arquivos Python — código essencial; __pycache__ removido)
+
+  NÃO bundled:
+  - data/ (306MB — caches de sessão NotebookLM, gerados localmente)
+  - images/ (136KB — screenshots auxiliares)
+  - references/ (36KB — snapshots auxiliares de docs)
+  - .venv/ (ambiente isolado, criado no primeiro uso)
+
+  Total economizado: ~306MB. Funcionalidade preservada — usuário gera data/
+  e referências localmente no primeiro run via auto-setup do scripts/run.py.
+
+  Runtime deps documentadas em requirements.txt e auto-instaladas:
+  - patchright (browser automation)
+  - python-dotenv
+  - playwright
+
+  Primeiro uso requer: Google account + browser visível pra auth manual.
+anti_verbatim:
+  ngram_check: N/A
+  five_nos_check: N/A
+  notes: |
+    Vendoring legítimo via MIT License com atribuição preservada (LICENSE
+    verbatim na pasta + cabeçalho no SKILL.md + manifest + LICENSES.md raiz).
+referenciada_por:
+  - /absorver-contexto (Passo 7 EXPAND-PROMPTS - bucket C)
+runtime_deps_externas:
+  - Python 3.10+
+  - Google account com acesso a NotebookLM
+  - Chromium (auto-instalado via patchright)
+  - Rate limit Google: ~50 queries/dia em conta free

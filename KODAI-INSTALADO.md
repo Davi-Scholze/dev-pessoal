@@ -25,20 +25,19 @@
 - [x] `_memoria/empresa.md` — contexto do negócio
 - [x] `_memoria/estrategia.md` — foco e prioridades
 - [x] `_memoria/preferencias.md` — tom, estilo, evitar
-- [x] `identidade/design-guide.md` — paleta dark minimalist
-- [x] `MAPA.md` — entrada rápida (alias para MAPA_PESSOAL.md)
-- [x] `PENDENCIAS.md` — fila priorizada
-- [x] `PROMPT_MASTER_HANDOFF.md` — estado vivo completo
+- [x] `_negocio/identidade/design-guide.md` — paleta dark minimalist
+- [x] `_negocio/MAPA.md` — mapa consolidado (entrada rápida + detalhado; MAPA_PESSOAL.md mesclado em 2026-05-21 via `/organizar`)
+- [x] `_negocio/PENDENCIAS.md` — fila priorizada
+- [x] `_negocio/PROMPT_MASTER_HANDOFF.md` — estado vivo completo
 - [x] `KODAI-INSTALADO.md` — este arquivo
 
 ### O que já existia (mantido intocado)
 - [x] `CLAUDE.md` — regras de IA (compatível com KOD.AI)
 - [x] `AGENTS.md` — 18 agentes SCHOLZE-STACK (compatível)
-- [x] `REGRAS_SESSAO.md` — regras operacionais (extensão local)
-- [x] `MAPA_PESSOAL.md` — mapa detalhado (complementa MAPA.md)
-- [x] `contextos/` — biblioteca de conhecimento
+- [x] `.claude/rules/regras-sessao.md` — regras operacionais (extensão local, movida 2026-05-21 via `/organizar`)
+- [x] `_negocio/contextos/` — biblioteca de conhecimento
 - [x] `docs/` — documentação
-- [x] `ferramentas/` — templates e catálogos
+- [x] `_dev/ferramentas/` — templates e catálogos
 - [x] `.claude/` — SCHOLZE-STACK (agents, skills, hooks, commands)
 - [x] `Repositorios/` — code repos
 
@@ -92,14 +91,15 @@ C:\Users\usuario\Documents\Projetos Dev Pessoais\KODAI\
 
 ---
 
-## Conflitos detectados na instalação
+## Conflitos detectados (resolvidos)
 
 | Item | Classificação | Resolução |
 |---|---|---|
-| MAPA.md vs MAPA_PESSOAL.md | (b) Diverge — mesmo conteúdo, nome diferente | Criado MAPA.md como entrada rápida; MAPA_PESSOAL.md mantido |
-| REGRAS_SESSAO.md | (a) Extra local — não está no template | Mantido intocado |
+| MAPA.md vs MAPA_PESSOAL.md | (b) Diverge — mesmo escopo, nomes diferentes | **Consolidado em `_negocio/MAPA.md`** (2026-05-21 via `/organizar`); MAPA_PESSOAL.md em quarentena |
+| REGRAS_SESSAO.md | (a) Extra local — não está no template | **Movido pra `.claude/rules/regras-sessao.md`** (2026-05-21 via `/organizar`) |
 | `.claude/` (SCHOLZE-STACK) | (a) Extra local — extensão local | Mantido intocado |
-| `ferramentas/` | (a) Extra local | Mantido intocado |
+| `_dev/ferramentas/` | (a) Extra local | Movido de `ferramentas/` pra `_dev/ferramentas/` (2026-05-21) |
+| `docs/` raiz | Override do template | Mantido na raiz por opção do usuário; registrado em `_layout-override.md` (2026-05-21) |
 
 ---
 

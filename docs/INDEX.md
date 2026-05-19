@@ -16,9 +16,9 @@
 
 | Arquivo | Propósito | Quando ler |
 |---------|-----------|------------|
-| `MAPA_PESSOAL.md` | Entrada rápida — estado atual, skills, onde está o quê | Sempre primeiro |
+| `_negocio/MAPA.md` | Entrada rápida — estado atual, skills, onde está o quê | Sempre primeiro |
 | `CLAUDE.md` | Regras de IA, metodologia, stack por projeto | Início de sessão |
-| `REGRAS_SESSAO.md` | Regras operacionais detalhadas, check-in, handoff | Início de sessão |
+| `.claude/rules/regras-sessao.md` | Regras operacionais detalhadas, check-in, handoff | Início de sessão |
 | `AGENTS.md` | Agentes, MCPs, modelo de negócio, casos reais | Ao trabalhar com IA/marketing |
 
 ---
@@ -27,22 +27,22 @@
 
 | Arquivo | Propósito |
 |---------|-----------|
-| `contextos/CONTEXTO_GERAL.md` | Fonte de verdade completa — todos os projetos, decisões, histórico |
-| `contextos/notebooklm/README.md` | Registro e instruções de uso dos notebooks NotebookLM |
-| `contextos/prompts/README.md` | Prompts reutilizáveis catalogados |
+| `_negocio/contextos/CONTEXTO_GERAL.md` | Fonte de verdade completa — todos os projetos, decisões, histórico |
+| `_negocio/contextos/notebooklm/README.md` | Registro e instruções de uso dos notebooks NotebookLM |
+| `_negocio/contextos/prompts/README.md` | Prompts reutilizáveis catalogados |
 
 ### Contexto Bruto (não processar sem OK)
 
 | Arquivo | Conteúdo |
 |---------|---------|
-| `contextos/bruto/2026-05-12_visao-geral-projetos.md` | Contexto inicial de todos os projetos |
-| `contextos/bruto/2026-05-13_biblioteca-web-design-internacional.md` | Referências de design, agências, tecnologias |
-| `contextos/bruto/2026-05-13_biblioteca-agentes-ia.md` | Agentes prontos, frameworks, padrões de arquitetura |
-| `contextos/bruto/2026-05-13_biblioteca-claude-code-skills.md` | Skills, fontes, stacks recomendadas |
-| `contextos/bruto/2026-05-13_biblioteca-estrutura-pastas-projetos.md` | Clean Architecture, ML, RAG, Diátaxis |
-| `contextos/bruto/2026-05-13_biblioteca-fluxos-dev-e-testes.md` | SDLC, Agile, pirâmide de testes ⚠️ incompleto |
-| `contextos/bruto/2026-05-13_biblioteca-pagamentos-br-internacional.md` | Gateways BR e internacionais ⚠️ incompleto |
-| `contextos/bruto/2026-05-13_biblioteca-trafego-pago-ia.md` | Google/Meta/TikTok Ads, criativos com IA |
+| `_negocio/contextos/bruto/2026-05-12_visao-geral-projetos.md` | Contexto inicial de todos os projetos |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-web-design-internacional.md` | Referências de design, agências, tecnologias |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-agentes-ia.md` | Agentes prontos, frameworks, padrões de arquitetura |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-claude-code-skills.md` | Skills, fontes, stacks recomendadas |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-estrutura-pastas-projetos.md` | Clean Architecture, ML, RAG, Diátaxis |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-fluxos-dev-e-testes.md` | SDLC, Agile, pirâmide de testes ⚠️ incompleto |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-pagamentos-br-internacional.md` | Gateways BR e internacionais ⚠️ incompleto |
+| `_negocio/contextos/bruto/2026-05-13_biblioteca-trafego-pago-ia.md` | Google/Meta/TikTok Ads, criativos com IA |
 
 ---
 
@@ -50,7 +50,7 @@
 
 | Arquivo | Propósito |
 |---------|-----------|
-| `ferramentas/skills/CATALOGO.md` | Todas as skills disponíveis, comandos e quando usar |
+| `_dev/ferramentas/skills/CATALOGO.md` | Todas as skills disponíveis, comandos e quando usar |
 
 ### Skills instaladas (`~/.claude/skills/`)
 
@@ -79,7 +79,7 @@
 
 | Template | Caminho | Para quê |
 |----------|---------|---------|
-| cliente-novo | `ferramentas/templates/cliente-novo/` | Estrutura padrão para novos clientes |
+| cliente-novo | `_dev/ferramentas/templates/cliente-novo/` | Estrutura padrão para novos clientes |
 
 ---
 

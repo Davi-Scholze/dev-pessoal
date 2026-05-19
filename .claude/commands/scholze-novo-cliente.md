@@ -21,7 +21,7 @@ O agente vai perguntar: nome do cliente, nicho, serviços contratados e nível d
    - Nível de integração Google (1-4)
    - Stack desejada
 
-2. Copia `ferramentas/templates/cliente-novo/` para `Repositorios/[nome-cliente]/`
+2. Copia `_dev/ferramentas/templates/cliente-novo/` para `Repositorios/[nome-cliente]/`
 
 3. Preenche todos os `[colchetes]` no CLAUDE.md do cliente
 

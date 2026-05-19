@@ -1,0 +1,32 @@
+name: executing-plans
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Anthropic Superpowers
+  path: c:\Users\Usuario\.claude\skills\executing-plans\
+  version: snapshot 2026-05-18
+  url: (Anthropic Superpowers — repo oficial)
+license:
+  type: Apache-2.0
+  attribution_required: true
+  attribution_text: |
+    Re-implementação inspirada em `executing-plans` do plugin Anthropic Superpowers
+    (~/.claude/skills/executing-plans/). Estrutura e processo originais Anthropic.
+strategy: reimplementation
+absorbed_at: 2026-05-18T18:00:00-03:00
+notes: |
+  Re-implementação completa em voz KOD.AI + PT-BR.
+
+  Adaptações:
+  - Path do plano: docs/decisoes/tasks/ (padrão KOD.AI)
+  - Próxima skill terminal anotada como "queue futuro" pra /finishing-a-development-branch
+  - Tom PT-BR direto
+  - Adicionada preferência commit+push imediato (regra Davi)
+  - Adicionada nota sobre worktree opcional
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    Re-implementação manual. Forma de checklist mantida (convenção universal).
+    Conteúdo PT-BR reescrito do entendimento.

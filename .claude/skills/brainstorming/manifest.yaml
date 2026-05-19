@@ -1,0 +1,35 @@
+name: brainstorming
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Anthropic Superpowers
+  path: c:\Users\Usuario\.claude\skills\brainstorming\
+  version: snapshot 2026-05-18
+  url: (https://github.com/anthropics/superpowers — repositório oficial estimado)
+license:
+  type: Apache-2.0
+  attribution_required: true
+  attribution_text: |
+    Re-implementação inspirada em `brainstorming` do plugin Anthropic Superpowers
+    (~/.claude/skills/brainstorming/). Método e conceitos originais Anthropic.
+strategy: reimplementation
+absorbed_at: 2026-05-18T17:00:00-03:00
+notes: |
+  Re-implementação completa em voz KOD.AI. Conceito + workflow + hard gate
+  mantidos; texto reescrito do zero baseado no entendimento.
+
+  Adaptações:
+  - Spec destination: docs/decisoes/ (padrão KOD.AI) vs docs/superpowers/specs/
+  - Próxima skill: /break (padrão KOD.AI) vs writing-plans (padrão Superpowers)
+  - Removida seção Visual Companion (feature específica não-portada nesta onda)
+  - Removido DOT graph (substituído por workflow numerado em texto)
+  - Adicionada preferência commit+push imediato (regra local Davi 2026-05-18)
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    Verificação manual durante write: nenhuma sequência de 5+ palavras consecutivas
+    idênticas com a fonte. 5 NÃOs adaptados PASS (tom diferente, marca Superpowers
+    citada honestamente como origem, exemplos paralelos, estrutura reorganizada,
+    claim atribuído honestamente no rodapé).

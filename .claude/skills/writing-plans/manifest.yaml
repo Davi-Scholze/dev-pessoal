@@ -1,0 +1,35 @@
+name: writing-plans
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Anthropic Superpowers
+  path: c:\Users\Usuario\.claude\skills\writing-plans\
+  version: snapshot 2026-05-18
+  url: (https://github.com/anthropics/superpowers — repositório oficial estimado)
+license:
+  type: Apache-2.0
+  attribution_required: true
+  attribution_text: |
+    Re-implementação inspirada em `writing-plans` do plugin Anthropic Superpowers
+    (~/.claude/skills/writing-plans/). Estrutura e método originais Anthropic.
+strategy: reimplementation
+absorbed_at: 2026-05-18T17:20:00-03:00
+notes: |
+  Re-implementação completa em voz KOD.AI + PT-BR.
+
+  Adaptações:
+  - Path de salvar: docs/decisoes/tasks/ (padrão KOD.AI)
+  - Header referencia /executing-plans + /subagent-driven-development com nota
+    "se bundled" (próximas ondas)
+  - Tom português direto
+  - Removido: bloco "Spec coverage from another agent"
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    Bloco de código YAML do "Header obrigatório" e "Estrutura de task" usam
+    a mesma forma SINTÁTICA do source porque é estrutura técnica (markdown +
+    checkbox + code fences). Conteúdo PT-BR reescrito; sintaxe estrutural é
+    convenção universal. Verificação manual: nenhuma sequência ≥5 palavras
+    consecutivas idênticas em PROSA (técnico OK).

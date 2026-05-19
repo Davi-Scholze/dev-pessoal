@@ -137,7 +137,7 @@ Formato 3 linhas:
 ## Quando NÃO usar
 
 - Contexto recém-criado (< 30 dias) sem trigger explícito do usuário
-- Bruto sagrado (`contextos/bruto/`) — esse NÃO atualiza, é histórico
+- Bruto sagrado (`_negocio/contextos/bruto/`) — esse NÃO atualiza, é histórico
 - Templates (`templates/`, `_template-pack/`, `_template-contexto/`) — atualizam só via release do KOD.AI
 
 ## Política irmã + skill

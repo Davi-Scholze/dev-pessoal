@@ -1,0 +1,51 @@
+name: google-workspace
+version: 0.1.0
+status: FUNCIONAL
+bundled: true
+bundled_from:
+  source: Local skill da máquina dev (origem Navortech/TrackOps - skill específica)
+  path: c:\Users\Usuario\.claude\skills\google-workspace\
+  version: snapshot 2026-05-18
+license:
+  type: derivative-original-author
+  attribution_required: true
+  attribution_text: |
+    Capacidade inspirada em skill local Navortech. Re-implementação universalizada
+    em 2026-05-18 removendo toda referência específica ao projeto original (TrackOps,
+    Transposeg, Sandra, paths/vars Navortech). Versão atual é reescrita do zero pra
+    ser genérica + reutilizável por qualquer comprador KOD.AI.
+strategy: reimplementation (universalizada)
+absorbed_at: 2026-05-18T20:00:00-03:00
+notes: |
+  Original era altamente Navortech-específica. Re-implementação:
+
+  Removido:
+  - Referências a TrackOps, Transposeg, Sandra
+  - Variável VITE_GOOGLE_DRIVE_FOLDER_ID (substituída por DRIVE_FOLDER_ID)
+  - Menções a "Fase 1.5" e roadmap específico
+  - Tabela `placas` e schema Supabase do projeto original
+  - Fluxo "Consultores Transposeg → Drive Transposeg → Sandra copia..."
+
+  Adicionado (cobertura universal):
+  - 3 cenários de autenticação (Service Account, OAuth 2.0, dev local)
+  - Tabela completa de operações Drive API + Sheets API
+  - Setup passo-a-passo Service Account
+  - Setup OAuth 2.0 multi-usuário
+  - Variáveis de ambiente recomendadas
+  - Código Node.js exemplo
+  - Seção Anti-padrões
+  - Seção Custos & limites
+  - Seção Segurança (regra-base #5)
+  - Cross-links pra outras skills KOD.AI
+anti_verbatim:
+  ngram_check: PASS (re-implementação completa)
+  five_nos_check: PASS
+  notes: |
+    Re-implementação universal. Estrutura técnica (assinaturas de função
+    googleapis) preservada porque é convenção universal da API Google,
+    não cópia de prosa.
+runtime_deps:
+  - googleapis (Node.js): latest
+  - google-auth-library (Node.js): latest
+  - Conta Google Cloud Platform (sem custo direto pra uso típico)
+  - Service Account JSON OU OAuth client credentials

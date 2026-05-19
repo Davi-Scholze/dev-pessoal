@@ -15,7 +15,7 @@
 
 ## Etapa 1 — /spec (Especificação)
 
-Criar arquivo em `contextos/fluxos/YYYY-MM-DD_nome-feature.md` com:
+Criar arquivo em `_negocio/contextos/fluxos/YYYY-MM-DD_nome-feature.md` com:
 
 ```markdown
 ## Feature: [Nome]

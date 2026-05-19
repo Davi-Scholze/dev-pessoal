@@ -201,7 +201,7 @@ Ou marcador YAML opt-in:
 ```yaml
 # .kodai-pre-triado.yaml na raiz do projeto consumidor
 pre_triados:
-  - contextos/universal/
+  - _negocio/contextos/universal/
   - docs/lessons-learned/
 ```
 

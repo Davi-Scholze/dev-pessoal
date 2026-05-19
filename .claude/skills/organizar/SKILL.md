@@ -47,7 +47,7 @@ Reorganização estrutural não-destrutiva. Escala de sistema pequeno até guard
 **Triggers contextuais (sugerir):**
 - Detectou ≥6 `.md` soltos na raiz que poderiam ser agrupados
 - Detectou estrutura atual diverge ≥30% do layout-alvo canônico do tipo detectado
-- Detectou pastas com nomes redundantes (`tools/` + `ferramentas/` + `scripts/`)
+- Detectou pastas com nomes redundantes (`tools/` + `_dev/ferramentas/` + `scripts/`)
 - Detectou que último `/organizar` foi há > 90 dias OU nunca
 - Detectou pasta-mãe sem agrupamento `_memoria/_negocio/_dev/` convencionado
 
@@ -98,8 +98,8 @@ Lista de **8 anti-padrões** detectados:
 
 1. **Muitos `.md` soltos na raiz** (>5 não-canônicos) → propor agrupamento em `_negocio/` ou `docs/`
 2. **MAPA + MAPA_PESSOAL duplicados** → propor consolidação
-3. **`ferramentas/` + `tools/` + `scripts/` coexistindo** → propor unificação em `_dev/tools/`
-4. **`identidade/` + `contextos/` + `_memoria/` em níveis diferentes** → propor agrupamento sob `_negocio/`
+3. **`_dev/ferramentas/` + `tools/` + `scripts/` coexistindo** → propor unificação em `_dev/tools/`
+4. **`_negocio/identidade/` + `_negocio/contextos/` + `_memoria/` em níveis diferentes** → propor agrupamento sob `_negocio/`
 5. **`docs/` no mesmo nível de `src/`** (projeto-solo) → OK, deixa
 6. **Pastas vazias > 1 dia** → delegar pra `/faxina` Bucket 4
 7. **Repos pessoais sem `_memoria/` próprio** → propor criar
@@ -120,26 +120,26 @@ Carrega template canônico de `1-ESQUELETO/templates/layouts/<tipo>.md`. Gera **
 
 | # | De | Para | Tipo | Confiança |
 |---|---|---|---|---|
-| 1 | identidade/ | _negocio/identidade/ | git mv -- dir | ALTA |
-| 2 | contextos/ | _negocio/contextos/ | git mv -- dir | ALTA |
-| 3 | MAPA.md | _negocio/MAPA.md | git mv | MÉDIA (verificar se MAPA_PESSOAL.md fica) |
-| 4 | PENDENCIAS.md | _negocio/PENDENCIAS.md | git mv | ALTA |
-| 5 | PROMPT_MASTER_HANDOFF.md | _negocio/PROMPT_MASTER_HANDOFF.md | git mv | ALTA |
-| 6 | ferramentas/ | _dev/ferramentas/ | git mv -- dir | ALTA |
+| 1 | _negocio/identidade/ | _negocio/identidade/ | git mv -- dir | ALTA |
+| 2 | _negocio/contextos/ | _negocio/contextos/ | git mv -- dir | ALTA |
+| 3 | _negocio/MAPA.md | _negocio/MAPA.md | git mv | MÉDIA (verificar se _negocio/MAPA.md fica) |
+| 4 | _negocio/PENDENCIAS.md | _negocio/PENDENCIAS.md | git mv | ALTA |
+| 5 | _negocio/PROMPT_MASTER_HANDOFF.md | _negocio/PROMPT_MASTER_HANDOFF.md | git mv | ALTA |
+| 6 | _dev/ferramentas/ | _dev/ferramentas/ | git mv -- dir | ALTA |
 | 7 | docs/ | _dev/docs/ | git mv -- dir | MÉDIA (docs pode ser canônico raiz) |
 
 ## Referências em .md a atualizar (M arquivos)
 
 | Arquivo | Path antigo | Path novo | Linhas |
 |---|---|---|---|
-| CLAUDE.md | MAPA_PESSOAL.md | _negocio/MAPA_PESSOAL.md ou _negocio/MAPA.md | linhas 23, 47 |
-| AGENTS.md | identidade/ | _negocio/identidade/ | linhas 12, 89 |
+| CLAUDE.md | _negocio/MAPA.md | _negocio/MAPA_PESSOAL.md ou _negocio/MAPA.md | linhas 23, 47 |
+| AGENTS.md | _negocio/identidade/ | _negocio/identidade/ | linhas 12, 89 |
 | ... | ... | ... | ... |
 
 ## Anti-padrões NÃO corrigidos automaticamente (precisam decisão)
 
-- MAPA.md vs MAPA_PESSOAL.md — qual é o canônico? (decisão humana)
-- REGRAS_SESSAO.md — extensão local, deixar raiz OU mover pra `.claude/rules/regras-sessao.md`?
+- _negocio/MAPA.md vs _negocio/MAPA.md — qual é o canônico? (decisão humana)
+- .claude/rules/regras-sessao.md — extensão local, deixar raiz OU mover pra `.claude/rules/regras-sessao.md`?
 
 ## Resumo
 Total movimentações: N
@@ -254,8 +254,8 @@ Próximos passos sugeridos:
 
 ### Bruto sagrado (regra-base 2)
 
-- Arquivos em `contextos/bruto/` e `inbox-*/` são **sagrados** — `/organizar` pode **mover a pasta inteira** (preservando estrutura interna), mas NUNCA renomeia ou reagrupa arquivos individuais dentro
-- Se mover `contextos/bruto/` pra `_negocio/contextos/bruto/`, a pasta inteira vai junto
+- Arquivos em `_negocio/contextos/bruto/` e `inbox-*/` são **sagrados** — `/organizar` pode **mover a pasta inteira** (preservando estrutura interna), mas NUNCA renomeia ou reagrupa arquivos individuais dentro
+- Se mover `_negocio/contextos/bruto/` pra `_negocio/contextos/bruto/`, a pasta inteira vai junto
 
 ### `KODAI/` clone (upstream)
 

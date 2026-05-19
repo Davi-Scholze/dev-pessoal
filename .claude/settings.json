@@ -1,5 +1,15 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Nova sessão num projeto KOD.AI. Execute /abrir agora para fazer Sessão Zero: health check silencioso + leitura de _memoria/ + leitura de PROMPT_MASTER_HANDOFF.md + reporte canônico em 5-7 linhas. Não pergunte permissão — apenas execute /abrir. Se a pasta não tiver KOD.AI instalado (sem _memoria/ ou KODAI-INSTALADO.md), /abrir reportará isso.'"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",

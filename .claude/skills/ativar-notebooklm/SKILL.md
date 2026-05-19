@@ -59,7 +59,7 @@ Heurísticas:
 | Grounding — domínio de negócio específico | `3-CONTEXTOS-DOMINIO/<slug-do-vertical>/` (criar se não existir via `/criar-contexto`) |
 | Grounding — capacidade técnica (pack) | `2-PACKS/packs/<categoria>/<slug>/` (criar se não existir via `/criar-pack`) |
 | Orchestration — comportamento universal | `1-ESQUELETO/politicas/` ou `1-ESQUELETO/metodologias/` (decisão por tipo de regra) |
-| Sem fit claro | `contextos/bruto/<data>-<tema>.md` (sagrado, processar depois) |
+| Sem fit claro | `_negocio/contextos/bruto/<data>-<tema>.md` (sagrado, processar depois) |
 
 ### Passo 4 — Criar/atualizar `notebooklm.url` na pasta destino
 
@@ -96,7 +96,7 @@ PYTHONIOENCODING=utf-8 py scripts/run.py notebook_manager.py add \
 
 ### Passo 6 — Se houver markdown anexado, salvar como bruto + criar referência
 
-1. Salvar conteúdo do `.md` em `contextos/bruto/<YYYY-MM-DD>_<slug>.md` (sagrado, intocado)
+1. Salvar conteúdo do `.md` em `_negocio/contextos/bruto/<YYYY-MM-DD>_<slug>.md` (sagrado, intocado)
 2. Adicionar header `Fontes:` com link pro notebook no bruto
 3. Criar reference em pasta destino (não verbatim — re-implementação universalizada quando aplicável)
 

@@ -43,7 +43,7 @@ Toda movimentação vai pra `.faxina-quarentena/<data>/` com `RATIONALE.md` adja
 - Detectou ≥5 PNGs/JPGs soltos na raiz (regra `imagens.md` quebrada)
 - Detectou pastas vazias > 3 em qualquer subnível
 - Detectou último `/faxina` foi há > 30 dias (heurística via último `.faxina-quarentena/<data>/`)
-- Detectou duplicatas SHA256 entre raiz e `contextos/bruto/`
+- Detectou duplicatas SHA256 entre raiz e `_negocio/contextos/bruto/`
 
 **NÃO disparar quando:**
 - Pasta tem < 50 arquivos no total (não tem o que limpar)
@@ -72,7 +72,7 @@ Toda movimentação vai pra `.faxina-quarentena/<data>/` com `RATIONALE.md` adja
 
 **Bucket 1 — Duplicatas SHA256:**
 - Calcular SHA256 de todos arquivos > 1KB na raiz
-- Comparar com SHA256 de arquivos em `contextos/bruto/**` e `inbox-*/**`
+- Comparar com SHA256 de arquivos em `_negocio/contextos/bruto/**` e `inbox-*/**`
 - Match exato → candidato a quarentena (manter o canônico, mover a duplicata)
 
 **Bucket 2 — Arquivos fora-do-lugar:**
@@ -82,7 +82,7 @@ Toda movimentação vai pra `.faxina-quarentena/<data>/` com `RATIONALE.md` adja
 - `*.tmp`, `*.bak`, `*.swp`, `*.swo`, `*.DS_Store`, `Thumbs.db`
 
 **Bucket 3 — Órfãos (sem referência):**
-- Arquivos `.md` na raiz NÃO referenciados em `CLAUDE.md`, `AGENTS.md`, `MAPA.md`, `KODAI-INSTALADO.md`, `PENDENCIAS.md`, `PROMPT_MASTER_HANDOFF.md`, ou em qualquer outro `.md` da raiz
+- Arquivos `.md` na raiz NÃO referenciados em `CLAUDE.md`, `AGENTS.md`, `_negocio/MAPA.md`, `KODAI-INSTALADO.md`, `_negocio/PENDENCIAS.md`, `_negocio/PROMPT_MASTER_HANDOFF.md`, ou em qualquer outro `.md` da raiz
 - Heurística: grep `<nome-arquivo>` em todos `.md` da pasta — 0 matches = órfão candidato
 
 **Bucket 4 — Pastas vazias:**
@@ -224,7 +224,7 @@ Workflow:
 - Pular pastas de submodules (detectar via `.gitmodules`)
 - Cada submodule é responsável pela própria faxina
 
-### Pasta `_memoria/` ou `contextos/bruto/`
+### Pasta `_memoria/` ou `_negocio/contextos/bruto/`
 
 - **NUNCA** mover arquivos dessas pastas (são canônicas)
 - Apenas detectar duplicatas APONTANDO pra essas pastas (mover a duplicata, não o canônico)
@@ -236,7 +236,7 @@ Workflow:
 
 ### Bruto sagrado (regra-base 2)
 
-- Arquivos em `contextos/bruto/` e `inbox-*/` são **sagrados**
+- Arquivos em `_negocio/contextos/bruto/` e `inbox-*/` são **sagrados**
 - Faxina **nunca** toca neles
 - Faxina pode mover **cópias** desses arquivos que estão fora do lugar (na raiz, por exemplo)
 
