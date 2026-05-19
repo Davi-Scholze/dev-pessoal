@@ -1,0 +1,44 @@
+name: evoluir-contexto
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+Fontes:
+  - 1-ESQUELETO/metodologias/mapeamento-iterativo.md (5 categorias)
+  - 1-ESQUELETO/skills-universais/absorver-contexto/SKILL.md
+  - 1-ESQUELETO/skills-universais/atualizar/SKILL.md (Passo 5)
+  - docs/CONTEXT-OS.md (capítulo 7 — contra context rot)
+triggers:
+  - contexto.md com Atualizado >90 dias
+  - usuário menciona algo que contradiz documentado
+  - consulta NotebookLM retorna lacuna evidente
+  - eixo importante sem notebooklm.url vinculado
+  - "evoluir contexto" / "/evoluir-contexto" / "atualiza esse contexto" / "esse contexto tá velho"
+authors:
+  - Davi Scholze (criador)
+  - KOD.AI v0.5 (formalização)
+notes: |
+  Skill operacional de MANUTENÇÃO PROATIVA. Detecta drift de contexto e
+  sinaliza sugestão específica + acionável.
+
+  Nunca age destrutivamente — apenas propõe. Quando aprovado, gera
+  prompt padrão pra extensão Claude Chrome alimentar NotebookLM.
+
+  Após retorno da extensão (próxima sessão), aplica anti-verbatim PASS
+  + mapeamento iterativo (NOVO/CONFIRMA/REFINA aplica; ALTERA/DESCARTA
+  pergunta) + atualiza header + versão bumpa + audit_log.
+
+  4 triggers de detecção: data >90d, contradição com input usuário,
+  lacuna em consulta NotebookLM, eixo importante sem notebook vinculado.
+related:
+  - sugerir-pesquisa
+  - ativar-notebooklm
+  - absorver-contexto
+  - atualizar
+  - mapeamento-iterativo (metodologia)
+  - escuta-antes-de-agir (gate humano)
+  - 99_meta/audit_log.md

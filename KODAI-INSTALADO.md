@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-15
+> Última atualização: 2026-05-21 (sync upstream v0.5.0 + propagação skills v0.5/v0.6-dev)
 
 ---
 
@@ -10,9 +10,10 @@
 
 | Campo | Valor |
 |---|---|
-| Versão KOD.AI | `v0.1.0-camada1` |
+| Versão KOD.AI | `v0.5.0` (tag) → `0.6.0-dev` (em desenvolvimento) |
 | Perfil | `completo` |
-| Data instalação | 2026-05-15 |
+| Data instalação inicial | 2026-05-15 |
+| Última atualização | 2026-05-21 (v0.2.6 → v0.5.0 via `git pull` + 0.6.0-dev local) |
 | Upstream | github.com/Davi-Scholze/kod-ai |
 | Modo | Pasta-mãe existente (Categoria C) |
 
@@ -41,19 +42,38 @@
 - [x] `.claude/` — SCHOLZE-STACK (agents, skills, hooks, commands)
 - [x] `Repositorios/` — code repos
 
+### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-21)
+
+**Universais nativas v0.4 (16):** abrir, absorver-contexto, absorver-referencia, atualizar, capturar, capturar-contexto-cliente, check-in, criar-contexto, criar-pack, criar-perfil, mapear-rotinas, salvar, ver, writing-plans (e mais 2 via bundled overlap)
+
+**Universais v0.5 (5):** ativar-notebooklm, evoluir-contexto, sugerir-pesquisa, auditar-projeto, capturar-imagem
+
+**Universais v0.6-dev (2):** capturar-video, faxina
+
+**Bundled (17):** brainstorming, writing-plans, transcribe-audio, executing-plans, subagent-driven-development, notebooklm, google-workspace, dev-browser, excalidraw-diagram, code-review, verification-before-completion, finishing-a-development-branch, using-git-worktrees, systematic-debugging, test-driven-development, writing-skills, skill-creator
+
+**Instalação/gestão (6):** adicionar-pack, atualizar-kodai, instalar, listar-disponiveis, remover-pack, trocar-perfil
+
+Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK (accessibility-axe, conventional-commits, etc.). Total atual em `.claude/skills/` da pasta-mãe: 53.
+
+### Hook SessionStart adicionado em `.claude/settings.json` (2026-05-18)
+
+Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1). Hooks PreToolUse (block-dangerous.py) e PostToolUse (log-metrics.py) do SCHOLZE-STACK preservados.
+
 ---
 
 ## Contextos-domínio ativos
 
-> **Nota:** a filosofia de contextos está mudando (spec aprovada 2026-05-15).
-> Camada 3 deixará de entregar domínios pré-prontos; contexto específico
-> passa a ser capturado via `/capturar-contexto-cliente`. Esta seção será
-> reescrita quando RF4 da spec for executado.
+> **OBSOLETO desde v0.2.0** — KOD.AI não entrega mais domínio pré-pronto.
+> Contexto específico de cliente/vertical é capturado sob demanda via
+> `/capturar-contexto-cliente` → Google Doc + NotebookLM. Os STUBs antigos
+> abaixo permanecem documentados só por histórico — não estão "ativos" no
+> sentido operacional.
 
 | Domínio | Status | Path no KOD.AI |
 |---|---|---|
-| contabilidade-br | STUB (a remover) | `KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` |
-| dojos-artes-marciais | STUB (a remover) | `KODAI/3-CONTEXTOS-DOMINIO/dojos-artes-marciais/` |
+| contabilidade-br | STUB legado | `KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` |
+| dojos-artes-marciais | STUB legado | `KODAI/3-CONTEXTOS-DOMINIO/dojos-artes-marciais/` |
 
 ---
 

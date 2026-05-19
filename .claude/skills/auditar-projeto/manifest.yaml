@@ -1,0 +1,40 @@
+name: auditar-projeto
+version: 1.0
+type: skill-universal
+status: DRAFT-implementado
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+Fontes:
+  - docs/decisoes/2026-05-20-auto-mapeamento-projeto-consumidor.md (spec v1.1 com D1-D10 decididas)
+  - docs/decisoes/tasks/2026-05-20_auto-mapeamento/notas-exploratorias-nv-dev.md (piloto NV-Dev)
+  - 1-ESQUELETO/metodologias/estrutura-de-contexto.md (3 Eixos)
+  - 1-ESQUELETO/metodologias/mapeamento-iterativo.md (5 categorias cross-ref)
+  - PRECEDENCE.md (8 níveis)
+triggers:
+  - /auditar-projeto
+  - auditar projeto
+  - varre essa pasta
+  - o que tem aqui que vale pro KODAI?
+  - auto-mapeamento
+  - absorve o que tem nesse projeto
+related:
+  - ../absorver-contexto/SKILL.md (motor)
+  - ../absorver-referencia/SKILL.md (motor)
+  - ../atualizar/SKILL.md (auto-descoberta)
+  - ../../../0-INSTALACAO/skills/instalar/SKILL.md (opt-in --with-install)
+  - ../../../docs/decisoes/2026-05-20-auto-mapeamento-projeto-consumidor.md
+  - ../../../docs/decisoes/2026-05-20-upstream-update-mecanismo.md (spec-irmã)
+decisoes_resolvidas:
+  D1: A (skill nova /auditar-projeto)
+  D2: A (.kodai-auditoria/<data>/ gitignored)
+  D3: C (2 OKs separados, sem tempo mínimo forçado)
+  D4: C (híbrido batch+item)
+  D5: B (pausa com ALARME em credencial)
+  D6: A (pitch markdown only)
+  D7: A (merge-aditivo .claude/)
+  D8: A (bloqueia se anti-verbatim falha)
+  D9: C (heurística path + marcador YAML)
+  D10: C (audit-only default + --with-install opt-in)

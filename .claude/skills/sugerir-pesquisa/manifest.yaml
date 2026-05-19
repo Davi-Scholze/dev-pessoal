@@ -1,0 +1,46 @@
+name: sugerir-pesquisa
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+Fontes:
+  - 1-ESQUELETO/regras-base.md (regra 10 - honestidade em claims)
+  - 1-ESQUELETO/politicas/respostas-com-referencias.md
+  - 1-ESQUELETO/politicas/referencias-externas.md
+  - 1-ESQUELETO/skills-universais/verification-before-completion/SKILL.md (Iron Law)
+  - docs/CONTEXT-OS.md (seção 4 — porta de intake)
+triggers:
+  - pergunta do usuário sem contexto suficiente (gap em tempo real)
+  - gap identificado em eixo sem notebooklm.url vinculado
+  - resposta dependeria de fonte externa atualizada
+  - pedido excede conhecimento documentado do projeto
+  - "preciso saber sobre X" / "não tenho contexto pra Y" / "/sugerir-pesquisa" / "pesquisa isso pra mim"
+authors:
+  - Davi Scholze (criador)
+  - KOD.AI v0.5 (formalização)
+notes: |
+  Skill operacional de GAP-DETECTION REATIVO. Detecta durante interação
+  quando a pergunta do usuário não pode ser respondida com contextos
+  atuais — sinaliza lacuna + sugere ação específica.
+
+  Princípio: HONESTIDADE ABSOLUTA. Não inventa, não alucina, não responde
+  por baixo. Combina Iron Law (verification-before-completion) com
+  política respostas-com-referencias (anti-alucinação).
+
+  Diferença vs /evoluir-contexto: reativa (em tempo real) vs proativa
+  (drift). Ambas convergem no prompt da extensão Claude Chrome quando
+  aprovadas.
+
+  Output padrão 5 linhas (Lacuna detectada / Cobertura atual / Falta /
+  Sugestão / pergunta sobre prompt da extensão).
+related:
+  - evoluir-contexto (irmã proativa)
+  - ativar-notebooklm
+  - respostas-com-referencias (política)
+  - referencias-externas (política)
+  - verification-before-completion (skill bundled)
+  - regras-base (regra 10)

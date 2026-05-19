@@ -1,0 +1,26 @@
+name: capturar-imagem
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+Fontes:
+  - 1-ESQUELETO/politicas/imagens.md (3 tipos canônicos)
+  - 1-ESQUELETO/regras-base.md (regra 2 bruto sagrado, regra 4 LGPD)
+  - .claude/rules/playwright-output-path.md (interação com /ver)
+triggers:
+  - /capturar-imagem
+  - captura essa imagem
+  - salva esse print
+  - registra esse mockup
+  - anota esse design
+  - guarda essa foto
+related:
+  - ../capturar/SKILL.md (texto stakeholder)
+  - ../transcribe-audio/SKILL.md (áudio stakeholder)
+  - ../capturar-video/SKILL.md (vídeo stakeholder)
+  - ../ver/SKILL.md (Playwright — caso distinto)
+  - ../../politicas/imagens.md

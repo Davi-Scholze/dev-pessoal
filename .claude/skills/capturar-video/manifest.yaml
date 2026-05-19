@@ -1,0 +1,52 @@
+name: capturar-video
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-21
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-21
+Fontes:
+  - 1-ESQUELETO/politicas/imagens.md (3 tipos canônicos — herdados pra vídeo)
+  - 1-ESQUELETO/regras-base.md (regra 2 bruto sagrado, regra 4 LGPD)
+  - .claude/rules/playwright-output-path.md (interação com /ver)
+  - 1-ESQUELETO/skills-universais/capturar-imagem/SKILL.md (skill irmã, padrão estrutural)
+  - 1-ESQUELETO/skills-universais/transcribe-audio/SKILL.md (ponte de transcrição)
+triggers:
+  - /capturar-video
+  - captura esse vídeo
+  - salva essa gravação
+  - registra esse demo
+  - anota esse screen-recording
+  - guarda esse vídeo
+  - esse mp4
+  - esse screen-recording
+dependencias:
+  obrigatorias: []
+  opcionais:
+    - ffmpeg (metadata + frames + extração áudio)
+    - ffprobe (metadata; vem junto com ffmpeg)
+    - yt-dlp (download de YouTube/Vimeo — não default)
+related:
+  - ../capturar-imagem/SKILL.md
+  - ../transcribe-audio/SKILL.md
+  - ../capturar/SKILL.md
+  - ../ver/SKILL.md (Playwright — caso distinto)
+  - ../../politicas/imagens.md
+inputs_aceitos:
+  extensoes: [.mp4, .mov, .webm, .avi, .mkv, .m4v, .flv]
+  paths: absoluto ou relativo
+  urls: links de Loom/Vimeo/YouTube/Google Drive privado (salvos como referência, não baixados por default)
+outputs:
+  - <video> salvo no destino canônico
+  - <video>.md metadata adjacente
+  - <video>.mp3 áudio extraído (opcional)
+  - <video>.transcript.md transcrição (opcional)
+  - frame-001.png ... frame-003.png frames-chave (opcional)
+limitacoes:
+  - claude_nao_le_video_nativamente: true (frames extraídos como workaround)
+  - sem_deteccao_pii: true (usuário responsável por recortar)
+  - sem_comparacao_perceptual: true
+  - sem_geracao_video: true
+  - ffmpeg_opcional: true (degrada graciosamente)

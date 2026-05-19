@@ -1,0 +1,71 @@
+name: faxina
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-21
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-21
+Fontes:
+  - 1-ESQUELETO/regras-base.md (regra 2 bruto sagrado; regra 11 honestidade — NUNCA delete)
+  - 1-ESQUELETO/politicas/imagens.md (PNGs soltos na raiz)
+  - 1-ESQUELETO/politicas/explicar-acao-custosa.md (4 dados antes de mover/purgar)
+  - .claude/rules/gitignore-aditivo.md (adicionar .faxina-quarentena/ aditivamente)
+  - HANDOFF-2026-05-20.md (frente 8 do plano feroz)
+  - docs/DELETION_RATIONALE.md (4 deletes manuais 2026-05-20 — padrão de rationale formalizado aqui)
+triggers:
+  - /faxina
+  - limpa raiz
+  - arruma essa pasta
+  - varre o que tá fora do lugar
+  - tem muita coisa solta
+  - tá uma bagunça
+  - faxina periódica
+  - higiene
+flags:
+  --dry-run: default — só inventário, não move nada
+  --apply: move classificados pra .faxina-quarentena/<data>/ após OK
+  --restore <data>: reverte uma faxina anterior
+  --purge <data>: delete real após N dias e 2 confirmações
+  --list: lista todas quarentenas existentes
+  --include-repos: força entrar em repos aninhados (raro)
+buckets_de_classificacao:
+  - duplicatas-sha256
+  - fora-do-lugar
+  - orfaos
+  - pastas-vazias
+  - caches-antigos
+nunca_toca:
+  - _memoria/**
+  - contextos/bruto/**
+  - inbox-*/**
+  - .claude/skills/**
+  - .git/**
+  - submodules (.gitmodules)
+  - repos aninhados (sem --include-repos)
+related:
+  - ../auditar-projeto/SKILL.md (auditoria mais abrangente)
+  - ../capturar-imagem/SKILL.md (Bucket 2 — PNGs soltos)
+  - ../capturar-video/SKILL.md (Bucket 2 — vídeos soltos)
+  - ../../politicas/imagens.md
+  - ../../politicas/explicar-acao-custosa.md
+  - ../../regras-base.md
+dependencias:
+  obrigatorias: []
+  opcionais:
+    - sha256sum (built-in em Linux/Mac/Git Bash; PowerShell tem Get-FileHash)
+    - find (built-in)
+limitacoes:
+  - sem_hash_perceptual: true (só SHA256 exato)
+  - heuristica_orfaos_imperfeita: true (NotebookLM/commit message fora do alcance)
+  - sem_varredura_profunda_default: true (raiz + 2 níveis)
+  - sequencial: true (não paralelo)
+criterios_pass:
+  - zero_delete_sem_dois_oks_explicitos: true
+  - rationale_md_em_toda_quarentena: true
+  - reversao_em_um_comando: true
+  - bruto_sagrado_intocado: true
+  - gitignore_aditivo_atualizado: true
+  - inventario_em_30s_em_10k_arquivos: true
+  - pausa_se_git_status_sujo: true

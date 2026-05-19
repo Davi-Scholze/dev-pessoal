@@ -1,0 +1,44 @@
+name: ativar-notebooklm
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+Fontes:
+  - 1-ESQUELETO/skills-universais/notebooklm/SKILL.md (bundled — biblioteca/auth)
+  - 99_meta/notebooklm_auth.md (manutenção da auth)
+  - docs/CONTEXT-OS.md (seção 4 — portas de intake)
+triggers:
+  - URL notebooklm.google.com/notebook/<id> detectada no prompt do usuário
+  - + Contexto adjacente identificando tema/eixo na mesma mensagem
+  - Disparo explícito: "ativar notebooklm" / "vincula esse notebook" / "/ativar-notebooklm" / "esse notebooklm é sobre X"
+authors:
+  - Davi Scholze (criador)
+  - KOD.AI v0.5 (formalização da skill)
+notes: |
+  Skill operacional de intake — detecta URL de NotebookLM colada pelo
+  usuário + contexto adjacente e vincula automaticamente à pasta correta
+  da estrutura KOD.AI.
+
+  Workflow 7 passos: detectar URL (regex) → identificar tema/eixo
+  (heurísticas + 1 pergunta única se vago) → mapear pra pasta destino
+  (6 cenários) → criar/atualizar notebooklm.url (idempotente, confirma
+  antes de sobrescrever) → adicionar à library via notebook_manager.py
+  → salvar bruto se .md anexado → confirmação padrão ao usuário.
+
+  Combate sub-trigger (regra-base 4): auto-disparo por presença do link,
+  não só por comando explícito.
+
+  Skill formalizada após sessão 2026-05-20 onde Davi compartilhou 2
+  NotebookLMs canônicos com contexto adjacente — comportamento esperado
+  era ativação automática.
+related:
+  - notebooklm (bundled)
+  - capturar
+  - absorver-contexto
+  - evoluir-contexto
+  - sugerir-pesquisa
+  - 99_meta/notebooklm_auth.md
