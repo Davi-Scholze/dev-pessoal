@@ -1,0 +1,98 @@
+name: organizar
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-21
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-21
+Fontes:
+  - 1-ESQUELETO/regras-base.md (regra 2 bruto sagrado; regra 7 commit-on-step; regra 11 honestidade)
+  - 1-ESQUELETO/politicas/layout-canonico.md (4 layouts canônicos por tipo)
+  - 1-ESQUELETO/politicas/explicar-acao-custosa.md (4 dados antes de mover)
+  - 1-ESQUELETO/templates/layouts/ (templates dos 4 tipos)
+  - .claude/rules/gitignore-aditivo.md (.organizar-rollback-*.md + .faxina-quarentena/ adicionados aditivamente)
+  - Demanda Davi 2026-05-21 (incômodo com pasta-mãe desorganizada)
+triggers:
+  - /organizar
+  - organiza essa pasta
+  - arrumar estrutura
+  - reorganiza
+  - aplica layout canônico
+  - padroniza essa estrutura
+  - tá desorganizado
+  - muitos .md soltos na raiz
+  - agrupa o que é semelhante
+  - tá uma bagunça estrutural
+flags:
+  --dry-run: default — plano sem movimentação
+  --apply: executa git mv + atualiza refs após OK
+  --rollback <data>: reverte uma reorganização anterior
+  --list: lista reorganizações registradas
+  --apenas-faxina: só higiene, pula reorganização estrutural
+  --apenas-estrutura: pula faxina, só layout
+  --include-repos: força reorganizar dentro de repos aninhados (raro)
+  --include-code: estende refs pra .ts/.js/.py/.json (mais risco)
+  --tipo <X>: override de detecção automática
+  --commit-mode <atomic|per-move>: 1 commit ou N commits
+tipos_detectados:
+  - pasta-mae: tem KODAI-INSTALADO.md OU KODAI/ OU Repositorios/ OU ≥2 .git/ em subpastas
+  - projeto-solo-grande: .git/ + src/|app/|lib/ + ≥30 arquivos
+  - projeto-solo-pequeno: .git/ + <30 arquivos OU sem src/
+  - monorepo: package.json com workspaces OU pnpm-workspace.yaml OU turbo.json
+anti_padroes_detectados:
+  - md_soltos_raiz: >5 .md não-canônicos na raiz
+  - mapa_duplicado: MAPA.md + MAPA_PESSOAL.md coexistindo
+  - dirs_redundantes: ferramentas/ + tools/ + scripts/ coexistindo
+  - identidade_contextos_memoria_dispersos: cada um em nível diferente sem agrupamento
+  - pastas_vazias: delegado pra /faxina Bucket 4
+  - repos_sem_memoria_propria: repo pessoal sem _memoria/ próprio
+  - md_orfaos: delegado pra /faxina Bucket 3
+  - regras_sessao_solto: REGRAS_SESSAO.md ou similar que deveria ser .claude/rules/
+nunca_toca_individualmente:
+  - contextos/bruto/** (pode mover pasta inteira, nunca arquivos dentro)
+  - inbox-*/**
+  - _memoria/** (canônico)
+  - .claude/skills/** (sistema)
+  - .git/**
+  - KODAI/** (clone upstream — mudanças via /upstream-update)
+  - node_modules/**
+  - .faxina-quarentena/**
+  - .organizar-rollback-*.md
+preserva_historico:
+  metodo: git mv (sempre)
+  validacao: git log --follow funciona em todos arquivos movidos
+related:
+  - ../faxina/SKILL.md (composta na Fase 3)
+  - ../auditar-projeto/SKILL.md (auditoria é input pra organizar)
+  - ../../politicas/layout-canonico.md (NOVO — define os 4 layouts)
+  - ../../politicas/explicar-acao-custosa.md (4 dados antes de mover)
+  - ../../templates/layouts/ (NOVO — 4 layouts canônicos)
+  - ../../regras-base.md (regra 2 + 7 + 11)
+dependencias:
+  obrigatorias:
+    - git (pra git mv preservar histórico)
+  opcionais:
+    - sha256sum (compartilhado com /faxina)
+    - find (built-in)
+escala:
+  minimo: sistema pequeno (10 arquivos)
+  maximo: monorepo + pasta-mãe (100k+ arquivos)
+  performance_alvo: diagnóstico em ≤60s pra 10k arquivos
+limitacoes:
+  - refs_md_only_por_default: true (--include-code estende com risco)
+  - sem_deteccao_codigo_orfao: true
+  - merge_hell_se_em_main_com_PRs_abertos: true (use branch dedicada)
+  - layouts_canonicos_evoluem: true (versão registrada em rollback md)
+criterios_pass:
+  - zero_arquivo_perdido: true (sempre git mv)
+  - rollback_md_em_toda_reorganizacao: true
+  - reversao_em_um_comando: true
+  - bruto_sagrado_intocado_individualmente: true
+  - kodai_clone_intocado: true
+  - refs_md_atualizadas_automaticamente: true
+  - git_log_follow_funciona: true
+  - match_score_pos_85_pct: true
+  - gate_humano_5_niveis_granularidade: true
+  - funciona_em_pequeno_e_grande: true
