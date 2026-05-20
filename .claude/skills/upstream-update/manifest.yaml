@@ -1,0 +1,112 @@
+name: upstream-update
+version: 0.6.0-draft
+type: skill-universal
+status: DRAFT
+created: 2026-05-21
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Sensibilidade: publico
+Atualizado: 2026-05-21
+Fontes:
+  - docs/decisoes/2026-05-20-upstream-update-mecanismo.md (spec parent, D1-D10 resolvidas 2026-05-21)
+  - docs/decisoes/tasks/2026-05-21_upstream-update/ (tasks de break)
+  - 1-ESQUELETO/politicas/classificacao-contexto.md (gate sensibilidade)
+  - 1-ESQUELETO/politicas/engenharia-de-contexto.md (princípio base)
+  - 2-PACKS/_template-pack/REFERENCE-ABSORB.md (anti-verbatim + cinco-NÃOs)
+triggers:
+  - /upstream-update
+  - contribuir upstream
+  - mandar isso pro KODAI
+  - subir contexto absorvido
+  - fazer pitch pro upstream
+  - publicar essa skill no kod-ai
+  - publicar essa política no kod-ai
+flags:
+  --modelo: "A (default v0.6) | B (trusted, futuro) | C (open-gated, futuro)"
+  --dry-run: "Gera plano sem fazer push"
+  --override-anti-pollution: "Só Modelo A; exige --razao + log"
+  --razao: "Texto explicando override (>=30 chars)"
+  --attribution: "true|false (default false; opt-in pra Co-Authored-By)"
+  --pitch-path: "Path do upstream-pitch.md (default: .kodai-auditoria/latest/upstream-pitch.md)"
+  --upstream-path: "Path local clone do Davi-Scholze/kod-ai (default env KODAI_UPSTREAM_PATH)"
+modos:
+  modelo-A:
+    descricao: "Davi-only commit direto em Davi-Scholze/kod-ai/main"
+    quem_pode: "Apenas Davi (verifica git config user.email)"
+    pr_aberto: false
+    gate_anti_pollution: "Local + override permitido com log"
+    status: DRAFT (implementado, aguarda piloto NV-Dev)
+  modelo-B:
+    descricao: "Fork + PR via gh CLI (consumidores trusted)"
+    quem_pode: "Listados em upstream-contributors.yaml"
+    pr_aberto: true
+    gate_anti_pollution: "Local (mesmo de A)"
+    status: STUB (futuro v0.7+)
+  modelo-C:
+    descricao: "Fork + PR via GitHub Action (qualquer consumer)"
+    quem_pode: "Qualquer dev"
+    pr_aberto: true
+    gate_anti_pollution: "Local + Server (GitHub Action no fork) — DUAS validações"
+    status: STUB (futuro v0.8+)
+anti_pollution_checks:
+  - 1_anti_verbatim_ngram_5: bloqueante
+  - 2_cinco_naos: bloqueante
+  - 3_marca_zero: bloqueante
+  - 4_pii_zero: bloqueante
+  - 5_license_compativel: bloqueante
+  - 6_evidence_bloc: bloqueante
+  - 7_atribuicao: bloqueante
+  - 8_categoria_mapeada: NÃO bloqueante (permite proposta categoria nova)
+sensibilidade_nunca_envia:
+  - confidencial (sem DPA do upstream)
+  - pii (LGPD)
+  - marca_do_consumidor_detectada
+relacionadas:
+  consome: skills/auditar-projeto (gera pitch)
+  consumida_por: ".upstream-history.yaml (track de status)"
+  irmas:
+    - skills/absorver-contexto
+    - skills/absorver-referencia
+arquivos_internos:
+  - SKILL.md (este — orquestrador)
+  - manifest.yaml (este)
+  - anti-pollution-checklist.yaml (config dos 7 SIM — task 02)
+  - checks.js (implementação Node — task 02)
+  - tracker.js (CRUD .upstream-history.yaml — task 03)
+  - status-tracker.md (formato canônico — task 03)
+  - modelo-a.js (Modelo A direct push — task 04)
+  - pre-push-check.js (hook integrado — task 04)
+  - modelo-b.js (Modelo B fork+PR — task 06 stub futuro)
+  - modelo-c.js (Modelo C gate-server — task 07 stub futuro)
+dependencias:
+  obrigatorias:
+    - git
+    - node (>=18)
+  opcionais:
+    - gh (GitHub CLI — Modelos B/C apenas)
+related:
+  - ../auditar-projeto/SKILL.md
+  - ../absorver-contexto/SKILL.md
+  - ../absorver-referencia/SKILL.md
+  - ../../politicas/classificacao-contexto.md
+  - ../../politicas/engenharia-de-contexto.md
+  - ../../politicas/escuta-antes-de-agir.md
+  - ../../politicas/entrada-em-projeto-existente.md
+  - ../../metodologias/mapeamento-equivalencias.md
+  - ../../regras-base.md
+limitacoes:
+  - modelo_A_so_davi: true
+  - modelo_BC_stubs_futuros: true
+  - anti_verbatim_pode_falso_positivo: true (override existe com log)
+  - cinco_naos_heuristico_nao_deterministico: true
+  - sem_rollback_automatico_contribuicao_merged: true (revert manual)
+  - piloto_NV_Dev_deferido_outra_maquina: true
+criterios_pass:
+  - skill_operacional_dogfood: pending (aguarda piloto)
+  - piloto_real_NV_Dev: pending
+  - anti_pollution_bloqueia_falhas: pending (testar com fixtures)
+  - upstream_history_yaml_funcional: pending
+  - attribution_opt_in_testado: pending
+  - evidence_bloc_completo: pending
+  - upstream_contributing_md_publicado: pending

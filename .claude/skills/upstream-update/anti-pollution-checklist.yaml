@@ -1,0 +1,206 @@
+# anti-pollution-checklist.yaml
+# Configuração dos 7 SIM bloqueantes (D3 da spec /upstream-update)
+# Lido por checks.js a cada execução de /upstream-update Fase 2
+
+schema_version: "1.0"
+spec_parent: docs/decisoes/2026-05-20-upstream-update-mecanismo.md
+
+checks:
+
+  1_anti_verbatim:
+    descricao: "n-gram >= 5 — nenhuma sequencia de 5+ palavras consecutivas identica entre item proposto e fonte original"
+    bloqueante: true
+    implementacao: checks.js::antiVerbatim()
+    fonte_comparacao:
+      - "_negocio/contextos/bruto/**"
+      - "inbox-*/**"
+      - "<custom-source-paths-do-pitch>"
+    parametros:
+      ngram_size: 5
+      threshold_matches: 0  # zero matches absoluto
+      normalize: true  # lowercase + trim whitespace antes de comparar
+    output_falha:
+      formato: "Match found: '<5 palavras consecutivas>' em <item_path>:<linha> ↔ <source_path>:<linha>"
+      sugestao_correcao: "Re-implementar trecho universalizando linguagem (não copiar do bruto)"
+
+  2_cinco_naos:
+    descricao: "Verbatim em tom/marca/exemplos/estrutura/claim — 5 NÃOs da REFERENCE-ABSORB.md"
+    bloqueante: true
+    implementacao: checks.js::cincoNaos()
+    referencia: 2-PACKS/_template-pack/REFERENCE-ABSORB.md
+    sub_checks:
+      tom:
+        descricao: "Tom do item bate verbatim com tom do source (formal/casual/sarcastico/etc)"
+        heuristica: "Compara 3 marcadores: pontuação média por sentence, taxa de exclamações/interrogações, voz ativa/passiva"
+        threshold_similaridade: 0.85
+      marca:
+        descricao: "Nomes próprios do source presentes no item (Decon, Navortech, etc — diferente do check 3 que valida brand_words declarados)"
+        heuristica: "Grep case-insensitive de qualquer Nome Próprio (capital letter) no source"
+      exemplos:
+        descricao: "Números, casos, situações exatas reproduzidas"
+        heuristica: "Grep de números >=2 dígitos do source no item"
+      estrutura:
+        descricao: "Ordem de seções (h2/h3) idêntica"
+        heuristica: "Sequência de headings markdown comparada"
+        threshold_similaridade: 0.7
+      claim:
+        descricao: "Assertions/afirmações exatas reproduzidas"
+        heuristica: "Sentence-level n-gram match (threshold mais baixo que check 1, mas só pra sentences declarativas)"
+    output_falha:
+      formato: "Verbatim detected em <sub_check>: <amostra>"
+
+  3_marca_zero:
+    descricao: "Brand words declaradas pelo consumidor → zero matches no item"
+    bloqueante: true
+    implementacao: checks.js::marcaZero()
+    input_consumer: "brand_words declarados no /auditar-projeto pitch ou em <consumidor>/.upstream-history.yaml consumidor.brand_words"
+    exemplo_brand_words: ["Navortech", "NV-Dev", "navortech.dev", "Decon", "Denize", "Davi-Scholze"]
+    heuristica: "grep case-insensitive cada brand_word no item content"
+    threshold_matches: 0
+    excecao: "Em comentários de atribuição ('Origem: <consumidor>...') brand_word é PERMITIDA — não conta como match"
+    output_falha:
+      formato: "Brand word '<word>' encontrada em <item>:<linha>"
+      sugestao_correcao: "Substituir por placeholder genérico (<empresa>, <cliente>, <projeto>) ou remover"
+
+  4_pii_zero:
+    descricao: "Regex de credencial/CPF/telefone/email pessoal não encontrada"
+    bloqueante: true
+    implementacao: checks.js::piiScan()
+    patterns:
+      cpf:
+        regex: "\\b\\d{3}\\.?\\d{3}\\.?\\d{3}-?\\d{2}\\b"
+        descricao: "CPF com ou sem máscara"
+      cnpj:
+        regex: "\\b\\d{2}\\.?\\d{3}\\.?\\d{3}\\/?\\d{4}-?\\d{2}\\b"
+        descricao: "CNPJ — só bloqueia se não for o do consumidor declarado"
+      telefone_br:
+        regex: "\\+?55\\s?\\(?\\d{2}\\)?\\s?9?\\d{4}-?\\d{4}"
+        descricao: "Telefone BR com DDI"
+      email_pessoal:
+        regex: "[a-z0-9._%+-]+@(gmail|hotmail|yahoo|outlook|protonmail|icloud)\\.com"
+        descricao: "Email em provedores pessoais (não corporativo)"
+      github_pat:
+        regex: "ghp_[A-Za-z0-9]{36}"
+        descricao: "GitHub Personal Access Token"
+      github_pat_fine_grained:
+        regex: "github_pat_[A-Za-z0-9_]{82}"
+        descricao: "GitHub PAT fine-grained"
+      openai_key:
+        regex: "sk-[A-Za-z0-9]{48}"
+        descricao: "OpenAI API key"
+      anthropic_key:
+        regex: "sk-ant-[A-Za-z0-9-]{90,}"
+        descricao: "Anthropic API key"
+      aws_access_key:
+        regex: "AKIA[A-Z0-9]{16}"
+        descricao: "AWS Access Key ID"
+      slack_token:
+        regex: "xox[bp]-[A-Za-z0-9-]{10,}"
+        descricao: "Slack bot/user token"
+      jwt_simples:
+        regex: "eyJ[A-Za-z0-9_-]{20,}\\.eyJ[A-Za-z0-9_-]{20,}\\.[A-Za-z0-9_-]{20,}"
+        descricao: "JWT (3 segmentos base64)"
+    threshold_matches: 0
+    excecao: "Em arquivos de exemplo/fixture com PATTERN ::: <EXEMPLO_DOC_DE_TESTE> comentado acima"
+    output_falha:
+      formato: "PII '<tipo>' detectado em <item>:<linha> — <amostra-mascarada>"
+      sugestao_correcao: "Mascarar ou remover; usar placeholder <CPF_REDACTED> ou similar"
+
+  5_license_compativel:
+    descricao: "Item original tem MIT/Apache-2.0/BSD ou é trabalho próprio do consumidor"
+    bloqueante: true
+    implementacao: checks.js::licenseCheck()
+    accept:
+      - MIT
+      - Apache-2.0
+      - BSD-2-Clause
+      - BSD-3-Clause
+      - Unlicense
+      - CC0-1.0
+      - derivative-original-author  # trabalho derivado com atribuição clara
+      - own  # trabalho próprio do consumidor
+    reject:
+      - GPL-2.0
+      - GPL-3.0
+      - AGPL-3.0
+      - LGPL-3.0
+      - proprietary  # exceto se origin = own
+      - SSPL-1.0
+      - none-declared  # sem license = inseguro
+    fonte_license:
+      - "Campo `license:` no manifest.yaml ou frontmatter YAML do item"
+      - "LICENSE file no source repo (se item vem de repo externo)"
+    output_falha:
+      formato: "License '<X>' não compatível com KOD.AI"
+      sugestao_correcao: "Re-implementar do zero (trabalho próprio) OU usar fonte com license compatível"
+
+  6_evidence_bloc:
+    descricao: "EVIDENCE.md adjacente com matriz mínima rodada + relato honesto"
+    bloqueante: true
+    implementacao: checks.js::evidenceBloc()
+    paths_busca:
+      - "<item_dir>/EVIDENCE.md"
+      - "<item_dir>/../EVIDENCE.md"
+      - "<item_dir>/../../EVIDENCE.md"
+    campos_minimos:
+      - data
+      - operador
+      - matriz_rodada  # lista de cenários testados
+      - resultados_pass_fail  # cada cenário marcado pass ou fail
+      - relato_honesto  # texto livre com limitações + o que NÃO foi testado
+    output_falha:
+      formato: "EVIDENCE.md ausente OU campo '<X>' não preenchido"
+      sugestao_correcao: "Criar EVIDENCE.md adjacente com matriz mínima + relato honesto"
+
+  7_atribuicao:
+    descricao: "Rodapé/cabeçalho preserva proveniência ('Vindo de <projeto> em <data> via /upstream-update')"
+    bloqueante: true
+    implementacao: checks.js::atribuicaoCheck()
+    formato_aceito:
+      - "> Origem: <projeto> em <data> via /upstream-update"
+      - "Fontes:\\n  - ...<consumidor>..."  # no YAML frontmatter
+      - "<!-- attribution: <consumidor>:<data> -->"  # comentário HTML em md
+    output_falha:
+      formato: "Atribuição ausente em <item>"
+      sugestao_correcao: "Adicionar rodapé '> Origem: <consumidor> em <data> via /upstream-update'"
+
+checks_nao_bloqueantes:
+
+  8_categoria_mapeada:
+    descricao: "Item bate em categoria existente do KOD.AI (pack/política/metodologia/skill universal/contexto-domínio)"
+    bloqueante: false
+    permite_proposta_categoria_nova: true
+    requisito_categoria_nova: "Justificativa em texto livre + path proposto"
+    implementacao: checks.js::categoriaMapeada()
+    fontes_categorias:
+      - 1-ESQUELETO/politicas/
+      - 1-ESQUELETO/metodologias/
+      - 1-ESQUELETO/skills-universais/
+      - 2-PACKS/packs/<categoria>/
+      - 3-CONTEXTOS-DOMINIO/
+
+output_format:
+  json_schema:
+    allPass: bool
+    failures: array
+    detalhes:
+      per_check: object  # { check_id: { pass: bool, items_falharam: [...], razao: str } }
+    summary:
+      total_items: int
+      items_pass: int
+      items_fail: int
+      checks_run: int
+
+logging:
+  audit_log_path: KODAI/99_meta/audit_log.md
+  formato_entry: |
+    ## Anti-pollution run <data>
+    - Consumer: <nome>
+    - Items: <N>
+    - Result: <PASS|FAIL>
+    - Falhas: <lista>
+    - Override usado: <bool>
+
+versao_checklist: "1.0"
+ultima_revisao: 2026-05-21
+proxima_revisao_recomendada: 2026-08-21  # 3 meses
