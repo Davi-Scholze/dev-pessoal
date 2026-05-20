@@ -17,6 +17,10 @@
           {
             "type": "command",
             "command": "python \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/pre-tool-use/block-dangerous.py\""
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/pre-tool-use/kodai-pre-commit-guard.js\""
           }
         ]
       }
