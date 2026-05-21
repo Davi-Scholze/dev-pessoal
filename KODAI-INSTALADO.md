@@ -84,11 +84,12 @@ Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1
 
 | Domínio | Status | Path no KOD.AI | Origem |
 |---|---|---|---|
-| ai-ecosystem-strategy | DRAFT | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
-| competitive-intelligence | DRAFT | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) |
-| **sistemas-empresariais-br** ✨ | **DRAFT** | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | **Davi 2026-05-21 (par doc+notebook 26782f74)** |
+| ai-ecosystem-strategy | DRAFT (+ lineage v1) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
+| competitive-intelligence | DRAFT (+ lineage v1 + Kelvin) | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) + análise Kelvin (2026-05-21) |
+| **sistemas-empresariais-br** ✨ | **DRAFT (+ lineage v1)** | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | **Davi 2026-05-21 (par doc+notebook 26782f74)** |
 
-✨ = adicionado na sessão 2026-05-21 (commit upstream `d53abde`)
+✨ = adicionado em 2026-05-21 (commit `d53abde`)
++ lineage v1 = bloco `lineage:` populado conforme Spec 1 aprovada
 
 ---
 
@@ -100,18 +101,22 @@ Nenhum pack FUNCIONAL ainda — promoção exige Evidence Bloc com uso real.
 
 | Pack | Status | Onde | Origem |
 |---|---|---|---|
-| `marketing/seo` | DRAFT | upstream | absorção MazyOS 2026-05-17 |
+| `marketing/seo` | DRAFT (+ lineage v1) | upstream | absorção MazyOS 2026-05-17 |
 | `ia/contexto-profundo` | DRAFT | upstream | pesquisa NotebookLM 2026-05-21 |
-| `infra/supabase-config-maxima` | DRAFT | upstream | absorção onda 2 |
+| `infra/supabase-config-maxima` | DRAFT (+ lineage v1) | upstream | absorção onda 2 |
 | `infra/vercel-config-maxima` | DRAFT | upstream | absorção onda 2 |
 | `integracoes/email-smtp-transacional` | DRAFT | upstream | absorção onda 2 |
 | `infra/mcp-server-template` | STUB | upstream | absorção 2026-05-20 |
 | `infra/qr-scanner-web` | STUB | upstream | absorção 2026-05-20 |
 | `infra/pwa-webgpu` | docs | upstream | absorção 2026-05-20 |
 | `ia/face-recognition` | notebooklm-only | upstream | absorção 2026-05-20 |
-| **`dev/ui-responsivo-smb`** ✨ | **DRAFT** | upstream | **Davi 2026-05-21 (par doc+notebook 216c85a8)** |
+| **`dev/ui-responsivo-smb`** ✨ | **DRAFT (+ lineage v1)** | upstream | **Davi 2026-05-21 (par doc+notebook 216c85a8)** |
+| **`comercial/modelos-venda-ia`** 🆕 | **DRAFT (+ lineage v1)** | upstream | **gap Kelvin 2026-05-21 (DFY/DWY/DIY + 6 alavancas)** |
+| **`atendimento/customer-success-ia`** 🆕 | **DRAFT (+ lineage v1)** | upstream | **gap Kelvin 2026-05-21 (N1/N2 WhatsApp+Claude)** |
 
-✨ = adicionado na sessão 2026-05-21 (commit upstream `d53abde`)
+✨ = adicionado em 2026-05-21 sessão 2 (commit `d53abde`)
+🆕 = adicionado em 2026-05-21 sessão 3 (commit upstream pendente)
++ lineage v1 = bloco `lineage:` populado conforme Spec 1 aprovada
 
 ## Políticas universais novas no upstream (sync 2026-05-21)
 

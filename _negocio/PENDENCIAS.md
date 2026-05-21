@@ -37,9 +37,13 @@
 | K13 | ~~Responder PERGUNTAS-QA-KODAI.md~~ **RESOLVIDO 2026-05-21** (20 perguntas respondidas; STRATEGIC-NORTH v1.2 publicado) | — |
 | K14 | **Síntese dos 5 vídeos Kelvin Cleto** (decisão D3: opção `a` — automática por vídeo + análise comparativa transversal) | Automático pós-batch v4 (task `bkohk7j6z`); plano em `PENDING-KELVIN-CLETO-ABSORPTION.md` |
 | K15 | **Promover packs DRAFT → FUNCIONAL** (decisão D2: opção `c` — ambos paralelo) | (a) `dev/ui-responsivo-smb` aplicado em decon-sistema Fase 2 + (b) `sistemas-empresariais-br` no mapeamento Denize Fase 1 |
-| K16 | **Spec 1 (lineage)** aprovada — ready-for-break | `docs/decisoes/2026-05-21_lineage-no-manifest.md`; 5 tasks (~6-8h em 1-2 sessões) |
-| K17 | **Spec 2 (candidate-to-core)** | Rascunho pronto; ativar após Spec 1 FUNCIONAL OU ≥2 consumidores reais |
+| K16 | ~~Spec 1 (lineage)~~ **PARCIAL 2026-05-21**: MANIFEST-SCHEMA + 2 templates + 6 manifests piloto com lineage; Task D (auto-preencher /upstream-update) ainda pendente | Task D pode esperar Spec 2 |
+| K17 | **Spec 2 (candidate-to-core)** | Rascunho pronto; ativar após Spec 1 Task D OU ≥2 consumidores reais |
 | K18 | **Spec 3 (closed-loop-evolution)** | Rascunho pronto; ativar após Specs 1+2 FUNCIONAL + ≥3 consumidores OU ≥20 reflexões |
+| K21 | **Síntese 5 vídeos Kelvin Cleto + análise comparativa** RESOLVIDO 2026-05-21 | 5 sinteses.md + `competitive-intelligence/conceitos/kelvin-cleto-vs-kodai.md` |
+| K22 | **Pack `comercial/modelos-venda-ia` DRAFT** RESOLVIDO 2026-05-21 | Manifest + README + SKILL — Fase A do STRATEGIC-NORTH |
+| K23 | **Pack `atendimento/customer-success-ia` DRAFT** RESOLVIDO 2026-05-21 | Manifest + README — retention de primeiro caso |
+| K24 | **STRATEGIC-NORTH v1.3** RESOLVIDO 2026-05-21 | 7 diferenciais KOD.AI explícitos + concorrentes mapeados + velocidade comercial |
 | K19 | **Teste Obsidian (2 semanas)** decisão C2 — análise em `_negocio/contextos/analise-obsidian-kodai.md` | Davi instala vault + 5 plugins built-in + Dataview; reavaliação 2026-06-04 com hipóteses H1-H5 |
 | K20 | **Stack Dojô confirmada** decisão D1: React Native + Expo + TypeScript (por enquanto, sujeita a revisão) | Sem ação imediata — usado no momento de criar sistema Dojô |
 
