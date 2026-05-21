@@ -165,24 +165,40 @@ def extract_audio(source_path: Path, audio_path: Path) -> Path:
 def transcribe(audio_path: Path, transcript_path: Path, engine: str = "local") -> Path:
     """Invoca /transcribe-audio internamente."""
     if engine == "local":
-        # Localiza script da skill transcribe-audio
-        skill_dir = Path.home() / ".claude" / "skills" / "transcribe-audio" / "scripts"
-        transcribe_script = skill_dir / "transcribe.py"
-        if not transcribe_script.exists():
+        # Localiza script da skill transcribe-audio — procura local primeiro
+        # (propagada em .claude/skills/ da pasta-mae), depois global (~/.claude/skills/)
+        candidate_dirs = [
+            Path.cwd() / ".claude" / "skills" / "transcribe-audio" / "scripts",
+            Path.home() / ".claude" / "skills" / "transcribe-audio" / "scripts",
+        ]
+        transcribe_script = None
+        for skill_dir in candidate_dirs:
+            cand = skill_dir / "transcribe.py"
+            if cand.exists():
+                transcribe_script = cand
+                break
+        if transcribe_script is None:
             raise RuntimeError(
-                f"Skill /transcribe-audio não localizada em {skill_dir}. "
+                f"Skill /transcribe-audio não localizada em nenhum dos: {[str(d) for d in candidate_dirs]}. "
                 f"Instalar antes de usar absorver-midia."
             )
 
         # Invoca via subprocess
+        # transcribe.py salva <audio>.txt automaticamente; movemos pra transcript_path depois.
         cmd = [
             sys.executable,
             str(transcribe_script),
             str(audio_path),
-            "--output", str(transcript_path),
             "--language", "pt",
+            "--no-context-file",  # nao puxa .transcribe-prompt da raiz da pasta-mae
         ]
         run(cmd)
+        # transcribe_script gera <audio>.txt — copia conteudo pra transcript_path em md
+        auto_txt = audio_path.with_suffix(".txt")
+        if auto_txt.exists():
+            transcript_path.write_text(auto_txt.read_text(encoding="utf-8"), encoding="utf-8")
+        else:
+            raise RuntimeError(f"transcribe.py nao gerou {auto_txt} — verificar")
     elif engine == "cloud-whisper":
         raise NotImplementedError("engine=cloud-whisper ainda não implementado — usar local")
     elif engine == "gemini":
