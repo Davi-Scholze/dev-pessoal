@@ -1,15 +1,23 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-15
+> Última atualização: 2026-05-22 (sync KODAI 0.6.0-dev + ativação hooks K9)
 
 ---
 
 ## Brief atual
 
-Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, 20 skills, 8 hooks). KOD.AI instalado via /instalar nesta pasta-mãe (v0.1.0-camada1, perfil: completo).
+Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 skills técnicas, 8 hooks). KOD.AI 0.6.0-dev sincronizado (upstream commit `e9ea7e6`).
 
-Foco desta semana: organizar KOD.AI + iniciar Decon Fase 1.
+**Sessão 2026-05-22 (concluída):**
+- `git pull` upstream KOD.AI (47 arquivos, +7151/-143)
+- `/atualizar-kodai` modo total: propagou 10 skills universais novas + 6 rules path-scoped pra `.claude/`
+- K9 resolvido: 2 hooks JS KOD.AI ativados em `.claude/settings.json` (Stop + UserPromptSubmit)
+- K3 verificado como resolvido (paths upstream já parametrizados)
+- PENDENCIAS.md reconciliada (K1 marcada como implementada, K12 nova)
+- Memórias `project_kodai.md` + MEMORY.md atualizadas
+
+Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos**.
 
 ---
 
@@ -23,10 +31,9 @@ Foco desta semana: organizar KOD.AI + iniciar Decon Fase 1.
 
 ### KOD.AI (Prioridade 2)
 - **Branch:** main
-- **Versão:** v0.1.0-camada1
-- **Status:** Fase 1 completa. Instalado na pasta-mãe via /instalar hoje (2026-05-15)
-- **Problema pendente:** paths hardcoded em PROMPT-DE-ADOCAO.md, ROTEIRO-INSTALACAO.md, COMO-USAR.md
-- **Próxima ação:** corrigir paths (trivial, Regra 9) + popular contabilidade-br DOMINIO.md
+- **Versão:** 0.6.0-dev (último sync upstream commit `e9ea7e6` em 2026-05-22)
+- **Status:** Sistema dogfooding fechado — `/atualizar-kodai` funcional, hooks K9 ativos, /upstream-update implementada aguardando piloto
+- **Próxima ação:** Piloto NV-Dev em outra máquina (K4) OU `/brainstorming` contexto-profundo com Davi (K2)
 
 ### dojo-familia-scholze (Prioridade 3)
 - **Branch:** main
@@ -45,13 +52,11 @@ Foco desta semana: organizar KOD.AI + iniciar Decon Fase 1.
 
 ## Próxima ação
 
-**Imediato (esta sessão):**
-1. Corrigir paths hardcoded no KODAI (PROMPT-DE-ADOCAO.md, ROTEIRO-INSTALACAO.md, COMO-USAR.md)
-2. Commit + push KODAI com correções
-3. Commit + push dev-pessoal com arquivos KOD.AI install (_memoria/, _negocio/identidade/, _negocio/MAPA.md, _negocio/PENDENCIAS.md, _negocio/PROMPT_MASTER_HANDOFF.md, KODAI-INSTALADO.md)
-
-**Próxima sessão:**
-1. Davi traz transcrição áudio Denize → iniciar mapeamento Decon Fase 1
+**Próxima sessão (escolher uma frente):**
+1. **D1 Decon Fase 1:** Davi grava áudio Denize → `/transcribe-audio` (ou nova skill `/absorver-midia`) → mapeamento Domínio
+2. **K4 Piloto NV-Dev:** `/auditar-projeto` em Navortech-Desenvolvimento → `/upstream-update` end-to-end (requer outra máquina, ~60-90min)
+3. **K2 Brainstorming:** `/brainstorming` arquitetura contexto-profundo com Davi (CAG + Prompt Caching + política `memoria-3-tier` recém-chegada do upstream)
+4. **K12 Validação local:** fixtures sintéticas pro anti-pollution `checks.js` (parte do K1 factível sem NV-Dev)
 
 ---
 
@@ -66,8 +71,9 @@ Foco desta semana: organizar KOD.AI + iniciar Decon Fase 1.
 ## Decisões pendentes
 
 - Stack final Dojô (confirmado? React Native + Expo?)
-- Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens
+- Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens (C2 da fila crítica)
 - ~~KOD.AI: manter em Repositorios/ ou criar alias na raiz?~~ RESOLVIDO: movido para raiz `KODAI/` (spec 2026-05-15)
+- ~~Paths hardcoded KODAI~~ RESOLVIDO (verificado 2026-05-22 — já parametrizados upstream)
 
 ---
 
