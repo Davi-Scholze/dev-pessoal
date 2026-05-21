@@ -1,7 +1,7 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-21 (sync KODAI 0.6.0-dev + reconciliação K1/K3).
+> Última consolidação: 2026-05-21 sessão 2 (absorção pacote Davi + pack/contexto novos).
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
 
 ---
@@ -30,10 +30,14 @@
 | # | Pendência | Próxima ação |
 |---|---|---|
 | K1 | **`/upstream-update` IMPLEMENTADA** (7 tasks done 2026-05-21; modelo A + stubs B/C) | Aguarda piloto NV-Dev (ver K4) — esta sessão validou propagação local |
-| K2 | **Spec arquitetural de contexto-profundo** — pesquisa NotebookLM já feita, falta destilação | `/brainstorming` com Davi (CAG + Prompt Caching recomendado pela pesquisa) |
-| K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-21 — paths já parametrizados como `<usuario>`/`<pasta-mae>`) | — |
+| K2 | **Spec arquitetural de contexto-profundo** — pesquisa NotebookLM feita + 3 docs Davi 2026-05-21 destravam | `/brainstorming` com Davi consumindo `inbox-davi/.../ANALISE-ARQUITETURAL.md` |
+| K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-21) | — |
 | K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento + `/upstream-update` end-to-end** | Próxima sessão na máquina certa (~60-90min) |
-| K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-21** | 6 fixtures sintéticas em `KODAI/1-ESQUELETO/skills-universais/upstream-update/fixtures/`; runner `run-fixtures.js` produziu 6/6 OK (1 PASS + 5 FAIL em checks distintos) |
+| K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-21** | 6 fixtures sintéticas; runner 6/6 OK |
+| K13 | **Responder PERGUNTAS-QA-KODAI.md** (14 perguntas em 5 blocos sobre estrela polar/conceitos novos/operacional/pendências/multi-cliente) | Davi responde uma de cada vez — cada resposta gera ação concreta |
+| K14 | **Síntese dos 5 vídeos transcritos** (quando batch terminar) — gerar `sintese.md` por vídeo + sugestão de absorção | Automático pós-batch: Claude consome inbox + frames + transcript → sintese.md |
+| K15 | **Promover packs DRAFT → FUNCIONAL** com Evidence Bloc | Começar por `dev/ui-responsivo-smb` aplicado em decon-sistema OU `sistemas-empresariais-br` no mapeamento Denize |
+| K16 | **Specs arquiteturais novas** propostas pela ANALISE-ARQUITETURAL: lineage no manifest + candidate-to-core + closed-loop-evolution | Sequência baixo→médio risco; spec 1 (lineage) primeiro |
 
 ---
 

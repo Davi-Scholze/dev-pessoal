@@ -31,3 +31,8 @@ KODAI/
 # settings.local.json contem permissoes-com-historico-de-comandos do Claude Code;
 # alguns comandos podem ter PAT/credenciais em texto plano. NUNCA commitar.
 .claude/settings.local.json
+
+# === Adicionado por KOD.AI em 2026-05-21 (origem: politica event-log-ndjson) ===
+# logs/events.ndjson e gerado por skills (absorver-midia, etc).
+# Eh local-per-projeto, NAO commitar.
+logs/

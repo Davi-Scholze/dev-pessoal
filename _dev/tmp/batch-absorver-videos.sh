@@ -12,12 +12,14 @@ cd "/c/Users/usuario/Documents/Projetos Dev Pessoais"
 # Limpa inboxes parciais (download + extração feitos, mas sem transcript/frames/manifest)
 rm -rf inbox-davi/2026-05-21-qpl8-lqquf4 inbox-davi/2026-05-21-ifpsw14vfzs
 
+# Ordem v3: vídeos curtos (2-5) primeiro pra produzir transcripts rápido.
+# Live longo (QpL8_lQquf4) por último — se demorar 1h+, os 4 curtos já estão prontos.
 VIDEOS=(
-    "https://www.youtube.com/live/QpL8_lQquf4"
     "https://youtu.be/IfPSw14VfZs"
     "https://youtu.be/mVN2Q_EUPwE"
     "https://youtu.be/69XDrNFXNco"
     "https://youtu.be/u0njPG-rXj8"
+    "https://www.youtube.com/live/QpL8_lQquf4"
 )
 
 LOG_DIR="_dev/tmp/batch-logs"

@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-21 (sync KODAI 0.6.0-dev + ativação hooks K9)
+> Última atualização: 2026-05-21 (sessão 2 — absorção pacote Davi + pack/contexto novos)
 
 ---
 
@@ -10,14 +10,22 @@
 Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 skills técnicas, 8 hooks). KOD.AI 0.6.0-dev sincronizado (upstream commit `e9ea7e6`).
 
 **Sessão 2026-05-21 (concluída):**
-- `git pull` upstream KOD.AI (47 arquivos, +7151/-143)
-- `/atualizar-kodai` modo total: propagou 10 skills universais novas + 6 rules path-scoped pra `.claude/`
-- K9 resolvido: 2 hooks JS KOD.AI ativados em `.claude/settings.json` (Stop + UserPromptSubmit)
-- K3 verificado como resolvido (paths upstream já parametrizados)
-- PENDENCIAS.md reconciliada (K1 marcada como implementada, K12 nova)
-- Memórias `project_kodai.md` + MEMORY.md atualizadas
+- `git pull` upstream KOD.AI (47 arquivos) + `/atualizar-kodai` total (10 skills + 6 rules propagadas)
+- K9 resolvido: 2 hooks JS KOD.AI ativos (Stop + UserPromptSubmit)
+- K3, K5, K6, K7, K8, K12 reconciliadas/resolvidas; K10 marcado PARKED (não-aplicável-CLI)
+
+**Sessão 2026-05-21 (continuação — absorção pacote Davi):**
+- Bloco 1: 3 docs estratégicos KOD.AI + 2 docs pareados com NotebookLM → `inbox-davi/` (bruto sagrado)
+- Bloco 2: 68 novos NotebookLMs catalogados (79 total na library oficial da skill `/notebooklm`)
+- Bloco 3: 5 vídeos YouTube → batch `/absorver-midia` (interrompido na 1ª tentativa, re-disparado v3 com curtos primeiro)
+- ANALISE-ARQUITETURAL.md (20 pontos do Doc 3 do Davi cruzando com KODAI atual)
+- PERGUNTAS-QA-KODAI.md (14 perguntas em 5 blocos — aguarda respostas)
+- Pack `dev/ui-responsivo-smb` DRAFT criado no upstream (commit `d53abde`)
+- Contexto-domínio `sistemas-empresariais-br` DRAFT criado no upstream (commit `d53abde`)
+- 2 patches no `/absorver-midia` (search path + transcribe.py args)
 
 Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos**.
+Library NotebookLM: **79 notebooks** catalogados (taxonomia CNTX UNI/EPCF/SMB).
 
 ---
 
@@ -53,10 +61,11 @@ Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos*
 ## Próxima ação
 
 **Próxima sessão (escolher uma frente):**
-1. **D1 Decon Fase 1:** Davi grava áudio Denize → `/transcribe-audio` (ou nova skill `/absorver-midia`) → mapeamento Domínio
-2. **K4 Piloto NV-Dev:** `/auditar-projeto` em Navortech-Desenvolvimento → `/upstream-update` end-to-end (requer outra máquina, ~60-90min)
-3. **K2 Brainstorming:** `/brainstorming` arquitetura contexto-profundo com Davi (CAG + Prompt Caching + política `memoria-3-tier` recém-chegada do upstream)
-4. **K12 Validação local:** fixtures sintéticas pro anti-pollution `checks.js` (parte do K1 factível sem NV-Dev)
+1. **Responder PERGUNTAS-QA-KODAI.md (14 perguntas)** — destrava conceitos novos (candidate-to-core, lineage, closed-loop) + estrela polar + sequência de specs
+2. **D1 Decon Fase 1:** Davi grava áudio Denize → `/absorver-midia` (pipeline pronto + patched) → mapeamento Domínio
+3. **K4 Piloto NV-Dev:** `/auditar-projeto` em Navortech-Desenvolvimento → `/upstream-update` end-to-end (requer outra máquina, ~60-90min)
+4. **Promover packs DRAFT → FUNCIONAL** com Evidence Bloc — começar por `dev/ui-responsivo-smb` aplicado em decon-sistema OU `sistemas-empresariais-br` no mapeamento da Denize
+5. **Sintetizar vídeos transcritos** (quando batch terminar) — gerar `sintese.md` por vídeo com narrativa + decisões + tópicos + sugestão de absorção
 
 ---
 

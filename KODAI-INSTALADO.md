@@ -78,40 +78,40 @@ Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1
 
 ---
 
-## Contextos-domínio ativos
+## Contextos-domínio ativos no upstream
 
-> **OBSOLETO desde v0.2.0** — KOD.AI não entrega mais domínio pré-pronto.
-> Contexto específico de cliente/vertical é capturado sob demanda via
-> `/capturar-contexto-cliente` → Google Doc + NotebookLM. Os STUBs antigos
-> abaixo permanecem documentados só por histórico — não estão "ativos" no
-> sentido operacional.
+> Política v0.2.0: contexto-domínio só entra quando há síntese curada com NotebookLM pareado.
 
-| Domínio | Status | Path no KOD.AI |
-|---|---|---|
-| contabilidade-br | STUB legado | `KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` |
-| dojos-artes-marciais | STUB legado | `KODAI/3-CONTEXTOS-DOMINIO/dojos-artes-marciais/` |
+| Domínio | Status | Path no KOD.AI | Origem |
+|---|---|---|---|
+| ai-ecosystem-strategy | DRAFT | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
+| competitive-intelligence | DRAFT | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) |
+| **sistemas-empresariais-br** ✨ | **DRAFT** | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | **Davi 2026-05-21 (par doc+notebook 26782f74)** |
+
+✨ = adicionado na sessão 2026-05-21 (commit upstream `d53abde`)
 
 ---
 
 ## Packs ativos
 
-Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.md`.
+Nenhum pack FUNCIONAL ainda — promoção exige Evidence Bloc com uso real.
 
-### Packs novos disponíveis em upstream (sync 2026-05-21)
+### Packs DRAFT/STUB no upstream
 
-| Pack | Status | Onde |
-|---|---|---|
-| `infra/mcp-server-template` | STUB | `KODAI/2-PACKS/packs/infra/mcp-server-template/` |
-| `infra/qr-scanner-web` | STUB | `KODAI/2-PACKS/packs/infra/qr-scanner-web/` |
-| `infra/pwa-webgpu` | docs | `KODAI/2-PACKS/packs/infra/pwa-webgpu/` |
-| `ia/face-recognition` | notebooklm-only | `KODAI/2-PACKS/packs/ia/face-recognition/` |
+| Pack | Status | Onde | Origem |
+|---|---|---|---|
+| `marketing/seo` | DRAFT | upstream | absorção MazyOS 2026-05-17 |
+| `ia/contexto-profundo` | DRAFT | upstream | pesquisa NotebookLM 2026-05-21 |
+| `infra/supabase-config-maxima` | DRAFT | upstream | absorção onda 2 |
+| `infra/vercel-config-maxima` | DRAFT | upstream | absorção onda 2 |
+| `integracoes/email-smtp-transacional` | DRAFT | upstream | absorção onda 2 |
+| `infra/mcp-server-template` | STUB | upstream | absorção 2026-05-20 |
+| `infra/qr-scanner-web` | STUB | upstream | absorção 2026-05-20 |
+| `infra/pwa-webgpu` | docs | upstream | absorção 2026-05-20 |
+| `ia/face-recognition` | notebooklm-only | upstream | absorção 2026-05-20 |
+| **`dev/ui-responsivo-smb`** ✨ | **DRAFT** | upstream | **Davi 2026-05-21 (par doc+notebook 216c85a8)** |
 
-## Contextos-domínio novos no upstream (sync 2026-05-21)
-
-| Contexto | Status | Onde |
-|---|---|---|
-| `ai-ecosystem-strategy` | DRAFT (DOMINIO.md + 4 conceitos + notebooklm) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` |
-| `competitive-intelligence` | notebooklm-only | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` |
+✨ = adicionado na sessão 2026-05-21 (commit upstream `d53abde`)
 
 ## Políticas universais novas no upstream (sync 2026-05-21)
 
