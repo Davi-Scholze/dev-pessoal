@@ -1,22 +1,22 @@
 # MAPA — Projetos Dev Pessoais
 
 > Entrada rápida + mapa detalhado consolidado. Leia ANTES de qualquer outro arquivo.
-> Atualizado: 2026-05-21 (consolidação _negocio/MAPA.md + _negocio/MAPA.md via `/organizar`)
+> Atualizado: 2026-05-22 (sync KOD.AI 0.6.0-dev commit `e9ea7e6` + ativação hooks JS)
 
 ## TL;DR
 
-Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI v0.5.0 tagged + 0.6.0-dev em curso. 3-4 projetos ativos.
+Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI 0.6.0-dev sincronizado. 3-4 projetos ativos.
 
 ## Estado atual
 
-**2026-05-21:** KOD.AI v0.5.0 tagged + 0.6.0-dev (skills `/auditar-projeto`, `/capturar-imagem`, `/capturar-video`, `/faxina`, `/organizar`, `/ativar-notebooklm`, `/evoluir-contexto`, `/sugerir-pesquisa` operacionais). Foco: Decon Fase 1 (aguarda transcrição áudio Denize).
+**2026-05-22:** KOD.AI 0.6.0-dev (`e9ea7e6`). Pasta-mãe com 67 skills + 8 rules path-scoped + 5 hooks ativos (3 KOD.AI JS + 2 SCHOLZE Python). `/upstream-update` IMPLEMENTADA (7 tasks done, fixtures anti-pollution 6/6 OK). Foco: Decon Fase 1 (aguarda transcrição áudio Denize) + piloto NV-Dev (outra máquina) + brainstorming contexto-profundo.
 
 ## Prioridade dos projetos
 
 | # | Projeto | Fase atual | Status |
 |---|---|---|---|
 | 1 | **decon-sistema** | Fase 1: mapear Domínio + automatizar fluxos da Denize | Aguardando transcrição áudio Denize |
-| 2 | **KOD.AI** | v0.5.0 tagged → 0.6.0-dev (próximo: `/break` da spec `/upstream-update`) | Em evolução ativa |
+| 2 | **KOD.AI** | 0.6.0-dev (sync `e9ea7e6`) — `/upstream-update` implementada, aguarda piloto NV-Dev | Em evolução ativa |
 | 3 | **dojo-familia-scholze** | Planejamento — stack a definir (React Native + Expo?) | Parado |
 | 4 | **lar-antonia** | Manutenção | Contrato ativo até dez/2026 |
 
@@ -106,17 +106,21 @@ Bruto sagrado — leitura como referência, sem editar:
 
 ## Próximos passos
 
-**Imediato:**
-- Decon Fase 1 — Davi traz transcrição áudio Denize → mapear sistema Domínio
-- KOD.AI — `/break` da spec `/upstream-update` (D1-D10 RESOLVIDAS em 2026-05-21)
+**Imediato (factível aqui):**
+- `/brainstorming` arquitetura contexto-profundo com Davi (CAG + Prompt Caching + política `memoria-3-tier`)
+- C2: revogar token GitHub antigo `ghp_Zht254O3...` em github.com/settings/tokens
+
+**Próxima máquina ou contexto específico (não-factível aqui):**
+- D1: Decon Fase 1 — Davi traz transcrição áudio Denize → mapear sistema Domínio
+- K4: Piloto NV-Dev `/auditar-projeto` + `/upstream-update` end-to-end (outra máquina, ~60-90min)
+- Assets de marca Decon (logo, foto Denize, og-image)
 
 **Próximas semanas:**
 - Definir stack final do dojo-familia-scholze
-- Assets de marca Decon (logo, foto Denize, og-image)
-- Deploy Vercel decon-sistema
+- Deploy Vercel decon-sistema (após assets prontos)
 
 **Maiores frentes abertas (KOD.AI):**
-- Spec arquitetural de contexto profundo (CAG + Prompt Caching) — pesquisa feita 2026-05-21, aguarda `/brainstorming`
+- Spec arquitetural de contexto profundo (CAG + Prompt Caching) — pesquisa feita 2026-05-21; política `memoria-3-tier` upstream destravou parte
 - 5 frentes abertas em `KODAI/docs/decisoes/2026-05-20_aberto-*.md`
 - Estrela polar de 3/5/10 anos do KOD.AI
 

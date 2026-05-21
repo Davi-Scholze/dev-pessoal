@@ -43,18 +43,18 @@
 
 | # | Pendência | Por quê |
 |---|---|---|
-| K5 | Popular `contabilidade-br/DOMINIO.md` (STUB → DRAFT) | Decon ganha contexto sem reinventar |
-| K6 | Verificar coerência `_negocio/MAPA.md` pós-organizar (já consolidado em 2026-05-21) | Após push da pasta-mãe |
-| K7 | Atualizar memory `project_scholze_stack.md` (E12-E14 concluídos) | Mantém memória coerente |
-| K8 | Atualizar memory `project_kodai.md` com v0.6.0-dev + skill `/organizar` + nova absorção | Já parcialmente feito 2026-05-21; revisar |
+| K5 | ~~Popular `contabilidade-br/DOMINIO.md`~~ **OBSOLETO** (KOD.AI v0.2.0 mudou filosofia — Camada 3 deixou de ser domínios pré-prontos; agora captura sob demanda via `/capturar-contexto-cliente`. `contabilidade-br/` removido do upstream) | — |
+| K6 | ~~Verificar coerência `_negocio/MAPA.md`~~ **RESOLVIDO 2026-05-22** (MAPA reconciliado com sync 0.6.0-dev) | — |
+| K7 | ~~Atualizar memory `project_scholze_stack.md`~~ **RESOLVIDO 2026-05-22** (memória mantida; E1-E14 ainda válidos como histórico) | — |
+| K8 | ~~Atualizar memory `project_kodai.md`~~ **RESOLVIDO 2026-05-22** (memória reescrita com 67 skills + 8 rules + 5 hooks) | — |
 
 ### KOD.AI — Skills + Hooks
 
 | # | Pendência | Por quê |
 |---|---|---|
-| K9 | **Ativar hooks JS no projeto consumidor** — `check-completion-claims.js`, `pre-commit-guard.js`, `inject-warning.js` existem como gabarito mas não estão habilitados em `.claude/settings.json` | Enforcement mecânico das regras-base 7, 11, 12 |
-| K10 | **Configurar prompt caching** efetivamente (não só doc) | Reduz custo + latência em 30-90% sessões longas |
-| K11 | **Skill `/skill-creator`** rodar pra criar próxima skill (validar workflow) | Auto-validação do bundle Tier 3 |
+| K9 | ~~**Ativar hooks JS no projeto consumidor**~~ **RESOLVIDO 2026-05-22** (`check-completion-claims.js` em Stop + `inject-warning.js` em UserPromptSubmit + `kodai-pre-commit-guard.js` em PreToolUse já ativos) | — |
+| K10 | ~~**Configurar prompt caching** efetivamente~~ **PARKED — não-aplicável-CLI** (verificado 2026-05-22 em `KODAI/.claude/hooks/prompt_cache_config.md`: harness Anthropic gerencia automaticamente; sem flag em `settings.json`. Re-abrir quando KOD.AI tiver SDK Anthropic custom) | Documentação intacta em `prompt_cache_config.md` |
+| K11 | **Skill `/skill-creator`** rodar pra criar próxima skill (validar workflow) | Auto-validação do bundle Tier 3 — requer skill em mente |
 
 ### Dojô (prioridade 2)
 
