@@ -39,8 +39,15 @@ def check_dep(cmd: str) -> bool:
 
 
 def run(cmd: list[str], cwd: Path | None = None, check: bool = True) -> subprocess.CompletedProcess:
-    """Wrapper de subprocess.run com defaults sensatos."""
-    return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=check)
+    """Wrapper de subprocess.run com defaults sensatos.
+
+    encoding=utf-8 + errors=replace evita UnicodeDecodeError em Windows
+    quando subprocess emite caracteres não-cp1252 (acentos PT, simbolos como ✓).
+    """
+    return subprocess.run(
+        cmd, cwd=cwd, capture_output=True, text=True, check=check,
+        encoding="utf-8", errors="replace"
+    )
 
 
 def slugify(text: str, max_len: int = 50) -> str:
@@ -417,7 +424,7 @@ def main():
         )
 
         # Reporte
-        print(f"\n✓ /absorver-midia concluída (Fases 1-4 + 7)")
+        print(f"\n[OK] /absorver-midia concluida (Fases 1-4 + 7)")
         print(f"Inbox: {inbox_dir}")
         print(f"Artefatos: source + transcript + {len(frames)} frames + manifest")
         print(f"\nPróximo passo: Claude consome este inbox pra gerar:")
