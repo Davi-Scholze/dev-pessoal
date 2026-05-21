@@ -1,7 +1,7 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-21 sessão 2 (absorção pacote Davi + pack/contexto novos).
+> Última consolidação: 2026-05-21 sessão 3 (Q&A 20 perguntas respondidas → ações executadas).
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
 
 ---
@@ -34,10 +34,14 @@
 | K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-21) | — |
 | K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento + `/upstream-update` end-to-end** | Próxima sessão na máquina certa (~60-90min) |
 | K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-21** | 6 fixtures sintéticas; runner 6/6 OK |
-| K13 | **Responder PERGUNTAS-QA-KODAI.md** (14 perguntas em 5 blocos sobre estrela polar/conceitos novos/operacional/pendências/multi-cliente) | Davi responde uma de cada vez — cada resposta gera ação concreta |
-| K14 | **Síntese dos 5 vídeos transcritos** (quando batch terminar) — gerar `sintese.md` por vídeo + sugestão de absorção | Automático pós-batch: Claude consome inbox + frames + transcript → sintese.md |
-| K15 | **Promover packs DRAFT → FUNCIONAL** com Evidence Bloc | Começar por `dev/ui-responsivo-smb` aplicado em decon-sistema OU `sistemas-empresariais-br` no mapeamento Denize |
-| K16 | **Specs arquiteturais novas** propostas pela ANALISE-ARQUITETURAL: lineage no manifest + candidate-to-core + closed-loop-evolution | Sequência baixo→médio risco; spec 1 (lineage) primeiro |
+| K13 | ~~Responder PERGUNTAS-QA-KODAI.md~~ **RESOLVIDO 2026-05-21** (20 perguntas respondidas; STRATEGIC-NORTH v1.2 publicado) | — |
+| K14 | **Síntese dos 5 vídeos Kelvin Cleto** (decisão D3: opção `a` — automática por vídeo + análise comparativa transversal) | Automático pós-batch v4 (task `bkohk7j6z`); plano em `PENDING-KELVIN-CLETO-ABSORPTION.md` |
+| K15 | **Promover packs DRAFT → FUNCIONAL** (decisão D2: opção `c` — ambos paralelo) | (a) `dev/ui-responsivo-smb` aplicado em decon-sistema Fase 2 + (b) `sistemas-empresariais-br` no mapeamento Denize Fase 1 |
+| K16 | **Spec 1 (lineage)** aprovada — ready-for-break | `docs/decisoes/2026-05-21_lineage-no-manifest.md`; 5 tasks (~6-8h em 1-2 sessões) |
+| K17 | **Spec 2 (candidate-to-core)** | Rascunho pronto; ativar após Spec 1 FUNCIONAL OU ≥2 consumidores reais |
+| K18 | **Spec 3 (closed-loop-evolution)** | Rascunho pronto; ativar após Specs 1+2 FUNCIONAL + ≥3 consumidores OU ≥20 reflexões |
+| K19 | **Teste Obsidian (2 semanas)** decisão C2 — análise em `_negocio/contextos/analise-obsidian-kodai.md` | Davi instala vault + 5 plugins built-in + Dataview; reavaliação 2026-06-04 com hipóteses H1-H5 |
+| K20 | **Stack Dojô confirmada** decisão D1: React Native + Expo + TypeScript (por enquanto, sujeita a revisão) | Sem ação imediata — usado no momento de criar sistema Dojô |
 
 ---
 

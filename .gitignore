@@ -36,3 +36,9 @@ KODAI/
 # logs/events.ndjson e gerado por skills (absorver-midia, etc).
 # Eh local-per-projeto, NAO commitar.
 logs/
+
+# === Adicionado por KOD.AI em 2026-05-21 (origem: analise-obsidian-kodai) ===
+# .obsidian/ contem config local de cada dev (workspace, plugins habilitados).
+# Cada usuario tem preferencia visual diferente. Plugins comuns ficam documentados
+# em _negocio/contextos/analise-obsidian-kodai.md (whitelist).
+.obsidian/
