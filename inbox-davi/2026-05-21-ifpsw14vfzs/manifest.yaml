@@ -1,0 +1,20 @@
+source: https://youtu.be/IfPSw14VfZs
+autor: Kelvin Cleto
+autoria: externa
+tema_slug: ifpsw14vfzs
+data_captura: 2026-05-21T17:04:18+00:00
+duracao_sec: 1935
+duracao_min: 32.25
+artifacts:
+  - "source: source.mp4"
+  - "transcript: transcript.md"
+  - "frames_count: 15"
+  - "audio: audio.opus"
+title: "Como Estou Usando IA Na Minha Empresa Em 2026 (me copie)"
+status: synthesized-pending-absorption
+proximo_passo: "Claude lê manifest + transcript + frames → produz sintese.md + sugere skill absorção"
+nota_processamento: |
+  Batch v3 (task bnrezfnd3) — transcript completou OK, mas extract_frames original
+  falhou com YUV+MJPEG encoder mismatch. Frames re-extraidos manualmente com
+  comando alternativo (fps=1/129 + pix_fmt yuvj420p). Patch v3 do run.py agora
+  usa este comando + tolerante a falhas.

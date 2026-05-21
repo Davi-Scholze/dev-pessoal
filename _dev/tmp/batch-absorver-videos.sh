@@ -9,13 +9,11 @@ export PATH="/c/Users/usuario/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpe
 
 cd "/c/Users/usuario/Documents/Projetos Dev Pessoais"
 
-# Limpa inboxes parciais (download + extração feitos, mas sem transcript/frames/manifest)
-rm -rf inbox-davi/2026-05-21-qpl8-lqquf4 inbox-davi/2026-05-21-ifpsw14vfzs
+# v4: NAO limpa inboxes — vídeo 1 (ifpsw14vfzs) ja foi recuperado manualmente
 
-# Ordem v3: vídeos curtos (2-5) primeiro pra produzir transcripts rápido.
-# Live longo (QpL8_lQquf4) por último — se demorar 1h+, os 4 curtos já estão prontos.
+# Ordem v4: vídeo 1 (IfPSw14VfZs) já tem audio+transcript+frames (recuperação manual).
+# Continua do vídeo 2 em diante. Patch v3 do run.py corrige extract_frames.
 VIDEOS=(
-    "https://youtu.be/IfPSw14VfZs"
     "https://youtu.be/mVN2Q_EUPwE"
     "https://youtu.be/69XDrNFXNco"
     "https://youtu.be/u0njPG-rXj8"
@@ -25,12 +23,13 @@ VIDEOS=(
 LOG_DIR="_dev/tmp/batch-logs"
 mkdir -p "$LOG_DIR"
 
-echo "===== Batch /absorver-midia 2026-05-21 ====="
-echo "5 vídeos em série. Log: $LOG_DIR/"
+echo "===== Batch /absorver-midia 2026-05-21 (v4) ====="
+echo "4 vídeos restantes em série. Log: $LOG_DIR/"
+echo "(vídeo 1 IfPSw14VfZs ja tem audio+transcript+frames+manifest)"
 echo ""
 
 for i in "${!VIDEOS[@]}"; do
-    n=$((i + 1))  # vídeo 1..5
+    n=$((i + 2))  # videos 2..5
     url="${VIDEOS[$i]}"
     log="$LOG_DIR/video-${n}.log"
 

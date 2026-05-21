@@ -213,28 +213,50 @@ def transcribe(audio_path: Path, transcript_path: Path, engine: str = "local") -
 
 
 def extract_frames(source_path: Path, frames_dir: Path, max_frames: int = 15) -> list[Path]:
-    """Extrai frames-chave via ffmpeg scene-change. Retorna lista de paths."""
+    """Extrai frames-chave via ffmpeg. Tolerante a falhas — retorna [] em erro.
+
+    Estrategia: usa fps=1/(duracao/max_frames) — frames distribuidos no tempo.
+    Mais robusto que scene-change que falha com YUV non-standard + MJPEG encoder.
+    """
     # Skip pra áudio puro ou imagem
     if source_path.suffix.lower() not in (".mp4", ".mov", ".webm", ".avi", ".mkv", ".m4v"):
         return []
 
     # Verifica duração — pula vídeos < 30s
-    duration = get_video_duration(source_path)
+    try:
+        duration = get_video_duration(source_path)
+    except Exception:
+        return []
     if duration < 30:
         return []
 
     frames_dir.mkdir(parents=True, exist_ok=True)
     out_template = str(frames_dir / "frame-%03d.jpg")
 
+    # Intervalo entre frames pra max_frames frames espalhados na duracao.
+    # Min 30s entre frames pra videos curtos.
+    interval = max(30, int(duration / max_frames))
+
     cmd = [
         "ffmpeg", "-y",
         "-i", str(source_path),
-        "-vf", "select='gt(scene,0.4)',scale=640:-1",
-        "-vsync", "vfr",
+        "-vf", f"fps=1/{interval},scale=640:-1",
+        "-pix_fmt", "yuvj420p",  # forca full-range YUV (MJPEG compatible)
         "-frames:v", str(max_frames),
         out_template,
     ]
-    run(cmd)
+    try:
+        run(cmd)
+    except subprocess.CalledProcessError as err:
+        # Frames sao opcionais — log mas nao bloqueia pipeline
+        log_file = frames_dir.parent / "extract_frames_error.log"
+        log_file.write_text(
+            f"ffmpeg extract_frames falhou (exit {err.returncode}). "
+            f"Pipeline continua sem frames.\n"
+            f"stderr (ultimas linhas):\n{(err.stderr or '')[-1000:]}\n",
+            encoding="utf-8"
+        )
+        return []
 
     return sorted(frames_dir.glob("frame-*.jpg"))
 
