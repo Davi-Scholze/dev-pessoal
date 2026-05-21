@@ -1,0 +1,61 @@
+name: verification-before-completion
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/verification-before-completion/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Iron Law + Gate Function (5 passos)
+    + Red Flags + Rationalization Prevention preservados como decisões
+    centrais. Tabela claim×evidência expandida pra 8 entradas. Casamento
+    explícito com regras-base 10/12 + 4 políticas/skills KOD.AI adicionado.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 'Iron Law' como nome preservado (decisão central)
+    - 'Gate Function' como conceito preservado mas reformulado em PT
+    - Estrutura reorganizada vs fonte
+    - Tabela claim×evidência expandida (8 entradas vs 7 fonte; adicionado
+      'Deploy ok' linha)
+    - Padrões concretos com 5 cenários (Testes / Regression red-green /
+      Build / Requisitos / Delegação a agente)
+    - Casamento com KOD.AI (regras-base + políticas + skill code-review)
+      adicionado (fonte não tem)
+    - 'Por que esta skill existe' reformulado com 5 padrões de falha
+      históricos em PT
+    - Tom KOD.AI alinhado
+triggers:
+  - antes de QUALQUER claim de sucesso/conclusão (testes passam, build ok,
+    bug fixado, deploy ok, agente completou, requisito atendido)
+  - antes de expressar satisfação ('feito!', 'perfeito!', 'tranquilo!')
+  - antes de commit / push / PR
+  - antes de mover pra próximo passo
+  - antes de delegar a sub-agente
+  - auto-disparada por /complete (regra-base 12)
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.2. Operacionaliza regra-base 10 (honestidade em claims).
+  Iron Law: 'sem evidência fresca, sem claim de sucesso'.
+
+  Gate Function de 5 passos: IDENTIFICAR / RODAR / LER / VERIFICAR /
+  EMITIR. Pular qualquer passo = mentir, não verificar.
+
+  8 Red Flags pra interromper o reflexo + 8 racionalizações refutadas.
+
+  Integra com /complete (passo de gate final do pipeline) e com
+  testes.md seção 'Status honesto + Evidence Bloc' (formato do Evidence
+  que esta skill produz).
+related:
+  - testes (metodologia)
+  - code-review (skill)
+  - documentar-cada-implementacao
+  - escuta-antes-de-agir
+  - complete-workflow
+  - regras-base (10, 12)

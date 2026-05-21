@@ -1,0 +1,60 @@
+name: test-driven-development
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/test-driven-development/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Iron Law + ciclo Red-Green-Refactor
+    + racionalizações comuns + red flags + checklist preservados como
+    decisão central. 11 racionalizações em tabela com refutação por linha.
+    Tom KOD.AI alinhado.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 'Jesse' / 'your human partner' → 'decisor humano'
+    - Diagrama Graphviz substituído por ASCII art linear simples
+    - Sub-arquivo testing-anti-patterns.md (não bundled) reduzido a
+      parágrafo no texto principal
+    - 11 racionalizações na tabela vs ~10 na fonte (adicionei explicação
+      mais clara em algumas)
+    - Casamento explícito com 6 skills/políticas/regras-base KOD.AI
+      adicionado (fonte não tem)
+    - Tom KOD.AI alinhado
+triggers:
+  - implementação de feature nova
+  - bug fix
+  - refactor com mudança de comportamento
+  - mudança de comportamento existente
+  - skill systematic-debugging Fase 4 passo 1 (criar failing test)
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.6. Iron Law: 'sem código de produção sem teste
+  falhando primeiro'.
+
+  Ciclo Red-Green-Refactor preservado:
+  RED (escreve teste mínimo) → Verifica RED (CONFIRMA falha pelo
+  motivo certo) → GREEN (código mínimo) → Verifica GREEN (passa +
+  outros não quebraram) → REFACTOR (limpa sem adicionar comportamento)
+  → Repeat.
+
+  Exceções (com permissão): protótipos descartáveis, codegen, configs.
+
+  Sem exceção pra: features novas, bug fixes, refactors, mudanças
+  de comportamento.
+
+  Casamento crítico com systematic-debugging (TDD é Fase 4.1) +
+  verification-before-completion (Iron Law similar).
+related:
+  - systematic-debugging
+  - verification-before-completion
+  - code-review
+  - testes (metodologia)
+  - regras-base (10, 12)

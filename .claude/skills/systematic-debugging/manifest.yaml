@@ -1,0 +1,69 @@
+name: systematic-debugging
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/systematic-debugging/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Iron Law + 4 fases (Root Cause /
+    Pattern / Hipótese / Implementação) + red flags + racionalizações
+    preservados como decisão central. Tom KOD.AI alinhado, branding
+    Superpowers e referências a sub-arquivos auxiliares (root-cause-
+    tracing.md, defense-in-depth.md, condition-based-waiting.md)
+    incorporados ao texto.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 'Jesse' / 'your human partner' substituídos por 'decisor humano'
+    - Sub-skills auxiliares (root-cause-tracing, defense-in-depth,
+      condition-based-waiting) NÃO bundled separadamente — princípios
+      core absorvidos no texto principal (data flow tracing,
+      instrumentação multi-camada)
+    - 4 fases preservadas mas reformuladas
+    - Red Flags + Sinais do decisor humano + Racionalizações comuns
+      preservados
+    - Casamento explícito com TDD + verification-before-completion +
+      code-review + escuta-antes-de-agir + explicar-acao-custosa +
+      regras-base 10/12 adicionado
+    - 'Real-World Impact' (estatísticas) removido (não-universal,
+      origem específica das sessões Superpowers)
+    - Tom KOD.AI alinhado
+triggers:
+  - bug reportado, teste falhando, comportamento inesperado, perf, build
+    quebrado, integração quebrada
+  - ANTES de propor fix
+  - especialmente em emergência ('fix rápido' tentador)
+  - quando fix anterior não resolveu
+  - quando IA já tentou 2+ fixes sem sucesso (gate da Fase 4.5)
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.5. Iron Law: 'sem fix sem investigar root cause'.
+  Espelha verification-before-completion (Iron Law similar, escopo
+  diferente — uma é debug, outra é claim de conclusão).
+
+  4 fases sequenciais sem pular:
+  1. Root Cause Investigation (multi-camada quando necessário)
+  2. Pattern Analysis (comparar com working examples)
+  3. Hipótese (uma de cada vez, teste mínimo)
+  4. Implementação (teste falha → fix → verificar)
+
+  Gate crítico: se 3+ fixes falharam, PARA e questiona arquitetura.
+  Não tenta o 4º. Fala com decisor humano antes.
+
+  Sub-arquivos auxiliares da fonte (root-cause-tracing,
+  defense-in-depth, condition-based-waiting) — princípios absorvidos
+  ao texto, não bundled separadamente.
+related:
+  - test-driven-development
+  - verification-before-completion
+  - code-review
+  - escuta-antes-de-agir
+  - explicar-acao-custosa
+  - regras-base (10, 12)

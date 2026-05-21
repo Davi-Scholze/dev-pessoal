@@ -1,0 +1,52 @@
+name: code-review
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/code-review/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Threshold de confiança ≥80%
+    preservado como decisão central. Estrutura nova, dimensões expandidas,
+    integração com /complete (regra-base 12), casamento explícito com
+    políticas KOD.AI (testes.md, escuta-antes-de-agir, explicar-acao-
+    custosa, mapeamento-iterativo).
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - Estrutura reorganizada vs fonte
+    - Tabela de confiança expandida com nuances 100/90-99/80-89/60-79/<60
+    - 4 dimensões expandidas (cada uma com 6-7 sub-items concretos vs fonte
+      com 3-5)
+    - Anti-padrões adicionados (não estavam tão explícitos na fonte)
+    - Seção 'Quando NÃO usar' (não estava na fonte)
+    - Integração com /complete + 4 políticas/metodologias do KOD.AI
+      explícita (fonte só menciona SDD genericamente)
+    - Tom KOD.AI alinhado
+triggers:
+  - usuário pede 'revisa', 'verifica', 'olha esse código', 'tem algum problema?'
+  - antes de commit/merge/PR
+  - antes de declarar tarefa como 'done'
+  - auto-disparada por /complete (pipeline test-runner → qa-verifier → code-review)
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.1 — primeira de 8 skills methodology avaliadas.
+  Re-implementação porque a função é universal e cabe direto.
+
+  Sistema de confiança ≥80 é diferencial — sem isso, code review vira
+  ruído e o humano para de ler. Decisão preservada da fonte.
+
+  Integra com /complete (regra-base 12): pipeline obrigatório pré-done
+  inclui esta skill como passo 3.
+related:
+  - testes (metodologia)
+  - escuta-antes-de-agir
+  - explicar-acao-custosa
+  - mapeamento-iterativo
+  - complete-workflow

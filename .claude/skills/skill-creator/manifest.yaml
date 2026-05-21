@@ -1,0 +1,70 @@
+name: skill-creator
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/skill-creator/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada compacta. 33KB fonte → ~280 linhas.
+    Workflow 10 estágios preservado (intent → pesquisa paralela → draft →
+    test prompts → evals paralelos → grade → apresentação → feedback →
+    iterar → otimizar descrição).
+
+    Decisão central preservada: ciclo iterativo é o que torna skill
+    BATTLE-TESTED. Skill escrita uma vez sem evals nasce frágil.
+
+    Scripts auxiliares da fonte (aggregate_benchmark.py, eval-viewer/
+    generate_review.py, agents/grader.md, agents/analyzer.md) NÃO
+    bundled — referenciados conceitualmente. Usuário implementa
+    conforme stack.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - Workflow 10 estágios preservado como decisão central
+    - 'Pushy' como combate a sub-trigger preservado
+    - Scripts específicos (eval-viewer, aggregate_benchmark) NÃO bundled
+      — só conceito referenciado
+    - 'Comunicação com usuário variado' (plumber-grandparent context)
+      reformulado pra tom KOD.AI
+    - Anti-padrões em tabela (7 itens) — fonte não tinha tabela formal
+    - 'Quando uma skill não vale a pena' nova (não estava na fonte)
+    - 'Tipos comuns de skill' com exemplos KOD.AI (não Anthropic
+      Superpowers) — mostra padrões já bundled
+    - Casamento com writing-skills (irmã princípios) + subagent-driven-
+      development (paralelização) explícito
+    - Tom KOD.AI alinhado
+triggers:
+  - "criar skill" / "/skill-creator" / "iterar essa skill"
+  - "rodar evals" / "benchmark de skill" / "otimizar descrição da skill"
+  - usuário pede pra transformar pattern repetível em skill
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.8 — última das 8 skills methodology bundled.
+
+  Pareia com writing-skills (princípios de skill bem escrita) — esta
+  skill é WORKFLOW; writing-skills é PRINCÍPIOS. Use ambas juntas.
+
+  Decisão central: ciclo iterativo de 10 estágios. Sem ciclo, skill
+  nasce frágil; com ciclo, chega a BATTLE-TESTED.
+
+  Quando NÃO criar skill: caso único, convenção projeto (vai pra
+  AGENTS.md), automatizável (vira hook), bem documentado em outro lugar.
+
+  'Pushy' obrigatório em descriptions — combate sub-trigger (regra-base 4).
+related:
+  - writing-skills (irmã — princípios)
+  - test-driven-development (RED-GREEN-REFACTOR base)
+  - subagent-driven-development (paralelização das evals)
+  - code-review (review da skill nova antes de merge)
+  - verification-before-completion (Iron Law antes de declarar pronta)
+  - regras-base (regra 4 - pushy descriptions)

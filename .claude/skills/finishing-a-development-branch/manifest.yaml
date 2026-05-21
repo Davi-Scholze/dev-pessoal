@@ -1,0 +1,49 @@
+name: finishing-a-development-branch
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/finishing-a-development-branch/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Estrutura 5 passos + 4 opções
+    preservada como decisão central. Comandos de teste expandidos por
+    stack. Integração com /complete (regra-base 12) e skills KOD.AI
+    (using-git-worktrees, verification-before-completion, code-review)
+    explícita.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 4 opções estruturadas preservadas (decisão central)
+    - Comandos por stack expandidos (JS / Python / Go / Rust / Ruby
+      vs fonte com 4)
+    - Tabela 'Resumo das 4 opções' preservada estrutura
+    - Confirmação literal 'descartar' (PT — fonte usa 'discard')
+    - Integração com /complete + 3 skills irmãs KOD.AI adicionada
+    - Tom KOD.AI alinhado
+triggers:
+  - implementação completa, todos os testes passam
+  - usuário pede 'finalizar branch', 'fechar feature', 'mergear isso'
+  - auto-disparada por /complete, subagent-driven-development,
+    executing-plans (passo final)
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.3. Skill operacional pra fechar branch de dev.
+  Estrutura 5 passos: verifica testes → identifica base → 4 opções
+  estruturadas → executa → cleanup worktree.
+
+  4 opções: Merge local / Push+PR / Manter / Descartar.
+  Cleanup worktree só nas opções 1 e 4 (2 e 3 preservam).
+  Opção 4 exige confirmação literal 'descartar'.
+related:
+  - using-git-worktrees
+  - verification-before-completion
+  - code-review
+  - complete-workflow
+  - regras-base (7, 10, 12)

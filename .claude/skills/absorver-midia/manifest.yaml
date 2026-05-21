@@ -1,0 +1,160 @@
+name: absorver-midia
+version: 0.1.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-20
+updated: 2026-05-20
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+tier: employee
+reports_to: null
+
+description: >
+  Orquestrador multimodal universal — ingere mídia (URL externa OU arquivo
+  local de vídeo/áudio/imagem) e produz contexto sintetizado em inbox
+  pronto pra absorção. Pipeline: download (yt-dlp) → áudio + transcrição
+  (faster-whisper) → frames-chave (ffmpeg) → descrição multimodal (Claude
+  vision) → síntese estruturada (narrativa + decisões + tópicos) → manifest.
+  Bridge com /absorver-contexto, /absorver-referencia, /capturar-contexto-cliente.
+
+triggers:
+  - /absorver-midia
+  - absorve esse vídeo
+  - transcreve essa reunião
+  - vira contexto esse YouTube
+  - absorve esse podcast
+  - captura esse Instagram
+  - absorve esse Reels
+  - vira contexto esse áudio
+
+argument_hint: "<URL ou path local> [--tema slug] [--autoria propria|externa|cliente] [--max-frames N] [--max-duration-min N] [--engine local|cloud-whisper|gemini]"
+
+handoff_in:
+  required:
+    source: "URL externa ou path local de mídia"
+  optional:
+    tema: "slug pro nome da pasta inbox (auto se URL)"
+    autoria: "propria | externa | cliente"
+    max_frames: "default 15"
+    max_duration_min: "default sem corte"
+    engine_transcribe: "local (default) | cloud-whisper | gemini"
+
+handoff_out:
+  produces:
+    inbox_path: "inbox-davi/<YYYY-MM-DD>-<tema-slug>/"
+    transcript: "transcript.md"
+    frames: "frames/<N>.jpg + descriptions.md"
+    sintese: "sintese.md"
+    manifest: "manifest.yaml"
+  paths:
+    - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/"
+
+quality_gates:
+  - "Source validado antes de download"
+  - "Autoria confirmada antes de absorção"
+  - "Transcript não-vazio"
+  - "Mínimo 3 frames pra vídeos > 30s"
+  - "Síntese com narrativa + decisões + tópicos + bucket"
+  - "Manifest com source + autor + data + duração"
+  - "Material externo: anti-pollution flag em trechos verbatim"
+
+requires:
+  blocking:
+    - "yt-dlp instalado (pip install yt-dlp)"
+    - "ffmpeg + ffprobe no PATH"
+    - "Skill /transcribe-audio disponível"
+  recommended:
+    - "Workspace tem inbox-<stakeholder>/ (skill cria se ausente)"
+    - "logs/events.ndjson existe (event log)"
+    - "memory/per-skill/absorver-midia/ existe (reflections)"
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "<source-path>"
+  - "<source>.info.json (yt-dlp metadata)"
+  - "memory/per-skill/absorver-midia/reflections.md (se existir)"
+
+writes_to:
+  - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/source.<ext>"
+  - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/transcript.md"
+  - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/frames/"
+  - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/sintese.md"
+  - "inbox-davi/<YYYY-MM-DD>-<tema-slug>/manifest.yaml"
+
+updates_index:
+  - "memory/per-skill/absorver-midia/state.md (se existir)"
+  - "logs/events.ndjson (append)"
+
+supports_reflexion: true
+
+invokes:
+  - "/transcribe-audio (interno via subprocess Python)"
+
+related:
+  - ../../politicas/notebooklm-fonte-ancorada.md
+  - ../../politicas/classificacao-contexto.md
+  - ../../politicas/reflexion-per-skill.md
+  - ../../politicas/event-log-ndjson.md
+  - ../../politicas/handoff-contracts.md
+  - ../transcribe-audio/SKILL.md
+  - ../capturar-video/SKILL.md
+  - ../capturar-imagem/SKILL.md
+  - ../absorver-contexto/SKILL.md
+  - ../absorver-referencia/SKILL.md
+  - ../../regras-base.md (regras 1, 2, 10)
+
+dependencias:
+  obrigatorias:
+    - yt-dlp: "pip install yt-dlp (Unlicense, OSS)"
+    - ffmpeg: "LGPL/GPL OSS — instalar via package manager OS"
+    - ffprobe: "vem com ffmpeg"
+    - python3: "3.10+ pra /transcribe-audio"
+    - faster-whisper: "MIT, já requirido por /transcribe-audio"
+  opcionais:
+    - pyannote: "diarization v2 (futuro)"
+    - whisper-cloud-api: "se engine=cloud-whisper"
+    - gemini-api: "se engine=gemini"
+
+escala:
+  minimo: "1 imagem ou áudio curto (< 1 min)"
+  maximo: "vídeo até ~2h (alertar acima)"
+  performance_alvo:
+    - "vídeo 10min: ~3-5 min processamento total"
+    - "áudio 30min podcast: ~5-10 min"
+    - "reunião 60min: ~15-25 min"
+
+limitacoes:
+  - faster_whisper_erro_pt_br_pct: 5-10
+  - diarization_v1_ausente: true
+  - frames_chave_podem_perder_audio_critico: true
+  - videos_longos_custo_tokens_explode: true
+  - urls_autenticadas_yt_dlp_pode_falhar: true
+  - copyright_responsabilidade_humano: true
+  - sintese_alucinacoes_possiveis_validar_contra_transcript: true
+
+quando_promover_draft_funcional:
+  - testado_em_3_midias_reais: [youtube, podcast, reuniao-zoom]
+  - output_qualidade_validada_humano: true
+  - bridge_absorver_contexto_validado_piloto: true
+  - custo_tokens_medido_e_cap_em_videos_longos: true
+
+quando_promover_funcional_battle_tested:
+  - rodando_em_projeto_consumidor_real_meses: 3
+  - sem_incidente_grave_perda_de_dados: true
+  - diarization_v2_se_pedido: opcional
+
+anti_pollution:
+  metodo: paráfrase + atribuição + protocolo REFERENCE-ABSORB pra material externo
+  n_gram_score: pipeline-implementação-pendente
+  revisao_manual: spec passou em 2026-05-20
+  citacoes_diretas: apenas em "Trechos textuais notáveis" da síntese (com atribuição obrigatória)

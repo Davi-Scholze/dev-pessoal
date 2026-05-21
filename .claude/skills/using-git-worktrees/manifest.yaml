@@ -1,0 +1,60 @@
+name: using-git-worktrees
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/using-git-worktrees/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Seleção de diretório (3 níveis de
+    prioridade: existente → CLAUDE.md → pergunta) + verificação de
+    gitignore preservados como decisão central. Detecção de stack
+    expandida (Node/Rust/Python pip+poetry/Go/Ruby vs fonte com 4).
+    Integração explícita com gitignore-aditivo.md (política KOD.AI)
+    e multi-conta-github (playbook).
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 'Jesse's rule' (atribuição interna Superpowers) removido
+    - ~/.config/superpowers/worktrees/<project>/ substituído por
+      ~/dev-worktrees/<projeto>/ (universal)
+    - Estrutura 3 níveis de prioridade preservada
+    - Estrutura 5 passos preservada (detecta nome / cria / setup /
+      baseline / reporta)
+    - Auto-detecção stack expandida com Ruby (bundle install) e
+      poetry + uv pip alternates pra Python
+    - Salvar escolha no CLAUDE.md pra evitar repetir pergunta —
+      adicionado (não estava na fonte)
+    - Integração com gitignore-aditivo.md (KOD.AI policy) explícita
+    - Tom KOD.AI alinhado
+triggers:
+  - antes de executar /executing-plans ou /subagent-driven-development
+    grandes
+  - antes de feature que precisa isolamento do workspace ativo
+  - duas sessões IA paralelas precisando branches diferentes
+  - spike experimental que talvez seja descartado
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.4. Skill operacional pra isolamento via worktree.
+
+  Quando NÃO usar: mudança pequena (1-3 arquivos), hotfix urgente,
+  dev solo + 1 sessão IA por vez.
+
+  Aplica gitignore-aditivo.md (política KOD.AI) quando precisa
+  adicionar diretório de worktree ao .gitignore — nunca sobrescreve.
+
+  Auto-salva escolha no CLAUDE.md do projeto pra próximas sessões.
+related:
+  - finishing-a-development-branch
+  - gitignore-aditivo
+  - multi-conta-github (playbook)
+  - verification-before-completion
+  - subagent-driven-development
+  - executing-plans
+  - brainstorming

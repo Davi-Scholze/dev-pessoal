@@ -1,0 +1,69 @@
+name: writing-skills
+version: 0.1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+related-domains: [universal]
+bundled_from:
+  source: Anthropic Superpowers (~/.claude/skills/writing-skills/SKILL.md)
+  strategy: reimplementation
+  license: Apache-2.0
+  attribution: |
+    Re-implementação universalizada. Decisão central preservada: skill
+    writing é TDD aplicado a documentação. Mapeamento TDD→Skills +
+    pressure scenario como RED + 3 níveis de progressive disclosure +
+    descrição 'pushy' como combate a sub-trigger preservados.
+
+    Sub-arquivo anthropic-best-practices.md (Anthropic oficial) NÃO
+    bundled — referenciado como ponteiro externo no SKILL.md.
+anti_verbatim:
+  ngram_check: PASS
+  five_nos_check: PASS
+  notes: |
+    - 22KB → ~400 linhas (compressão drástica preservando essência)
+    - Sub-arquivos heavy reference (anthropic-best-practices.md) NÃO
+      bundled — referenciados como ponteiros externos
+    - Mapeamento TDD→Skills preservado em tabela
+    - Exemplos Good/Bad de descrição reformulados em PT
+    - Anti-padrões adicionados em tabela
+    - Pressure scenario detalhado com instrução de medição (3-5 rodadas
+      baseline, contar racionalizações)
+    - Checklist final pra skill pronta NOVO (não estava na fonte)
+    - Casamento explícito com 5 skills/políticas KOD.AI adicionado
+    - Tom KOD.AI alinhado
+triggers:
+  - usuário pede 'criar skill', 'escrever skill', 'editar skill',
+    'verificar skill antes de deploy'
+  - antes de adicionar skill a `.claude/skills/` ou KODAI/1-ESQUELETO/
+    skills-universais/
+  - durante review de PR que adiciona skill nova
+authors:
+  - Anthropic Superpowers (fonte)
+  - KOD.AI 2026-05-20 (re-implementação universalizada)
+notes: |
+  Bundle Tier 3.7. Pré-requisito: test-driven-development.
+
+  Decisão central: 'se você não viu agente falhar SEM a skill, você não
+  sabe se a skill ensina o que importa'.
+
+  Ciclo RED-GREEN-REFACTOR adaptado a skill:
+  - RED: pressure scenario com sub-agente, agente sem skill viola
+    (documenta racionalizações específicas)
+  - GREEN: skill mínima endereça aquelas racionalizações; agente passa
+    a cumprir (idealmente 5/5)
+  - REFACTOR: achar nova racionalização que skill não previu → expande
+
+  Descrição 'pushy' triplica disparo correto. 'Use SEMPRE que ... mesmo
+  se NÃO disser explicitamente X' combate sub-trigger.
+
+  Progressive disclosure 3 níveis: metadata (sempre) / body (quando
+  dispara) / recursos bundled (sob demanda).
+
+  Casamento crítico com skill-creator (workflow operacional).
+related:
+  - test-driven-development (PRÉ-REQUISITO)
+  - skill-creator
+  - code-review
+  - verification-before-completion
+  - criar-pack (KOD.AI)
+  - criar-contexto (KOD.AI)

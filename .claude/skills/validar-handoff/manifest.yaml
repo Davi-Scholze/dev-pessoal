@@ -1,0 +1,116 @@
+name: validar-handoff
+version: 1.0
+type: skill-universal
+status: FUNCIONAL
+created: 2026-05-20
+updated: 2026-05-20
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+tier: employee
+reports_to: null  # universal, pode ser chamada de qualquer Director/Coordinator/manual
+
+description: >
+  Gate de validação estruturada entre skills. Valida payload contra schema
+  declarado em handoff_in: do manifest da skill alvo. Retorna PASS/BLOCKED/
+  DEGRADED com remediation acionável. Sem side effects.
+
+triggers:
+  - /validar-handoff
+  - validar handoff
+  - checa briefing antes de invocar
+  - valida payload pra
+  - schema check pra skill
+
+flags:
+  --check: default - valida payload contra schema
+  --strict: PASS só se todos required + recommended presentes
+  --dry-run: mostra schema esperado sem validar payload
+  --list: lista handoff_in declarado na skill alvo
+
+handoff_in:
+  required:
+    target_skill: "nome da skill cujo handoff vai ser validado"
+    payload: "YAML ou JSON com fields a validar"
+  optional:
+    mode: "check (default) | strict | dry-run | list"
+
+handoff_out:
+  produces:
+    status: "PASS | BLOCKED | DEGRADED | DRY_RUN"
+    checks_passed: "lista de fields que passaram"
+    missing_required: "lista de required ausentes (se BLOCKED)"
+    invalid_fields: "lista de fields com type/format inválido"
+    warnings: "lista de warnings (recommended ausentes)"
+    remediation: "ações acionáveis pra resolver BLOCKED"
+  paths:
+    - "(nenhum — sem side effects, apenas retorna resultado)"
+
+quality_gates:
+  - "Output em YAML/JSON estruturado (não prosa livre)"
+  - "BLOCKED tem remediation acionável (não vago)"
+  - "Path fields validados contra filesystem quando aplicável"
+  - "Skills sem handoff_in retornam DEGRADED, não BLOCKED"
+  - "Sem side effects (não escreve, não invoca skill alvo)"
+
+requires:
+  blocking:
+    - "Skill alvo deve existir em 1-ESQUELETO/skills-universais/ ou 2-PACKS/packs/**/"
+  recommended:
+    - "Skill alvo declara handoff_in: no frontmatter"
+
+allowed-tools:
+  - Read
+  - Bash
+  - Glob
+
+reads:
+  - "1-ESQUELETO/skills-universais/<target>/SKILL.md"
+  - "1-ESQUELETO/skills-universais/<target>/manifest.yaml"
+  - "2-PACKS/packs/**/<target>/SKILL.md"
+  - "2-PACKS/packs/**/<target>/manifest.yaml"
+
+writes_to:
+  - "(nenhum — read-only)"
+
+updates_index:
+  - "(nenhum)"
+
+logs_event:
+  on_complete: true
+  fields: [target_skill, result, duration_ms]
+
+related:
+  - ../../politicas/handoff-contracts.md (política operacionalizada)
+  - ../../politicas/squad-3-tier.md (Director usa em cada boundary)
+  - ../../politicas/event-log-ndjson.md (loga resultado)
+  - ../../regras-base.md (regra 10 — honestidade em claims)
+
+dependencias:
+  obrigatorias:
+    - python3 ou node ou bash (pra parsear YAML)
+  opcionais:
+    - kodai-log (pra logar em event log)
+
+escala:
+  minimo: validação de 1 skill
+  maximo: validação em pipeline com N skills (linear no N)
+  performance_alvo: validação em ≤100ms por skill
+
+limitacoes:
+  - schema_yaml_estatico_sem_validacoes_complexas: true
+  - nao_substitui_revisao_humana_semantica: true
+  - skills_legadas_sem_handoff_in_retornam_degraded: true
+
+criterios_pass:
+  - schema_parseado_corretamente: true
+  - bloqueio_com_remediation_acionavel: true
+  - sem_side_effects: true
+  - output_estruturado_yaml_json: true
+
+anti_pollution:
+  metodo: paráfrase + estrutura própria + vocabulário público da indústria
+  n_gram_score: não-rodado-pipeline-automatizado
+  revisao_manual: passou-2026-05-20
+  citacoes_diretas: zero (apenas conceito público de schema validation)

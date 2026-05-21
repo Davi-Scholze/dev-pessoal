@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-21 (sync upstream v0.5.0 + propagação skills v0.5/v0.6-dev)
+> Última atualização: 2026-05-22 (sync upstream 0.6.0-dev commit e9ea7e6 — +10 skills, +6 rules, +8 políticas, +2 contextos-domínio, +4 packs)
 
 ---
 
@@ -10,10 +10,10 @@
 
 | Campo | Valor |
 |---|---|
-| Versão KOD.AI | `v0.5.0` (tag) → `0.6.0-dev` (em desenvolvimento) |
+| Versão KOD.AI | `0.6.0-dev` (sync 2026-05-22, commit upstream `e9ea7e6`) |
 | Perfil | `completo` |
 | Data instalação inicial | 2026-05-15 |
-| Última atualização | 2026-05-21 (v0.2.6 → v0.5.0 via `git pull` + 0.6.0-dev local) |
+| Última atualização | 2026-05-22 (`/atualizar-kodai` modo total — propagação 10 skills + 6 rules path-scoped) |
 | Upstream | github.com/Davi-Scholze/kod-ai |
 | Modo | Pasta-mãe existente (Categoria C) |
 
@@ -41,19 +41,36 @@
 - [x] `.claude/` — SCHOLZE-STACK (agents, skills, hooks, commands)
 - [x] `Repositorios/` — code repos
 
-### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-21)
+### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-22)
 
-**Universais nativas v0.4 (16):** abrir, absorver-contexto, absorver-referencia, atualizar, capturar, capturar-contexto-cliente, check-in, criar-contexto, criar-pack, criar-perfil, mapear-rotinas, salvar, ver, writing-plans (e mais 2 via bundled overlap)
+**Universais nativas v0.4 (14):** abrir, absorver-contexto, absorver-referencia, atualizar, capturar, capturar-contexto-cliente, check-in, criar-contexto, criar-pack, criar-perfil, mapear-rotinas, salvar, ver, writing-plans
 
 **Universais v0.5 (5):** ativar-notebooklm, evoluir-contexto, sugerir-pesquisa, auditar-projeto, capturar-imagem
 
-**Universais v0.6-dev (2):** capturar-video, faxina
+**Universais v0.6-dev (4):** capturar-video, faxina, **absorver-midia** ✨, **validar-handoff** ✨
 
-**Bundled (17):** brainstorming, writing-plans, transcribe-audio, executing-plans, subagent-driven-development, notebooklm, google-workspace, dev-browser, excalidraw-diagram, code-review, verification-before-completion, finishing-a-development-branch, using-git-worktrees, systematic-debugging, test-driven-development, writing-skills, skill-creator
+**Bundled Tier 3 Anthropic (16):** brainstorming, transcribe-audio, executing-plans, subagent-driven-development, notebooklm, google-workspace, dev-browser, excalidraw-diagram, code-review ✨, verification-before-completion ✨, finishing-a-development-branch ✨, using-git-worktrees ✨, systematic-debugging ✨, test-driven-development ✨, writing-skills ✨, skill-creator ✨
 
 **Instalação/gestão (6):** adicionar-pack, atualizar-kodai, instalar, listar-disponiveis, remover-pack, trocar-perfil
 
-Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK (accessibility-axe, conventional-commits, etc.). Total atual em `.claude/skills/` da pasta-mãe: 53.
+✨ = propagadas em 2026-05-22 via `/atualizar-kodai`
+
+Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK (accessibility-axe, conventional-commits, debug-systematic, code-review-checklist, etc.). Total atual em `.claude/skills/`: **67**.
+
+### Regras path-scoped em `.claude/rules/` (propagadas 2026-05-22)
+
+Camada complementar ao `AGENTS.md` raiz — regras injetadas só quando glob de arquivo corresponde:
+
+| Regra | Glob | O que opera |
+|---|---|---|
+| `commit-on-step.md` | `**/*` | regra-base 7 (commit a cada passo) |
+| `gitignore-aditivo.md` | `**/.gitignore` | nunca sobrescrever .gitignore |
+| `sql-migrations.md` | `**/migrations/*.sql` | DDL exige aprovação humana |
+| `playwright-output-path.md` | `.mcp.json` + `*.spec.*` | Playwright nunca escreve na raiz |
+| `ui-cycle-trigger.md` | `*.tsx/jsx/vue/svelte` | ciclo Ver→Analisar→Propor→Testar→Reportar |
+| `tests-when-modifying.md` | `*.test.*` + `tests/**` | TDD obrigatório |
+
+Preservado: `regras-sessao.md` (extensão SCHOLZE local — regras operacionais de toda sessão).
 
 ### Hook SessionStart adicionado em `.claude/settings.json` (2026-05-18)
 
@@ -79,6 +96,41 @@ Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1
 ## Packs ativos
 
 Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.md`.
+
+### Packs novos disponíveis em upstream (sync 2026-05-22)
+
+| Pack | Status | Onde |
+|---|---|---|
+| `infra/mcp-server-template` | STUB | `KODAI/2-PACKS/packs/infra/mcp-server-template/` |
+| `infra/qr-scanner-web` | STUB | `KODAI/2-PACKS/packs/infra/qr-scanner-web/` |
+| `infra/pwa-webgpu` | docs | `KODAI/2-PACKS/packs/infra/pwa-webgpu/` |
+| `ia/face-recognition` | notebooklm-only | `KODAI/2-PACKS/packs/ia/face-recognition/` |
+
+## Contextos-domínio novos no upstream (sync 2026-05-22)
+
+| Contexto | Status | Onde |
+|---|---|---|
+| `ai-ecosystem-strategy` | DRAFT (DOMINIO.md + 4 conceitos + notebooklm) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` |
+| `competitive-intelligence` | notebooklm-only | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` |
+
+## Políticas universais novas no upstream (sync 2026-05-22)
+
+8 políticas em `KODAI/1-ESQUELETO/politicas/` (absorção 2026-05-20 framework MIT vendas IA):
+
+- `memoria-3-tier.md` — Core/Recall/Archival, file-based, sem vector DB
+- `handoff-contracts.md` — `handoff_in/out + quality_gates` no manifest
+- `event-log-ndjson.md` — `logs/events.ndjson` append-only
+- `reflexion-per-skill.md` — Reflexion pattern (Shinn et al. 2023)
+- `squad-3-tier.md` — Coordinator/Director/Employee, cost 10/20/70
+- `quality-gates-com-critic-grounding.md` — Critic com tool grounding
+- `portabilidade-orquestracao-24-7.md` — Skill→agent via `runtime:`
+- `notebooklm-fonte-ancorada.md` — gating de fonte ancorada
+
+## Metodologias e docs novos (sync 2026-05-22)
+
+- `KODAI/1-ESQUELETO/metodologias/vendas-ia-por-valor-aios.md` (substitui `vendas-pe-no-peito.md`)
+- `KODAI/1-ESQUELETO/templates/layouts/pasta-mae-PARA-johnny-decimal.md`
+- `KODAI/docs/STRATEGIC-NORTH.md`
 
 ---
 
