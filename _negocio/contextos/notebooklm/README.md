@@ -162,9 +162,13 @@
 |---|---|---|
 | `trackops---documentação-completa` | TrackOps - Documentação Completa | `e52f79b6` |
 | `spec-driven-development-(sdd)` | Spec-Driven Development (SDD) — versão antiga | `1d2242d3` |
-| `app-meu-dojo` | App Meu Dojo (URL coincide com MeuDojo MVP novo) | `6cdda2e2` |
+| `app-meu-dojo` | App Meu Dojo (versão antiga) | `6cdda2e2` |
 
-> ⚠️ **Possíveis duplicatas a consolidar:** entradas SDD antiga (`1d2242d3`) vs nova (`7e25223f`); `app-meu-dojo` vs `cntx-epcf-meudojo-meudojo-mvp-roadmap-and-strategic-phasing` (URL idêntico).
+> **Verificação 2026-05-21:** zero duplicatas por URL (script Python rodado contra `library.json`). Os IDs antigos têm URLs **diferentes** dos novos:
+> - SDD antigo `1d2242d3` ≠ novo `7e25223f` (notebooks distintos)
+> - `app-meu-dojo` URL `6cdda2e2` coincide com `MeuDojo MVP novo` — script `add-notebooks-2026-05-21.py` PULOU duplicata (8 pulados de 76 enviados).
+>
+> Resultado final: 79 notebooks únicos por URL.
 
 ---
 
@@ -181,8 +185,10 @@
 
 ## Próximos passos
 
-1. **Consolidar duplicatas** — `app-meu-dojo` vs `meudojo-mvp-roadmap`; `spec-driven-development-(sdd)` antigo vs novo
-2. **Promover pares doc+notebook a pack/contexto-domínio** (próxima sessão de absorção via `/absorver-referencia` ou `/absorver-contexto`)
-3. **Cruzar com `KODAI/3-CONTEXTOS-DOMINIO/`** — notebooks `dca269d8`, `991b01dd`, `baa4b34f` podem alimentar `ai-ecosystem-strategy` e `competitive-intelligence` upstream
+1. ~~Consolidar duplicatas~~ **RESOLVIDO 2026-05-21** (zero duplicatas por URL verificadas)
+2. **Promover pares doc+notebook a pack/contexto-domínio** — ✓ feito 2026-05-21:
+   - `216c85a8` (UX) → pack `dev/ui-responsivo-smb` DRAFT (upstream commit `d53abde`)
+   - `26782f74` (CNTX SMB) → contexto `sistemas-empresariais-br` DRAFT (upstream commit `d53abde`)
+3. **Cruzar com `KODAI/3-CONTEXTOS-DOMINIO/`** — notebooks `dca269d8`, `991b01dd`, `baa4b34f` podem alimentar `ai-ecosystem-strategy` e `competitive-intelligence` upstream (futuro)
 4. **Auditar notebooks "CONCORRENTE KODAI"** (Kelvin Cleto, a16z) para o eixo aberto `aberto-objetivo-longo-prazo-kodai.md`
 5. **Script utilitário:** `_dev/tmp/add-notebooks-2026-05-21.py` preservado pra futuras adições em batch
