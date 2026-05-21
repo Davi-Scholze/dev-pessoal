@@ -11,10 +11,9 @@ cd "/c/Users/usuario/Documents/Projetos Dev Pessoais"
 
 # v4: NAO limpa inboxes — vídeo 1 (ifpsw14vfzs) ja foi recuperado manualmente
 
-# Ordem v4: vídeo 1 (IfPSw14VfZs) já tem audio+transcript+frames (recuperação manual).
-# Continua do vídeo 2 em diante. Patch v3 do run.py corrige extract_frames.
+# Ordem v5: vídeos 1 e 2 ja completos (recuperacao manual + patch v4).
+# Continua do vídeo 3. Patch v4 do run.py corrige encoding utf-8 no subprocess.
 VIDEOS=(
-    "https://youtu.be/mVN2Q_EUPwE"
     "https://youtu.be/69XDrNFXNco"
     "https://youtu.be/u0njPG-rXj8"
     "https://www.youtube.com/live/QpL8_lQquf4"
@@ -23,13 +22,13 @@ VIDEOS=(
 LOG_DIR="_dev/tmp/batch-logs"
 mkdir -p "$LOG_DIR"
 
-echo "===== Batch /absorver-midia 2026-05-21 (v4) ====="
-echo "4 vídeos restantes em série. Log: $LOG_DIR/"
-echo "(vídeo 1 IfPSw14VfZs ja tem audio+transcript+frames+manifest)"
+echo "===== Batch /absorver-midia 2026-05-21 (v5 — patch v4 ativo) ====="
+echo "3 vídeos restantes em série. Log: $LOG_DIR/"
+echo "(vídeos 1+2 ja completos com recuperacao manual)"
 echo ""
 
 for i in "${!VIDEOS[@]}"; do
-    n=$((i + 2))  # videos 2..5
+    n=$((i + 3))  # videos 3..5
     url="${VIDEOS[$i]}"
     log="$LOG_DIR/video-${n}.log"
 

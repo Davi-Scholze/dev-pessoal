@@ -1,0 +1,14 @@
+type: midia-absorvida
+source: https://youtu.be/u0njPG-rXj8
+autor: Kelvin Cleto
+autoria: externa
+tema_slug: u0njpg-rxj8
+data_captura: 2026-05-21T18:44:39+00:00
+duracao_sec: 1165
+artifacts:
+  - source: source.mp4
+  - transcript: transcript.md
+  - frames_count: 15
+  - audio: audio.opus
+status: synthesized-pending-absorption
+proximo_passo: Claude lê este manifest + transcript + frames → produz sintese.md + sugere skill absorção

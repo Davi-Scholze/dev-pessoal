@@ -1,0 +1,14 @@
+type: midia-absorvida
+source: https://www.youtube.com/live/QpL8_lQquf4
+autor: Kelvin Cleto
+autoria: externa
+tema_slug: qpl8-lqquf4
+data_captura: 2026-05-21T20:08:25+00:00
+duracao_sec: 7018
+artifacts:
+  - source: source.mp4
+  - transcript: transcript.md
+  - frames_count: 15
+  - audio: audio.opus
+status: synthesized-pending-absorption
+proximo_passo: Claude lê este manifest + transcript + frames → produz sintese.md + sugere skill absorção

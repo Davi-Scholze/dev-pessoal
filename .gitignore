@@ -42,3 +42,18 @@ logs/
 # Cada usuario tem preferencia visual diferente. Plugins comuns ficam documentados
 # em _negocio/contextos/analise-obsidian-kodai.md (whitelist).
 .obsidian/
+
+# === Adicionado por KOD.AI em 2026-05-21 (origem: /absorver-midia piloto) ===
+# Videos/audios brutos absorvidos via /absorver-midia podem exceder limite GitHub (100MB).
+# Mantemos local pra possivel re-processamento, mas NAO no repo.
+# Transcript + frames + sintese + manifest SAO commitados.
+inbox-*/**/source.mp4
+inbox-*/**/source.webm
+inbox-*/**/source.mov
+inbox-*/**/source.mkv
+inbox-*/**/source.avi
+inbox-*/**/source.m4v
+inbox-*/**/audio.opus
+inbox-*/**/audio.m4a
+inbox-*/**/audio.mp3
+inbox-*/**/audio.wav
