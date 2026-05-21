@@ -1,7 +1,7 @@
 # Contexto Geral — Projetos Dev Pessoais
 > Fonte de verdade completa. Atualizar ao fim de cada sessão significativa.
 > Para entrada rápida, use _negocio/MAPA.md
-> Última atualização: 2026-05-16
+> Última atualização: 2026-05-22 (sync KOD.AI 0.6.0-dev + ativação hooks JS)
 
 ## Sobre o desenvolvedor
 
@@ -120,7 +120,7 @@ Sistema criado anteriormente por Davi para o Lar Antônia. Contrato de manutenç
 **Repositório:** github.com/Davi-Scholze/kod-ai
 **Local:** `KODAI/` — **raiz da pasta-mãe**, NÃO em `Repositorios/`
 **Stack:** Markdown + YAML (sistema de regras/skills, não código de app)
-**Versão:** v0.2.0-camada1
+**Versão:** v0.5.0 tagged + 0.6.0-dev (sync `e9ea7e6` em 2026-05-22)
 
 ### O que é
 "Sistema operacional de IA" — base de regras + skills + mecanismo de captura
@@ -145,7 +145,9 @@ KOD.AI entrega só o **geral**. Conhecimento de negócio específico do cliente
 `KODAI/docs/decisoes/2026-05-15-reestruturacao-instalacao-e-contextos.md`.
 
 ### Próximo passo
-Popular `2-PACKS/packs/ia/agente-ia-humanizado` como primeiro pack FUNCIONAL.
+- Piloto NV-Dev `/auditar-projeto` + `/upstream-update` end-to-end (outra máquina, ~60-90min)
+- `/brainstorming` arquitetura contexto-profundo (CAG + Prompt Caching + política `memoria-3-tier`)
+- Popular `2-PACKS/packs/ia/agente-ia-humanizado` como primeiro pack FUNCIONAL (P1 estratégico)
 
 ---
 
@@ -216,5 +218,24 @@ sem resumos no fim, sem over-engineering, sem emojis, uma pergunta por vez.
   - RF3: skill /capturar-contexto-cliente (STUB)
   - RF4: Camada 3 inverte filosofia — 8 STUBs removidos, vira captura
   - RF5: KODAI movido de Repositorios/ para raiz; paths corrigidos; v0.2.0
-- **Próximo passo:** popular `ia/agente-ia-humanizado` (1º pack FUNCIONAL).
-  Decon Fase 1 continua aguardando transcrição de áudio da Denize.
+
+### 2026-05-22 (KOD.AI sync 0.6.0-dev + ativação hooks K9)
+- Pull upstream KOD.AI: `534eb1b..e9ea7e6` (47 arquivos, +7151/-143)
+  - 8 políticas universais novas (memoria-3-tier, handoff-contracts, event-log-ndjson,
+    reflexion-per-skill, squad-3-tier, quality-gates-com-critic-grounding,
+    portabilidade-orquestracao-24-7, notebooklm-fonte-ancorada)
+  - 4 packs novos (mcp-server-template, qr-scanner-web, pwa-webgpu, face-recognition)
+  - 2 contextos-domínio (ai-ecosystem-strategy DRAFT, competitive-intelligence)
+  - Metodologia vendas-ia-por-valor-aios (substitui vendas-pe-no-peito)
+  - 2 skills universais novas: absorver-midia, validar-handoff
+- `/atualizar-kodai` modo total → 10 skills + 6 rules propagadas pra `.claude/`
+  - Total pasta-mãe: 67 skills + 8 rules + 5 hooks ativos
+- K9 RESOLVIDO — 2 hooks JS KOD.AI ativados em `.claude/settings.json`:
+  - Stop → kodai-check-completion-claims.js (bloqueia claim sem Evidence Bloc)
+  - UserPromptSubmit → kodai-inject-warning.js (injeta lembrete contextual)
+- K12 RESOLVIDO — 6 fixtures sintéticas anti-pollution no upstream commit `cb266bc`;
+  runner produziu 6/6 OK validando os 7 SIM bloqueantes de `checks.js`
+- K3, K5, K6, K7, K8 reconciliados como RESOLVIDO/OBSOLETO
+- K10 reclassificado como PARKED não-aplicável-CLI (cache é harness-managed)
+- **Próximo passo:** D1 (áudio Denize) OU K4 (piloto NV-Dev outra máquina) OU
+  K2 (`/brainstorming` contexto-profundo com Davi).
