@@ -1,7 +1,7 @@
 # Contexto Geral — Projetos Dev Pessoais
 > Fonte de verdade completa. Atualizar ao fim de cada sessão significativa.
 > Para entrada rápida, use _negocio/MAPA.md
-> Última atualização: 2026-05-22 (sync KOD.AI 0.6.0-dev + ativação hooks JS)
+> Última atualização: 2026-05-21 (sync KOD.AI 0.6.0-dev + ativação hooks JS)
 
 ## Sobre o desenvolvedor
 
@@ -120,7 +120,7 @@ Sistema criado anteriormente por Davi para o Lar Antônia. Contrato de manutenç
 **Repositório:** github.com/Davi-Scholze/kod-ai
 **Local:** `KODAI/` — **raiz da pasta-mãe**, NÃO em `Repositorios/`
 **Stack:** Markdown + YAML (sistema de regras/skills, não código de app)
-**Versão:** v0.5.0 tagged + 0.6.0-dev (sync `e9ea7e6` em 2026-05-22)
+**Versão:** v0.5.0 tagged + 0.6.0-dev (sync `e9ea7e6` em 2026-05-21)
 
 ### O que é
 "Sistema operacional de IA" — base de regras + skills + mecanismo de captura
@@ -219,7 +219,7 @@ sem resumos no fim, sem over-engineering, sem emojis, uma pergunta por vez.
   - RF4: Camada 3 inverte filosofia — 8 STUBs removidos, vira captura
   - RF5: KODAI movido de Repositorios/ para raiz; paths corrigidos; v0.2.0
 
-### 2026-05-22 (KOD.AI sync 0.6.0-dev + ativação hooks K9)
+### 2026-05-21 (KOD.AI sync 0.6.0-dev + ativação hooks K9)
 - Pull upstream KOD.AI: `534eb1b..e9ea7e6` (47 arquivos, +7151/-143)
   - 8 políticas universais novas (memoria-3-tier, handoff-contracts, event-log-ndjson,
     reflexion-per-skill, squad-3-tier, quality-gates-com-critic-grounding,

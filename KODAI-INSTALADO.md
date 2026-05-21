@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-22 (sync upstream 0.6.0-dev commit e9ea7e6 — +10 skills, +6 rules, +8 políticas, +2 contextos-domínio, +4 packs)
+> Última atualização: 2026-05-21 (sync upstream 0.6.0-dev commit e9ea7e6 — +10 skills, +6 rules, +8 políticas, +2 contextos-domínio, +4 packs)
 
 ---
 
@@ -10,10 +10,10 @@
 
 | Campo | Valor |
 |---|---|
-| Versão KOD.AI | `0.6.0-dev` (sync 2026-05-22, commit upstream `e9ea7e6`) |
+| Versão KOD.AI | `0.6.0-dev` (sync 2026-05-21, commit upstream `e9ea7e6`) |
 | Perfil | `completo` |
 | Data instalação inicial | 2026-05-15 |
-| Última atualização | 2026-05-22 (`/atualizar-kodai` modo total — propagação 10 skills + 6 rules path-scoped) |
+| Última atualização | 2026-05-21 (`/atualizar-kodai` modo total — propagação 10 skills + 6 rules path-scoped) |
 | Upstream | github.com/Davi-Scholze/kod-ai |
 | Modo | Pasta-mãe existente (Categoria C) |
 
@@ -41,7 +41,7 @@
 - [x] `.claude/` — SCHOLZE-STACK (agents, skills, hooks, commands)
 - [x] `Repositorios/` — code repos
 
-### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-22)
+### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-21)
 
 **Universais nativas v0.4 (14):** abrir, absorver-contexto, absorver-referencia, atualizar, capturar, capturar-contexto-cliente, check-in, criar-contexto, criar-pack, criar-perfil, mapear-rotinas, salvar, ver, writing-plans
 
@@ -53,11 +53,11 @@
 
 **Instalação/gestão (6):** adicionar-pack, atualizar-kodai, instalar, listar-disponiveis, remover-pack, trocar-perfil
 
-✨ = propagadas em 2026-05-22 via `/atualizar-kodai`
+✨ = propagadas em 2026-05-21 via `/atualizar-kodai`
 
 Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK (accessibility-axe, conventional-commits, debug-systematic, code-review-checklist, etc.). Total atual em `.claude/skills/`: **67**.
 
-### Regras path-scoped em `.claude/rules/` (propagadas 2026-05-22)
+### Regras path-scoped em `.claude/rules/` (propagadas 2026-05-21)
 
 Camada complementar ao `AGENTS.md` raiz — regras injetadas só quando glob de arquivo corresponde:
 
@@ -97,7 +97,7 @@ Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1
 
 Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.md`.
 
-### Packs novos disponíveis em upstream (sync 2026-05-22)
+### Packs novos disponíveis em upstream (sync 2026-05-21)
 
 | Pack | Status | Onde |
 |---|---|---|
@@ -106,14 +106,14 @@ Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.m
 | `infra/pwa-webgpu` | docs | `KODAI/2-PACKS/packs/infra/pwa-webgpu/` |
 | `ia/face-recognition` | notebooklm-only | `KODAI/2-PACKS/packs/ia/face-recognition/` |
 
-## Contextos-domínio novos no upstream (sync 2026-05-22)
+## Contextos-domínio novos no upstream (sync 2026-05-21)
 
 | Contexto | Status | Onde |
 |---|---|---|
 | `ai-ecosystem-strategy` | DRAFT (DOMINIO.md + 4 conceitos + notebooklm) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` |
 | `competitive-intelligence` | notebooklm-only | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` |
 
-## Políticas universais novas no upstream (sync 2026-05-22)
+## Políticas universais novas no upstream (sync 2026-05-21)
 
 8 políticas em `KODAI/1-ESQUELETO/politicas/` (absorção 2026-05-20 framework MIT vendas IA):
 
@@ -126,7 +126,7 @@ Nenhum pack populado ainda — todos STUB. Ver roadmap em `KODAI/docs/PLANNING.m
 - `portabilidade-orquestracao-24-7.md` — Skill→agent via `runtime:`
 - `notebooklm-fonte-ancorada.md` — gating de fonte ancorada
 
-## Metodologias e docs novos (sync 2026-05-22)
+## Metodologias e docs novos (sync 2026-05-21)
 
 - `KODAI/1-ESQUELETO/metodologias/vendas-ia-por-valor-aios.md` (substitui `vendas-pe-no-peito.md`)
 - `KODAI/1-ESQUELETO/templates/layouts/pasta-mae-PARA-johnny-decimal.md`

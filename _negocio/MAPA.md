@@ -1,7 +1,7 @@
 # MAPA — Projetos Dev Pessoais
 
 > Entrada rápida + mapa detalhado consolidado. Leia ANTES de qualquer outro arquivo.
-> Atualizado: 2026-05-22 (sync KOD.AI 0.6.0-dev commit `e9ea7e6` + ativação hooks JS)
+> Atualizado: 2026-05-21 (sync KOD.AI 0.6.0-dev commit `e9ea7e6` + ativação hooks JS)
 
 ## TL;DR
 
@@ -9,7 +9,7 @@ Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% i
 
 ## Estado atual
 
-**2026-05-22:** KOD.AI 0.6.0-dev (`e9ea7e6`). Pasta-mãe com 67 skills + 8 rules path-scoped + 5 hooks ativos (3 KOD.AI JS + 2 SCHOLZE Python). `/upstream-update` IMPLEMENTADA (7 tasks done, fixtures anti-pollution 6/6 OK). Foco: Decon Fase 1 (aguarda transcrição áudio Denize) + piloto NV-Dev (outra máquina) + brainstorming contexto-profundo.
+**2026-05-21:** KOD.AI 0.6.0-dev (`e9ea7e6`). Pasta-mãe com 67 skills + 8 rules path-scoped + 5 hooks ativos (3 KOD.AI JS + 2 SCHOLZE Python). `/upstream-update` IMPLEMENTADA (7 tasks done, fixtures anti-pollution 6/6 OK). Foco: Decon Fase 1 (aguarda transcrição áudio Denize) + piloto NV-Dev (outra máquina) + brainstorming contexto-profundo.
 
 ## Prioridade dos projetos
 

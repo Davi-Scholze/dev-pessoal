@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-22 (sync KODAI 0.6.0-dev + ativação hooks K9)
+> Última atualização: 2026-05-21 (sync KODAI 0.6.0-dev + ativação hooks K9)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 skills técnicas, 8 hooks). KOD.AI 0.6.0-dev sincronizado (upstream commit `e9ea7e6`).
 
-**Sessão 2026-05-22 (concluída):**
+**Sessão 2026-05-21 (concluída):**
 - `git pull` upstream KOD.AI (47 arquivos, +7151/-143)
 - `/atualizar-kodai` modo total: propagou 10 skills universais novas + 6 rules path-scoped pra `.claude/`
 - K9 resolvido: 2 hooks JS KOD.AI ativados em `.claude/settings.json` (Stop + UserPromptSubmit)
@@ -31,7 +31,7 @@ Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos*
 
 ### KOD.AI (Prioridade 2)
 - **Branch:** main
-- **Versão:** 0.6.0-dev (último sync upstream commit `e9ea7e6` em 2026-05-22)
+- **Versão:** 0.6.0-dev (último sync upstream commit `e9ea7e6` em 2026-05-21)
 - **Status:** Sistema dogfooding fechado — `/atualizar-kodai` funcional, hooks K9 ativos, /upstream-update implementada aguardando piloto
 - **Próxima ação:** Piloto NV-Dev em outra máquina (K4) OU `/brainstorming` contexto-profundo com Davi (K2)
 
@@ -73,7 +73,7 @@ Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos*
 - Stack final Dojô (confirmado? React Native + Expo?)
 - Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens (C2 da fila crítica)
 - ~~KOD.AI: manter em Repositorios/ ou criar alias na raiz?~~ RESOLVIDO: movido para raiz `KODAI/` (spec 2026-05-15)
-- ~~Paths hardcoded KODAI~~ RESOLVIDO (verificado 2026-05-22 — já parametrizados upstream)
+- ~~Paths hardcoded KODAI~~ RESOLVIDO (verificado 2026-05-21 — já parametrizados upstream)
 
 ---
 

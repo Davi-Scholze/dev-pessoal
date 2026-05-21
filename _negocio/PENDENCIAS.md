@@ -1,7 +1,7 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-22 (sync KODAI 0.6.0-dev + reconciliação K1/K3).
+> Última consolidação: 2026-05-21 (sync KODAI 0.6.0-dev + reconciliação K1/K3).
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
 
 ---
@@ -31,9 +31,9 @@
 |---|---|---|
 | K1 | **`/upstream-update` IMPLEMENTADA** (7 tasks done 2026-05-21; modelo A + stubs B/C) | Aguarda piloto NV-Dev (ver K4) — esta sessão validou propagação local |
 | K2 | **Spec arquitetural de contexto-profundo** — pesquisa NotebookLM já feita, falta destilação | `/brainstorming` com Davi (CAG + Prompt Caching recomendado pela pesquisa) |
-| K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-22 — paths já parametrizados como `<usuario>`/`<pasta-mae>`) | — |
+| K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-21 — paths já parametrizados como `<usuario>`/`<pasta-mae>`) | — |
 | K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento + `/upstream-update` end-to-end** | Próxima sessão na máquina certa (~60-90min) |
-| K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-22** | 6 fixtures sintéticas em `KODAI/1-ESQUELETO/skills-universais/upstream-update/fixtures/`; runner `run-fixtures.js` produziu 6/6 OK (1 PASS + 5 FAIL em checks distintos) |
+| K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-21** | 6 fixtures sintéticas em `KODAI/1-ESQUELETO/skills-universais/upstream-update/fixtures/`; runner `run-fixtures.js` produziu 6/6 OK (1 PASS + 5 FAIL em checks distintos) |
 
 ---
 
@@ -44,16 +44,16 @@
 | # | Pendência | Por quê |
 |---|---|---|
 | K5 | ~~Popular `contabilidade-br/DOMINIO.md`~~ **OBSOLETO** (KOD.AI v0.2.0 mudou filosofia — Camada 3 deixou de ser domínios pré-prontos; agora captura sob demanda via `/capturar-contexto-cliente`. `contabilidade-br/` removido do upstream) | — |
-| K6 | ~~Verificar coerência `_negocio/MAPA.md`~~ **RESOLVIDO 2026-05-22** (MAPA reconciliado com sync 0.6.0-dev) | — |
-| K7 | ~~Atualizar memory `project_scholze_stack.md`~~ **RESOLVIDO 2026-05-22** (memória mantida; E1-E14 ainda válidos como histórico) | — |
-| K8 | ~~Atualizar memory `project_kodai.md`~~ **RESOLVIDO 2026-05-22** (memória reescrita com 67 skills + 8 rules + 5 hooks) | — |
+| K6 | ~~Verificar coerência `_negocio/MAPA.md`~~ **RESOLVIDO 2026-05-21** (MAPA reconciliado com sync 0.6.0-dev) | — |
+| K7 | ~~Atualizar memory `project_scholze_stack.md`~~ **RESOLVIDO 2026-05-21** (memória mantida; E1-E14 ainda válidos como histórico) | — |
+| K8 | ~~Atualizar memory `project_kodai.md`~~ **RESOLVIDO 2026-05-21** (memória reescrita com 67 skills + 8 rules + 5 hooks) | — |
 
 ### KOD.AI — Skills + Hooks
 
 | # | Pendência | Por quê |
 |---|---|---|
-| K9 | ~~**Ativar hooks JS no projeto consumidor**~~ **RESOLVIDO 2026-05-22** (`check-completion-claims.js` em Stop + `inject-warning.js` em UserPromptSubmit + `kodai-pre-commit-guard.js` em PreToolUse já ativos) | — |
-| K10 | ~~**Configurar prompt caching** efetivamente~~ **PARKED — não-aplicável-CLI** (verificado 2026-05-22 em `KODAI/.claude/hooks/prompt_cache_config.md`: harness Anthropic gerencia automaticamente; sem flag em `settings.json`. Re-abrir quando KOD.AI tiver SDK Anthropic custom) | Documentação intacta em `prompt_cache_config.md` |
+| K9 | ~~**Ativar hooks JS no projeto consumidor**~~ **RESOLVIDO 2026-05-21** (`check-completion-claims.js` em Stop + `inject-warning.js` em UserPromptSubmit + `kodai-pre-commit-guard.js` em PreToolUse já ativos) | — |
+| K10 | ~~**Configurar prompt caching** efetivamente~~ **PARKED — não-aplicável-CLI** (verificado 2026-05-21 em `KODAI/.claude/hooks/prompt_cache_config.md`: harness Anthropic gerencia automaticamente; sem flag em `settings.json`. Re-abrir quando KOD.AI tiver SDK Anthropic custom) | Documentação intacta em `prompt_cache_config.md` |
 | K11 | **Skill `/skill-creator`** rodar pra criar próxima skill (validar workflow) | Auto-validação do bundle Tier 3 — requer skill em mente |
 
 ### Dojô (prioridade 2)
