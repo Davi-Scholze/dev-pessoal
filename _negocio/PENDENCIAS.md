@@ -33,7 +33,7 @@
 | K2 | **Spec arquitetural de contexto-profundo** — pesquisa NotebookLM já feita, falta destilação | `/brainstorming` com Davi (CAG + Prompt Caching recomendado pela pesquisa) |
 | K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-22 — paths já parametrizados como `<usuario>`/`<pasta-mae>`) | — |
 | K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento + `/upstream-update` end-to-end** | Próxima sessão na máquina certa (~60-90min) |
-| K12 | **Validar anti-pollution checks com fixtures locais** (parte do K1 que não exige NV-Dev) | Rodar `KODAI/1-ESQUELETO/skills-universais/upstream-update/checks.js` contra items conhecidos — anti-verbatim FAIL + marca FAIL + credencial FAIL esperados |
+| K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-22** | 6 fixtures sintéticas em `KODAI/1-ESQUELETO/skills-universais/upstream-update/fixtures/`; runner `run-fixtures.js` produziu 6/6 OK (1 PASS + 5 FAIL em checks distintos) |
 
 ---
 
