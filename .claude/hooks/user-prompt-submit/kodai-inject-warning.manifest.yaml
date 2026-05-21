@@ -1,0 +1,44 @@
+name: inject-warning
+version: 1.0
+type: hook
+status: FUNCIONAL
+Tipo: hook
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+trigger: UserPromptSubmit
+behavior: context-injection (não bloqueia)
+operacionaliza:
+  - politicas/alerta-cobrancas-recorrentes.md
+  - politicas/verificar-infra-real.md
+  - politicas/aprovacao-schema-banco.md
+  - politicas/explicar-acao-custosa.md
+  - politicas/escuta-antes-de-agir.md
+  - politicas/engenharia-de-contexto.md (princípio "tokens de alto sinal")
+Fontes:
+  - Navortech-Desenvolvimento/.claude/hooks/inject-warning.js (gabarito)
+  - Re-implementação universalizada KOD.AI 2026-05-20
+categorias_detectadas:
+  cobrancas_billing:
+    - trial / renovação / upgrade / billing / auto-recharge
+    - cobrança / recorrente / assinatura
+    inject: "alerta-cobrancas-recorrentes — 4 dados obrigatórios no fim"
+  infra_externa:
+    - DNS / SMTP / domínio / deploy / secret / credencial / SSL / MX
+    inject: "verificar-infra-real — rode nslookup/curl/gh/vercel/supabase ANTES"
+  schema_banco:
+    - ALTER TABLE / DROP / migration / schema / RLS / policy SQL
+    inject: "aprovacao-schema-banco — OK explícito antes de DDL"
+  acao_custosa:
+    - subagent / paralelizar / backup / restore / destrutiv / wipe / reset
+    inject: "explicar-acao-custosa — anuncie 4 dados + espere OK"
+  exploratorio:
+    - "será que" / "acha que" / "pensar junto" / "imagina"
+    inject: "escuta-antes-de-agir — default exploratório, não tocar arquivo"
+fail_safe: |
+  Erro → não injeta + loga.
+related:
+  - politicas/* (todas as 5 listadas em 'operacionaliza')
+  - engenharia-de-contexto (carrega política certa no momento certo —
+    combate sub-trigger via injeção contextual)
+  - PRECEDENCE.md (nível 2)

@@ -1,7 +1,7 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-21 (cabe na pergunta-cabeça do `/abrir`).
+> Última consolidação: 2026-05-22 (sync KODAI 0.6.0-dev + reconciliação K1/K3).
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
 
 ---
@@ -29,10 +29,11 @@
 
 | # | Pendência | Próxima ação |
 |---|---|---|
-| K1 | **`/upstream-update` → `/break`** (D1-D10 RESOLVIDAS 2026-05-21) | 7 tasks atômicas: 5 obrigatórias Modelo A + 2 opcionais B/C |
+| K1 | **`/upstream-update` IMPLEMENTADA** (7 tasks done 2026-05-21; modelo A + stubs B/C) | Aguarda piloto NV-Dev (ver K4) — esta sessão validou propagação local |
 | K2 | **Spec arquitetural de contexto-profundo** — pesquisa NotebookLM já feita, falta destilação | `/brainstorming` com Davi (CAG + Prompt Caching recomendado pela pesquisa) |
-| K3 | **Corrigir paths hardcoded** em `KODAI/0-INSTALACAO/PROMPT-DE-ADOCAO.md` + `ROTEIRO-INSTALACAO.md` + `docs/COMO-USAR.md` (`C:\Users\Usuario\Documents\Davi\KODAI\` antigo) | Trivial — search & replace |
-| K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento** | Próxima sessão na máquina certa (~60-90min) |
+| K3 | ~~Corrigir paths hardcoded~~ **RESOLVIDO** (verificado 2026-05-22 — paths já parametrizados como `<usuario>`/`<pasta-mae>`) | — |
+| K4 | **Piloto `/auditar-projeto` contra Navortech-Desenvolvimento + `/upstream-update` end-to-end** | Próxima sessão na máquina certa (~60-90min) |
+| K12 | **Validar anti-pollution checks com fixtures locais** (parte do K1 que não exige NV-Dev) | Rodar `KODAI/1-ESQUELETO/skills-universais/upstream-update/checks.js` contra items conhecidos — anti-verbatim FAIL + marca FAIL + credencial FAIL esperados |
 
 ---
 

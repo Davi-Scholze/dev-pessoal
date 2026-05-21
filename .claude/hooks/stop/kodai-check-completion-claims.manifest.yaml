@@ -1,0 +1,36 @@
+name: check-completion-claims
+version: 1.0
+type: hook
+status: FUNCIONAL
+Tipo: hook
+Eixo: orchestration
+Escopo: global
+Atualizado: 2026-05-20
+trigger: Stop
+behavior: blocking
+operacionaliza:
+  - regras-base.md (regra 10 - honestidade em claims)
+  - regras-base.md (regra 12 - /complete antes de done)
+  - 1-ESQUELETO/skills-universais/verification-before-completion/SKILL.md (Iron Law)
+Fontes:
+  - Navortech-Desenvolvimento/.claude/hooks/check-completion-claims.js (gabarito)
+  - Re-implementação universalizada KOD.AI 2026-05-20
+detecta:
+  - "E2E" / "validado" / "completo" / "100% funcional"
+  - "tudo testado" / "done" / "finalizado"
+  - "testes passaram"
+exige_adjacente:
+  - "EVIDENCE BLOC"
+  - "timestamp: YYYY-MM-DD"
+  - "comando: $..."
+  - "output observado: ..."
+  - "critério de sucesso: ..."
+  - "exit code 0" OU "passou" / "✅ PASSOU"
+fail_safe: |
+  Erro de Node / crash / timeout → permite turno + loga em
+  .claude/hooks-errors.log. Hook nunca é única camada.
+related:
+  - politicas/escuta-antes-de-agir.md
+  - regras-base.md
+  - verification-before-completion (skill bundled)
+  - PRECEDENCE.md (nível 2)
