@@ -6,14 +6,30 @@
 
 ---
 
-## 🎯 Foco atual (revisado 2026-05-21 sessão 4)
+## 🎯 Foco atual (revisado 2026-05-21 sessão 4 — continuação após Kicksite + visão de venda revisada)
 
 **KOD.AI evolui na prática, não em pesquisa.** Foco mudou pra colocar KOD.AI em uso REAL:
 
 1. **AMANHÃ 2026-05-22:** Auditar Navortech-Desenvolvimento (segundo piloto KOD.AI) — plano em `inbox-davi/2026-05-22-plano-nv-dev.md`
-2. **Em curso:** Piloto dojo (primeiro cliente = pai) — contexto-domínio `gestao-academia-esportiva-br` DRAFT criado (1.507 linhas, 5 conceitos, anti-pollution PASS, commits `e406149` + `9873d45` + `ac26617` pushed em `Davi-Scholze/kod-ai`)
-3. **Depois:** decidir próximos (continuar dojo → FUNCIONAL via Evidence Bloc OU outras frentes)
+2. **Em curso:** Piloto dojo (primeiro cliente = pai)
+   - Contexto-domínio `gestao-academia-esportiva-br` DRAFT (6 conceitos, 1.700+ linhas)
+   - 3 concorrentes mapeados (FaceDojo, Next Fit, Kicksite) em `competitive-intelligence/conceitos/`
+   - Skill `/mapear-concorrente` promovida DRAFT → FUNCIONAL
+   - **REVISÃO ESTRATÉGICA 2026-05-21 sessão 4:** MeuDojo NÃO é SaaS B2B genérico tabelado — é modelo adaptável vendável (tickets R$1-20k DFY/DWY/DIY + recorrência opcional, estilo Kelvin Cleto). Doc revisado em `Repositorios/dojo-familia-scholze/contextos/modelo-de-venda-2026-05-21.md`
+3. **Depois:** decidir próximos (continuar dojo → FUNCIONAL via Evidence Bloc OU outras frentes do KOD.AI)
 4. Decon Fase 1 + KOD.AI v0.2.0 (`ia/agente-ia-humanizado`) + outros itens DRAFT → **adiados** até decisão pós-Navortech
+
+## 🚧 Frentes do KOD.AI propostas pra próxima evolução (sessão 4 análise honesta KOD.AI vs fluxo desejado)
+
+4 skills novas + 1 pack identificados como gap:
+
+| Frente | Tipo | Custo | Prioridade |
+|---|---|---|---|
+| **`/pedir-contexto`** | Skill | M | Alta (resolve gap WebFetch falhou + contexto missing) |
+| **`/espelhar`** ou hook PostToolUse | Skill/hook | M | Alta (espelhamento tempo real) |
+| **`/status-decisao`** | Skill | S | Média |
+| **`/proposta-cliente`** | Skill | L | Alta (workflow direto de venda) |
+| **`seguranca/pentest-automated`** | Pack | L | Média |
 
 ---
 
