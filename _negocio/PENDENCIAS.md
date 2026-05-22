@@ -1,8 +1,19 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-21 sessão 3 (Q&A 20 perguntas respondidas → ações executadas).
+> Última consolidação: 2026-05-21 sessão 4 (virada de foco KOD.AI prático + piloto dojo Fase 3 completa).
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
+
+---
+
+## 🎯 Foco atual (revisado 2026-05-21 sessão 4)
+
+**KOD.AI evolui na prática, não em pesquisa.** Foco mudou pra colocar KOD.AI em uso REAL:
+
+1. **AMANHÃ 2026-05-22:** Auditar Navortech-Desenvolvimento (segundo piloto KOD.AI) — plano em `inbox-davi/2026-05-22-plano-nv-dev.md`
+2. **Em curso:** Piloto dojo (primeiro cliente = pai) — contexto-domínio `gestao-academia-esportiva-br` DRAFT criado (1.507 linhas, 5 conceitos, anti-pollution PASS, commits `e406149` + `9873d45` + `ac26617` pushed em `Davi-Scholze/kod-ai`)
+3. **Depois:** decidir próximos (continuar dojo → FUNCIONAL via Evidence Bloc OU outras frentes)
+4. Decon Fase 1 + KOD.AI v0.2.0 (`ia/agente-ia-humanizado`) + outros itens DRAFT → **adiados** até decisão pós-Navortech
 
 ---
 
@@ -36,7 +47,8 @@
 | K12 | ~~Validar anti-pollution checks com fixtures locais~~ **RESOLVIDO 2026-05-21** | 6 fixtures sintéticas; runner 6/6 OK |
 | K13 | ~~Responder PERGUNTAS-QA-KODAI.md~~ **RESOLVIDO 2026-05-21** (20 perguntas respondidas; STRATEGIC-NORTH v1.2 publicado) | — |
 | K14 | **Síntese dos 5 vídeos Kelvin Cleto** (decisão D3: opção `a` — automática por vídeo + análise comparativa transversal) | Automático pós-batch v4 (task `bkohk7j6z`); plano em `PENDING-KELVIN-CLETO-ABSORPTION.md` |
-| K15 | **Promover packs DRAFT → FUNCIONAL** (decisão D2: opção `c` — ambos paralelo) | (a) `dev/ui-responsivo-smb` aplicado em decon-sistema Fase 2 + (b) `sistemas-empresariais-br` no mapeamento Denize Fase 1 |
+| K15 | **Promover packs DRAFT → FUNCIONAL** — PARCIAL: `gestao-academia-esportiva-br` criado DRAFT em 2026-05-21 sessão 4 via /absorver-contexto modo máximo (não promovido ainda — exige Evidence Bloc do app dojo real) | (a) Aplicar `gestao-academia-esportiva-br` no app dojo real (J3) + (b) `dev/ui-responsivo-smb` em decon-sistema Fase 2 (adiado) + (c) `sistemas-empresariais-br` no mapeamento Denize Fase 1 (adiado) |
+| K25 | **Contexto novo `gestao-academia-esportiva-br` DRAFT** criado 2026-05-21 sessão 4 (11 arquivos, 1.507 linhas, 5 conceitos: lgpd-menor + verticalizacao-saas-b2b + white-label + stack-tecnica-mobile + infra-custos-br). 2 merges Bucket B aplicados em `sistemas-empresariais-br` (+seções 11, 12) e `competitive-intelligence` (+7 benchmarks UX). Anti-pollution PASS. | Aguarda Evidence Bloc do app dojo real (J3) pra promover FUNCIONAL |
 | K16 | ~~Spec 1 (lineage)~~ **PARCIAL 2026-05-21**: MANIFEST-SCHEMA + 2 templates + 6 manifests piloto com lineage; Task D (auto-preencher /upstream-update) ainda pendente | Task D pode esperar Spec 2 |
 | K17 | **Spec 2 (candidate-to-core)** | Rascunho pronto; ativar após Spec 1 Task D OU ≥2 consumidores reais |
 | K18 | **Spec 3 (closed-loop-evolution)** | Rascunho pronto; ativar após Specs 1+2 FUNCIONAL + ≥3 consumidores OU ≥20 reflexões |
@@ -68,12 +80,14 @@
 | K10 | ~~**Configurar prompt caching** efetivamente~~ **PARKED — não-aplicável-CLI** (verificado 2026-05-21 em `KODAI/.claude/hooks/prompt_cache_config.md`: harness Anthropic gerencia automaticamente; sem flag em `settings.json`. Re-abrir quando KOD.AI tiver SDK Anthropic custom) | Documentação intacta em `prompt_cache_config.md` |
 | K11 | **Skill `/skill-creator`** rodar pra criar próxima skill (validar workflow) | Auto-validação do bundle Tier 3 — requer skill em mente |
 
-### Dojô (prioridade 2)
+### Dojô (piloto KOD.AI — prioridade 1 do foco atual)
 
-| # | Pendência | Decisão |
+| # | Pendência | Decisão / Próxima ação |
 |---|---|---|
-| J1 | Confirmar stack (React Native + Expo + TypeScript?) | Davi decide |
-| J2 | Estrutura inicial do app | Após J1 |
+| J1 | ~~Confirmar stack~~ **RESOLVIDO 2026-05-21 sessão 4** — React Native + Expo + TypeScript + Supabase + Asaas (confirmado em `gestao-academia-esportiva-br/conceitos/stack-tecnica-mobile-saas-vertical.md`) | — |
+| J2 | Estrutura inicial do app | Após decisão pós-Navortech (ver foco atual) |
+| J3 | **Implementar app dojo real usando `gestao-academia-esportiva-br` DRAFT como guia** — gera Evidence Bloc pra promover contexto FUNCIONAL (K15 + K25) | Após decisão pós-Navortech 2026-05-22 |
+| J4 | **Material absorvido do pai já no repo** (4 brutos + 9 imagens classificadas + 4 assets oficiais reais + INDEX). Davi confirmou que ESSES são todos os assets disponíveis hoje (não pedir mais ao pai). | Aplicar em design-guide quando começar implementação (J3) |
 
 ---
 

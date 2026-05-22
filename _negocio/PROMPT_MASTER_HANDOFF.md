@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-21 (sessão 2 — absorção pacote Davi + pack/contexto novos)
+> Última atualização: 2026-05-21 (sessão 4 — virada de foco KOD.AI prático + piloto dojo)
 
 ---
 
@@ -24,8 +24,26 @@ Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 ski
 - Contexto-domínio `sistemas-empresariais-br` DRAFT criado no upstream (commit `d53abde`)
 - 2 patches no `/absorver-midia` (search path + transcribe.py args)
 
+**Sessão 2026-05-21 (sessão 4 — virada de foco KOD.AI prático + piloto dojo):**
+
+**Insight central:** KOD.AI evolui na prática, não em pesquisa. Foco mudou pra colocar KOD.AI em uso REAL → dojo virou primeiro piloto, Navortech será segundo amanhã.
+
+**Absorção dojo (Fases 1-3 completas):**
+
+- **Fase 1** (commit `0a2c29f` repo dojo): 4 brutos novos do Downloads copiados pra `Repositorios/dojo-familia-scholze/contextos/bruto/` (mvp-fluxos + novas-ideias + site-pai-netlify + 1 PDF)
+- **Fase 2** (commit `95d78a3` repo dojo): 5 screenshots do dojo (logos + marketing + presença digital) classificados via `/capturar-imagem` em 3 sub-pastas (`_negocio/identidade/logos-e-marca/`, `/marketing-exemplos/`, `/presenca-digital/`), com OCR + metadata adjacente
+- **Fase 2.5** (commit `f6a314a` repo dojo): 4 assets oficiais reais entregues pelo pai (logo redondo branco + retangular preto + banner YouTube + certificado template PDF) → `_negocio/identidade/logos-e-marca/oficial/` + INDEX.md rico (paleta + tipografia + filosofia institucional + hierarquia confirmados)
+- **Fase 3a** (commit `e406149` KODAI upstream): contexto-domínio universal **`gestao-academia-esportiva-br`** criado (DRAFT) — DOMINIO.md 5 personas canônicas + 3 conceitos (lgpd-menor + verticalizacao-saas-b2b + white-label) + manifest com lineage v1 (8 derives_from) + EXPAND-PROMPTS.md + notebooklm.md síntese
+- **Fase 3b** (commit `9873d45` KODAI upstream): 2 merges Bucket B aplicados — `sistemas-empresariais-br/DOMINIO.md` ganhou seções 11 (verticalização SaaS B2B SMB) e 12 (operação multi-tenant white-label); `competitive-intelligence/DOMINIO.md` ganhou seção com 7 benchmarks UX academia esportiva (Kicksite/OnMat/Zen Planner/etc) + lacuna marketplace B2B identificada
+- **Fase 3c** (commit `ac26617` KODAI upstream): 2 conceitos técnicos adicionados ao gestao-academia-esportiva-br — `conceitos/stack-tecnica-mobile-saas-vertical.md` (172 linhas) + `conceitos/infra-custos-saas-vertical-br.md` (178 linhas)
+
+**URL Netlify do pai visitada** (commit `d91385b` repo dojo): WebFetch confirmou título "Família Scholze — Graduações JJ & Judô" — protótipo minimalista, registro de graduações; decisão de NÃO virar fonte universal (já capturado via perspectivas).
+
+**Inventário final do contexto novo:** 11 arquivos, 1.507 linhas, 5 conceitos universais, anti-pollution PASS (marca-zero + n-gram ≥5 + 5 NÃOs), DRAFT aguardando primeiro uso real.
+
 Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos**.
 Library NotebookLM: **79 notebooks** catalogados (taxonomia CNTX UNI/EPCF/SMB).
+KOD.AI upstream agora tem **4 contextos-domínio** (ai-ecosystem-strategy, competitive-intelligence, sistemas-empresariais-br, **gestao-academia-esportiva-br** ✨).
 
 ---
 
@@ -60,12 +78,19 @@ Library NotebookLM: **79 notebooks** catalogados (taxonomia CNTX UNI/EPCF/SMB).
 
 ## Próxima ação
 
-**Próxima sessão (escolher uma frente):**
-1. **Responder PERGUNTAS-QA-KODAI.md (14 perguntas)** — destrava conceitos novos (candidate-to-core, lineage, closed-loop) + estrela polar + sequência de specs
-2. **D1 Decon Fase 1:** Davi grava áudio Denize → `/absorver-midia` (pipeline pronto + patched) → mapeamento Domínio
-3. **K4 Piloto NV-Dev:** `/auditar-projeto` em Navortech-Desenvolvimento → `/upstream-update` end-to-end (requer outra máquina, ~60-90min)
-4. **Promover packs DRAFT → FUNCIONAL** com Evidence Bloc — começar por `dev/ui-responsivo-smb` aplicado em decon-sistema OU `sistemas-empresariais-br` no mapeamento da Denize
-5. **Sintetizar vídeos transcritos** (quando batch terminar) — gerar `sintese.md` por vídeo com narrativa + decisões + tópicos + sugestão de absorção
+**Amanhã 2026-05-22 — frente única confirmada:**
+
+**Auditar Navortech-Desenvolvimento** via `/auditar-projeto` + `/upstream-update` end-to-end (segundo piloto KOD.AI). Plano detalhado em `inbox-davi/2026-05-22-plano-nv-dev.md` (gerado na sessão 3 de 2026-05-21). Tempo estimado: 60-90min. Requer estar na máquina correta com acesso ao repo Navortech.
+
+**Após Navortech (a decidir):**
+- Continuar piloto dojo (próximo passo: aplicar `gestao-academia-esportiva-br` DRAFT em código real → promover FUNCIONAL via Evidence Bloc)
+- Responder o que sobrou de PERGUNTAS-QA-KODAI.md (se restou — sessão 3 absorveu 20 perguntas)
+- Promover outros packs DRAFT → FUNCIONAL com aprendizados dos pilotos
+- Retomar Decon Fase 1 (mapeamento Domínio Denize)
+
+**Frentes adiadas (mas viva):**
+- Sintetizar vídeos Kelvin Cleto (5 sínteses já existem desde sessão 3 — K21 RESOLVIDO)
+- Decon Fase 1 (aguardando decisão pós-Navortech)
 
 ---
 

@@ -24,13 +24,18 @@ Cada feature nova deve justificar ROI de tempo — sem over-engineering.
 
 ---
 
-## Próximas prioridades
+## Próximas prioridades (revisado 2026-05-21 sessão 4 — virada de foco)
 
-| # | Prioridade | Prazo | Bloqueia? |
+**Insight da sessão 4:** KOD.AI evolui na prática, não em pesquisa. Por isso o foco mudou — começou o piloto `dojo-familia-scholze` (primeiro cliente real = pai do Davi), e o aprendizado retroalimenta o upstream.
+
+| # | Prioridade | Prazo | Status |
 |---|---|---|---|
-| 1 | Decon Fase 1 — mapear Domínio + automatizar fluxos da Denize | Asap | Sim — é o projeto de maior ROI |
-| 2 | KOD.AI v0.2.0 — popular `ia/agente-ia-humanizado` como primeiro pack FUNCIONAL | Após Decon estável | Não |
-| 3 | Dojô — definir stack + planejar estrutura do app | Após Decon estável | Não |
+| 1 | **KOD.AI evolução prática via piloto dojo** — gestao-academia-esportiva-br absorvido como primeiro contexto-domínio vertical real (1.507 linhas, 11 arquivos, DRAFT) | Em curso desde 2026-05-21 | Ativo |
+| 2 | **Auditar Navortech-Desenvolvimento** com `/auditar-projeto` + `/upstream-update` end-to-end | Amanhã 2026-05-22 (plano em `inbox-davi/2026-05-22-plano-nv-dev.md`) | Próximo |
+| 3 | **Decisão de próximos** após auditoria Navortech | Pós-Navortech | A decidir |
+| 4 | Decon Fase 1 — mapear Domínio + automatizar fluxos da Denize | Após decisão pós-Navortech | Adiado |
+| 5 | KOD.AI v0.2.0 — popular `ia/agente-ia-humanizado` como primeiro pack FUNCIONAL | Após Decon estável | Adiado |
+| 6 | Dojô — implementação real do app (após KOD.AI absorver mais aprendizado via piloto) | Após decisão pós-Navortech | Adiado |
 
 ---
 
@@ -65,3 +70,4 @@ Fórmula: proposta = 30% do ROI anual projetado. Payback típico: 4-6 meses.
 | 2026-05-15 | Foco inicial: Decon Fase 1 → KOD.AI v0.2.0 → Dojô |
 | 2026-05-15 | SCHOLZE-STACK implantado (E1-E14 concluídos) |
 | 2026-05-15 | KOD.AI clonado, instalado na pasta-mãe; movido para raiz (KODAI/) conforme spec de reestruturação |
+| 2026-05-21 sessão 4 | **Virada de foco: KOD.AI prioridade absoluta**. Insight: KOD.AI evolui na prática, não em pesquisa. Dojo (pai = primeiro cliente) virou piloto pra implementar e melhorar KOD.AI ao máximo possível antes dos próximos passos. Decon adiado. Amanhã: auditar Navortech como segundo piloto. |
