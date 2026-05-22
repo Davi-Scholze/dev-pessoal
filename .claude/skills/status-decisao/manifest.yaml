@@ -1,0 +1,107 @@
+name: status-decisao
+type: skill-universal
+version: 0.1.0-draft
+status: DRAFT
+created: 2026-05-21
+updated: 2026-05-21
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+description: >
+  Marca decisoes/features/specs/conceitos com tag semantica de status do ciclo de vida
+  (8 canonicos: rascunho/em-progresso/bloqueado/funcionando/refatorado/parqueado/wontfix/descartado)
+  e mantem grafo de transicao (quando mudou + porque + decidido_por). Aplica em ADRs,
+  PENDENCIAS.md, manifests de skills/contextos/packs, conceitos. Cross-ref automatico.
+  Historico NUNCA apagado — auditavel pra sempre.
+
+triggers:
+  - "/status-decisao <item> <status>"
+  - "Marca X como funcionando"
+  - "Esse Y descartamos"
+  - "Esse plano foi refatorado"
+  - "Esse pack parqueamos"
+  - "Esse status mudou pra X"
+  - Auto-promote quando Evidence Bloc validado em manifest
+  - Auto-marca quando pendencia marcada com checkmark em PENDENCIAS.md
+
+applies_to:
+  - Qualquer projeto consumidor com KOD.AI instalado
+  - Skills/contextos/packs com lifecycle (DRAFT -> FUNCIONAL -> BATTLE-TESTED)
+  - Specs/ADRs em docs/decisoes/
+  - Features do produto-ancora (catalogo modular MeuDojo, por ex)
+  - Pendencias com resolucao ou descarte
+
+not_applicable:
+  - Status implicito nao-confirmado (operador disse "acho que tá ok" — nao eh confirmacao)
+  - Mudanca trivial entre estados consecutivos (idempotencia)
+  - Conceito sem estrutura de manifest (texto livre puro)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Analise honesta KOD.AI vs fluxo desejado 2026-05-21 sessao 4 — gap identificado: 'rastreamento semantico de decisao' (operador queria saber 'descartado / melhorando / funcionando' como label, sem skill estruturada fica implicito em prosa)"
+      type: incidente-operacional-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Texto literal do operador 2026-05-21 sessao 4: 'em tempo real a IA possa ir espelhando tudo isso em contexto, de forma que a gente nao perca contextos, saiba que esse descartamos, esse melhoramos, esse esta funcionando'"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Padrao Anthropic de status (regra-base 5 — STUB|DRAFT|FUNCIONAL|BATTLE-TESTED|PARKED) — extendido pra 8 canonicos cobrindo lifecycle completo"
+      type: regra-base-derivada
+      anti_pollution_passed: true
+      date: 2026-05-21
+  contextos_filhos: []
+  validado_por: []  # aguarda primeiro uso real
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "projeto-com-lifecycle-features-multiplas"
+    - "saas-modular-com-features-opt-in-opt-off"
+    - "framework-com-skills-evolutivas-DRAFT-FUNCIONAL-BATTLE-TESTED"
+    - "operador-que-perde-contexto-do-que-foi-decidido"
+  nichos_incompativeis:
+    - "projeto-trivial-sem-features-multiplas"
+    - "documentacao-puramente-livre-sem-estrutura"
+  relacoes_semanticas:
+    depende_de:
+      - "1-ESQUELETO/politicas/honestidade-em-claims.md"  # status nao-confirmado nao vira funcionando
+    complementa:
+      - "1-ESQUELETO/skills-universais/espelhar"  # consumidor frequente (reflete mudancas de status)
+      - "1-ESQUELETO/skills-universais/check-in"  # consome status atual
+      - "1-ESQUELETO/skills-universais/abrir"  # Sessao Zero usa status pra priorizar
+      - "1-ESQUELETO/skills-universais/atualizar"  # reconcilia status no projeto inteiro
+      - "1-ESQUELETO/skills-universais/pedir-contexto"  # skill irma (ativa)
+      - "1-ESQUELETO/skills-universais/proposta-cliente"  # consumidor (FUNCIONAL = credibilidade)
+    substitui: []
+    similar_a: []
+
+ranks:
+  importance: high
+  reuso_esperado: muito-alto — qualquer projeto KOD.AI com features evolutivas se beneficia
+
+authors:
+  - name: Davi Scholze
+    role: especificador
+    notes: "Descreveu necessidade em 2026-05-21 sessao 4 — 'saiba que esse descartamos, esse melhoramos, esse esta funcionando'"
+
+related:
+  - SKILL.md (workflow 4 fases + 8 status canonicos + 3 casos de uso + modos --listar/--diff/--grafo)
+  - "../espelhar/SKILL.md (consumidor — reflete mudancas de status)"
+  - "../pedir-contexto/SKILL.md (skill irma)"
+  - "../proposta-cliente/SKILL.md (consumidor — FUNCIONAL como credibilidade na proposta)"
+  - "../../regras-base.md (regra-base 5 — STUB|DRAFT|FUNCIONAL|BATTLE-TESTED|PARKED extendido)"
+
+evidence_bloc_status: aguardando-primeiro-uso-pratico
+
+proxima_promocao: |
+  DRAFT -> FUNCIONAL quando aplicada em >=5 transicoes reais validadas:
+  - >=2 skills promovidas DRAFT -> FUNCIONAL via /status-decisao
+  - >=1 feature marcada wontfix com motivo registrado
+  - >=1 conceito refatorado (transicao com link pra substituto)
+  - >=1 pendencia marcada resolvida via auto-detecto (checkmark em PENDENCIAS)
+  + operador valida que historico nao foi corrompido e cross-refs estao consistentes
+
+  FUNCIONAL -> BATTLE-TESTED quando >=20 transicoes em >=2 projetos consumidores diferentes,
+  zero perdas de historico, e operador usa --grafo regularmente pra navegar decisoes.

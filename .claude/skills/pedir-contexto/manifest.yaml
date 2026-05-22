@@ -1,0 +1,106 @@
+name: pedir-contexto
+type: skill-universal
+version: 0.1.0-draft
+status: DRAFT
+created: 2026-05-21
+updated: 2026-05-21
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+description: >
+  Detecta gap de contexto (foto/print/link/video/audio/doc/credencial faltando) durante
+  execucao de outra skill OU em conversa livre, e pede ATIVAMENTE ao operador o material
+  necessario em formato especifico. Anti-padrao: ficar tentando alternativas silenciosamente
+  OU inventar baseado em palpite. Sempre oferece 2-3 alternativas de como prover. Apos
+  receber, dispara skill de absorcao apropriada automaticamente.
+
+triggers:
+  - "/pedir-contexto <tipo>"
+  - "Pede ao Davi um print de X"
+  - "Preciso de mais contexto sobre Y"
+  - WebFetch falha consecutivamente (>=2 URLs)
+  - Skill ativa pede input nao fornecido
+  - Conceito sem fonte ancorada sendo criado
+  - Pre-flight de outra skill identifica input ausente
+
+applies_to:
+  - Qualquer projeto consumidor com KOD.AI instalado
+  - Skills que dependem de input externo (WebFetch, /mapear-concorrente, /proposta-cliente, /absorver-*)
+  - Conversa livre quando operador pede analise sem enviar material
+  - Pos-falha de tentativas automaticas (WebFetch ECONNREFUSED / 404 / vazio)
+
+not_applicable:
+  - Gap resolvivel por codigo (ex: ler arquivo que ja existe na pasta)
+  - Gap inferivel com risco controlado e marcado
+  - Operador focado em outra coisa (use modo --silencioso)
+  - Quando /sugerir-pesquisa cobre melhor (pesquisa web sem precisar do operador)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Anti-padrao observado 2026-05-21 sessao 4 — KOD.AI tentou mapear OnMat+Kimono via WebFetch, falhou em todas URLs, ficou tentando silenciosamente em vez de pedir ao operador. Operador identificou explicitamente o gap: 'KODAI precisa pedir mais contexto caso precise — links, prints, fotos, videos'"
+      type: incidente-operacional-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Memory feedback_nao_perder_contextos.md (regra-base: processar TODOS pontos do operador, nao deixar gaps silenciosos)"
+      type: regra-base-derivada
+      anti_pollution_passed: true
+      date: 2026-05-21
+  contextos_filhos: []
+  validado_por: []  # aguarda primeiro uso real
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "qualquer-vertical-com-skills-que-dependem-input-externo"
+    - "saas-vertical-mapeamento-concorrentes"
+    - "agencia-freelancer-atendendo-cliente"
+    - "projeto-com-fontes-distribuidas"
+  nichos_incompativeis:
+    - "automacao-100-autonoma-sem-humano"
+    - "tarefa-puramente-computacional-sem-input-externo"
+  relacoes_semanticas:
+    depende_de: []
+    complementa:
+      - "1-ESQUELETO/politicas/escuta-antes-de-agir.md"
+      - "1-ESQUELETO/politicas/honestidade-em-claims.md"
+      - "1-ESQUELETO/skills-universais/sugerir-pesquisa"
+      - "1-ESQUELETO/skills-universais/capturar-imagem"
+      - "1-ESQUELETO/skills-universais/capturar-video"
+      - "1-ESQUELETO/skills-universais/transcribe-audio"
+      - "1-ESQUELETO/skills-universais/ativar-notebooklm"
+      - "1-ESQUELETO/skills-universais/absorver-contexto"
+      - "1-ESQUELETO/skills-universais/absorver-midia"
+      - "1-ESQUELETO/skills-universais/mapear-concorrente"
+      - "1-ESQUELETO/skills-universais/proposta-cliente"
+    substitui: []
+    similar_a:
+      - "1-ESQUELETO/skills-universais/sugerir-pesquisa"  # alternativa quando NAO precisa input humano
+
+ranks:
+  importance: high
+  reuso_esperado: muito-alto — toda skill que depende de input externo se beneficia
+
+authors:
+  - name: Davi Scholze
+    role: especificador
+    notes: "Identificou anti-padrao em 2026-05-21 sessao 4 apos OnMat+Kimono falharem silenciosamente — pediu skill explicita pra resolver"
+
+related:
+  - SKILL.md (workflow 4 fases)
+  - "../../../1-ESQUELETO/politicas/escuta-antes-de-agir.md"
+  - "../mapear-concorrente/SKILL.md (sera atualizada pra usar /pedir-contexto como fallback quando WebFetch falhar)"
+  - "../proposta-cliente/SKILL.md (skill irma criada na mesma sessao)"
+
+evidence_bloc_status: aguardando-primeiro-uso-pratico
+
+proxima_promocao: |
+  DRAFT -> FUNCIONAL quando aplicada em >=3 situacoes reais distintas:
+  - 1 caso de WebFetch falhando (ex: proximo concorrente OnMat/Kimono — operador prove
+    NotebookLM ou material manual via skill)
+  - 1 caso de pre-flight de skill identificar input ausente (ex: /proposta-cliente sem material)
+  - 1 caso de gap detectado durante implementacao (ex: hex exato de paleta faltando)
+  + operador valida que pedido foi claro e nao gerou ruido
+
+  FUNCIONAL -> BATTLE-TESTED quando >=10 usos em >=2 projetos consumidores diferentes
+  com taxa de resposta do operador >70% (skill nao vira fonte de ruido).

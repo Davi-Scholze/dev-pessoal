@@ -1,0 +1,114 @@
+name: proposta-cliente
+type: skill-universal
+version: 0.1.0-draft
+status: DRAFT
+created: 2026-05-21
+updated: 2026-05-21
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial-cliente
+
+description: >
+  Workflow orquestrador de 6 fases pra gerar proposta consultiva TOP pra cliente novo
+  (modelo DFY/DWY/DIY). Captura material recebido (prints, URLs, audios) -> mapeia
+  estado atual do cliente -> pesquisa o melhor da categoria (concorrentes + benchmarks)
+  -> gera proposta TOP com escopo + ticket + entregaveis. Orquestra /capturar-imagem +
+  /absorver-contexto + /mapear-concorrente + /sugerir-pesquisa + /pedir-contexto. Output:
+  arquivo propostas/<cliente>-<data>.md pronto pra exportar PDF.
+
+triggers:
+  - "/proposta-cliente <nome>"
+  - "Preparar proposta pra X"
+  - "Vamos atender cliente Y"
+  - "Material desse cliente: ..." (com URLs/prints adjacentes)
+  - Operador cola URLs+prints com tom 'atendimento cliente novo'
+
+applies_to:
+  - Agencia/freelancer que vende sistemas/automacao/consultoria
+  - Operador em modelo de venda consultiva (DFY/DWY/DIY)
+  - SaaS com plano Enterprise (venda consultiva pra ticket alto)
+  - Profissional autonomo que precisa formalizar proposta tecnica
+
+not_applicable:
+  - Cliente ja existente (use /atualizar-projeto ou /update-proposta)
+  - Discussao tecnica nao-comercial (escolha de stack, decisao arquitetural)
+  - Pesquisa de mercado sem cliente especifico (use /sugerir-pesquisa direto)
+  - Operador puramente SaaS self-service (proposta nao se aplica)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Input direto do operador 2026-05-21 sessao 4 — descricao do workflow desejado: 'Pego referencias visuais do meu clientes, prints... copio e colo coisas, links... a partir disso o KODAI ja mapeia e entende o atual, com isso ja pesquisa o melhor, para chegarmos ao cliente com a proposta TOP'"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Modelo de venda revisado MeuDojo (sessao 4 mesmo dia) — DFY/DWY/DIY com tickets R$1-20k + recorrencia opcional"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Pack comercial/modelos-venda-ia DRAFT no upstream (origem dos modelos DFY/DWY/DIY)"
+      type: pack-kodai-derivado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Conceito kelvin-cleto-vs-kodai (referencia de modelo consultivo validado em mercado)"
+      type: contexto-kodai-derivado
+      anti_pollution_passed: true
+      date: 2026-05-21
+  contextos_filhos: []
+  validado_por: []  # aguarda primeiro uso real
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "agencia-freelancer-venda-consultiva"
+    - "saas-vertical-com-plano-enterprise"
+    - "profissional-autonomo-tecnico"
+    - "modelo-DFY-DWY-DIY"
+    - "tickets-altos-R\$1k-R\$50k"
+  nichos_incompativeis:
+    - "saas-puro-self-service"
+    - "produto-mass-market-sem-personalizacao"
+    - "venda-transacional-baixo-ticket"
+  relacoes_semanticas:
+    depende_de:
+      - "1-ESQUELETO/skills-universais/pedir-contexto"  # auto-disparada se faltar material
+    complementa:
+      - "1-ESQUELETO/skills-universais/capturar-imagem"
+      - "1-ESQUELETO/skills-universais/capturar-video"
+      - "1-ESQUELETO/skills-universais/transcribe-audio"
+      - "1-ESQUELETO/skills-universais/absorver-midia"
+      - "1-ESQUELETO/skills-universais/absorver-contexto"
+      - "1-ESQUELETO/skills-universais/mapear-concorrente"
+      - "1-ESQUELETO/skills-universais/sugerir-pesquisa"
+      - "2-PACKS/packs/comercial/modelos-venda-ia"
+      - "2-PACKS/packs/atendimento/customer-success-ia"
+      - "3-CONTEXTOS-DOMINIO/competitive-intelligence"
+    substitui: []
+    similar_a:
+      - "1-ESQUELETO/skills-universais/auditar-projeto"  # mesma logica orquestradora pra projeto interno, nao cliente
+
+ranks:
+  importance: high
+  reuso_esperado: alto — qualquer projeto consumidor com modelo de venda consultiva
+
+authors:
+  - name: Davi Scholze
+    role: especificador
+    notes: "Descreveu workflow desejado em 2026-05-21 sessao 4 + estabeleceu modelo de venda revisado MeuDojo no mesmo turno"
+
+related:
+  - SKILL.md (workflow 6 fases + modo --update + 8 secoes canonicas da proposta)
+  - "../pedir-contexto/SKILL.md (auto-disparada se material insuficiente)"
+  - "../../../2-PACKS/packs/comercial/modelos-venda-ia/ (modelos DFY/DWY/DIY)"
+  - "../../../3-CONTEXTOS-DOMINIO/competitive-intelligence/ (destino concorrentes Fase 4)"
+  - "../../../Repositorios/dojo-familia-scholze/contextos/modelo-de-venda-2026-05-21.md (caso real de modelo de venda no MeuDojo)"
+
+evidence_bloc_status: aguardando-primeiro-uso-pratico
+
+proxima_promocao: |
+  DRAFT -> FUNCIONAL quando aplicada em >=2 propostas reais validadas:
+  - 1 proposta enviada a cliente real com material curado
+  - 1 conversao (fechamento) ou >=1 sessao de revisao consultiva
+  - Operador valida qualidade do output (5 elementos canonicos + estado-arte + gaps + proposta + executive summary)
+
+  FUNCIONAL -> BATTLE-TESTED quando >=5 propostas geradas em >=2 projetos consumidores
+  diferentes, com taxa de conversao >25% e ticket medio dentro do esperado.

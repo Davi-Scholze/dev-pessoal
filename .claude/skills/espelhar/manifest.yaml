@@ -1,0 +1,121 @@
+name: espelhar
+type: skill-universal
+version: 0.1.0-draft
+status: DRAFT
+created: 2026-05-21
+updated: 2026-05-21
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+description: >
+  Reflete mudancas efetivas da sessao (commits, arquivos novos, edits significativos, decisoes
+  tomadas) nos arquivos vivos do projeto consumidor: PROMPT_MASTER_HANDOFF.md, PENDENCIAS.md,
+  _negocio/MAPA.md, _memoria/*.md e memorias persistentes. Git como fonte de verdade — NUNCA
+  inventa progresso. Sai do modo 'atualizo quando lembrar' — entra no modo 'espelhamento
+  estruturado auditavel'.
+
+triggers:
+  - "/espelhar"
+  - "Espelha o que fizemos"
+  - "Atualiza memoria"
+  - "Registra a sessao"
+  - "Atualiza handoff/pendencias"
+  - Final de sessao com >=5 tool uses + >=1 commit
+  - Apos criacao de artefato significativo (skill/contexto/pack)
+  - Apos resolucao de pendencia P0/P1
+  - Apos mudanca de foco estrategico
+  - Antes de operador fechar conversa (proxima Sessao Zero precisa contexto fresco)
+
+applies_to:
+  - Qualquer projeto consumidor com KOD.AI instalado
+  - Sessoes longas com multiplas mudancas (5+ tool uses + commits)
+  - Apos /mapear-concorrente, /absorver-contexto, /criar-skill, /criar-pack, etc
+  - Final de sessao significativa
+
+not_applicable:
+  - Sessao com <5 tool uses + 0 commits (nada significativo)
+  - Operador rodou /espelhar ha <30 turnos (idempotencia)
+  - Operador focado em outra coisa e nao pediu (use --silencioso)
+  - Operador pediu /atualizar (skill maior, escopo diferente)
+  - Projeto consumidor sem git rastreando (sem fonte de verdade)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Analise honesta KOD.AI vs fluxo desejado 2026-05-21 sessao 4 — gap identificado: 'espelhamento em tempo real' (operador queria mapa atualizado a cada turno, IA atualiza so quando lembra)"
+      type: incidente-operacional-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Memory feedback_nao_perder_contextos.md (regra-base: nao deixar pontos pra tras)"
+      type: regra-base-derivada
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Politica documentar-cada-implementacao.md (politica universal existente — /espelhar operacionaliza)"
+      type: politica-kodai-derivada
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Modelo de venda revisado MeuDojo 2026-05-21 sessao 4 — modular features_habilitadas exige tracking estruturado"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+  contextos_filhos: []
+  validado_por: []  # aguarda primeiro uso real
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "projeto-consumidor-com-multiplas-mudancas-por-sessao"
+    - "modelo-de-venda-modular-com-tracking-de-decisao"
+    - "sessoes-longas-com-multiplos-commits"
+    - "operador-que-nao-lembra-de-atualizar-handoff"
+  nichos_incompativeis:
+    - "projeto-sem-git"
+    - "sessao-trivial-sem-mudancas-significativas"
+    - "operador-que-prefere-controle-manual-puro-sem-automacao"
+  relacoes_semanticas:
+    depende_de:
+      - "1-ESQUELETO/politicas/honestidade-em-claims.md"  # nao inventar
+      - "1-ESQUELETO/politicas/documentar-cada-implementacao.md"  # principio operacionalizado
+    complementa:
+      - "1-ESQUELETO/skills-universais/abrir"  # Sessao Zero consome
+      - "1-ESQUELETO/skills-universais/check-in"  # reporta sem aplicar
+      - "1-ESQUELETO/skills-universais/atualizar"  # reconcilia projeto inteiro (maior escopo)
+      - "1-ESQUELETO/skills-universais/salvar"  # pode disparar espelhar antes
+      - "1-ESQUELETO/skills-universais/pedir-contexto"  # skill irma (ativa)
+      - "1-ESQUELETO/skills-universais/proposta-cliente"  # skill irma (orquestradora)
+    substitui: []
+    similar_a:
+      - "1-ESQUELETO/skills-universais/atualizar"  # mesma intencao, escopo diferente (atualizar=projeto inteiro; espelhar=ultimas mudancas)
+      - "1-ESQUELETO/skills-universais/check-in"  # mesma intencao, espelhar APLICA, check-in so REPORTA
+
+ranks:
+  importance: high
+  reuso_esperado: muito-alto — qualquer projeto KOD.AI com sessoes longas se beneficia
+
+authors:
+  - name: Davi Scholze
+    role: especificador
+    notes: "Descreveu fluxo desejado em 2026-05-21 sessao 4 — 'em tempo real IA possa ir espelhando tudo isso em contexto, de forma que a gente nao perca contextos'. Skill operacionaliza esse pedido."
+
+related:
+  - SKILL.md (workflow 5 fases + 3 casos de uso + modo --dry-run + --silencioso + --escopo)
+  - "../pedir-contexto/SKILL.md (skill irma — ativa pra pedir contexto)"
+  - "../proposta-cliente/SKILL.md (skill irma — orquestradora venda)"
+  - "../abrir/SKILL.md (Sessao Zero consome espelhamento da sessao anterior)"
+  - "../atualizar/SKILL.md (skill maior — escopo projeto inteiro)"
+
+evidence_bloc_status: aguardando-primeiro-uso-pratico
+
+proxima_promocao: |
+  DRAFT -> FUNCIONAL quando aplicada em >=3 sessoes reais com sucesso:
+  - 1 fim-de-sessao significativa (>=5 tool uses + >=1 commit) com handoff atualizado
+  - 1 apos criacao de skill/contexto/pack (espelhamento incremental)
+  - 1 modo --dry-run validado pelo operador (diff aceito + aplicado)
+  + operador valida que arquivos vivos refletem realidade da sessao
+
+  FUNCIONAL -> BATTLE-TESTED quando >=10 execucoes em >=2 projetos consumidores
+  diferentes, taxa de erro de categorizacao <10%, operador confia no resultado
+  sem revisar manualmente cada vez.
+
+  Roadmap futuro: virar hook PostToolUse 'intelligent' que detecta momentos-chave
+  automaticamente e dispara espelhar sem precisar lembrar.

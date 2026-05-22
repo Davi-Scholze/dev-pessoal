@@ -1,0 +1,107 @@
+name: mapear-concorrente
+type: skill-universal
+version: 0.2.0
+status: FUNCIONAL
+created: 2026-05-21
+updated: 2026-05-21
+promoted_to_functional_at: 2026-05-21
+promoted_evidence: |
+  Promovida DRAFT -> FUNCIONAL apos 2 execucoes end-to-end validadas:
+  1. FaceDojo (Zedscript, BR) — conceito facedojo-vs-meudojo.md (commit 2d5c170)
+  2. Next Fit (enterprise fitness BR) — conceito nextfit-vs-meudojo.md (este commit)
+  Ambos com matriz comparativa, lacunas defensaveis, plano implementacao
+  priorizado por ROI, decisoes pendentes com recomendacao, anti-pollution
+  PASS, commit + push upstream. Critério de promocao atingido conforme
+  proxima_promocao declarada (>=2 concorrentes diferentes mapeados).
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+description: >
+  Investiga concorrente direto do produto-ancora em workflow de 5 fases
+  (investigar -> matriz comparativa -> propor implementacao dos gaps ->
+  garantir superioridade defensavel -> registrar como conceito em
+  competitive-intelligence). Operacionaliza padrao operacional do operador:
+  todo concorrente enviado dispara investigacao automatica + matriz +
+  plano de implementacao. Sem copiar verbatim, com gate humano em
+  decisoes criticas.
+
+triggers:
+  - "/mapear-concorrente <url-ou-nome>"
+  - "Mapear concorrente X"
+  - "Analisa esse concorrente: <url>"
+  - "Como nos diferenciamos de X?"
+  - "Esse aqui faz o que a gente faz?" (apos colar URL)
+  - Auto-disparo ao detectar URL de Instagram/YouTube/site/marketplace com tom "olha esse aqui"
+
+applies_to:
+  - Qualquer projeto consumidor com produto-ancora identificavel + concorrentes diretos
+  - Vertical com benchmark publico (SaaS B2B, B2C, marketplace, plataforma vertical)
+  - Pasta-mae com KODAI instalado + contexto-dominio do vertical
+
+not_applicable:
+  - Pesquisa neutra de mercado (use /sugerir-pesquisa)
+  - Pesquisa de tecnologia/framework (use Context7 ou WebFetch direto)
+  - Concorrente sem presenca publica (sem URL/listing/marca)
+  - Re-mapeamento <30 dias (use --update explicito)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Input direto do operador 2026-05-21 sessao 4 — padrao operacional 'pra cada concorrente que eu enviar, KODAI investiga + mapeia + implementa + garante superioridade'"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+    - source: "Material curado de projeto consumidor anonimizado tipo dojo BR (10 features MeuDojo + matriz vs 5 concorrentes em features-diferenciadoras-saas-vertical-esportivo.md)"
+      type: doc-pareado-curado
+      anti_pollution_passed: true
+      date: 2026-05-21
+  contextos_filhos: []
+  validado_por: []  # aguarda primeiro uso real (proximo concorrente que Davi enviar)
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "qualquer-vertical-com-concorrencia-mapeavel"
+    - "saas-b2b-com-benchmark-publico"
+    - "marketplace-com-players-multiplos"
+    - "plataforma-vertical-com-diferenciacao-defensavel"
+  nichos_incompativeis:
+    - "mercados-monopolisticos"
+    - "produto-sem-concorrente-direto-publico"
+    - "pesquisa-academica-pura"
+  relacoes_semanticas:
+    depende_de: []
+    complementa:
+      - "3-CONTEXTOS-DOMINIO/competitive-intelligence"  # destino canonico dos conceitos
+      - "1-ESQUELETO/skills-universais/criar-contexto"  # invocada se competitive-intel ausente
+      - "1-ESQUELETO/skills-universais/notebooklm"      # modo --deep
+      - "1-ESQUELETO/skills-universais/ativar-notebooklm"  # vincula notebook criado --deep
+      - "1-ESQUELETO/skills-universais/absorver-contexto"  # alternativa pra absorver doc completo
+    substitui: []
+    similar_a:
+      - "1-ESQUELETO/skills-universais/sugerir-pesquisa"  # alternativa pra pesquisa neutra
+
+ranks:
+  importance: high
+  reuso_esperado: alto — qualquer projeto KOD.AI com produto + concorrentes
+
+authors:
+  - name: Davi Scholze
+    role: especificador
+    notes: "Estabeleceu padrao operacional na sessao 4 de 2026-05-21 ('pra cada concorrente que eu enviar...')"
+
+related:
+  - SKILL.md (workflow 5 fases)
+  - "../../../3-CONTEXTOS-DOMINIO/competitive-intelligence/ (destino canonico)"
+  - "../../../3-CONTEXTOS-DOMINIO/gestao-academia-esportiva-br/conceitos/features-diferenciadoras-saas-vertical-esportivo.md (primeira aplicacao demonstrada com matriz vs 5 concorrentes)"
+
+evidence_bloc_status: aguardando-primeiro-uso-pratico
+
+proxima_promocao: |
+  DRAFT -> FUNCIONAL quando aplicada em >=2 concorrentes reais com Evidence Bloc:
+  - 2 concorrentes diferentes mapeados
+  - Pelo menos 1 lacuna defensavel proposta foi efetivamente implementada
+  - Operador validou que reporte foi acionavel (nao gerou ruido)
+
+  FUNCIONAL -> BATTLE-TESTED quando >=5 concorrentes mapeados em >=2 projetos consumidores
+  diferentes, com pelo menos 3 implementacoes concretas derivadas.
