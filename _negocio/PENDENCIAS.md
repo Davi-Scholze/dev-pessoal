@@ -21,15 +21,18 @@
 
 ## 🚧 Frentes do KOD.AI propostas pra próxima evolução (sessão 4 análise honesta KOD.AI vs fluxo desejado)
 
-4 skills novas + 1 pack identificados como gap:
+**ATUALIZADO 2026-05-21 sessão 4 final:** 4 skills CRIADAS (DRAFT pushed). Restantes: 1 hook + 1 pack.
 
-| Frente | Tipo | Custo | Prioridade |
+| Frente | Tipo | Custo | Status |
 |---|---|---|---|
-| **`/pedir-contexto`** | Skill | M | Alta (resolve gap WebFetch falhou + contexto missing) |
-| **`/espelhar`** ou hook PostToolUse | Skill/hook | M | Alta (espelhamento tempo real) |
-| **`/status-decisao`** | Skill | S | Média |
-| **`/proposta-cliente`** | Skill | L | Alta (workflow direto de venda) |
-| **`seguranca/pentest-automated`** | Pack | L | Média |
+| **`/pedir-contexto`** | Skill | M | ✅ **CRIADA DRAFT** (commit 28227bc, propagada runtime) — aguarda 3 usos reais pra FUNCIONAL |
+| **`/proposta-cliente`** | Skill | L | ✅ **CRIADA DRAFT** (commit 28227bc, propagada runtime) — aguarda 2 propostas reais |
+| **`/espelhar`** | Skill | M | ✅ **CRIADA DRAFT** (commit 7bac71b, propagada runtime) — aguarda 3 sessões com espelhamento |
+| **`/status-decisao`** | Skill | S | ✅ **CRIADA DRAFT** (commit f568188, propagada runtime) — dogfooding aplicado nos 4 manifests novos |
+| **Hook PostToolUse "intelligent"** pra `/espelhar` auto | Hook JS | M | ⏳ Roadmap (sem urgência — `/espelhar` manual funciona) |
+| **`seguranca/pentest-automated`** | Pack | L | ⏳ Pendente (sem urgência pré-MVP) |
+| **Validar 4 skills DRAFT em uso real** | (tarefa) | varia | ⏳ Próximas sessões — promove DRAFT → FUNCIONAL |
+| **Mapear OnMat + Kimono + outros concorrentes** | (tarefa) | M | ⏳ Aguarda NotebookLM dedicado OU material manual via `/pedir-contexto` |
 
 ---
 

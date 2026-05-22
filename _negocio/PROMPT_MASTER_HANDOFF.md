@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-21 (sessão 4 — virada de foco KOD.AI prático + piloto dojo)
+> Última atualização: 2026-05-21 (sessão 4 — final: 3 concorrentes mapeados + modelo venda revisado + 4 skills DRAFT criadas)
 
 ---
 
@@ -41,9 +41,42 @@ Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 ski
 
 **Inventário final do contexto novo:** 11 arquivos, 1.507 linhas, 5 conceitos universais, anti-pollution PASS (marca-zero + n-gram ≥5 + 5 NÃOs), DRAFT aguardando primeiro uso real.
 
-Inventário atual da pasta-mãe: **67 skills** + **8 rules** + **5 hooks ativos**.
-Library NotebookLM: **79 notebooks** catalogados (taxonomia CNTX UNI/EPCF/SMB).
-KOD.AI upstream agora tem **4 contextos-domínio** (ai-ecosystem-strategy, competitive-intelligence, sistemas-empresariais-br, **gestao-academia-esportiva-br** ✨).
+**Sessão 2026-05-21 (sessão 4 — FINAL: concorrentes + modelo venda revisado + 4 skills novas):**
+
+**Continuação após criação do contexto-domínio:**
+
+- **3 concorrentes mapeados via `/mapear-concorrente`** (skill criada nesta mesma sessão):
+  - FaceDojo (Zedscript Automações LTDA, BR) — commit `2d5c170`
+  - Next Fit (BR, enterprise fitness 18k+ academias) — commit `be7c919`
+  - Kicksite (EUA, ~20 anos artes marciais) — commit `b2afa49`
+  - 3 conceitos em `competitive-intelligence/conceitos/` com matriz comparativa + lacunas defensáveis + plano implementação ROI
+  - **Limitação documentada honestamente:** OnMat + Kimono falharam (URLs WebFetch ECONNREFUSED/404) — fonte: limitação técnica WebFetch em SaaS modernos. Mitigação: NotebookLM dedicado OU material manual via `/pedir-contexto` (skill criada hoje pra exato esse caso)
+
+- **`/mapear-concorrente` promovida DRAFT → FUNCIONAL** após 2 execuções end-to-end validadas (FaceDojo + Next Fit) — primeira skill universal nativa promovida nesta pasta-mãe
+
+- **REVISÃO ESTRATÉGICA CRÍTICA do MeuDojo (commit `3e1eab0` KODAI upstream):**
+  - Davi clarificou: MeuDojo **NÃO** é SaaS B2B genérico tabelado (R$80-450/mês com gating por feature)
+  - É **modelo adaptável vendável**: tickets project-based **R$1k/5k/15k/20k+ DFY/DWY/DIY + recorrência opcional** (estilo Kelvin Cleto)
+  - 15 features confirmadas viram **MÓDULOS opt-in por tenant** (`features_habilitadas` jsonb)
+  - **Bootstrap-mode declarado:** Davi sem capital, ganharia vendendo o sistema → CompreFace self-hosted (não Rekognition) + Evolution API self-hosted + escalar com receita real
+  - Doc estruturado em `Repositorios/dojo-familia-scholze/contextos/modelo-de-venda-2026-05-21.md`
+
+- **Memory persistente NOVA: `feedback_nao_perder_contextos.md`** estabelecida — regra crítica: processar TODOS pontos da mensagem do Davi via TodoWrite, nunca deixar 2-3 pra trás
+
+- **4 SKILLS NOVAS DRAFT criadas (análise honesta KOD.AI vs fluxo desejado):**
+  1. **`/pedir-contexto`** (commit `28227bc`) — pede ATIVAMENTE material faltando (5 elementos canônicos: contexto + tentativas + tipo + finalidade + 2-3 alternativas)
+  2. **`/proposta-cliente`** (commit `28227bc`) — workflow 6 fases pra atender cliente DFY/DWY/DIY → proposta TOP `.md`
+  3. **`/espelhar`** (commit `7bac71b`) — reflete mudanças efetivas (git como fonte de verdade) nos arquivos vivos
+  4. **`/status-decisao`** (commit `f568188`) — tag semântica do ciclo de vida (8 status canônicos) + histórico auditável
+  - Todas com lineage v1 (Spec 1) + anti-pollution PASS + propagadas pra runtime pasta-mãe
+  - Dogfooding aplicado: `/status-decisao` formaliza status_historico nos 4 manifests novos
+
+- **Update em `/mapear-concorrente`:** auto-fallback via `/pedir-contexto` quando ≥2 URLs WebFetch falham (anti-padrão OnMat/Kimono resolvido)
+
+Inventário atual da pasta-mãe: **72 skills** (era 67 + 5 propagadas hoje: mapear-concorrente + pedir-contexto + proposta-cliente + espelhar + status-decisao) + 8 rules + 5 hooks ativos.
+Library NotebookLM: 79 notebooks catalogados.
+KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competitive-intelligence, **6 conceitos** em gestao-academia-esportiva-br, **70 skills universais** (4 novas DRAFT + 1 promovida FUNCIONAL).
+**13 commits no upstream pushed** nesta sessão.
 
 ---
 
@@ -82,15 +115,23 @@ KOD.AI upstream agora tem **4 contextos-domínio** (ai-ecosystem-strategy, compe
 
 **Auditar Navortech-Desenvolvimento** via `/auditar-projeto` + `/upstream-update` end-to-end (segundo piloto KOD.AI). Plano detalhado em `inbox-davi/2026-05-22-plano-nv-dev.md` (gerado na sessão 3 de 2026-05-21). Tempo estimado: 60-90min. Requer estar na máquina correta com acesso ao repo Navortech.
 
+**Pull amanhã na NV-Dev funciona pra:** KOD.AI upstream (13 commits desta sessão pushed) + repo dojo (todos pushed). **NÃO funciona pra:** pasta-mãe `dev-pessoal` (5 commits locais bloqueados por C1 PAT exposto — isolado a esta máquina).
+
+**Loop de captura de evoluções da NV-Dev pro upstream KOD.AI já implementado:** `/auditar-projeto` (8 fases) → `/absorver-contexto` ou `/absorver-referencia` (curadoria 4 buckets) → `/upstream-update` (modelo A funcional, anti-pollution 7 SIM) → propagação automática pra outras instalações via `git pull`.
+
 **Após Navortech (a decidir):**
-- Continuar piloto dojo (próximo passo: aplicar `gestao-academia-esportiva-br` DRAFT em código real → promover FUNCIONAL via Evidence Bloc)
-- Responder o que sobrou de PERGUNTAS-QA-KODAI.md (se restou — sessão 3 absorveu 20 perguntas)
+- Validar end-to-end as 4 skills novas DRAFT criadas hoje em uso real (próximas execuções promovem DRAFT → FUNCIONAL)
+- Continuar piloto dojo: `/brainstorming` arquitetura `features_habilitadas` por tenant (modelo de venda revisado exige)
+- Implementar modelo de venda revisado (template de proposta + onboarding humano protocol + suporte tiered)
 - Promover outros packs DRAFT → FUNCIONAL com aprendizados dos pilotos
 - Retomar Decon Fase 1 (mapeamento Domínio Denize)
 
 **Frentes adiadas (mas viva):**
 - Sintetizar vídeos Kelvin Cleto (5 sínteses já existem desde sessão 3 — K21 RESOLVIDO)
 - Decon Fase 1 (aguardando decisão pós-Navortech)
+- Hook PostToolUse "intelligent" pra disparar `/espelhar` automaticamente em momentos-chave (roadmap)
+- Pack `seguranca/pentest-automated` (sem urgência pré-MVP)
+- Mapear OnMat + Kimono + outros concorrentes (precisa NotebookLM dedicado OU material manual via `/pedir-contexto`)
 
 ---
 
