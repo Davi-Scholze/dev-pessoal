@@ -1,0 +1,157 @@
+name: test-runner
+type: skill
+category: qa
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Sub-agente pipeline mecânico de testes automáticos. Ordem: typecheck → lint
+  → unit → integration → build → e2e. Para no primeiro fail. Reporta exit
+  code + últimas 30 linhas + proposta de fix (NÃO aplica sem aprovação
+  humana). Cinto de segurança #1 antes do qa-verifier (cinto #2 adversarial).
+
+skill_principal: test-runner
+model: sonnet
+
+triggers:
+  - /test-runner
+  - rodar pipeline
+  - validar build antes de PR
+  - pipeline mecânico
+
+handoff_in:
+  required:
+    REPO_PATH: "path absoluto do repo"
+    HEAD_SHA_ESPERADO: "hash que deveria estar checked out"
+  optional:
+    STACK: "node | python | go | rust | misto (default: detect via arquivos)"
+    SKIP_BUILD: "true se build é redundante (default false)"
+
+handoff_out:
+  produces:
+    resultado: "PASS ✅ | FAIL ❌ na etapa N"
+    head_testado: "git rev-parse HEAD output"
+    pipeline_tabela: "markdown com etapas + exit codes + tempos"
+    output_fail: "últimas 30 linhas literais (se FAIL)"
+    proposta_fix: "sugestão sem aplicação (se FAIL)"
+    tempo_total: "segundos"
+
+quality_gates:
+  - "Pipeline rodado na ordem (sem pular etapa)"
+  - "Para no primeiro exit != 0"
+  - "Output do fail tem últimas 30 linhas literais"
+  - "Proposta de fix sem aplicação"
+  - "0 uso de --no-verify / --force / --skip-tests pra fazer passar"
+  - "HEAD_SHA conferido com esperado (ABORT se diverged)"
+
+requires:
+  blocking:
+    - "Repo limpo (`git status --short` reporta delta se sujo, mas não bloqueia)"
+    - "Dependências instaláveis (`npm install` ou equivalente)"
+    - "Permissão Bash + Read no repo"
+  recommended:
+    - "package.json com scripts `typecheck`, `lint`, `build`"
+    - "vitest.config ou jest.config (unit)"
+    - "playwright instalado (e2e mecânico)"
+
+dependencias:
+  obrigatorias:
+    - Node 18+ (pra projetos JS/TS)
+    - git
+    - shell POSIX (bash/zsh)
+  opcionais:
+    - vitest / jest
+    - playwright test
+    - mypy / ruff / pytest (Python)
+    - go toolchain
+    - cargo (Rust)
+
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+
+reads:
+  - "package.json (detect scripts)"
+  - "tsconfig.json (detect typecheck)"
+  - "vitest.config.* / jest.config.*"
+  - "playwright.config.*"
+
+writes_to: []  # apenas reporta, não escreve
+
+related:
+  - ../qa-verifier/SKILL.md (cinto #2 — roda depois)
+  - ../verification-before-completion/SKILL.md (Iron Law)
+  - ../../metodologias/testes.md (framework universal)
+  - ../../politicas/status-honesto-handoff.md (Evidence Bloc)
+  - ../../politicas/coordinator-na-sessao-pai.md (anti-pattern coordinator-agente)
+
+lineage:
+  origin: downstream-absorption
+  parent: navortech-2026-05-22
+  derived_from: "Navortech-Desenvolvimento/.claude/agents/test-runner.md"
+  battle_tested_em: "Projeto consumidor real desde 14/05/2026 — pegou ~50 erros tsc no NV OS antes de irem pra produção"
+  anti_pollution_passed: true
+  marcas_removidas: ["NV OS", "TrackOps", "Navortech"]
+  validado_por: ["Davi 2026-05-22"]
+  contextos_filhos: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "projeto-node-typescript"
+    - "projeto-python-com-mypy"
+    - "projeto-go"
+    - "projeto-rust"
+    - "monorepo-multi-stack"
+    - "projeto-sem-CI-precisa-cinto-mecanico"
+  nichos_incompativeis:
+    - "biblioteca-pure-functional-sem-build-step"
+    - "script-pontual-sem-package.json"
+
+sugere_proxima_skill:
+  - condicao: "test-runner PASS + feature com UI"
+    skill: qa-verifier
+    razao: "Validação adversarial da camada UI/E2E"
+  - condicao: "test-runner FAIL + fix proposto plausível"
+    skill: subagent-driven-development
+    razao: "Implementer aplica fix + test-runner re-roda"
+  - condicao: "test-runner PASS + sem UI (lib/SDK)"
+    skill: complete
+    razao: "Declarar done com Evidence Bloc do pipeline"
+
+requires_skills_anteriores: []  # skill terminal de validação mecânica
+
+supports_reflexion: true
+
+runtime:
+  mode: sub-agent
+  trigger: invocado por sessão pai via tool Agent
+  background: true
+  paralelizavel: true (1 por repo)
+  portavel_pra_agent: true
+  cenario_agent: "pre-commit hook OU CI/CD pré-merge — auto-roda pipeline antes de qualquer push"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_stacks_diferentes: 3 (node + python + go)
+  - 0_falsos_positivos_em_50_execucoes: true
+  - pegou_erro_real_que_implementer_teria_pushed: 5
+  - tempo_medio_under_60s_em_repo_medio: true
+
+limitacoes:
+  - nao_substitui_CI_completo: true (cobre 80% dos checks pré-merge)
+  - sem_testes_e2e_mecanicos_se_playwright_test_nao_configurado: true
+  - build_lento_nao_e_fail_e_problema_de_DevX: true
+  - python_go_rust_adapters_simples_nao_cobrem_todo_ecossistema: true (vitest+jest+playwright são prioridade)
+
+anti_pollution:
+  metodo: vocabulário público pipelines CI (typecheck/lint/unit/build/e2e) + comandos padrão dos ecossistemas
+  citacoes_diretas: zero (estrutura própria)
+  marca_mazyos_usada: false
+  marcas_navortech_removidas: true
+  atribuicao_em_metadata: true

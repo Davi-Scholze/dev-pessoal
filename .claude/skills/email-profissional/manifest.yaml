@@ -1,0 +1,162 @@
+name: email-profissional
+type: skill
+category: communication
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial  # toca credenciais SMTP + envia comunicação cliente
+nivel_operacional: L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Compõe email PT-BR profissional em 7 tipos (cold/warm/proposta/resposta-sac/
+  briefing-alinhamento/newsletter/cobrança) respeitando tom de
+  _memoria/preferencias.md. Suporta apenas-draft ou envio SMTP
+  (Gmail/Workspace App Password / Resend / SendGrid). Mobile-first, ≤150
+  palavras (exceto newsletter+proposta), 1 CTA claro, assinatura real.
+  Event log NDJSON.
+
+skill_principal: email-profissional
+
+triggers:
+  - /email-profissional
+  - escreve um email
+  - responder cliente por email
+  - newsletter mensal
+
+handoff_in:
+  required:
+    tipo: "cold | warm | proposta | resposta-sac | briefing-alinhamento | newsletter | cobrança"
+    destinatario: "nome + email + contexto"
+    objetivo: "1 frase: o que quero que aconteça depois"
+  optional:
+    tom: "formal | informal | muito-informal (default herda _memoria/preferencias)"
+    anexos: "caminhos"
+    modo: "apenas-draft | enviar-via-smtp (default apenas-draft)"
+    cliente_slug: "se for em nome de cliente específico"
+
+handoff_out:
+  produces:
+    draft_md: "_negocio/clientes/<slug>/comunicacoes/emails/<YYYY-MM-DD>-<tipo>-<destinatario>.md OU _memoria/emails-draft/<...>.md"
+    enviado:
+      event_log: "_negocio/clientes/<slug>/comunicacoes/emails-enviados.ndjson"
+      message_id: "se modo=enviar"
+      status: "enviado | falhou | aguardando-aprovacao"
+
+quality_gates:
+  - "Assunto ≤50 char sem CAPS"
+  - "Greeting personalizado (nome destinatário)"
+  - "1 CTA claro (não múltiplos)"
+  - "≤150 palavras (exceto newsletter + proposta)"
+  - "Assinatura nome real + canal contato"
+  - "Tom alinhado _memoria/preferencias.md"
+  - "Sem jargão vazio ('alinhamento', 'sinergia', 'value-add')"
+  - "Mobile-friendly: parágrafos ≤3 linhas"
+  - "Anti-pollution: zero marca proibida"
+  - "Newsletter: link unsubscribe obrigatório"
+  - "Cobrança: cordial sem agressividade"
+
+requires:
+  blocking:
+    - "_memoria/preferencias.md preenchido (tom + assinatura)"
+    - "Tipo + destinatário + objetivo no briefing"
+  recommended:
+    - "SMTP configurado no .env (se modo envio)"
+    - "_memoria/empresa.md OU _negocio/clientes/<slug>/briefing.md (contexto)"
+    - "Gmail/Workspace com 2FA + App Password (envio Gmail)"
+
+dependencias:
+  obrigatorias:
+    - python 3.10+ (smtplib + email.mime built-in)
+  opcionais:
+    - Gmail/Workspace App Password
+    - Resend API token (futuro)
+    - SendGrid API token (futuro)
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - AskUserQuestion
+
+reads:
+  - "_memoria/preferencias.md"
+  - "_memoria/empresa.md"
+  - "_memoria/.env (SMTP self)"
+  - "_negocio/clientes/<slug>/briefing.md"
+  - "_negocio/clientes/<slug>/.env (SMTP cliente, se em nome dele)"
+
+writes_to:
+  - "_negocio/clientes/<slug>/comunicacoes/emails/  OU  _memoria/emails-draft/"
+  - "_negocio/clientes/<slug>/comunicacoes/emails-enviados.ndjson"
+
+related:
+  - ../publicar-tema/SKILL.md (A3 — alimenta newsletter)
+  - ../proposta-cliente/SKILL.md (proposta antes do email envia)
+  - ../novo-projeto/SKILL.md (A9 — pós-aceite proposta)
+  - ../relatorio-ads/SKILL.md (A5 — pode ser anexo em email warm)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A7 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Best practices públicos cold email (HubSpot, Lemlist blog) + email transacional (Resend/SendGrid docs)"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "smb-precisa-comunicacao-recorrente-cliente"
+    - "agencia-multi-cliente-com-emails-em-lote"
+    - "freelancer-envia-proposta-cobranca-followup"
+    - "creator-com-newsletter"
+  nichos_incompativeis:
+    - "comunicacao-100-pct-whatsapp-sem-email"
+    - "campanha-mass-email-marketing-50k+ (usar Mailchimp/Brevo)"
+
+sugere_proxima_skill:
+  - condicao: "newsletter precisa conteúdo recorrente"
+    skill: publicar-tema
+    razao: "Cada tema vira matéria-prima newsletter"
+  - condicao: "proposta enviada + cliente aceitou"
+    skill: novo-projeto
+    razao: "Pasta cliente pós-aceite"
+  - condicao: "follow-up de relatório"
+    skill: relatorio-ads
+    razao: "Anexar relatório ao email"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "cron mensal envia newsletter automaticamente após /publicar-tema do mês"
+
+quando_promover_draft_funcional:
+  - aplicado_em_5_clientes_diferentes: true
+  - envio_smtp_funcionou_em_3_provedores: 3
+  - taxa_abertura_acima_20_pct_em_warm: true
+  - 0_emails_classificados_spam_em_amostragem: true
+  - drafts_aprovados_sem_edit_humano_em_60_pct: true
+
+limitacoes:
+  - gmail_app_password_depende_2FA: true
+  - rate_limit_gmail_500_dia_2000_workspace: true
+  - bounces_unsubscribe_nao_tratados_v1: true (skill futura email-marketing-completo)
+  - AB_test_subject_nao_implementado_v1: true
+  - HTML_rich_newsletter_basico_sem_template_builder: true
+  - nao_substitui_mailchimp_brevo_rd_em_volume: true
+
+anti_pollution:
+  metodo: vocabulário público email best practices (subject line, App Password, CAN-SPAM, mobile-first)
+  citacoes_diretas: zero (apenas conceitos públicos)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

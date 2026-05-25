@@ -1,0 +1,82 @@
+name: poluicao-detector
+type: hook
+hook_type: PostToolUse
+disparo: PostToolUse (Write | Edit)
+eixo: orchestration
+escopo: global
+versao: 1.0.0
+status: FUNCIONAL
+sensibilidade: publico
+nivel_operacional: meta
+criado: 2026-05-22
+atualizado: 2026-05-22
+
+description: >
+  Hook PostToolUse que detecta sinais de poluição estrutural (pastas tmp >100MB,
+  .md órfãos sem manifest, .gitignore drift, duplicatas SHA256, pastas vazias,
+  drift de layout vs padrão KOD.AI). Auto-detecta workspace KOD.AI (presença de
+  _memoria/ ou KODAI-INSTALADO.md). NÃO bloqueia operação — emite warning.
+  Suporta silenciamento por sessão via flag.
+
+fontes:
+  - "Frente B1 plano 16 frentes Davi 2026-05-22 — hook alerta poluição"
+  - "politicas/poluicao-detection.md (6 gatilhos canônicos)"
+related:
+  - ../politicas/poluicao-detection.md
+  - ../politicas/auto-instrucao-pipeline.md
+  - ./check-completion-claims.js
+  - ./pre-commit-guard.js
+
+triggers:
+  - any Write/Edit em arquivo dentro de workspace KOD.AI detectado
+  - skip silencioso se workspace não é KOD.AI
+
+inputs:
+  - tool_use.tool_name (Write | Edit | NotebookEdit)
+  - tool_use.input.file_path
+  - workspace_root (auto-detect via _memoria/ ou KODAI-INSTALADO.md)
+
+outputs:
+  - warning message no stderr quando gatilho positivo
+  - exit code 0 sempre (não-bloqueante)
+
+fail_safe: true
+
+instalacao:
+  - configurar em .claude/settings.json como PostToolUse hook
+  - aponta pro arquivo poluicao-detector.js
+
+quality_gates:
+  - "0 falsos positivos em workspaces não-KODAI"
+  - "Detecta os 6 gatilhos canônicos"
+  - "Tempo de execução <500ms (não atrasa workflow IA)"
+  - "Fail-safe testado (quebra do hook não bloqueia operação)"
+
+dependencias:
+  - node 18+
+  - fs/path built-in
+
+lineage:
+  origin: upstream
+  parent: null
+  derived_from:
+    - source: "Frente B1 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+quando_promover_battle_tested:
+  - aplicado_em_workspace_real_por_30_dias: true
+  - detectou_polução_real_min_1_caso: 1
+  - 0_falsos_positivos_em_workspaces_não-KODAI: true
+
+limitacoes:
+  - "Heurísticas simples — não substitui audit estrutural completo"
+  - "Não detecta poluição semântica (só estrutural)"
+  - "Silenciamento global possível se IA setar flag — confiar no fail-safe"
+
+anti_pollution:
+  metodo: estrutura própria + vocabulário público (hook, gatilho, fail-safe)
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

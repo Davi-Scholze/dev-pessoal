@@ -1,0 +1,130 @@
+name: live-preview
+version: 1.0.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+
+tier: employee
+reports_to: null
+
+description: >
+  Auto-mostra output visual em browser (Playwright MCP) quando skill produz HTML/
+  imagem/carrossel/slide/página. 4 modos (auto/manual/watch/batch). 3 viewports
+  (desktop/tablet/mobile). Auto-trigger por skills geradoras que declaram
+  live_preview: true no manifest.
+
+triggers:
+  - /live-preview
+  - abre preview de
+  - vê como tá ficando
+  - mostra na tela
+  - preview essa pasta
+  - preview esse arquivo
+
+argument_hint: "<path> [--modo auto|manual|watch|batch] [--viewport desktop|tablet|mobile] [--snapshot]"
+
+handoff_in:
+  required:
+    target: "path arquivo OU pasta"
+  optional:
+    modo: "auto (default chamado por outra skill) | manual | watch | batch"
+    viewport: "desktop | tablet | mobile (default desktop, mas auto-trigger mobile-first)"
+    auto_close: "false default; setar pra fechar sozinho após N segundos"
+    snapshot: "false default; true salva PNG do estado atual"
+
+handoff_out:
+  produces:
+    preview_aberto: "boolean"
+    screenshot_path: "path se snapshot=true"
+    feedback_humano: "OK | PROBLEMA | OUTRO_VIEWPORT | WATCH (em modo manual/auto)"
+  paths:
+    - "(efêmero por default)"
+    - "mapeamento/evidencias/<YYYY-MM-DD>/<nome>.png (se --snapshot)"
+
+quality_gates:
+  - "Browser abre em ≤3s após chamada"
+  - "Output renderizado bate visualmente com expectativa"
+  - "Modo watch refresh automático após edição (debounce 500ms)"
+  - "3 viewports suportados"
+  - "Modo agent retorna skipped (não erra)"
+  - "Snapshot em path canônico mapeamento/evidencias/"
+
+requires:
+  blocking:
+    - "Playwright MCP configurado em .mcp.json"
+  recommended:
+    - "Skill chamadora declara live_preview: true no frontmatter pra auto-trigger"
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+
+invokes_mcp:
+  - playwright (browser_navigate, browser_resize, browser_take_screenshot, browser_close)
+
+reads:
+  - "<target file ou pasta>"
+  - ".claude/skills/live-preview/config.json (opcional override)"
+
+writes_to:
+  - "(nenhum por default — preview é efêmero)"
+  - "mapeamento/evidencias/<YYYY-MM-DD>/<nome>.png (se --snapshot)"
+
+related:
+  - ../../politicas/auto-instrucao-pipeline.md
+  - ../../politicas/imagens.md
+  - ../../politicas/ver-analisar-propor-testar-reportar.md
+  - ../ver/SKILL.md
+  - ../dev-browser/SKILL.md
+  - ../gerar-carrossel/SKILL.md (consumidor — frente A1)
+  - ../publicar-tema/SKILL.md (consumidor — frente A3)
+
+sugere_proxima_skill:
+  - condicao: "preview mostrou problema visual"
+    skill: ver
+    razao: "Capturar screenshot 'antes' + iniciar ciclo Ver→Analisar→Propor"
+  - condicao: "preview OK + skill geradora terminou"
+    skill: aprovar-post-meta-api
+    razao: "Conteúdo aprovado visualmente → publicar (se aplicável)"
+
+auto_detecta:
+  - gap_de_contexto: "skill geradora não declarou live_preview: true mas produziu output visual"
+    sugere: "atualizar manifest da skill chamadora pra auto-trigger"
+
+supports_reflexion: true
+
+dependencias:
+  obrigatorias:
+    - playwright-mcp (já em .mcp.json)
+  opcionais:
+    - chokidar (modo watch — file watcher Node.js)
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: false
+  razao_nao_portavel: "Validação visual exige humano síncrono"
+
+limitacoes:
+  - depende_playwright_mcp_configurado: true
+  - modo_watch_polling_windows_500ms: true
+  - nao_substitui_validacao_dispositivo_fisico_real: true
+  - nao_portavel_pra_agent_24_7: true
+  - videos_nao_suportados: true
+
+anti_pollution:
+  metodo: padrão público "live-reload + browser preview" da indústria web
+  citacoes_diretas: zero (conceitos universais)
+
+quando_promover_draft_funcional:
+  - implementado_e_testado_em_4_modos: [auto, manual, watch, batch]
+  - testado_com_skill_geradora_real: ["gerar-carrossel ou similar"]
+  - viewports_validados: [desktop, tablet, mobile]
+  - modo_watch_sem_memory_leaks: true
+  - snapshot_path_correto: true

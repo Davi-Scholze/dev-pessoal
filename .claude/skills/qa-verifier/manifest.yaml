@@ -1,0 +1,165 @@
+name: qa-verifier
+type: skill
+category: qa
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Sub-agente verificador ADVERSARIAL. Acionado depois de qualquer implementer
+  declarar "done". Reproduz a matriz de testes do zero em contexto limpo, sem
+  confiar no agente anterior. Output VERIFIED ✅ ou REJECTED ❌ com Evidence
+  Bloc por caso. NÃO conserta bug — só aprova/rejeita. Pega anti-padrões
+  clássicos (estados vazios, duplicação, rate limits, permissões, mobile,
+  race conditions, cleanup órfão).
+
+skill_principal: qa-verifier
+model: sonnet
+
+triggers:
+  - /qa-verifier
+  - verificar feature
+  - auditar entrega
+  - QA adversarial
+
+handoff_in:
+  required:
+    HEAD_SHA: "hash do commit a testar"
+    BRANCH: "branch atual"
+    DEV_SERVER: "status do dev server (200 OK em :porta)"
+    TYPECHECK: "0 erros | N erros"
+    BROWSERS: "chromium disponível"
+    FEATURE: "descrição da feature alegada como done"
+  optional:
+    LOGINS: "credenciais por persona"
+    RELATORIO_IMPLEMENTER: "link ou inline do que ele alega"
+    MATRIZ_HINT: "tipo de feature (A/B/C/...) — opcional, sub-agente identifica"
+
+handoff_out:
+  produces:
+    veredito: "VERIFIED ✅ | REJECTED ❌"
+    matriz_executada: "tabela markdown com casos rodados"
+    bugs: "lista 🔴 BUG / 🟡 LACUNA / ⚠️ COLATERAL"
+    cleanup_pendente: "lista de DELETE/UPDATE pra sessão pai rodar"
+    evidence_blocks: "screenshot + output banco + console por caso crítico"
+
+quality_gates:
+  - "Matriz construída do zero (não copiada do implementer)"
+  - "Mín 8 casos da lista de anti-padrões clássicos cobertos"
+  - "Cada ✅ tem Evidence Bloc adjacente"
+  - "Banco confirmado via SELECT (não apenas via código)"
+  - "Cleanup destrutivo listado pra sessão pai (não executado)"
+  - "ABORT explícito se pre-flight ausente ou bug bloqueia"
+  - "Veredito final: VERIFIED ou REJECTED (sem 'parcial')"
+
+requires:
+  blocking:
+    - "Sessão pai rodou pre-flight (git/tsc/curl/browsers)"
+    - "Playwright MCP carregado via ToolSearch"
+    - "Permissões browser_* + Bash read-only (curl SELECT)"
+    - "HEAD_SHA + DEV_SERVER + TYPECHECK no prompt"
+  recommended:
+    - "metodologias/testes.md leitura prévia"
+    - "Logins de teste por persona configurados"
+
+dependencias:
+  obrigatorias:
+    - Playwright MCP (chromium)
+    - git
+    - curl
+    - Acesso read-only ao banco (SELECT via Service Role/equivalente)
+  opcionais:
+    - DevTools Network throttling (testes slow)
+
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+  - mcp__playwright__browser_*
+
+reads:
+  - "git diff origin/main...HEAD"
+  - "git log --oneline -5"
+  - "Logs do implementer (se fornecido)"
+
+writes_to:
+  - "Relatório de output (mensagem final do sub-agente)"
+  - "Screenshots Playwright em .playwright-mcp/ (efêmero)"
+
+related:
+  - ../test-runner/SKILL.md (roda ANTES do qa-verifier)
+  - ../verification-before-completion/SKILL.md (Iron Law)
+  - ../../politicas/status-honesto-handoff.md (Evidence Bloc)
+  - ../../politicas/quality-gates-com-critic-grounding.md (base teórica)
+  - ../../politicas/coordinator-na-sessao-pai.md (anti-pattern coordinator-agente)
+  - ../../metodologias/testes.md (framework universal)
+
+lineage:
+  origin: downstream-absorption
+  parent: navortech-2026-05-22
+  derived_from: "Navortech-Desenvolvimento/.claude/agents/qa-verifier.md"
+  battle_tested_em: "Projeto consumidor real desde 14/05/2026 — pegou bug crítico que sessões anteriores marcaram como 'E2E completo'"
+  anti_pollution_passed: true
+  marcas_removidas: ["NV OS", "TrackOps", "Navortech", "Davi", "Pablo", "Sandre", "Supabase Service Role específico"]
+  validado_por: ["Davi 2026-05-22"]
+  contextos_filhos: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "qualquer-projeto-com-feature-end-to-end"
+    - "saas-multi-tenant"
+    - "app-web-com-banco"
+    - "pipeline-CI-onde-falta-adversarial"
+  nichos_incompativeis:
+    - "biblioteca-puramente-funcional-sem-UI"
+    - "script-pontual-sem-stack-completa"
+
+sugere_proxima_skill:
+  - condicao: "qa-verifier reportou REJECTED com bugs"
+    skill: subagent-driven-development
+    razao: "Implementer corrige bugs apontados + qa-verifier re-roda"
+  - condicao: "qa-verifier reportou VERIFIED + cleanup pendente"
+    skill: complete
+    razao: "Sessão pai roda cleanup + declara complete com Evidence"
+  - condicao: "qa-verifier identificou padrão de bug recorrente"
+    skill: reflexion-per-skill
+    razao: "Atualizar matriz com caso novo pra próximas verificações"
+
+requires_skills_anteriores:
+  - condicao: "código não passou pipeline mecânico"
+    skill: test-runner
+    razao: "Test-runner pega erros tsc/lint/unit ANTES de gastar tempo em browser"
+
+supports_reflexion: true
+
+runtime:
+  mode: sub-agent
+  trigger: invocado por sessão pai via tool Agent
+  background: true
+  paralelizavel: true (até 3 simultâneos com sandboxes isolados)
+  portavel_pra_agent: true
+  cenario_agent: "CI/CD trigger pós-merge — auto-verifica feature no staging antes de prod"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_projetos_diferentes: true
+  - pegou_bug_real_que_implementer_marcou_como_done: 1
+  - 0_falsos_positivos_em_20_execucoes: true
+  - relatorio_evidence_bloc_aprovado_humano: 5
+
+limitacoes:
+  - sub_agente_background_sem_Agent_tool: true (logo não coordena outros)
+  - cleanup_destrutivo_fica_pra_sessao_pai: true
+  - permissoes_browser_e_curl_precisam_estar_allowed_pre_flight: true
+  - matriz_aberta_atualizar_com_aprendizados: true
+
+anti_pollution:
+  metodo: vocabulário público QA + Playwright + ferramentas OSS (curl, Service Role pattern Supabase)
+  citacoes_diretas: zero (estrutura própria + casos genéricos)
+  marca_mazyos_usada: false
+  marcas_navortech_removidas: true
+  atribuicao_em_metadata: true

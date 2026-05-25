@@ -1,0 +1,45 @@
+name: auto-suggest-skills
+description: >
+  Detecta intenção no prompt do usuário e sugere skills KOD.AI relevantes
+  via additionalContext. Operacionaliza o princípio fundacional 2Co 12:9-10
+  ("humano não precisa lembrar — sistema lembra por ele").
+versão: "1.0"
+atualizado: "2026-05-23"
+status: FUNCIONAL
+
+eixo: orchestration
+tipo: hook
+
+disparo:
+  evento: UserPromptSubmit
+  matcher: ""
+
+implementacao:
+  arquivo: auto-suggest-skills.js
+  linguagem: nodejs
+  fail_safe: log + continue
+
+operacionaliza:
+  - politicas/auto-instrucao-pipeline.md
+  - feedback_kodai_principio_2corintios_12_9 (princípio fundacional)
+  - regras-base.md regra 2 (progressive disclosure — só lembra quando relevante)
+
+bloqueia: false
+modifica_estado: false
+adiciona_contexto: true
+
+quality_gates:
+  - "Hook não bloqueia turno, apenas injeta sugestões via additionalContext"
+  - "Fail-safe (try/catch) ativo — turno segue se hook quebrar"
+  - "Lista de skills sugeridas limitada a 5 (não infla contexto)"
+  - "Dedup por nome de skill (não duplica sugestões)"
+  - "Padrões regex case-insensitive (PT-BR primário)"
+
+related:
+  - inject-warning.js (hook irmão — sugere POLÍTICAS)
+  - skills-universais/spec/SKILL.md (skill canônica do pipeline)
+  - skills-universais/complete/SKILL.md (skill final do pipeline)
+  - politicas/engenharia-de-contexto.md (princípio "menor conjunto de tokens de alto sinal")
+
+historico:
+  - 2026-05-23 v1.0 FUNCIONAL — criado como resposta ao gap A1 do piloto Navortech-Desenvolvimento (skills propagadas mas humano não invoca)

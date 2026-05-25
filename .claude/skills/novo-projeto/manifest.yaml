@@ -1,0 +1,133 @@
+name: novo-projeto
+version: 1.0.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+tier: employee
+reports_to: null
+
+description: >
+  Workflow LEVE pra criar novo cliente/projeto dentro de pasta KOD.AI já
+  instalada (multi-cliente — _negocio/clientes/<slug>/). Entrevista 4
+  perguntas → cria pasta dedicada com CLAUDE.md herdado + briefing.md +
+  subpastas conforme entregas declaradas.
+
+triggers:
+  - /novo-projeto
+  - novo cliente
+  - novo projeto
+  - começar projeto pra
+  - estruturar trabalho novo
+  - "começar projeto"
+
+argument_hint: "[<nome-curto>] (opcional — pergunta se ausente)"
+
+handoff_in:
+  optional:
+    nome: "Nome do projeto/cliente (entrevista pergunta se ausente)"
+    tipo: "cliente | projeto-interno | iniciativa-pessoal"
+    objetivo: "Objetivo principal (1 frase)"
+    entregas: "Lista de entregas previstas"
+
+handoff_out:
+  produces:
+    pasta_criada: "path completo da pasta nova"
+    slug: "kebab-case slug gerado"
+    arquivos_gerados:
+      - "<slug>/CLAUDE.md (herdado)"
+      - "<slug>/00-briefing.md"
+      - "<slug>/_index.md"
+      - "<slug>/<subpastas conforme entregas>"
+    proxima_skill_sugerida: "capturar | proposta-cliente | mapear-concorrente | seo"
+  paths:
+    - "_negocio/clientes/<slug>/ (default cliente)"
+    - "_negocio/projetos/<slug>/ (default projeto interno)"
+    - "_negocio/iniciativas/<slug>/ (default iniciativa pessoal)"
+
+quality_gates:
+  - "Slug kebab-case sem acento"
+  - "Pasta não-existente antes de criar (zero overwrite)"
+  - "CLAUDE.md sempre criado (herdado da raiz)"
+  - "briefing.md sempre criado (mesmo vazio)"
+  - "Subpastas só conforme entregas declaradas"
+  - "Atualiza _index.md / MoC pai"
+
+requires:
+  blocking:
+    - "Workspace KOD.AI já inicializado (_memoria/ existe na raiz)"
+  recommended:
+    - "Pasta _negocio/clientes/ ou _negocio/projetos/ ou _negocio/iniciativas/ pré-criadas"
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - AskUserQuestion
+
+reads:
+  - "_memoria/empresa.md (contexto Davi)"
+  - "_memoria/preferencias.md (tom)"
+  - "_negocio/identidade/design-guide.md (marca herdada)"
+
+writes_to:
+  - "_negocio/clientes/<slug>/ (default cliente)"
+  - "_negocio/projetos/<slug>/ (projeto interno)"
+  - "_negocio/iniciativas/<slug>/ (iniciativa pessoal)"
+
+updates_index:
+  - "_negocio/clientes/_index.md"
+  - "_negocio/projetos/_index.md"
+  - "_negocio/iniciativas/_index.md"
+  - "_memoria/empresa.md (lista de clientes ativos)"
+
+related:
+  - ../instalar/SKILL.md (skill maior — pasta-mãe inteira)
+  - ../criar-pack/SKILL.md (universal — não cliente)
+  - ../criar-contexto/SKILL.md (universal — não cliente)
+  - ../../politicas/multi-cliente-vs-por-empresa.md
+  - ../../templates/cliente-lite/README.md (se cliente vai receber lite depois)
+  - ../../../0-INSTALACAO/PACOTE-DAVI-PADRAO.md
+
+sugere_proxima_skill:
+  - condicao: "cliente novo + sem briefing real ainda"
+    skill: capturar
+    razao: "Registrar primeira conversa/email cliente"
+  - condicao: "cliente novo + proposta pendente"
+    skill: proposta-cliente
+    razao: "Gerar proposta comercial inicial"
+  - condicao: "cliente B2B + concorrência relevante"
+    skill: mapear-concorrente
+    razao: "Entender concorrentes antes de posicionar"
+  - condicao: "projeto inclui site"
+    skill: seo
+    razao: "Preparar SEO + Google Power desde início"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: false
+  razao_nao_portavel: "Entrevista exige humano síncrono"
+
+limitacoes:
+  - nao_substitui_instalar: true
+  - nao_cria_credenciais_cliente: true
+  - convencao_clientes_vs_projetos_pode_evoluir: true
+  - nao_automatiza_onboarding_humano: true
+
+anti_pollution:
+  metodo: padrão "novo projeto + CLAUDE.md herdado" — público da indústria multi-tenant
+  citacoes_diretas: zero (estrutura própria adaptada a _negocio/clientes/ KOD.AI)
+
+quando_promover_draft_funcional:
+  - testado_em_clientes_reais: 3
+  - workflow_4_perguntas_validado: true
+  - bridge_com_capturar_proposta_cliente_validado: true
+  - estrutura_pasta_correta_em_todos_casos: true

@@ -1,0 +1,167 @@
+name: publicar-tema
+type: skill
+category: orchestration
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial  # pode conter estratégia cliente
+nivel_operacional: L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Orquestrador de pipeline de conteúdo. Recebe um tema central e produz pacote
+  multi-formato em uma rodada: artigo blog (SEO-aware) + carrossel via
+  /gerar-carrossel + 3 legendas adaptadas (Instagram/Facebook/LinkedIn) +
+  hashtags + ganchos. Output_dir único carimbado por data, pronto pra
+  aprovação via /live-preview e publicação via /aprovar-post-meta-api.
+
+skill_principal: publicar-tema
+
+triggers:
+  - /publicar-tema
+  - publicar tema
+  - tema da semana
+  - criar conteúdo completo sobre
+  - pacote de conteúdo
+
+handoff_in:
+  required:
+    tema: "tema central do pacote"
+  optional:
+    objetivo: "educar | vender | posicionar | engajar"
+    audiencia: "perfil-alvo"
+    cliente_slug: "se cliente específico"
+    canais: "default [blog, instagram, facebook, linkedin]"
+
+handoff_out:
+  produces:
+    output_dir: "_negocio/clientes/<slug>/marketing/conteudo/tema-<slug>-<YYYY-MM-DD>/"
+    briefing_md: "briefing.md"
+    nucleo_md: "nucleo.md (tese + sub-pontos + exemplos + CTA)"
+    artigo_md: "artigo.md (Markdown + frontmatter)"
+    carrossel_dir: "carrossel/ (subset do output /gerar-carrossel)"
+    legendas_dir: "legendas/ (instagram.md + facebook.md + linkedin.md)"
+    hashtags_md: "hashtags.md"
+    hooks_md: "hooks-alternativos.md"
+    manifest: "manifest.yaml"
+
+quality_gates:
+  - "Núcleo conceitual gerado primeiro (não adapta formato isoladamente)"
+  - "Artigo entre 800-1500 palavras"
+  - "Meta description ≤155 char"
+  - "Slug kebab-case sem acentos"
+  - "Carrossel 8 slides exatos (capa + 6 + CTA final)"
+  - "3 legendas com tom DIFERENTE por canal"
+  - "Hashtags Insta 8-15; LinkedIn 3-5"
+  - "Hooks alternativos: mínimo 3"
+  - "/live-preview disparado pós-empacotamento"
+  - "Anti-pollution: zero marca proibida em qualquer output"
+
+requires:
+  blocking:
+    - "_memoria/empresa.md preenchido"
+    - "Tema + objetivo + público (no briefing)"
+  recommended:
+    - "_negocio/clientes/<slug>/marketing/seo/01-pesquisa-demanda.md"
+    - "_negocio/identidade/design-guide.md"
+    - "Skill /gerar-carrossel (A1) ativa"
+
+dependencias:
+  obrigatorias:
+    - skill /gerar-carrossel (A1, pack carrossel-visual)
+    - playwright (via carrossel)
+    - node 20+
+  opcionais:
+    - OpenAI API (foto IA blog destaque)
+    - pesquisa SEO existente
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - AskUserQuestion
+
+reads:
+  - "_memoria/empresa.md"
+  - "_memoria/preferencias.md"
+  - "_memoria/estrategia.md"
+  - "_negocio/identidade/design-guide.md"
+  - "_negocio/clientes/<slug>/marketing/seo/01-pesquisa-demanda.md (opcional)"
+
+writes_to:
+  - "_negocio/clientes/<slug>/marketing/conteudo/tema-<slug>-<YYYY-MM-DD>/"
+
+invokes_skills:
+  - /gerar-carrossel (A1 — passo 3b)
+  - /live-preview (auto, modo batch, pós-empacotamento)
+
+related:
+  - ../../2-PACKS/packs/midia/carrossel-visual/ (A1 — geradora carrossel)
+  - ../live-preview/SKILL.md (B3 — gate aprovação visual)
+  - ../aprovar-post-meta-api/SKILL.md (A4 — publicação automatizada)
+  - ../seo/SKILL.md (A10 — pesquisa demanda alimenta keywords)
+  - ../../0-INSTALACAO/PACOTE-DAVI-PADRAO.md (Pilar 4 Contexto Fiel)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A3 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Padrões públicos: pillar content, hub-and-spoke, content atomization, multi-format adaptation"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "marketing-conteudo-recorrente"
+    - "agencia-digital-multi-cliente"
+    - "creator-individual-multi-canal"
+    - "smb-precisa-conteudo-blog+social"
+  nichos_incompativeis:
+    - "conteudo-100-pct-video-shortform"
+    - "branding-puro-sem-conteudo-editorial"
+
+sugere_proxima_skill:
+  - condicao: "pacote aprovado + Meta Graph API configurado"
+    skill: aprovar-post-meta-api
+    razao: "Publicar Instagram + Facebook automaticamente"
+  - condicao: "artigo aprovado + blog tem deploy automation"
+    skill: deploy-blog
+    razao: "Publicar artigo no blog (skill futura)"
+  - condicao: "tema vai virar campanha paga"
+    skill: anuncio-google
+    razao: "Estender tema pra campanha Google Ads"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: false  # aprovação visual exige humano
+  razao_nao_portavel: "Aprovação visual humana via /live-preview é gate obrigatório"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_temas_reais_diferentes_clientes: true
+  - artigo_publicado_blog_real_com_indexacao_google: 2
+  - carrossel_publicado_instagram_real: 3
+  - aprovacao_davi_via_live_preview_funcionando: true
+  - tom_diferenciado_3_canais_validado: true
+
+limitacoes:
+  - nao_substitui_editor_premium: true
+  - sem_publicacao_automatica_blog_default: true
+  - sem_geracao_video_shortform: true (futuro pack)
+  - SEO_qualidade_depende_pesquisa_demanda_previa: true
+  - max_3_canais_por_rodada: true (Insta/FB/LinkedIn)
+
+anti_pollution:
+  metodo: vocabulário público marketing de conteúdo (pillar/hub-and-spoke/atomization)
+  citacoes_diretas: zero (estrutura própria)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

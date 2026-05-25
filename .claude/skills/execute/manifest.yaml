@@ -1,0 +1,154 @@
+name: execute
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 4/6 do pipeline canônico KOD.AI. Executa tasks do plano com commits
+  granulares (1 task = 1 commit + push imediato — default Davi). Respeita
+  checkpoints + stop-criteria. Compõe /executing-plans + /subagent-driven-
+  development bundled. Event log NDJSON por task.
+
+skill_principal: execute
+pipeline_position: 4
+pipeline_prev: plan
+pipeline_next: review
+composes:
+  - executing-plans
+  - subagent-driven-development
+  - test-driven-development (opcional)
+
+triggers:
+  - /execute
+  - rodar plano
+  - implementar tasks
+  - executar
+
+handoff_in:
+  required:
+    spec_path: "docs/decisoes/<spec>.md com ## Tasks + ## Plano"
+  optional:
+    modo: "sequential | parallel (default sequential se plano não declarar)"
+    pre_flight_done: "true se infra já validada"
+
+handoff_out:
+  produces:
+    commits: "N commits no formato Conventional"
+    pushes: "N pushes pro remote"
+    event_log: "logs/events.ndjson (1 entrada por task)"
+    diff_total: "diff agregado"
+    proximo_passo: "/review ou /complete"
+
+quality_gates:
+  - "Spec + tasks + plano carregados"
+  - "Pre-flight rodado se infra externa"
+  - "1 task = 1 commit (nunca batch)"
+  - "Conventional Commits format"
+  - "Push imediato pós-commit"
+  - "Checkpoints respeitados"
+  - "Stop-criteria aplicados em fail"
+  - "UI cycle em mudanças visuais"
+  - "Event log NDJSON gravado"
+  - "Sem --no-verify / --force / --skip-tests"
+
+requires:
+  blocking:
+    - "/plan executado (ou tasks ≤3 simples)"
+    - "Repo limpo OU branch dedicada"
+    - "git + push remote configurado"
+  recommended:
+    - "/verificar-infra-real rodado pré"
+    - "Playwright MCP allowed (se UI)"
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/<spec>.md"
+  - "tasks declaradas + plano"
+
+writes_to:
+  - "repo (código real)"
+  - "logs/events.ndjson"
+  - "docs/decisoes/<spec>.md (atualiza status de tasks)"
+
+related:
+  - ../plan/SKILL.md (passo 3)
+  - ../review/SKILL.md (passo 5)
+  - ../complete/SKILL.md (passo 6)
+  - ../executing-plans/SKILL.md (bundled)
+  - ../subagent-driven-development/SKILL.md (bundled)
+  - ../test-driven-development/SKILL.md (bundled)
+  - ../../politicas/event-log-ndjson.md
+  - ../../politicas/coordinator-na-sessao-pai.md
+  - ../../.claude/rules/ui-cycle-trigger.md
+  - ../../.claude/rules/commit-on-step.md
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2"
+      type: gap-analysis-pos-auditoria
+    - source: "Regra-base 7 + extensão local Davi (commit+push imediato)"
+      type: regra-base
+    - source: "Bundled /executing-plans + /subagent-driven-development"
+      type: composition
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "todas tasks done"
+    skill: review
+    razao: "Review estruturada"
+  - condicao: "task UI completa"
+    skill: ver
+    razao: "Validação visual"
+  - condicao: "task falhou"
+    skill: systematic-debugging
+    razao: "Debug"
+
+requires_skills_anteriores:
+  - condicao: "plano não definido"
+    skill: plan
+  - condicao: "infra externa"
+    skill: verificar-infra-real
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "cron noturno executa tasks de plano agendado + reporta pra Davi pela manhã"
+
+quando_promover_battle_tested:
+  - aplicado_em_5_features_completas_sem_revert: 5
+  - 0_uso_de_no_verify_force: true
+  - checkpoints_respeitados_em_100_pct: true
+  - paralelismo_real_validado: 1
+
+limitacoes:
+  - "Falhas externas (quota, infra) escalam pra Davi"
+  - "Paralelismo ≤3 sub-agentes"
+  - "Revert task = destrutivo, pedir confirmação"
+  - "1 branch principal default"
+
+anti_pollution:
+  metodo: "Composição de skills bundled + Conventional Commits + estrutura própria"
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

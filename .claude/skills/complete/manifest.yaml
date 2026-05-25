@@ -1,0 +1,159 @@
+name: complete
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 6/6 do pipeline canônico KOD.AI — fechamento com Iron Law (regra-base
+  12). Evidence Bloc obrigatório (timestamp + comando + output literal +
+  critério + resultado + limitações). Atualiza spec status → implementado +
+  handoff pra próxima sessão. Compõe /verification-before-completion +
+  /finishing-a-development-branch (bundled). Hook check-completion-claims
+  bloqueia claims sem evidência.
+
+skill_principal: complete
+pipeline_position: 6
+pipeline_prev: review
+pipeline_next: salvar (opcional) OR upstream-update (opcional)
+composes:
+  - verification-before-completion (Iron Law metodológica)
+  - finishing-a-development-branch (git workflow)
+enforces:
+  - regra-base 12 (/complete antes de done)
+  - regra-base 10 (honestidade em claims)
+  - politica status-honesto-handoff
+  - politica event-log-ndjson
+  - hook check-completion-claims.js
+
+triggers:
+  - /complete
+  - fechar feature
+  - declarar done
+  - fim da spec
+
+handoff_in:
+  required:
+    spec_path: "docs/decisoes/<spec>.md com ## Review APROVADO"
+  optional:
+    promover_battle_tested: "true se Davi já confirmou validado textualmente"
+
+handoff_out:
+  produces:
+    spec_status: "implementado (era em-andamento)"
+    evidence_blocs: "1 por critério de aceitação"
+    handoff_md: "inbox-davi/<YYYY-MM-DD>-resumo.md (criado ou append)"
+    event_log: "logs/events.ndjson (1 entrada final)"
+    commit_final: "complete(<escopo>): <spec> implementada com Evidence Bloc"
+    proximo_passo: "/salvar OR /upstream-update OR fim"
+
+quality_gates:
+  - "/review status: APROVADO"
+  - "Tasks com commit + push"
+  - "Cada critério de aceitação tem Evidence Bloc"
+  - "Output literal (não parafraseado)"
+  - "Resultado explícito (PASSOU/PARCIAL/FALHOU)"
+  - "Limitações declaradas"
+  - "Spec status → implementado"
+  - "Handoff atualizado"
+  - "Event log NDJSON gravado"
+  - "Hook check-completion-claims passou"
+  - "Commit + push final"
+
+requires:
+  blocking:
+    - "/review APROVADO"
+    - "Todas tasks com commit"
+    - "Push sincronizado"
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/<spec>.md (full)"
+  - "git log/diff"
+  - "logs/events.ndjson (existente)"
+
+writes_to:
+  - "docs/decisoes/<spec>.md (status + Evidence Blocs)"
+  - "inbox-davi/<YYYY-MM-DD>-resumo.md"
+  - "logs/events.ndjson (append)"
+
+related:
+  - ../review/SKILL.md (passo 5)
+  - ../verification-before-completion/SKILL.md (Iron Law bundled)
+  - ../finishing-a-development-branch/SKILL.md (git bundled)
+  - ../salvar/SKILL.md (passo opcional pós-complete)
+  - ../upstream-update/SKILL.md (passo opcional pós-complete)
+  - ../../politicas/status-honesto-handoff.md
+  - ../../politicas/event-log-ndjson.md
+  - ../../hooks/check-completion-claims.js
+  - ../../regras-base.md (regra 10 + 12)
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2"
+      type: gap-analysis-pos-auditoria
+    - source: "Regra-base 10 + 12 (Iron Law)"
+      type: regra-base
+    - source: "Bundled /verification-before-completion + /finishing-a-development-branch"
+      type: composition
+    - source: "Hook check-completion-claims.js (mecanização)"
+      type: hook-enforcement
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "complete OK + estado a persistir"
+    skill: salvar
+    razao: "Persistir handoff + memórias"
+  - condicao: "feature absorvível pro core"
+    skill: upstream-update
+    razao: "Loop cliente → core"
+  - condicao: "Davi vai validar visualmente"
+    skill: live-preview
+
+requires_skills_anteriores:
+  - condicao: "review não aprovou"
+    skill: review
+  - condicao: "tasks pendentes"
+    skill: execute
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "agente background ao terminar /execute auto-roda /review + /complete se 0 fails (com humano confirmando BATTLE-TESTED depois)"
+
+quando_promover_battle_tested:
+  - aplicado_em_10_completes_reais: 10
+  - 0_claims_bloqueados_pelo_hook: true
+  - evidence_bloc_aprovado_por_davi_em_5_specs_minimo: 5
+  - 0_revert_pos_complete_em_30d: true
+
+limitacoes:
+  - "Overhead Evidence Bloc excessivo em micro-mudanças"
+  - "BATTLE-TESTED exige OK humano textual"
+  - "Janela de validade arbitrária"
+
+anti_pollution:
+  metodo: "Composição /verification-before-completion + /finishing-a-development-branch bundled. Iron Law enforce via hook mecânico."
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

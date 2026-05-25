@@ -1,0 +1,166 @@
+name: aprovar-post-meta-api
+type: skill
+category: integration
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: alto_risco  # toca credenciais Meta + publica conteúdo público
+nivel_operacional: L1  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Publica posts/carrosséis aprovados no Instagram + Facebook via Meta Graph
+  API. Lê output de /gerar-carrossel ou /publicar-tema, valida pré-flight
+  (tokens, IDs, dimensões), faz upload + publica + grava IDs/permalinks no
+  manifest + event log NDJSON. Suporta agendamento Facebook nativo + fila
+  local pra Instagram. Long-lived token 60d com refresh.
+
+skill_principal: aprovar-post-meta-api
+
+triggers:
+  - /aprovar-post-meta-api
+  - publicar carrossel aprovado
+  - subir pro Instagram
+  - agendar post Meta
+  - publicar post Facebook
+
+handoff_in:
+  required:
+    peça_dir: "path do output de /gerar-carrossel ou /publicar-tema"
+    cliente_slug: "slug do cliente (carrega .env + meta.yaml)"
+  optional:
+    canais: "default [instagram, facebook]"
+    scheduled_at: "ISO timestamp se agendar (default agora)"
+    legenda_override: "se quiser legenda manual em vez de legendas/*.md"
+
+handoff_out:
+  produces:
+    manifest_update:
+      published_at: "ISO timestamp"
+      instagram_media_id: "string"
+      instagram_permalink: "URL"
+      facebook_post_id: "string"
+      facebook_permalink: "URL"
+    event_log: "_negocio/clientes/<slug>/integracoes/meta-publicacoes.ndjson (append)"
+
+quality_gates:
+  - "Pré-flight 100% verde antes de qualquer upload"
+  - "Aprovação humana registrada (manifest.aprovado=true OU OK Davi)"
+  - "Imagens 1080×1350 ou 1080×1080 + ≤8MB"
+  - "Legenda Instagram ≤2.200 char"
+  - "Hashtags ≤30"
+  - "Token expira em ≥7 dias"
+  - "Manifest atualizado com IDs Meta"
+  - "Event log NDJSON gravado"
+  - "Anti-pollution: zero marca proibida no caption publicado"
+
+requires:
+  blocking:
+    - "_negocio/clientes/<slug>/.env com META_* preenchido"
+    - "_negocio/clientes/<slug>/integracoes/meta.yaml configurado"
+    - "Peça aprovada (manifest.aprovado=true OU OK Davi explícito)"
+    - "Página Facebook + Instagram Business Account vinculados"
+    - "App Meta for Developers com permissões granted"
+  recommended:
+    - "Bucket público temporário (R2/S3) com TTL 7d"
+    - "Cron de refresh token (60d → renova a cada 50d)"
+
+dependencias:
+  obrigatorias:
+    - curl ou httpie
+    - jq (parse responses)
+    - Meta Graph API v21.0+
+    - Page Access Token longa duração
+  opcionais:
+    - Cloudflare R2 / AWS S3 (bucket público temporário)
+    - cron (agendamento Instagram via fila local)
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - AskUserQuestion
+
+reads:
+  - "_negocio/clientes/<slug>/.env"
+  - "_negocio/clientes/<slug>/integracoes/meta.yaml"
+  - "<peça_dir>/manifest.yaml"
+  - "<peça_dir>/legendas/instagram.md"
+  - "<peça_dir>/legendas/facebook.md"
+  - "<peça_dir>/carrossel/*.png OR <peça_dir>/slides/*.png"
+
+writes_to:
+  - "<peça_dir>/manifest.yaml (update com IDs Meta)"
+  - "_negocio/clientes/<slug>/integracoes/meta-publicacoes.ndjson (append)"
+  - "_negocio/clientes/<slug>/integracoes/meta-fila.yaml (se agendamento Instagram)"
+
+invokes_skills: []
+
+related:
+  - ../../2-PACKS/packs/midia/carrossel-visual/ (A1 — produz input)
+  - ../publicar-tema/SKILL.md (A3 — produz input)
+  - ../live-preview/SKILL.md (B3 — gate aprovação obrigatório)
+  - ../relatorio-ads/SKILL.md (A5 — consome IDs Meta pra métricas)
+  - ../../1-ESQUELETO/politicas/event-log-ndjson.md (formato log)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A4 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Meta Graph API documentação oficial v21.0 (developers.facebook.com)"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "smb-precisa-publicar-instagram-facebook-recorrente"
+    - "agencia-digital-multi-cliente-com-credenciais-cliente"
+    - "creator-individual-com-conta-business"
+  nichos_incompativeis:
+    - "conta-instagram-pessoal-nao-business"
+    - "publicacao-100-pct-manual-cliente-quer-controle"
+
+sugere_proxima_skill:
+  - condicao: "post publicado + cliente quer relatório performance"
+    skill: relatorio-ads
+    razao: "Adicionar post ao tracker (orgânico + pago)"
+  - condicao: "responses começam a chegar (DM Instagram + comentários)"
+    skill: responder-avaliacoes-gmb
+    razao: "Coordenar respostas multi-canal"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true  # publica via API — não exige humano em runtime
+  cenario_agent: "cron que processa meta-fila.yaml e publica Instagram no horário agendado (Meta API não suporta scheduled Insta nativo)"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_clientes_diferentes: true
+  - publicacao_instagram_real_sem_erro_em_10_posts: true
+  - publicacao_facebook_real_sem_erro_em_10_posts: true
+  - agendamento_funcionou_em_2_clientes: true
+  - token_refresh_60d_validado: true
+  - rollback_em_publicacao_quebrada_testado: true
+
+limitacoes:
+  - reels_stories_nao_cobertos_v1: true (futura iteração)
+  - threads_meta_sem_api_publica_estavel_2026: true
+  - scheduled_instagram_via_api_direta_impossivel: true (fila + cron própria)
+  - token_refresh_depende_cron_proprio: true
+  - rate_limit_4800_calls_24h_token: true
+  - nao_substitui_hootsuite_50+_clientes_simultaneos: true
+
+anti_pollution:
+  metodo: vocabulário oficial Meta Graph API (Page Token, IG Business Account, carousel container, media_publish)
+  citacoes_diretas: zero (documentação pública)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

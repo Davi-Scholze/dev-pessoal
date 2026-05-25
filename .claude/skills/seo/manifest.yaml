@@ -1,0 +1,172 @@
+name: seo
+type: skill
+category: orchestration
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial  # estratégia cliente
+nivel_operacional: L1+L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Orquestrador SEO 8 passos pra cliente SMB BR. Demanda + intenção, concorrência
+  top 10 SERP, GMB, on-page audit, estratégia de conteúdo, briefing Google Ads,
+  checklist priorizado e GEO/AI-search. Output_dir carimbado por data alimenta
+  /anuncio-google (A2), /publicar-tema (A3) e plano de implementação.
+
+skill_principal: seo
+
+triggers:
+  - /seo
+  - auditar SEO
+  - estratégia SEO completa
+  - posicionar site no Google
+  - como aparecer no Google
+
+handoff_in:
+  required:
+    cliente_slug: "slug do cliente (pasta _negocio/clientes/<slug>/)"
+    site_url: "URL principal do cliente"
+    nicho: "nicho de atuação"
+    regiao: "cidade/região (raio km)"
+  optional:
+    foco: "termo específico pra começar"
+    orcamento_ads_mes: "se cliente já tem teto definido"
+
+handoff_out:
+  produces:
+    output_dir: "_negocio/clientes/<slug>/marketing/seo/<YYYY-MM-DD>/"
+    pesquisa_demanda: "01-pesquisa-demanda.md"
+    concorrencia: "02-concorrencia-serp.md"
+    gmb: "03-gmb-checklist.md"
+    onpage: "04-onpage-audit.md"
+    estrategia_conteudo: "05-estrategia-conteudo.md"
+    google_ads_briefing: "06-google-ads.md"
+    checklist: "07-checklist-implementacao.md"
+    geo: "08-geo-ai-search.md"
+    manifest: "manifest.yaml"
+
+quality_gates:
+  - "Top 20 termos priorizados com intenção classificada (transacional/comercial/informacional/navegacional)"
+  - "Top 10 SERP analisada pra cada termo top 10"
+  - "GMB checklist 7 dimensões (categorias/serviços/descrição/atributos/fotos/horário/posts)"
+  - "On-page audit mín 5 páginas (técnico + conteúdo)"
+  - "Estratégia conteúdo mín 3 clusters + calendário 12 semanas"
+  - "Google Ads briefing 8-12 termos transacional/comercial + ≥20 negativas"
+  - "Checklist em matriz impacto × esforço (sprint plan 8 semanas)"
+  - "GEO checklist com Schema.org + FAQs + E-E-A-T"
+
+requires:
+  blocking:
+    - "_memoria/empresa.md preenchido"
+    - "Pasta cliente _negocio/clientes/<slug>/ criada"
+    - "URL do site + nicho + região no briefing"
+  recommended:
+    - "Acesso Google Search Console do cliente (opcional, próxima iteração)"
+    - "Acesso Google Business Profile do cliente (pra executar GMB)"
+    - "Lighthouse instalado local (auditoria de velocidade)"
+
+dependencias:
+  obrigatorias:
+    - WebSearch (pesquisa demanda + SERP analysis)
+    - WebFetch (análise páginas concorrentes)
+  opcionais:
+    - Google Search Console API
+    - Lighthouse CLI
+    - Screaming Frog
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - WebSearch
+  - WebFetch
+  - AskUserQuestion
+
+reads:
+  - "_memoria/empresa.md"
+  - "_memoria/preferencias.md"
+  - "_negocio/clientes/<slug>/briefing.md"
+
+writes_to:
+  - "_negocio/clientes/<slug>/marketing/seo/<YYYY-MM-DD>/"
+
+invokes_skills:
+  - mapear-concorrente (opcional, Passo 2 profundo)
+
+related:
+  - ../../2-PACKS/packs/marketing/google-ads-campanhas/ (A2 — consome Passo 6)
+  - ../publicar-tema/SKILL.md (A3 — consome Passo 5 calendário)
+  - ../novo-projeto/SKILL.md (A9 — pré-requisito)
+  - ../../3-CONTEXTOS-DOMINIO/responsividade-mobile-first/ (referência Passo 4)
+  - ../../0-INSTALACAO/PACOTE-DAVI-PADRAO.md (Pilar 2 Google Power)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A10 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Padrões públicos SEO (Backlinko, Ahrefs blog, Moz Beginner's Guide, Google Search Central)"
+      type: documentacao-publica
+      anti_pollution_passed: true
+    - source: "GEO/AEO patterns públicos 2025-2026 (web.dev/learn/seo, schema.org docs)"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "smb-br-precisa-posicionamento-google"
+    - "negocio-local-com-GMB"
+    - "ecommerce-search-organico"
+    - "b2b-local-busca"
+    - "saas-precisa-conteudo-blog"
+  nichos_incompativeis:
+    - "branding-puro-sem-busca"
+    - "produto-100-pct-impulso"
+    - "marketplace-fechado-sem-site-proprio"
+
+sugere_proxima_skill:
+  - condicao: "Passo 6 concluído + cliente vai rodar Ads"
+    skill: anuncio-google
+    razao: "Briefing pronto pra gerar CSV Ads Editor"
+  - condicao: "Passo 5 concluído + cliente vai produzir conteúdo recorrente"
+    skill: publicar-tema
+    razao: "Cada tema do calendário vira pacote multi-formato"
+  - condicao: "Passo 4 detectou problemas técnicos profundos"
+    skill: mapear-concorrente
+    razao: "Aprofundar gap analysis técnico"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true  # gera relatório — não exige humano em runtime
+  cenario_agent: "cron trimestral — refaz auditoria SEO de cliente sob retainer"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_clientes_diferentes: true
+  - cliente_subiu_top_3_em_mín_2_termos_priorizados: true
+  - briefing_ads_gerou_csv_funcional_via_anuncio_google: true
+  - calendario_conteudo_executado_4_semanas_consecutivas: true
+  - GMB_checklist_implementado_e_reviews_subiram: 1
+
+limitacoes:
+  - pesquisa_demanda_sem_volume_real_keyword_planner: true
+  - serp_e_snapshot_revalidar_trimestralmente: true
+  - GMB_execucao_depende_acesso_cliente: true
+  - onpage_audit_manual_sem_lighthouse_automatico: true (futuro pack seo-audit-tools)
+  - GEO_evolui_rapido_revalidar_6_meses: true
+  - nao_substitui_seo_consultor_senior_em_mercado_top_3_nacional: true
+
+anti_pollution:
+  metodo: vocabulário público SEO (intent classification, SERP, clusters, E-E-A-T, GEO/AEO, schema.org)
+  citacoes_diretas: zero (estrutura própria, padrões públicos)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

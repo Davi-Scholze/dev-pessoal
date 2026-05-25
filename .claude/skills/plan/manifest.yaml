@@ -1,0 +1,113 @@
+name: plan
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 3/6 do pipeline canônico KOD.AI. Plano executável a partir de tasks
+  de /break: ordem + paralelismo + checkpoints + stop-criteria. Wrapper
+  semântico sobre /writing-plans bundled.
+
+skill_principal: plan
+pipeline_position: 3
+pipeline_prev: break
+pipeline_next: execute
+wraps: writing-plans
+
+triggers:
+  - /plan
+  - fazer plano
+  - como executar essas tasks
+  - ordem de execução
+
+handoff_in:
+  required:
+    spec_path: "docs/decisoes/<data>_<topico>.md com seção ## Tasks"
+  optional:
+    paralelismo_max: "1 | 2 | 3 (default 1)"
+    executor_preferido: "humano | IA-solo | sub-agente | multi-agente"
+
+handoff_out:
+  produces:
+    plan_section: "## Plano adicionada à spec OU arquivo .plan.md"
+    diagram: "Mermaid DAG opcional"
+    proximo_passo: "/execute"
+
+quality_gates:
+  - "Tasks de /break carregadas + validadas"
+  - "Ordem respeita DAG"
+  - "Paralelismo declarado"
+  - "Checkpoints mín 1"
+  - "Stop-criteria explícitos"
+  - "Riscos mapeados"
+  - "Commit + push imediato"
+
+requires:
+  blocking:
+    - "/break executado (tasks com ID + dependências)"
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/<spec>.md"
+  - "skills-universais/writing-plans/SKILL.md"
+
+writes_to:
+  - "docs/decisoes/<spec>.md (## Plano section)"
+
+related:
+  - ../break/SKILL.md (passo 2)
+  - ../execute/SKILL.md (passo 4)
+  - ../writing-plans/SKILL.md (metodologia bundled)
+  - ../../metodologias/slice-fluxo-visao.md
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2"
+      type: gap-analysis-pos-auditoria
+    - source: "Skill bundled /writing-plans (Anthropic Superpowers)"
+      type: wrapping
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "plano aprovado"
+    skill: execute
+    razao: "Executar plano"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+
+quando_promover_battle_tested:
+  - aplicado_em_5_planos_reais_diferentes: 5
+  - 0_desvios_não-reportados: true
+  - paralelismo_real_validado_em_2_features: 2
+
+limitacoes:
+  - "Estimativas são chutes"
+  - "Multi-agente paralelo ≤3 (quota Anthropic)"
+
+anti_pollution:
+  metodo: "Wrapper sobre /writing-plans bundled + estrutura própria de checkpoints/stop-criteria"
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

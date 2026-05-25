@@ -6,6 +6,10 @@
           {
             "type": "command",
             "command": "echo 'Nova sessão num projeto KOD.AI. Execute /abrir agora para fazer Sessão Zero: health check silencioso + leitura de _memoria/ + leitura de PROMPT_MASTER_HANDOFF.md + reporte canônico em 5-7 linhas. Não pergunte permissão — apenas execute /abrir. Se a pasta não tiver KOD.AI instalado (sem _memoria/ ou KODAI-INSTALADO.md), /abrir reportará isso.'"
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/session-start/kodai-check-upstream-age.js\""
           }
         ]
       }
@@ -32,6 +36,10 @@
           {
             "type": "command",
             "command": "python \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/post-tool-use/log-metrics.py\""
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/post-tool-use/kodai-poluicao-detector.js\""
           }
         ]
       }
@@ -54,6 +62,10 @@
           {
             "type": "command",
             "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/user-prompt-submit/kodai-inject-warning.js\""
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/user-prompt-submit/kodai-auto-suggest-skills.js\""
           }
         ]
       }

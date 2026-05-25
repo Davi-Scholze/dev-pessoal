@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-21 (sync upstream 0.6.0-dev commit e9ea7e6 — +10 skills, +6 rules, +8 políticas, +2 contextos-domínio, +4 packs)
+> Última atualização: 2026-05-25 (sync upstream 0.6.0-dev commit 80f5f07 — +19 skills, +3 hooks JS, +5 contextos-domínio universais via Navortech)
 
 ---
 
@@ -10,10 +10,10 @@
 
 | Campo | Valor |
 |---|---|
-| Versão KOD.AI | `0.6.0-dev` (sync 2026-05-21, commit upstream `e9ea7e6`) |
+| Versão KOD.AI | `0.6.0-dev` (sync 2026-05-25, commit upstream `80f5f07`) |
 | Perfil | `completo` |
 | Data instalação inicial | 2026-05-15 |
-| Última atualização | 2026-05-21 (`/atualizar-kodai` modo total — propagação 10 skills + 6 rules path-scoped) |
+| Última atualização | 2026-05-25 (`/atualizar-kodai` modo total pós-Navortech — propagação 19 skills + 3 hooks JS + ativação settings.json) |
 | Upstream | github.com/Davi-Scholze/kod-ai |
 | Modo | Pasta-mãe existente (Categoria C) |
 
@@ -41,21 +41,33 @@
 - [x] `.claude/` — SCHOLZE-STACK (agents, skills, hooks, commands)
 - [x] `Repositorios/` — code repos
 
-### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-21)
+### Skills KOD.AI propagadas em `.claude/skills/` (atualizado 2026-05-25)
 
 **Universais nativas v0.4 (14):** abrir, absorver-contexto, absorver-referencia, atualizar, capturar, capturar-contexto-cliente, check-in, criar-contexto, criar-pack, criar-perfil, mapear-rotinas, salvar, ver, writing-plans
 
 **Universais v0.5 (5):** ativar-notebooklm, evoluir-contexto, sugerir-pesquisa, auditar-projeto, capturar-imagem
 
-**Universais v0.6-dev (4):** capturar-video, faxina, **absorver-midia** ✨, **validar-handoff** ✨
+**Universais v0.6-dev (4):** capturar-video, faxina, absorver-midia, validar-handoff
 
-**Bundled Tier 3 Anthropic (16):** brainstorming, transcribe-audio, executing-plans, subagent-driven-development, notebooklm, google-workspace, dev-browser, excalidraw-diagram, code-review ✨, verification-before-completion ✨, finishing-a-development-branch ✨, using-git-worktrees ✨, systematic-debugging ✨, test-driven-development ✨, writing-skills ✨, skill-creator ✨
+**Universais v0.6 sessão 4 (5):** mapear-concorrente, pedir-contexto, proposta-cliente, espelhar, status-decisao
+
+**Universais v0.6 Navortech (19) 🆕:**
+- **Pipeline SDD canônico (6):** spec, break, plan, execute, review, complete
+- **Gestão KOD.AI (2):** kodai-status, kodai-rollback
+- **Bloco-A Navortech (7):** analisar-dados, aprovar-post-meta-api, email-profissional, novo-projeto, publicar-tema, relatorio-ads, responder-avaliacoes-gmb
+- **Bloco-A SEO (1):** seo (orquestrador)
+- **Bloco-B Navortech (1):** live-preview
+- **QA Navortech (2):** qa-verifier, test-runner
+
+**Bundled Tier 3 Anthropic (16):** brainstorming, transcribe-audio, executing-plans, subagent-driven-development, notebooklm, google-workspace, dev-browser, excalidraw-diagram, code-review, verification-before-completion, finishing-a-development-branch, using-git-worktrees, systematic-debugging, test-driven-development, writing-skills, skill-creator
 
 **Instalação/gestão (6):** adicionar-pack, atualizar-kodai, instalar, listar-disponiveis, remover-pack, trocar-perfil
 
-✨ = propagadas em 2026-05-21 via `/atualizar-kodai`
+🆕 = propagadas em 2026-05-25 via `/atualizar-kodai` (origem Navortech absorption)
 
-Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK (accessibility-axe, conventional-commits, debug-systematic, code-review-checklist, etc.). Total atual em `.claude/skills/`: **67**.
+Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK. Total atual em `.claude/skills/`: **91** (+19 vs sync anterior).
+
+**⚠ Conflito conhecido pendente:** pipeline SDD universal (`/spec /break /plan /execute /review`) tem nomes idênticos aos commands legados em `.claude/commands/` do SCHOLZE-STACK. Resolução adiada — manter ambos até `/complete` validar pipeline novo em uso real.
 
 ### Regras path-scoped em `.claude/rules/` (propagadas 2026-05-21)
 
@@ -72,9 +84,19 @@ Camada complementar ao `AGENTS.md` raiz — regras injetadas só quando glob de 
 
 Preservado: `regras-sessao.md` (extensão SCHOLZE local — regras operacionais de toda sessão).
 
-### Hook SessionStart adicionado em `.claude/settings.json` (2026-05-18)
+### Hooks ativos em `.claude/settings.json` (atualizado 2026-05-25)
 
-Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1). Hooks PreToolUse (block-dangerous.py) e PostToolUse (log-metrics.py) do SCHOLZE-STACK preservados.
+| Evento | Hooks ativos | Origem |
+|---|---|---|
+| SessionStart | echo "/abrir" + kodai-check-upstream-age 🆕 | SCHOLZE + KODAI |
+| PreToolUse (Bash) | block-dangerous.py + kodai-pre-commit-guard | SCHOLZE + KODAI |
+| PostToolUse (.*) | log-metrics.py + kodai-poluicao-detector 🆕 | SCHOLZE + KODAI |
+| Stop | kodai-check-completion-claims | KODAI |
+| UserPromptSubmit | kodai-inject-warning + kodai-auto-suggest-skills 🆕 | KODAI |
+
+🆕 = ativados 2026-05-25 via `/atualizar-kodai` (origem Navortech sync)
+
+Total: **5 hooks JS KOD.AI + 3 hooks Python SCHOLZE** = 8 hooks ativos.
 
 ---
 
@@ -85,10 +107,15 @@ Dispara `/abrir` automaticamente no início de cada sessão (Sessão Zero v0.2.1
 | Domínio | Status | Path no KOD.AI | Origem |
 |---|---|---|---|
 | ai-ecosystem-strategy | DRAFT (+ lineage v1) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
-| competitive-intelligence | DRAFT (+ lineage v1 + Kelvin) | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) + análise Kelvin (2026-05-21) |
-| **sistemas-empresariais-br** ✨ | **DRAFT (+ lineage v1)** | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | **Davi 2026-05-21 (par doc+notebook 26782f74)** |
+| competitive-intelligence | DRAFT (+ lineage v1 + Kelvin + 3 concorrentes) | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) + análises (2026-05-21) |
+| sistemas-empresariais-br | DRAFT (+ lineage v1 + Bucket B) | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | Davi 2026-05-21 (par doc+notebook 26782f74) |
+| gestao-academia-esportiva-br | DRAFT (+ lineage v1 + 6 conceitos) | `KODAI/3-CONTEXTOS-DOMINIO/gestao-academia-esportiva-br/` | Davi 2026-05-21 sessão 4 (piloto dojo) |
+| **contabilidade-br** 🆕 | **DRAFT** | `KODAI/3-CONTEXTOS-DOMINIO/contabilidade-br/` | **bloco-C MazyOS absorption 2026-05-22** |
+| **responsividade-mobile-first** 🆕 | **DRAFT** | `KODAI/3-CONTEXTOS-DOMINIO/responsividade-mobile-first/` | **bloco-C MazyOS absorption 2026-05-22** |
+| **lgpd-seguranca-universal** 🆕 | **DRAFT v0.1.0** | `KODAI/3-CONTEXTOS-DOMINIO/lgpd-seguranca-universal/` | **Navortech 2026-05-23 (LGPD+GDPR+CCPA worst-case)** |
+| **niveis-operacionais-l1-l2-l3** 🆕 | **DRAFT (+ sub-L1/L2/L3)** | `KODAI/3-CONTEXTOS-DOMINIO/niveis-operacionais-l1-l2-l3/` | **Navortech 2026-05-22 (direção estratégica v1.4)** |
 
-✨ = adicionado em 2026-05-21 (commit `d53abde`)
+🆕 = adicionado entre 2026-05-22 e 2026-05-23 via Navortech absorption (commits 17182ce, 3d236cd, a473ef2)
 + lineage v1 = bloco `lineage:` populado conforme Spec 1 aprovada
 
 ---
@@ -110,13 +137,22 @@ Nenhum pack FUNCIONAL ainda — promoção exige Evidence Bloc com uso real.
 | `infra/qr-scanner-web` | STUB | upstream | absorção 2026-05-20 |
 | `infra/pwa-webgpu` | docs | upstream | absorção 2026-05-20 |
 | `ia/face-recognition` | notebooklm-only | upstream | absorção 2026-05-20 |
-| **`dev/ui-responsivo-smb`** ✨ | **DRAFT (+ lineage v1)** | upstream | **Davi 2026-05-21 (par doc+notebook 216c85a8)** |
-| **`comercial/modelos-venda-ia`** 🆕 | **DRAFT (+ lineage v1)** | upstream | **gap Kelvin 2026-05-21 (DFY/DWY/DIY + 6 alavancas)** |
-| **`atendimento/customer-success-ia`** 🆕 | **DRAFT (+ lineage v1)** | upstream | **gap Kelvin 2026-05-21 (N1/N2 WhatsApp+Claude)** |
+| `dev/ui-responsivo-smb` | DRAFT (+ lineage v1) | upstream | Davi 2026-05-21 (par doc+notebook 216c85a8) |
+| `comercial/modelos-venda-ia` | DRAFT (+ lineage v1) | upstream | gap Kelvin 2026-05-21 (DFY/DWY/DIY + 6 alavancas) |
+| `atendimento/customer-success-ia` | DRAFT (+ lineage v1) | upstream | gap Kelvin 2026-05-21 (N1/N2 WhatsApp+Claude) |
+| **`infra/multi-tenant-saas-architecture`** 🆕 | **DRAFT** | upstream | **Navortech 2026-05-22 (direção L1/L2/L3)** |
 
-✨ = adicionado em 2026-05-21 sessão 2 (commit `d53abde`)
-🆕 = adicionado em 2026-05-21 sessão 3 (commit upstream pendente)
+🆕 = adicionado em 2026-05-22 via Navortech sync (commit `a473ef2`)
 + lineage v1 = bloco `lineage:` populado conforme Spec 1 aprovada
+
+## Políticas universais novas pós-Navortech (sync 2026-05-25)
+
+4 políticas adicionais em `KODAI/1-ESQUELETO/politicas/` (consultadas via referência, não copiadas):
+
+- `regra-ouro-l1-antes-de-l3.md` — sempre confirmar L1 (entender o usuário) antes de saltar pra L3 (executar)
+- `capturar-contexto-stakeholder.md` — formalização de captura de input externo
+- `coordinator-na-sessao-pai.md` — padrão Coordinator/Director/Employee aplicado ao Claude na sessão pai
+- `status-honesto-handoff.md` — handoff nunca infla progresso; status verdadeiro mesmo se incompleto
 
 ## Políticas universais novas no upstream (sync 2026-05-21)
 

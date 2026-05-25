@@ -1,0 +1,126 @@
+name: break
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 2/6 do pipeline canônico KOD.AI. Decompõe spec aprovada em tasks
+  atômicas comitáveis. Cada task = 1 commit ideal (≤500 linhas, ≤2h, critério
+  de done verificável). Persiste tasks na spec ou em arquivo separado.
+
+skill_principal: break
+pipeline_position: 2
+pipeline_prev: spec
+pipeline_next: plan
+
+triggers:
+  - /break
+  - decompor spec
+  - quebrar em tasks
+  - fragmentar feature
+
+handoff_in:
+  required:
+    spec_path: "docs/decisoes/<data>_<topico>.md (status em-andamento)"
+  optional:
+    granularidade: "fine (15-30min) | normal (30min-2h) | coarse (2-4h, raro)"
+    paralelismo_alvo: "sequential | parallel (default sequential)"
+
+handoff_out:
+  produces:
+    tasks_section: "## Tasks adicionada à spec OU arquivo .tasks.md separado"
+    task_count: "N tasks geradas"
+    dag_valid: "true (sem ciclo)"
+    proximo_passo: "/plan ou /execute (se simples)"
+
+quality_gates:
+  - "Spec referenciada existe + status em-andamento"
+  - "Tasks com ID T1..TN contínuo"
+  - "DAG válido (sem dependência circular)"
+  - "Cada task ≤500 linhas diff estimadas"
+  - "Cada task ≤2h estimadas"
+  - "Critério de done verificável em todas"
+  - "Última task = complete + Evidence Bloc"
+  - "Commit + push imediato"
+
+requires:
+  blocking:
+    - "Spec aprovada existe (status em-andamento)"
+    - "Contratos handoff + critérios aceitação na spec"
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/<spec>.md"
+  - "metodologias/slice-fluxo-visao.md"
+
+writes_to:
+  - "docs/decisoes/<spec>.md (adiciona ## Tasks)"
+  - "docs/decisoes/<spec>.tasks.md (alternativa pra spec grande)"
+
+related:
+  - ../spec/SKILL.md (passo 1)
+  - ../plan/SKILL.md (passo 3)
+  - ../execute/SKILL.md (passo 4)
+  - ../../metodologias/slice-fluxo-visao.md
+  - ../../metodologias/testes.md
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2"
+      type: gap-analysis-pos-auditoria
+    - source: "Regra-base 7 (commit a cada passo) + Davi extension (commit+push imediato)"
+      type: regra-base
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "tasks decompostas + DAG OK"
+    skill: plan
+    razao: "Plano com ordem + paralelização"
+  - condicao: "tasks simples lineares"
+    skill: execute
+    razao: "Pular /plan, executar direto"
+
+requires_skills_anteriores:
+  - condicao: "spec não escrita"
+    skill: spec
+    razao: "Sem spec, não decompor"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+
+quando_promover_battle_tested:
+  - aplicado_em_5_specs_reais: 5
+  - 0_DAGs_com_ciclo: true
+  - estimativas_calibradas_em_3_features_completadas: 3
+
+limitacoes:
+  - "Estimativas são chutes — calibrar com histórico"
+  - "Tasks <15min = overhead burocrático"
+  - "Tasks >2h = não atômicas — re-break"
+
+anti_pollution:
+  metodo: "Vocabulário público engenharia software (task atômica, DAG, critério de done). Estrutura própria."
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

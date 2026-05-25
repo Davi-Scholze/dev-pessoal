@@ -1,0 +1,129 @@
+name: review
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 5/6 do pipeline canônico KOD.AI. Review estruturada pós-execução
+  validando spec compliance + regressões + anti-pollution + qualidade
+  técnica. Wrapper sobre /code-review bundled. Output VEREDITO explícito
+  (APROVADO ou REJEITADO).
+
+skill_principal: review
+pipeline_position: 5
+pipeline_prev: execute
+pipeline_next: complete
+wraps: code-review
+composes:
+  - qa-verifier (opcional, E2E adversarial)
+  - test-runner (opcional, pipeline mecânico)
+
+triggers:
+  - /review
+  - revisar feature
+  - code review
+  - auditar entrega antes do complete
+
+handoff_in:
+  required:
+    spec_path: "docs/decisoes/<spec>.md com ## Tasks executadas"
+  optional:
+    invocar_qa_verifier: "true se feature E2E exige adversarial"
+    invocar_test_runner: "true se quer pipeline mecânico pre-review"
+    reviewer: "self | sub-agente | humano (default sub-agente)"
+
+handoff_out:
+  produces:
+    veredito: "APROVADO ✓ | REJEITADO ✗"
+    spec_compliance: "N/M critérios atendidos"
+    regressoes: "lista com path:linha + impacto"
+    antipollution_status: "PASS | FAIL"
+    melhorias_bloqueantes: "lista"
+    melhorias_nao_bloqueantes: "lista (vira TODO futuro)"
+    proximo_passo: "/complete OU /execute correções"
+
+quality_gates:
+  - "Spec + critérios de aceitação enumerados"
+  - "Diff conferido contra critérios"
+  - "Anti-pollution scan executado (grep marcas proibidas)"
+  - "Regressões verificadas"
+  - "/code-review bundled invocado em features médias/grandes"
+  - "Veredito explícito"
+  - "Bloqueantes separados de não-bloqueantes"
+
+requires:
+  blocking:
+    - "/execute concluído (tasks com commits)"
+    - "Spec + critérios de aceitação claros"
+
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/<spec>.md"
+  - "git log + git diff origin/main..HEAD"
+
+writes_to:
+  - "docs/decisoes/<spec>.md (## Review section)"
+  - "OU inbox-<stakeholder>/<data>-review-<spec>.md"
+
+related:
+  - ../execute/SKILL.md (passo 4)
+  - ../complete/SKILL.md (passo 6)
+  - ../code-review/SKILL.md (bundled — composição)
+  - ../qa-verifier/SKILL.md (adversarial opcional)
+  - ../test-runner/SKILL.md (mecânico opcional)
+  - ../../politicas/status-honesto-handoff.md
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2"
+      type: gap-analysis-pos-auditoria
+    - source: "Bundled /code-review (Anthropic Superpowers)"
+      type: wrapping
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "review APROVADO"
+    skill: complete
+  - condicao: "review REJEITADO"
+    skill: execute
+  - condicao: "E2E exige adversarial"
+    skill: qa-verifier
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+
+quando_promover_battle_tested:
+  - aplicado_em_5_reviews_reais: 5
+  - 0_falsos_aprovados_em_audit_posterior: true
+  - pegou_anti_pollution_real_min_1: 1
+
+limitacoes:
+  - "Review sem rodar app não pega bugs runtime"
+  - "Anti-pollution é grep (false negative em obfuscação)"
+  - "Critérios mensuráveis dependem de /spec bem feita"
+
+anti_pollution:
+  metodo: "Wrapper sobre /code-review bundled + scan anti-pollution explícito"
+  citacoes_diretas: zero
+  atribuicao_em_metadata: true

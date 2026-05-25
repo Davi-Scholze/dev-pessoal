@@ -1,0 +1,165 @@
+name: analisar-dados
+type: skill
+category: analysis
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial  # pode conter dados sensíveis cliente
+nivel_operacional: L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Análise exploratória de CSV/Excel/JSON via pandas (Python). 6 templates
+  (vendas-mensais, leads, reviews, metricas-ads, financeiro, genérico) com
+  análises padrão por template. Output: relatório Markdown + 3-7 gráficos PNG
+  + dados processados CSV + script Python reproduzível. Tratamento de
+  encoding/decimal/data brasileiros. Não substitui BI premium — análise
+  exploratória rápida em <5min.
+
+skill_principal: analisar-dados
+
+triggers:
+  - /analisar-dados
+  - analisa esse CSV
+  - o que esses dados dizem
+  - insights desta planilha
+  - métricas do relatório
+
+handoff_in:
+  required:
+    arquivo: "path do CSV/XLSX/JSON"
+  optional:
+    template: "vendas-mensais | leads | reviews | metricas-ads | financeiro | generico (default: auto-detect)"
+    cliente_slug: "se cliente específico"
+    foco: "TL;DR | detalhado | técnico"
+
+handoff_out:
+  produces:
+    output_dir: "_negocio/clientes/<slug>/analises/<arquivo-slug>-<YYYY-MM-DD>/ OU _memoria/analises/<...>/"
+    relatorio_md: "relatorio.md"
+    relatorio_pdf: "relatorio.pdf (opcional)"
+    dados_processados: "dados-processados.csv"
+    script: "script-analise.py"
+    graficos: "graficos/grafico-01...07-*.png"
+    manifest: "manifest.yaml"
+
+quality_gates:
+  - "TL;DR ≤5 bullets"
+  - "Mín 3 gráficos, máx 7"
+  - "Dados processados anexados (auditável)"
+  - "Script Python anexo (reproduzível)"
+  - "Recomendações ≥3 + acionáveis"
+  - "Anomalias destacadas separadamente"
+  - "Encoding CSV BR tratado (utf-8-sig)"
+  - "Datas BR (DD/MM/AAAA) parseadas"
+  - "Valores BR (vírgula decimal) tratados"
+  - "Anti-pollution: zero marca proibida"
+
+requires:
+  blocking:
+    - "Python 3.10+ instalado"
+    - "Arquivo de entrada acessível (CSV/XLSX/JSON)"
+  recommended:
+    - "pandas + matplotlib + seaborn + openpyxl instalados"
+    - "Pandoc (geração PDF)"
+    - "Briefing cliente em _negocio/clientes/<slug>/ (interpretação de domínio)"
+
+dependencias:
+  obrigatorias:
+    - python 3.10+
+    - pandas
+    - matplotlib
+  opcionais:
+    - openpyxl (Excel)
+    - seaborn (gráficos)
+    - Pandoc (PDF)
+    - polars (futuro, big data)
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - AskUserQuestion
+
+reads:
+  - "<arquivo-entrada>"
+  - "_memoria/empresa.md (contexto)"
+  - "_negocio/clientes/<slug>/briefing.md (se aplicável)"
+
+writes_to:
+  - "_negocio/clientes/<slug>/analises/<arquivo-slug>-<YYYY-MM-DD>/"
+  - "_memoria/analises/<arquivo-slug>-<YYYY-MM-DD>/ (se não cliente-específico)"
+
+related:
+  - ../relatorio-ads/SKILL.md (A5 — consome análise pra estruturar relatório recorrente)
+  - ../responder-avaliacoes-gmb/SKILL.md (A6 — analisa padrão de reviews)
+  - ../../0-INSTALACAO/PACOTE-DAVI-PADRAO.md (Pilar 5 KPIs sob demanda)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A8 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "EDA (Exploratory Data Analysis) clássico data science + pandas/matplotlib docs oficiais"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "smb-recebe-CSV-do-erp-precisa-insight-rapido"
+    - "agencia-multi-cliente-precisa-auditar-dados"
+    - "cliente-tem-planilha-Excel-quer-analise"
+    - "ad-hoc-EDA-antes-decisao-estrategica"
+  nichos_incompativeis:
+    - "BI-recorrente-dashboard-tempo-real (usar Looker/PowerBI)"
+    - "treinamento-ML-modelos (skill futura)"
+    - "big-data-100M+linhas (usar polars/spark)"
+
+sugere_proxima_skill:
+  - condicao: "análise revela problema campanha"
+    skill: anuncio-google
+    razao: "Reajustar campanha Google Ads"
+  - condicao: "análise revela tema reviews crítico"
+    skill: responder-avaliacoes-gmb
+    razao: "Resposta proativa às reviews padrão"
+  - condicao: "análise vai virar relatório recorrente"
+    skill: relatorio-ads
+    razao: "Estruturar relatório semanal/mensal"
+  - condicao: "análise revela cliente top"
+    skill: email-profissional
+    razao: "Email warm de retenção/upsell"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "cron mensal — analisa export ERP do cliente automaticamente + envia relatório via /email-profissional"
+
+quando_promover_draft_funcional:
+  - aplicado_em_5_arquivos_diferentes: true
+  - 5_templates_validados_minimo: 5
+  - encoding_BR_tratado_em_3_arquivos_ANSI/UTF-8/UTF-8-BOM: 3
+  - cliente_aprovou_TL;DR_em_3_iteracoes: true
+  - recomendacoes_acionaveis_em_80_pct: true
+
+limitacoes:
+  - nao_substitui_BI_premium_em_dashboard_recorrente: true
+  - nao_treina_ML_apenas_EDA: true
+  - sentimento_texto_v1_heuristica_simples: true
+  - big_data_acima_1M_linhas_lento_pandas: true (polars no futuro)
+  - sem_conexao_banco_direto: true (espera arquivo exportado)
+  - visualizacoes_estaticas_sem_Plotly_interativo_v1: true
+
+anti_pollution:
+  metodo: vocabulário público data science/pandas (EDA, IQR, correlation, NPS) + bibliotecas OSS (Apache/BSD/MIT)
+  citacoes_diretas: zero (documentação pública)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

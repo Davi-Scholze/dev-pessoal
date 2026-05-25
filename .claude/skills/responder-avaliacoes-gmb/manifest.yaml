@@ -1,0 +1,159 @@
+name: responder-avaliacoes-gmb
+type: skill
+category: integration
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: alto_risco  # toca credenciais GMB + posta publicamente
+nivel_operacional: L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Lê reviews recentes do Google Business Profile via API, classifica em 6
+  categorias (5★ entusiasmado/curto, 4★ neutro-positivo, 3★ neutro, 1-2★
+  legítimo, 1-2★ fake-suspect), gera draft personalizado por categoria
+  respeitando tom em _memoria/preferencias.md + briefing cliente. Fila de
+  aprovação humana antes de postar. Event log NDJSON. Reviews 1-2★ URGENTE
+  com resposta <2h.
+
+skill_principal: responder-avaliacoes-gmb
+
+triggers:
+  - /responder-avaliacoes-gmb
+  - responder reviews
+  - tem review novo no Google
+  - responder GMB
+
+handoff_in:
+  required:
+    cliente_slug: "slug do cliente"
+  optional:
+    janela_dias: "default 7 (reviews dos últimos N dias sem resposta)"
+    auto_postar_5star: "default false (sempre fila humana)"
+
+handoff_out:
+  produces:
+    fila_md: "_negocio/clientes/<slug>/integracoes/gmb-respostas-fila.md"
+    drafts_count: "número de drafts gerados"
+    urgentes_count: "reviews 1-2★ encontradas"
+  apos_aprovacao:
+    event_log: "_negocio/clientes/<slug>/integracoes/gmb-respostas.ndjson (append)"
+    reviews_respondidas: "via API PUT"
+
+quality_gates:
+  - "100% reviews coletadas categorizadas"
+  - "Draft personalizado (nome + referência específica, não-template)"
+  - "Tom de voz alinhado com _memoria/preferencias.md"
+  - "Assinatura com nome real (não 'Equipe X')"
+  - "Aprovação humana antes de postar"
+  - "Reviews 1-2★ marcadas URGENTE (<2h)"
+  - "Fakes denunciadas paralelamente"
+  - "Event log NDJSON gravado"
+  - "Anti-pollution: zero copy-paste entre clientes"
+
+requires:
+  blocking:
+    - "_negocio/clientes/<slug>/.env com GMB_* preenchido"
+    - "_negocio/clientes/<slug>/integracoes/gmb.yaml configurado"
+    - "_memoria/empresa.md preenchido"
+    - "_memoria/preferencias.md preenchido (tom de voz)"
+    - "Cliente concedeu acesso GMB via OAuth"
+  recommended:
+    - "Cliente com GMB ativo (Passo 3 da skill /seo executado)"
+    - "Cron diário 09:00 pra processar fila"
+
+dependencias:
+  obrigatorias:
+    - curl
+    - jq
+    - Google Business Profile API (Reviews endpoint)
+    - OAuth2 refresh token
+  opcionais:
+    - sentiment analysis (próxima iteração v2)
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - WebFetch
+  - AskUserQuestion
+
+reads:
+  - "_negocio/clientes/<slug>/.env"
+  - "_negocio/clientes/<slug>/integracoes/gmb.yaml"
+  - "_negocio/clientes/<slug>/briefing.md"
+  - "_memoria/empresa.md"
+  - "_memoria/preferencias.md"
+
+writes_to:
+  - "_negocio/clientes/<slug>/integracoes/gmb-respostas-fila.md"
+  - "_negocio/clientes/<slug>/integracoes/gmb-respostas.ndjson"
+
+related:
+  - ../seo/SKILL.md (A10 — Passo 3 GMB checklist é pré-requisito)
+  - ../relatorio-ads/SKILL.md (A5 — pode incluir bloco reviews)
+  - ../aprovar-post-meta-api/SKILL.md (A4 — padrão similar de fila aprovação)
+  - ../../1-ESQUELETO/politicas/event-log-ndjson.md (formato log)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A6 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Google Business Profile API documentação oficial (developers.google.com/my-business)"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "negocio-local-com-GMB-ativo"
+    - "smb-com-volume-reviews-semanal"
+    - "multi-localizacao-precisa-respostas-padronizadas"
+  nichos_incompativeis:
+    - "negocio-puramente-online-sem-presenca-fisica"
+    - "cliente-quer-respostas-100-pct-manuais"
+
+sugere_proxima_skill:
+  - condicao: "muitas reviews 1-2★ no mesmo tema"
+    skill: analisar-dados
+    razao: "Padrão crítico — analisar sentimento + frequência"
+  - condicao: "review fake denunciada não removida em 7d"
+    skill: capturar
+    razao: "Escalar caso ao Google Support"
+  - condicao: "cliente quer relatório de reviews"
+    skill: relatorio-ads
+    razao: "Bloco reviews no relatório recorrente"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "cron diário 09:00 coleta reviews da noite/madrugada + gera fila pra humano aprovar até 11:00"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_clientes_GMB_ativos: true
+  - drafts_aprovados_sem_edit_humano_em_70_pct: true
+  - tempo_medio_resposta_negativa_under_2h: true
+  - 0_reviews_perdidas_em_30d: true
+  - fake_review_denuncia_funcionou_em_1_caso: 1
+
+limitacoes:
+  - GMB_API_limita_200_reviews_por_request: true (paginar)
+  - reviews_3_anos_old_nem_sempre_retornadas: true
+  - denuncia_fake_e_manual_sem_endpoint_API: true
+  - sentiment_analysis_v1_baseado_estrelas_+_heuristica: true
+  - nao_substitui_SAC_em_volume_50+_reviews_semana: true
+
+anti_pollution:
+  metodo: vocabulário oficial Google Business Profile API (review, reply, rating, location)
+  citacoes_diretas: zero (docs públicos)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

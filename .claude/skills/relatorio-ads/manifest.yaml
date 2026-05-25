@@ -1,0 +1,162 @@
+name: relatorio-ads
+type: skill
+category: reporting
+version: 1.0.0
+status: DRAFT
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: confidencial  # dados de performance cliente
+nivel_operacional: L1+L2  # adicionado 2026-05-22 (direção estratégica v1.4)
+
+description: >
+  Relatório semanal/mensal consolidado Google Ads + Meta Ads + orgânico
+  Instagram/Facebook num único Markdown + CSVs raw. Modo API (com creds
+  configuradas) ou CSV manual (fallback). Calcula CTR/CPC/CPA/ROAS + Δ vs
+  período anterior. TL;DR executivo + apêndice detalhado + recomendações
+  priorizadas. Output_dir carimbado por data.
+
+skill_principal: relatorio-ads
+
+triggers:
+  - /relatorio-ads
+  - relatório semanal
+  - relatório mensal Ads
+  - como estão os Ads
+  - performance da campanha
+
+handoff_in:
+  required:
+    cliente_slug: "slug do cliente"
+  optional:
+    janela: "semana | mes | customizado (default: ultima semana)"
+    comparacao: "semana_anterior | mes_anterior | sem (default: semana_anterior)"
+    foco: "executivo | detalhado | tecnico (default: executivo)"
+    fontes: "default [google_ads, meta_ads, organico]"
+
+handoff_out:
+  produces:
+    output_dir: "_negocio/clientes/<slug>/marketing/relatorios/ads-<YYYY-MM-DD>/"
+    relatorio_md: "relatorio.md"
+    relatorio_pdf: "relatorio.pdf (opcional via Pandoc)"
+    dados_google: "dados-google-ads.csv"
+    dados_meta: "dados-meta-ads.csv"
+    dados_organico: "dados-organico.csv"
+    graficos: "graficos/ (PNGs opcionais via matplotlib)"
+    manifest: "manifest.yaml"
+
+quality_gates:
+  - "Janela + comparação definidas no briefing"
+  - "Dados das 3 fontes coletados (ou justificado faltante)"
+  - "Cálculos sem división por zero (handle 0 conv)"
+  - "TL;DR ≤1 parágrafo executivo"
+  - "Recomendações: mín 3 por canal + priorizadas"
+  - "Próximos passos 3-5 itens com responsável + prazo"
+  - "Raw CSV anexo (cliente audita)"
+  - "Anti-pollution: zero benchmark inventado, apenas dados reais"
+
+requires:
+  blocking:
+    - "_memoria/empresa.md preenchido"
+    - "Pasta cliente _negocio/clientes/<slug>/ existente"
+    - "Cliente com campanhas Ads ativas (ou orgânico configurado)"
+  recommended:
+    - "Google Ads API credentials em .env (modo API)"
+    - "Meta Marketing API token em .env (modo API)"
+    - "Conversion tracking configurado (pixel + CAPI Meta)"
+    - "Pandoc instalado (geração PDF)"
+
+dependencias:
+  obrigatorias:
+    - curl
+    - jq
+  opcionais:
+    - Google Ads API (google-ads-python ou REST)
+    - Meta Marketing API (v21.0+)
+    - Pandoc (PDF render)
+    - matplotlib (gráficos PNG)
+    - python 3.10+
+
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - WebFetch
+  - AskUserQuestion
+
+reads:
+  - "_negocio/clientes/<slug>/.env"
+  - "_negocio/clientes/<slug>/integracoes/google-ads.yaml"
+  - "_negocio/clientes/<slug>/integracoes/meta.yaml"
+  - "_negocio/clientes/<slug>/marketing/campanhas/google-ads-*/  (referência)"
+
+writes_to:
+  - "_negocio/clientes/<slug>/marketing/relatorios/ads-<YYYY-MM-DD>/"
+
+related:
+  - ../../2-PACKS/packs/marketing/google-ads-campanhas/ (A2 — gera campanhas reportadas)
+  - ../aprovar-post-meta-api/SKILL.md (A4 — publica conteúdo reportado)
+  - ../analisar-dados/SKILL.md (A8 — análise profunda de CSV)
+  - ../../0-INSTALACAO/PACOTE-DAVI-PADRAO.md (Pilar 5 KPIs Recorrentes)
+
+lineage:
+  origin: upstream
+  parent: null
+  derives_from:
+    - source: "Frente A5 plano 16 frentes Davi 2026-05-22"
+      type: feedback-stakeholder
+      date: 2026-05-22
+    - source: "Documentação oficial Google Ads API + Meta Marketing API"
+      type: documentacao-publica
+      anti_pollution_passed: true
+  contextos_filhos: []
+  validado_por: []
+  taxa_sucesso: null
+  nichos_compativeis:
+    - "smb-com-Ads-ativos-recorrente"
+    - "agencia-multi-cliente-precisa-reporting-em-lote"
+    - "cliente-quer-acompanhamento-semanal"
+  nichos_incompativeis:
+    - "campanha-pontual-sem-recorrencia"
+    - "branding-puro-sem-conversion-tracking"
+
+sugere_proxima_skill:
+  - condicao: "relatório aponta ajustes em campanhas Google"
+    skill: anuncio-google
+    razao: "Recriar CSV Ads Editor com ajustes recomendados"
+  - condicao: "performance ruim + dados de conversão suspeitos"
+    skill: analisar-dados
+    razao: "Auditar tracking (pixel, GA4, conversion API)"
+  - condicao: "relatório aprovado + próximo conteúdo"
+    skill: publicar-tema
+    razao: "Próximo tema do calendário editorial"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "cron semanal (toda segunda 09:00) gera relatório do cliente automaticamente + envia por email via /email-profissional"
+
+quando_promover_draft_funcional:
+  - aplicado_em_3_clientes_diferentes: true
+  - modo_API_funcionou_em_2_clientes: true
+  - modo_CSV_manual_funcionou_em_1_cliente: true
+  - cliente_aprovou_formato_executivo_em_3_iteracoes: true
+  - delta_vs_periodo_anterior_correto_em_amostragem_manual: true
+
+limitacoes:
+  - conversion_api_meta_depende_setup_servidor_cliente: true
+  - atribuicao_multi_touch_nao_modelada: true (usa default last-click)
+  - LTV_exige_integracao_CRM_futura: true
+  - YoY_limitado_se_cliente_novo: true
+  - nao_substitui_data_studio_looker_premium: true
+
+anti_pollution:
+  metodo: vocabulário oficial Google Ads API + Meta Marketing API (CTR, CPC, CPA, ROAS, attribution, lookback)
+  citacoes_diretas: zero (apenas docs públicas)
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true

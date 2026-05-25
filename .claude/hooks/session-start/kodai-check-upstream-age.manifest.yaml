@@ -1,0 +1,59 @@
+name: check-upstream-age
+description: >
+  Detecta drift do clone KODAI/ vs upstream Davi-Scholze/kod-ai. Alerta SOFT
+  (7-30 dias OU 1-5 commits novos) ou FIRME (>30 dias OU >5 commits novos)
+  via additionalContext. Operacionaliza princípio 2Co 12:9-10 — fraqueza
+  "drift silencioso" vira força "detector visível em cada sessão".
+versão: "1.0"
+atualizado: "2026-05-23"
+status: FUNCIONAL
+
+eixo: orchestration
+tipo: hook
+
+disparo:
+  evento: SessionStart
+  matcher: ""
+
+implementacao:
+  arquivo: check-upstream-age.js
+  linguagem: nodejs
+  timeout: 5s (git fetch)
+  fail_safe: log + continue (rede offline, git ausente, KODAI/ ausente)
+
+operacionaliza:
+  - feedback_kodai_principio_2corintios_12_9 (fraqueza 3 vira força)
+  - politicas/notebooklm-fonte-ancorada.md (fonte oficial = upstream, drift = risco)
+
+bloqueia: false
+modifica_estado: false (read-only — apenas git fetch)
+adiciona_contexto: true (quando alerta soft ou firme)
+
+quality_gates:
+  - "Silencioso quando idade <7d E zero commits novos"
+  - "Alerta SOFT para 7-30 dias OU 1-5 commits novos"
+  - "Alerta FIRME para >30 dias OU >5 commits novos"
+  - "NÃO faz pull automático (humano decide)"
+  - "Timeout 5s no git fetch (rede lenta não trava sessão)"
+  - "Fail-safe: log + continue se qualquer erro (rede, git, KODAI/ ausente)"
+  - "Detecta KODAI/ ausente e fica silencioso (pasta sem KOD.AI)"
+
+related:
+  - skills-universais/atualizar-kodai/SKILL.md (skill alvo da sugestão)
+  - skills-universais/kodai-status/SKILL.md (skill irmã — reporte completo de estado)
+  - politicas/escuta-antes-de-agir.md (não faz pull cego — informa pra humano decidir)
+
+historico:
+  - 2026-05-23 v1.0 FUNCIONAL — criado como resposta ao gap D3 do piloto Navortech-Desenvolvimento
+
+instalacao:
+  - Copiar arquivo + manifest pra .claude/hooks/ do projeto consumidor
+  - Adicionar entry em .claude/settings.json:
+      "SessionStart": [{
+        "matcher": "",
+        "hooks": [{
+          "type": "command",
+          "command": "node \".claude/hooks/check-upstream-age.js\""
+        }]
+      }]
+  - Co-existe com SessionStart instrucional (echo) — múltiplos hooks no mesmo evento são suportados

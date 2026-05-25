@@ -1,0 +1,127 @@
+name: spec
+type: skill
+category: pipeline
+version: 1.0.0
+status: FUNCIONAL
+created: 2026-05-22
+updated: 2026-05-22
+eixo: orchestration
+escopo: global
+sensibilidade: publico
+nivel_operacional: meta
+
+description: >
+  Passo 1/6 do pipeline canônico KOD.AI. Cria especificação formal em
+  docs/decisoes/<data>_<topico>.md antes de qualquer código. Problema +
+  hipótese + escopo + contratos + riscos + alternativas + critérios de
+  aceitação. Pré-condição pra /break.
+
+skill_principal: spec
+pipeline_position: 1
+pipeline_next: break
+pipeline_prev: brainstorming (opcional)
+
+triggers:
+  - /spec
+  - vamos especificar
+  - spec pra
+  - preciso de spec
+  - abrir feature nova
+
+handoff_in:
+  required:
+    problema: "1 frase do que dói hoje"
+  optional:
+    cliente_slug: "se feature é cliente-específica"
+    tamanho_estimado: "small | medium | large"
+    nivel_operacional_alvo: "L1 | L2 | L3 | meta"
+    brainstorming_anterior: "path se rodou /brainstorming antes"
+
+handoff_out:
+  produces:
+    spec_md: "docs/decisoes/<YYYY-MM-DD>_<topico>.md"
+    status: "aberto (default ao criar)"
+    proximo_passo: "/break"
+
+quality_gates:
+  - "Spec persistida em docs/decisoes/<data>_<topico>.md"
+  - "Frontmatter YAML completo"
+  - "Problema com evidência concreta"
+  - "Hipótese falsificável"
+  - "Escopo explícito (dentro + FORA)"
+  - "Mín 2 alternativas consideradas"
+  - "Critérios de aceitação mensuráveis"
+  - "nivel_operacional declarado + alinhado com regra-ouro-l1-antes-de-l3"
+  - "Commit + push imediato"
+
+requires:
+  blocking:
+    - "Problema concreto + escopo declarável"
+  recommended:
+    - "/brainstorming rodado antes (se tema aberto)"
+    - "/verificar-infra-real rodado antes (se toca infra)"
+    - "Contexto STRATEGIC-NORTH lido (alinhamento estratégico)"
+
+allowed-tools:
+  - Read
+  - Write
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+reads:
+  - "docs/decisoes/ (specs relacionadas)"
+  - "docs/STRATEGIC-NORTH.md"
+  - "3-CONTEXTOS-DOMINIO/niveis-operacionais-l1-l2-l3/"
+
+writes_to:
+  - "docs/decisoes/<YYYY-MM-DD>_<topico>.md"
+
+related:
+  - ../break/SKILL.md (passo 2)
+  - ../plan/SKILL.md (passo 3)
+  - ../brainstorming/SKILL.md (pré-spec opcional)
+  - ../../politicas/regra-ouro-l1-antes-de-l3.md
+  - ../../politicas/verificar-infra-real.md
+
+lineage:
+  origin: upstream
+  derived_from:
+    - source: "Pipeline canônico KOD.AI divulgado em CLAUDE.md + regras-sessao.md"
+      type: dogfooding-gap
+    - source: "Audit 2026-05-22 item 2 YELLOW — pipeline divulgado mas não implementado"
+      type: gap-analysis-pos-auditoria
+  anti_pollution_passed: true
+  validado_por: ["Davi 2026-05-22"]
+
+sugere_proxima_skill:
+  - condicao: "spec persistida + aprovada"
+    skill: break
+    razao: "Decompor em tasks atômicas"
+  - condicao: "spec toca múltiplos níveis L1/L2/L3"
+    skill: regra-ouro-l1-antes-de-l3 (política)
+    razao: "Verificar antes de planejar L3"
+
+supports_reflexion: true
+
+runtime:
+  mode: skill
+  trigger: manual
+  portavel_pra_agent: true
+  cenario_agent: "trigger por evento (nova issue GitHub, novo brief cliente) que gera spec automaticamente em status=aberto pra humano aprovar"
+
+quando_promover_battle_tested:
+  - aplicado_em_5_specs_reais_diferentes: 5
+  - 0_specs_rejeitadas_por_falta_de_alternativas: true
+  - critérios_aceitação_validados_em_3_features_completadas: 3
+
+limitacoes:
+  - "Não substitui POC quando hipótese exige experimentação real"
+  - "Specs grandes (>5 sub-features) viram mini-projeto — usar /break recursivo"
+  - "Conteúdo da spec é imutável após aprovação (status só muda)"
+
+anti_pollution:
+  metodo: "Vocabulário público engenharia software (spec, contratos, quality gates, alternativas). Estrutura própria."
+  citacoes_diretas: zero
+  marca_mazyos_usada: false
+  atribuicao_em_metadata: true
