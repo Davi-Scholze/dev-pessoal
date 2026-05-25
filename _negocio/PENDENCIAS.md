@@ -43,8 +43,8 @@
 
 | # | Pendência | Projeto | Bloqueia? |
 |---|---|---|---|
-| **C1** ⚠️ | **PAT atual `ghp_QUCC...fBRdi` exposto no remote URL** da pasta-mãe (`git remote -v` mostra em plaintext). Resolução: revogar PAT atual + gerar novo + `git remote set-url origin https://github.com/Davi-Scholze/dev-pessoal.git` (sem token) + configurar credential helper Windows OU `gh auth login` | Pasta-mãe | Push de **9 commits locais** desta sessão (`fa56bab`, `ccf86bc`, `fca38a6`, `8b269f1`, `c5b8454`, `04f9483`, `14c6be1`, `939fc13`, `9319f8c`). **Resolução agendada pra hoje 2026-05-25 Fase 2.** |
-| **C2** | **Revogar token GitHub antigo `ghp_Zht254O3...`** em github.com/settings/tokens (mencionado em commits antigos) | Segurança | Risco permanente de credencial vazada |
+| ~~**C1**~~ | ~~PAT atual `ghp_QUCC...fBRdi` exposto no remote URL~~ **RESOLVIDO 2026-05-25 Fase 2**: PAT revogado + novo PAT via `gh auth login` (Windows Credential Manager encrypted) + remote URL limpo + env var `GITHUB_TOKEN` User removida + 10 commits pushed (até `c09c5c5`) | — | — |
+| ~~**C2**~~ | ~~Revogar token GitHub antigo `ghp_Zht254O3...`~~ **RESOLVIDO 2026-05-25** (Davi revogou em github.com/settings/tokens) | — | — |
 
 ---
 
