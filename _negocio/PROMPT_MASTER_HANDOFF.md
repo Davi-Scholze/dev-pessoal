@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-21 (sessão 4 — final: 3 concorrentes mapeados + modelo venda revisado + 4 skills DRAFT criadas)
+> Última atualização: 2026-05-25 (sessão pós-Navortech — pull + ativação 19 skills + 3 hooks novos)
 
 ---
 

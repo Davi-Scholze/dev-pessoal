@@ -1,15 +1,15 @@
 # MAPA — Projetos Dev Pessoais
 
 > Entrada rápida + mapa detalhado consolidado. Leia ANTES de qualquer outro arquivo.
-> Atualizado: 2026-05-21 (sync KOD.AI 0.6.0-dev commit `e9ea7e6` + ativação hooks JS)
+> Atualizado: 2026-05-25 (sync KOD.AI 0.6.0-dev commit `80f5f07` pós-Navortech + 19 skills + 3 hooks JS novos ativados)
 
 ## TL;DR
 
-Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI 0.6.0-dev sincronizado. 3-4 projetos ativos.
+Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI 0.6.0-dev sincronizado pós-Navortech (2ª instância KODAI rodando em Navortech-Desenvolvimento). 3-4 projetos ativos.
 
 ## Estado atual
 
-**2026-05-21:** KOD.AI 0.6.0-dev (`e9ea7e6`). Pasta-mãe com 67 skills + 8 rules path-scoped + 5 hooks ativos (3 KOD.AI JS + 2 SCHOLZE Python). `/upstream-update` IMPLEMENTADA (7 tasks done, fixtures anti-pollution 6/6 OK). Foco: Decon Fase 1 (aguarda transcrição áudio Denize) + piloto NV-Dev (outra máquina) + brainstorming contexto-profundo.
+**2026-05-25:** KOD.AI 0.6.0-dev (`80f5f07`). Pasta-mãe com **91 skills** + 8 rules path-scoped + **8 hooks ativos** (5 KOD.AI JS + 3 SCHOLZE Python). Pipeline SDD canônico universal (`/spec /break /plan /execute /review /complete`) propagado. Auditoria Navortech-Desenvolvimento concluída sexta 2026-05-23 — KODAI instalado lá como 2º piloto + pasta Davi+KODAI legado removidos (segundo confirmação humana). Próximo foco a decidir entre: continuar dojo (J3 — implementação real do app) OU Decon Fase 1 (D1 — transcrição Denize) OU validar 4 skills DRAFT em uso real.
 
 ## Prioridade dos projetos
 

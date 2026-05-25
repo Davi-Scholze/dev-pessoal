@@ -1,7 +1,7 @@
 # CLAUDE.md — Projetos Dev Pessoais
 > Regras globais de IA para todos os projetos pessoais de Davi Scholze.
 > Leia este arquivo no início de cada sessão.
-> Última atualização: 2026-05-15
+> Última atualização: 2026-05-25
 
 ## Quem sou eu
 - **Nome:** Davi Pereira Scholze

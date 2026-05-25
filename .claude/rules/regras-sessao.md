@@ -1,7 +1,7 @@
 # Regras de Sessão — Projetos Dev Pessoais
 > Leia este arquivo no início de TODA sessão, em QUALQUER projeto.
 > Complemento operacional do CLAUDE.md.
-> Última atualização: 2026-05-15
+> Última atualização: 2026-05-25
 
 ---
 
