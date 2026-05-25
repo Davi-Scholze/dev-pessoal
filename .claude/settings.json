@@ -40,6 +40,10 @@
           {
             "type": "command",
             "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/post-tool-use/kodai-poluicao-detector.js\""
+          },
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/post-tool-use/kodai-auto-log-rotation.js\""
           }
         ]
       }

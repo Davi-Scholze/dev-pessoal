@@ -65,13 +65,12 @@
 
 🆕 = propagadas em 2026-05-25 via `/atualizar-kodai` (origem Navortech absorption)
 
-Convivem lado-a-lado com as **18 skills técnicas SCHOLZE-STACK STUB** (accessibility-axe, api-design-rest, code-review-checklist, conventional-commits, db-schema-postgres-rls, design-tokens, e2e-runner, edge-function-supabase, expo-scaffold, git-flow-strict, lgpd-dsr-endpoint, lgpd-ripd, react-native-nativewind, refactor-safely, responsive-mobile-first, secrets-scan, tailwind-shadcn-scaffold, vitest-unit — todas < 65 linhas, descriptions placeholder; candidatas a população real ou remoção em decisão futura).
+Total atual em `.claude/skills/`: **71** (era 91 — apagados 20 stubs sem implementação concreta).
 
-Total atual em `.claude/skills/`: **89** (91 - 2 stubs duplicados removidos).
-
-**Removidos em 2026-05-25:**
+**Removidos em 2026-05-25 (limpeza clean code):**
 - `spec-driven-dev` (22 linhas) — substituído pela skill universal `spec` + 6 commands delegate
-- `debug-systematic` (27 linhas) — substituído pela skill bundled `systematic-debugging` (233 linhas, robusta)
+- `debug-systematic` (27 linhas) — substituído pela skill bundled `systematic-debugging` (233 linhas)
+- **18 stubs SCHOLZE-STACK** (accessibility-axe, api-design-rest, code-review-checklist, conventional-commits, db-schema-postgres-rls, design-tokens, e2e-runner, edge-function-supabase, expo-scaffold, git-flow-strict, lgpd-dsr-endpoint, lgpd-ripd, react-native-nativewind, refactor-safely, responsive-mobile-first, secrets-scan, tailwind-shadcn-scaffold, vitest-unit) — todos descriptions placeholder, zero implementação concreta. Intenções preservadas em [`_dev/skills-stubs-arquivo.md`](_dev/skills-stubs-arquivo.md) como pack-candidates futuros. Asset real (`design-tokens/tokens.json` com paleta OKLCH) movido pra `_negocio/identidade/design-tokens.json`.
 
 **✓ Conflito SDD RESOLVIDO 2026-05-25:** criados 6 commands delegate em `.claude/commands/` (`spec.md`, `break.md`, `plan.md`, `execute.md`, `review.md`, `complete.md`) que invocam as skills universais KOD.AI quando user digita `/spec` etc. Substitui os commands SDD legados globais em `~/.claude/commands/` por precedência project-level. UX `/spec` preservada, pipeline novo (com Evidence Bloc + handoff contracts) é o que roda.
 
@@ -94,15 +93,15 @@ Preservado: `regras-sessao.md` (extensão SCHOLZE local — regras operacionais 
 
 | Evento | Hooks ativos | Origem |
 |---|---|---|
-| SessionStart | echo "/abrir" + kodai-check-upstream-age 🆕 | SCHOLZE + KODAI |
+| SessionStart | echo "/abrir" + kodai-check-upstream-age | SCHOLZE + KODAI |
 | PreToolUse (Bash) | block-dangerous.py + kodai-pre-commit-guard | SCHOLZE + KODAI |
-| PostToolUse (.*) | log-metrics.py + kodai-poluicao-detector 🆕 | SCHOLZE + KODAI |
+| PostToolUse (.*) | log-metrics.py + kodai-poluicao-detector + kodai-auto-log-rotation 🆕 | SCHOLZE + KODAI |
 | Stop | kodai-check-completion-claims | KODAI |
-| UserPromptSubmit | kodai-inject-warning + kodai-auto-suggest-skills 🆕 | KODAI |
+| UserPromptSubmit | kodai-inject-warning + kodai-auto-suggest-skills | KODAI |
 
-🆕 = ativados 2026-05-25 via `/atualizar-kodai` (origem Navortech sync)
+🆕 = ativado 2026-05-25 sessão pós-faxina (nova política universal `log-rotation` v1.0 — threshold 1MB → archive YYYY-MM-DD-HHMMSS → gzip >30d → quarentena >180d)
 
-Total: **5 hooks JS KOD.AI + 3 hooks Python SCHOLZE** = 8 hooks ativos.
+Total: **6 hooks JS KOD.AI + 3 hooks Python SCHOLZE** = 9 hooks ativos.
 
 ---
 

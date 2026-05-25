@@ -1,0 +1,68 @@
+name: auto-log-rotation
+type: hook
+hook_type: PostToolUse
+disparo: PostToolUse (.*)
+eixo: orchestration
+escopo: global
+versao: 1.0.0
+status: FUNCIONAL
+sensibilidade: publico
+nivel_operacional: meta
+criado: 2026-05-25
+atualizado: 2026-05-25
+
+description: >
+  Hook PostToolUse que rotaciona automaticamente arquivos de log append-only
+  em logs/ quando passam de threshold (default 1MB). Comprime archives após
+  30 dias, quarentena após 180 dias. Operacionaliza a política universal
+  log-rotation: "logs crescem sem ninguém olhar — KOD.AI cuida sozinho,
+  preservando auditoria, nunca apagando silenciosamente".
+
+  Fastpath custa < 5ms (apenas stat de paths conhecidos). Rotação real
+  é operação rara (acontece quando passa threshold). Daily housekeeping
+  (compress/quarantine) gated por marker logs/.last-rotation-check.
+
+  Falha silenciosa: erros vão pra stderr, NUNCA abortam tool use.
+
+politica_irma: politicas/log-rotation.md
+
+config_override:
+  arquivo: .kodai-log-rotation.json (raiz do projeto consumidor)
+  campos:
+    threshold_mb: int (default 1)
+    archive_dir: string (default "logs/archive")
+    compress_after_days: int (default 30)
+    quarantine_after_days: int (default 180)
+
+paths_monitorados:
+  - logs/*.ndjson
+  - logs/*.log
+  - logs/*.jsonl
+
+paths_sagrados_jamais_tocados:
+  - _negocio/contextos/bruto/**
+  - inbox-*/**
+  - .faxina-quarentena/**
+  - .git/**
+  - node_modules/**
+
+lineage:
+  derives_from:
+    - politicas/event-log-ndjson.md (política irmã — define o formato dos logs que esta política rotaciona)
+    - politicas/gitignore-aditivo.md (mesmo princípio: never destroy local state silently)
+    - skills/faxina (destino final de archives >180d via quarentena reversível)
+  origin: Davi 2026-05-25 sessão pós-Navortech (pergunta "como lidar melhor com cuidado de memória?")
+  evidence: pasta-mãe rodando dogfooding desde 2026-05-25 — logs/events.ndjson rotaciona quando passa de 1MB
+
+dependencies:
+  runtime: node >= 14 (built-ins: fs, path, zlib)
+  external: nenhuma
+
+criterios_PASS:
+  - Hook custa < 5ms no fastpath (verificável via benchmark)
+  - logs/events.ndjson nunca passa de threshold + 10% (overshoot máximo entre PostToolUses)
+  - Rotação é atômica (rename, não copy+delete)
+  - Compressão preserva conteúdo (gunzip restaura byte-exato)
+  - Quarentena reversível em 1 comando
+  - Falha de rotação NÃO aborta tool use original
+  - Nenhum log dentro de _negocio/contextos/bruto/ ou inbox-*/ é tocado
