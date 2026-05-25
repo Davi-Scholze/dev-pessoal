@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-25 (sync upstream 0.6.0-dev commit 80f5f07 — +19 skills, +3 hooks JS, +5 contextos-domínio universais via Navortech)
+> Última atualização: 2026-05-25 (sync upstream 0.6.0-dev commit 80f5f07 — +19 skills, +3 hooks JS, +5 contextos-domínio universais via Navortech + 6 commands delegate SDD + remoção 2 stubs duplicados)
 
 ---
 
@@ -65,9 +65,15 @@
 
 🆕 = propagadas em 2026-05-25 via `/atualizar-kodai` (origem Navortech absorption)
 
-Convivem lado-a-lado com as ~20 skills técnicas do SCHOLZE-STACK. Total atual em `.claude/skills/`: **91** (+19 vs sync anterior).
+Convivem lado-a-lado com as **18 skills técnicas SCHOLZE-STACK STUB** (accessibility-axe, api-design-rest, code-review-checklist, conventional-commits, db-schema-postgres-rls, design-tokens, e2e-runner, edge-function-supabase, expo-scaffold, git-flow-strict, lgpd-dsr-endpoint, lgpd-ripd, react-native-nativewind, refactor-safely, responsive-mobile-first, secrets-scan, tailwind-shadcn-scaffold, vitest-unit — todas < 65 linhas, descriptions placeholder; candidatas a população real ou remoção em decisão futura).
 
-**⚠ Conflito conhecido pendente:** pipeline SDD universal (`/spec /break /plan /execute /review`) tem nomes idênticos aos commands legados em `.claude/commands/` do SCHOLZE-STACK. Resolução adiada — manter ambos até `/complete` validar pipeline novo em uso real.
+Total atual em `.claude/skills/`: **89** (91 - 2 stubs duplicados removidos).
+
+**Removidos em 2026-05-25:**
+- `spec-driven-dev` (22 linhas) — substituído pela skill universal `spec` + 6 commands delegate
+- `debug-systematic` (27 linhas) — substituído pela skill bundled `systematic-debugging` (233 linhas, robusta)
+
+**✓ Conflito SDD RESOLVIDO 2026-05-25:** criados 6 commands delegate em `.claude/commands/` (`spec.md`, `break.md`, `plan.md`, `execute.md`, `review.md`, `complete.md`) que invocam as skills universais KOD.AI quando user digita `/spec` etc. Substitui os commands SDD legados globais em `~/.claude/commands/` por precedência project-level. UX `/spec` preservada, pipeline novo (com Evidence Bloc + handoff contracts) é o que roda.
 
 ### Regras path-scoped em `.claude/rules/` (propagadas 2026-05-21)
 
