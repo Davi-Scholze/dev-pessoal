@@ -1,0 +1,97 @@
+name: criar-agente
+tipo: skill
+eixo: orchestration
+escopo: global
+versao: 0.1.0-DRAFT
+status: DRAFT
+sensibilidade: publico
+nivel_operacional: dev
+criado: 2026-05-25
+atualizado: 2026-05-25
+
+description: >
+  Wizard universal pra criar agente IA do nível 1 (chatbot) ao 5 (AI-First
+  Business OS). Entrevista 4 perguntas (tier comercial + padrão + stack +
+  cliente), decide packs ativados automaticamente, gera scaffold completo
+  (pasta + agent.py/ts + manifest com lineage v1 + handoff_in/out + .env
+  + tests + briefing). Mapeia pra 1 dos 4 padrões prontos quando aplicável.
+
+  Use quando disser "criar agente IA", "/criar-agente", "novo agente pra
+  cliente X", "preciso de chatbot pra Y", "wizard agente", "começar agente".
+
+triggers:
+  explicit:
+    - "/criar-agente"
+    - "criar agente"
+    - "novo agente"
+    - "wizard agente"
+  implicit:
+    - "preciso de chatbot pra <cliente>"
+    - "agente IA pra <vertical>"
+    - "começar agente"
+    - "scaffolding de agente"
+
+handoff_in:
+  required: nenhum (skill faz entrevista pra coletar)
+  optional:
+    - cliente_slug (string) — se fornecido, pula P4
+    - tier (1|2|3) — se fornecido, pula P1
+    - padrao (string) — se fornecido, pula P2
+    - stack (python|typescript|hibrido) — se fornecido, pula P3
+
+handoff_out:
+  produces:
+    - path: agentes/<cliente_slug>/ (pasta criada no projeto consumidor)
+    - manifest_yaml: com lineage v1 + handoff_in/out + quality_gates
+    - scaffold_code: agent.py OR agent.ts (template do padrão escolhido)
+    - env_example: .env.example com chaves dos packs ativos
+    - smoke_test: tests/smoke.py
+    - briefing_template: docs/briefing.md (vazio, pra cliente preencher)
+
+quality_gates:
+  - estrutura_pasta_criada: true
+  - manifest_lineage_v1: true
+  - packs_declarados: >= 3
+  - scaffold_sintaxe_valida: true (node -c OU python -c no arquivo gerado)
+  - env_example_completo: true (1 var por dependência declarada)
+
+contexto_dominio_irmao: 3-CONTEXTOS-DOMINIO/agentes-ia-construcao
+packs_consumidos:
+  - 2-PACKS/packs/ia/agentes-llm-core (tier 1+)
+  - 2-PACKS/packs/ia/agentes-rag-knowledge (tier 1+)
+  - 2-PACKS/packs/ia/agentes-infra-deploy (tier 1+)
+  - 2-PACKS/packs/ia/agentes-memory (tier 2+)
+  - 2-PACKS/packs/ia/agentes-tools-mcp (tier 2+)
+  - 2-PACKS/packs/ia/agentes-orchestration (tier 3)
+
+perfil_de_instalacao_irmao: 0-INSTALACAO/perfis/agentes-builder.yaml
+
+lineage:
+  derives_from:
+    - 3-CONTEXTOS-DOMINIO/agentes-ia-construcao (contexto canônico — todos os 6 blocos + 9 conceitos)
+    - 2-PACKS/packs/ia/agentes-* (6 packs ativados condicionalmente)
+    - politicas/handoff-contracts (manifest com handoff_in/out + quality_gates)
+    - skills-universais/criar-pack (padrão de wizard /criar-*)
+    - skills-universais/novo-projeto (padrão de scaffold)
+  origin: Davi 2026-05-25 (doc estratégico "Infra Contextual Universal" — visão "wizard universal pra agentes")
+  evidence: DRAFT — promoção pra FUNCIONAL após 2 execuções end-to-end com Evidence Bloc
+
+criterios_PASS_FUNCIONAL:
+  - 2+ execuções end-to-end completas
+  - 2+ agentes criados com scaffold válido
+  - 1+ agente criado evoluiu pra produção real
+  - Evidence Bloc de cada execução
+
+skills_compositoras:
+  - /spec (formalizar primeira feature)
+  - /break + /plan + /execute + /review + /complete (pipeline SDD)
+  - /criar-pack (se padrão exigir capacidade técnica nova)
+  - /criar-contexto (se cliente exigir domínio novo)
+  - /proposta-cliente (gerar proposta comercial paralela)
+  - /mapear-concorrente (entender o que diferenciar)
+
+anti_patterns:
+  - Criar agente na raiz do upstream KODAI (deve ser no projeto consumidor)
+  - Scaffold sem manifest (não é discoverable)
+  - Promover STUB → FUNCIONAL sem Evidence Bloc
+  - Mock data no scaffold (deve estar vazio pronto pra preencher)

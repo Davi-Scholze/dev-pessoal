@@ -111,6 +111,7 @@ Total: **6 hooks JS KOD.AI + 3 hooks Python SCHOLZE** = 9 hooks ativos.
 
 | Domínio | Status | Path no KOD.AI | Origem |
 |---|---|---|---|
+| **agentes-ia-construcao** 🆕 | **DRAFT v0.1.0 (+ 9 conceitos)** | `KODAI/3-CONTEXTOS-DOMINIO/agentes-ia-construcao/` | **Davi 2026-05-25 (doc estratégico "Infra Contextual Universal")** |
 | ai-ecosystem-strategy | DRAFT (+ lineage v1) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
 | competitive-intelligence | DRAFT (+ lineage v1 + Kelvin + 3 concorrentes) | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) + análises (2026-05-21) |
 | sistemas-empresariais-br | DRAFT (+ lineage v1 + Bucket B) | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | Davi 2026-05-21 (par doc+notebook 26782f74) |
@@ -142,6 +143,12 @@ Nenhum pack FUNCIONAL ainda — promoção exige Evidence Bloc com uso real.
 | `infra/qr-scanner-web` | STUB | upstream | absorção 2026-05-20 |
 | `infra/pwa-webgpu` | docs | upstream | absorção 2026-05-20 |
 | `ia/face-recognition` | notebooklm-only | upstream | absorção 2026-05-20 |
+| **`ia/agentes-llm-core`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 1/6 — LiteLLM gateway)** |
+| **`ia/agentes-tools-mcp`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 2/6 — MCP servers)** |
+| **`ia/agentes-memory`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 3/6 — Mem0+LangMem)** |
+| **`ia/agentes-orchestration`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 4/6 — LangGraph+CrewAI)** |
+| **`ia/agentes-rag-knowledge`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 5/6 — Weaviate+pgvector)** |
+| **`ia/agentes-infra-deploy`** 🆕 | **STUB v0.1.0** | upstream | **Davi 2026-05-25 (Bloco 6/6 — Supabase+Temporal)** |
 | `dev/ui-responsivo-smb` | DRAFT (+ lineage v1) | upstream | Davi 2026-05-21 (par doc+notebook 216c85a8) |
 | `comercial/modelos-venda-ia` | DRAFT (+ lineage v1) | upstream | gap Kelvin 2026-05-21 (DFY/DWY/DIY + 6 alavancas) |
 | `atendimento/customer-success-ia` | DRAFT (+ lineage v1) | upstream | gap Kelvin 2026-05-21 (N1/N2 WhatsApp+Claude) |
