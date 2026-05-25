@@ -135,11 +135,46 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 
 ## Próxima ação
 
-**Hoje 2026-05-25 — sequência restante da sessão massiva:**
+**Sessão 2026-05-25 encerrando após reconciliação massiva (Davi vai dar `/clear`).**
 
-1. **Fase 2 (em andamento):** Resolver C1 (PAT exposto) → Davi revoga em github.com/settings/tokens + gera novo + reconfiguro remote sem token no URL + push 9 commits pasta-mãe
-2. **Fase 3:** Conversa sobre dojo-familia-scholze (NÃO codar direto — Davi quer alinhar onde parou + o que quer agora antes de scaffolding/implementação)
-3. **Opcional se der tempo:** Clonar repo Navortech aqui pra começar criar agentes IA substituindo Omnismart (provider externo de agentes que Davi quer substituir)
+### O que rolou nesta sessão completa
+1. Pull KODAI upstream (18 commits da Navortech) + ativação 19 skills + 3 hooks
+2. Resolução conflito SDD (6 commands delegate)
+3. Apagar 20 stubs SCHOLZE (clean code)
+4. Política universal `log-rotation` v1.0 + hook FUNCIONAL
+5. **Fundação completa de `agentes-ia-construcao`** (contexto + 6 packs STUB + skill `/criar-agente` + perfil + spec)
+6. Absorção curada Liam Ottley (+1 conceito + Voice Agent + scripts venda)
+7. Fluxo brutos formalizado (`_brutos-novos/` gitignored)
+8. C1+C2 RESOLVIDOS (PATs revogados + `gh auth keyring` + push 10 commits)
+9. **Conversa estratégica dojo: posicionamento KOD.AI consolidado** — agência (vende sistemas) + framework (open-source) de mesmo nome; cada cliente = instância dedicada; pricing canônico STRATEGIC-NORTH v1.4
+10. **Documento mestre dojo `ARQUITETURA-MESTRE.md`** criado (506 linhas) + corrigido pra alinhar com posicionamento agência
+11. **Memórias persistentes CRÍTICAS** estabelecidas: modelo negócio + realidade financeira Davi (zero capital, bootstrap MazyOS-style)
+12. **Skill `/abrir` evoluída**: Passo 1.5 carrega ATIVAMENTE KODAI canon (`AGENTS.md` + `STRATEGIC-NORTH.md`) + memórias críticas — evita IA hesitar em decisões estratégicas em sessões futuras
+13. CLAUDE.md raiz pasta-mãe atualizado com ordem de leitura canônica obrigatória
+
+### Decisões estratégicas confirmadas pelo Davi
+
+- **KOD.AI** = agência IA SMB BR + framework open-source de mesmo nome (igual Vercel/Next.js)
+- **Davi = fundador KOD.AI** (não é "MeuDojo founder")
+- **Cliente 0 = Dojô Família Scholze (pai)** — **NÃO COBRAR** (case study + validação)
+- **Cliente 1 (paralelo)** = professor que Davi já conversou (academia conhecida)
+- **Caso familiar paralelo** = Decon (mãe Denize, escritório contábil — pode ser parceiro universal modelo STRATEGIC-NORTH v1.1)
+- **Bootstrap radical** — zero capital, mas plano viável: pré-vende pacote completo → 50% upfront → reinveste → próximo cliente
+- **Sem $ pra domínios agora** — Davi aguarda primeiro fechamento pra comprar `kodai.com.br` + `dojofamiliascholze.com.br`
+
+### Próxima sessão (Davi vai dar /clear)
+
+**Objetivo:** desenvolver **apresentação pro cliente 0 (Dojô Família Scholze)** — começar o sistema de fato:
+1. Sessão Zero automática já vai carregar TODO o canon + memórias críticas (skill `/abrir` v2 evoluída nesta sessão garante)
+2. Scaffold monorepo (apps/site + apps/app + packages/*) — começar mesmo sem domínio (Vercel subdomínio gratuito até primeiro fechamento)
+3. Sprint 1 do dojo: scaffold + login + tela "Bem-vindo Sensei" + identidade visual do pai aplicada
+4. Em paralelo: outreach manual ao professor já conversado (pré-venda)
+
+### Frentes adiadas (esperam $)
+- Domínios `kodai.com.br` + `dojofamiliascholze.com.br` (R$ 80 total)
+- MEI KOD.AI (gratuito mas pode esperar 1ª venda)
+- Apple Dev (PWA elimina necessidade — adiado indefinidamente)
+- Ferramentas pagas (Cursor Pro, etc) — só após receita
 
 **Loop de captura validado end-to-end** na sessão sexta 2026-05-23 (Navortech): `/auditar-projeto` → `/absorver-contexto` → `/upstream-update` → propagação automática via `git pull` + `/atualizar-kodai`. 18 commits geraram nesta pasta-mãe.
 

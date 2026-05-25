@@ -6,7 +6,15 @@
 
 ---
 
-## 🎯 Foco atual (revisado 2026-05-21 sessão 4 — continuação após Kicksite + visão de venda revisada)
+## 🎯 Foco atual (revisado 2026-05-25 sessão massiva final — posicionamento KOD.AI consolidado)
+
+**KOD.AI = agência IA SMB BR + framework open-source de mesmo nome.** Davi = fundador.
+
+**Próxima sessão (pós-/clear):** desenvolver dojo case 0 (pai, sem cobrar) + outreach professor já conversado em paralelo. Bootstrap radical zero capital. Cada cliente = instância dedicada. Pricing canônico STRATEGIC-NORTH v1.4 (R$ 8-25k setup + R$ 3-15k/mês).
+
+**Skill `/abrir` v2 evoluída nesta sessão** garante que próxima Sessão Zero carrega KODAI canon + memórias críticas — Davi não precisa relembrar tudo toda vez.
+
+## 🎯 Foco anterior (histórico — 2026-05-21 sessão 4 — continuação após Kicksite + visão de venda revisada)
 
 **KOD.AI evolui na prática, não em pesquisa.** Foco mudou pra colocar KOD.AI em uso REAL:
 
@@ -50,13 +58,14 @@
 
 ## P0 — Fazer agora (1-2 sessões)
 
-### Decon (prioridade 1 do negócio)
+### Decon (case familiar paralelo — Denize Scholze, mãe)
 
 | # | Pendência | Próxima ação |
 |---|---|---|
 | D1 | **Transcrição áudio Denize** — desbloqueia toda a Fase 1 (mapeamento Domínio) | Davi grava ou pega áudio existente → `/transcribe-audio` |
 | D2 | **Assets de marca** — logo.png, denize-profile.jpg, og-image.jpg | Davi gera (ou contrata) |
 | D3 | **Deploy Vercel** decon-sistema | Após assets prontos |
+| D4 🆕 | **Decon como case parceiro universal** (modelo STRATEGIC-NORTH v1.1 Doc 1) — quando KOD.AI agência amadurecer, Decon vira **parceiro contabilidade** pra outros clientes da agência (cross-sell SMB) | Após primeiro fechamento externo |
 
 ### KOD.AI (foco da fase atual: contexto)
 
@@ -102,14 +111,16 @@
 | K10 | ~~**Configurar prompt caching** efetivamente~~ **PARKED — não-aplicável-CLI** (verificado 2026-05-21 em `KODAI/.claude/hooks/prompt_cache_config.md`: harness Anthropic gerencia automaticamente; sem flag em `settings.json`. Re-abrir quando KOD.AI tiver SDK Anthropic custom) | Documentação intacta em `prompt_cache_config.md` |
 | K11 | **Skill `/skill-creator`** rodar pra criar próxima skill (validar workflow) | Auto-validação do bundle Tier 3 — requer skill em mente |
 
-### Dojô (piloto KOD.AI — prioridade 1 do foco atual)
+### Dojô case 0 KOD.AI (NÃO cobrar do pai — case study + validação)
 
 | # | Pendência | Decisão / Próxima ação |
 |---|---|---|
-| J1 | ~~Confirmar stack~~ **RESOLVIDO 2026-05-21 sessão 4** — React Native + Expo + TypeScript + Supabase + Asaas (confirmado em `gestao-academia-esportiva-br/conceitos/stack-tecnica-mobile-saas-vertical.md`) | — |
-| J2 | Estrutura inicial do app | Após decisão pós-Navortech (ver foco atual) |
-| J3 | **Implementar app dojo real usando `gestao-academia-esportiva-br` DRAFT como guia** — gera Evidence Bloc pra promover contexto FUNCIONAL (K15 + K25) | Após decisão pós-Navortech 2026-05-22 |
-| J4 | **Material absorvido do pai já no repo** (4 brutos + 9 imagens classificadas + 4 assets oficiais reais + INDEX). Davi confirmou que ESSES são todos os assets disponíveis hoje (não pedir mais ao pai). | Aplicar em design-guide quando começar implementação (J3) |
+| J1 | ~~Confirmar stack~~ **REVISADO 2026-05-25**: NÃO React Native + Expo. Stack final: **PWA universal (Vite + React + Next.js site + Supabase + Asaas + vite-plugin-pwa)**. Decisão completa em `dojo-familia-scholze/contextos/mapeamento/ARQUITETURA-MESTRE.md` | — |
+| J2 | **Estrutura inicial do app** — scaffold monorepo (apps/site Next.js + apps/app Vite PWA + packages/ui+lib+supabase) | **Próxima sessão (pós-/clear) — Sprint 1** |
+| J3 | **Implementar Sprint 1**: login Magic Link + tela "Bem-vindo Sensei" + identidade visual do pai aplicada | Próxima sessão |
+| J4 | ~~Material absorvido do pai~~ **PRONTO** (4 brutos + 9 imagens classificadas + 4 assets oficiais reais + INDEX em `_negocio/identidade/`). Davi confirmou que ESSES são todos os assets disponíveis. | Aplicar em design-guide no Sprint 1 |
+| J5 🆕 | Sprint 2-4: CRUD alunos + presença + graduação + certificado + landing | Sprints sucessivos |
+| J6 🆕 | **NÃO cobrar do pai** — case study importa mais que receita. Custo infra (R$ 0 free tiers + R$ 80 domínios futuros) sai do bolso quando 1º cliente externo fechar | — |
 
 ---
 

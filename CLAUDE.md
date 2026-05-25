@@ -12,10 +12,30 @@
 
 ## Leitura obrigatória (ordem)
 
-1. `_negocio/MAPA.md` — visão geral e estado atual (sempre primeiro)
-2. `.claude/rules/regras-sessao.md` — regras operacionais de toda sessão
-3. `.claude/skills/` — skills estruturadas por domínio
-4. CLAUDE.md do projeto específico (se existir)
+> ⭐ **CRÍTICO 2026-05-25:** IA deve ler ATIVAMENTE os 4 documentos canônicos abaixo na Sessão Zero (`/abrir`).
+> Se ignorar, hesita em decisões estratégicas + força usuário a relembrar tudo toda sessão.
+
+### Canônicos KOD.AI (obrigatório se `KODAI/` clonado na raiz)
+
+1. **`KODAI/AGENTS.md`** — fonte única de regras, 12 princípios não-negociáveis, posicionamento KOD.AI
+2. **`KODAI/docs/STRATEGIC-NORTH.md`** v1.4+ — modelo de negócio (Fase A→B→C), 3 níveis L1/L2/L3, pricing canônico SMB BR (R$ 8-25k setup + R$ 3-15k/mês), 7 diferenciais defensáveis, regra de ouro, loop de evolução
+
+### Canônicos pasta-mãe consumidora
+
+3. **`_negocio/MAPA.md`** — visão geral + estado atual
+4. **`_negocio/PROMPT_MASTER_HANDOFF.md`** — estado vivo da última sessão
+5. **`.claude/rules/regras-sessao.md`** — regras operacionais
+
+### Memórias persistentes ⭐ CRÍTICAS (auto-load via MEMORY.md)
+
+Seção "⭐ CRÍTICAS" no [`MEMORY.md`](C:\Users\usuario\.claude\projects\c--Users-usuario-Documents-Projetos-Dev-Pessoais\memory\MEMORY.md) — ler integral cada arquivo listado lá. Atualmente:
+- `feedback_modelo_negocio_kodai_consolidado.md` — KOD.AI = agência + framework, modelo DFY/DWY/DIY, instâncias dedicadas (não SaaS multi-tenant)
+- `feedback_realidade_financeira_davi.md` — Davi tem ZERO capital, bootstrap radical, 1º cliente pagante = prioridade absoluta
+
+### Skills, projetos específicos
+
+6. `.claude/skills/` — skills estruturadas por domínio
+7. CLAUDE.md do projeto específico (se houver, ex: `Repositorios/dojo-familia-scholze/CLAUDE.md`)
 
 ## Estrutura deste espaço
 

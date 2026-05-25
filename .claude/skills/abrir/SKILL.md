@@ -34,6 +34,41 @@ Verificar em paralelo, sem reportar se tudo OK:
 - Se tudo OK: 1 linha "Sistema OK · N skills · M MCPs" (N = total real em `.claude/skills/`, M = total real de `mcp__*` presentes).
 - Se algo falhar: 1 linha "Sistema ⚠ <N>" + 1 linha por falha com sugestão (`Skills < 10 → rode /atualizar-kodai`, `Memória ilegível → rode /atualizar`).
 
+### Passo 1.5: Carregar KODAI CANON + memórias críticas (OBRIGATÓRIO)
+
+> **Adicionado 2026-05-25 após sessão massiva onde IA hesitou 3x sobre modelo de negócio KOD.AI por NÃO ter lido canônicos.** Este passo evita repetir essa falha.
+
+#### 1.5.1 — Ler ATIVAMENTE 2 arquivos canônicos do KODAI (se existirem)
+
+Se a pasta tem `KODAI/` na raiz (clone do framework upstream):
+
+1. **`KODAI/AGENTS.md`** — fonte única de regras, posicionamento, princípios não-negociáveis. **Ler integral.**
+2. **`KODAI/docs/STRATEGIC-NORTH.md`** — modelo de negócio (Fase A→B→C), 3 níveis operacionais L1/L2/L3, pricing canônico SMB BR, 7 diferenciais, regra de ouro, loop central. **Ler integral.**
+
+Se o KODAI não estiver clonado (pasta consumidora sem `KODAI/` raiz), pular sem erro.
+
+#### 1.5.2 — Ler ATIVAMENTE memórias críticas marcadas com ⭐ no MEMORY.md
+
+Carregar `MEMORY.md` (já auto-load do Claude Code). Pra cada entrada marcada com **⭐ CRÍTICA** (ou no topo do index sob seção "⭐ CRÍTICAS"), **ler integral o arquivo .md correspondente**.
+
+Memórias críticas típicas pra projetos KODAI:
+- `feedback_modelo_negocio_kodai_consolidado.md` — modelo agência+framework, pricing canônico, loop
+- `feedback_realidade_financeira_davi.md` — bootstrap-mode, sem capital, primeiro cliente prioridade
+- Outras com prefixo `feedback_` que aparecerem como críticas
+
+#### 1.5.3 — Registrar internamente
+
+Não menciona no reporte canônico (Passo 5) — silencioso quando OK. Mas IA carrega esse contexto pra:
+- Não propor coisa que viole modelo (ex: "SaaS único multi-tenant" quando o modelo é "agência + N instâncias")
+- Não propor compras que violem bootstrap (ex: comprar dominio .ai US$ 200 sem ROI <30 dias)
+- Não recomendar arquitetura que ignore os 3 níveis L1/L2/L3
+- Citar canon corretamente quando relevante ("conforme STRATEGIC-NORTH v1.4 ...")
+
+#### 1.5.4 — Se algum canon falhar leitura
+
+Reportar 1 linha no início do Passo 5:
+> "⚠ KODAI canon não carregado completamente — STRATEGIC-NORTH.md ausente. Sessão pode hesitar em decisões estratégicas. Rode `/atualizar-kodai` ou verifique `KODAI/` presente."
+
 ### Passo 2: Classificar memória (completa | parcial | vazia)
 
 Ler `_memoria/empresa.md`, `_memoria/preferencias.md`, `_memoria/estrategia.md` e classificar:
@@ -53,15 +88,15 @@ Ler `_memoria/empresa.md`, `_memoria/preferencias.md`, `_memoria/estrategia.md` 
 
 Ler em ordem, pegar só os campos relevantes (não ler arquivos inteiros se grandes):
 
-- `_negocio/PROMPT_MASTER_HANDOFF.md` → seção "Próxima ação" (1ª linha) + seção "Bloqueios" (1ª linha).
-- `_negocio/PENDENCIAS.md` → cabeça da fila (1-2 itens P0/P1).
+- `PROMPT_MASTER_HANDOFF.md` → seção "Próxima ação" (1ª linha) + seção "Bloqueios" (1ª linha).
+- `PENDENCIAS.md` → cabeça da fila (1-2 itens P0/P1).
 - `docs/SESSAO_BACKUP.md` (só em projeto-solo) → última task.
 
 Se nenhum desses existir, registrar handoff como "primeira sessão / nenhum estado anterior".
 
 ### Passo 4: Identidade visual (passivo)
 
-Confirmar se `_negocio/identidade/design-guide.md` está preenchido (sem `_(a definir)_` em cores/fontes principais). **Não mencionar no reporte** se está vazio — só vira problema quando uma skill visual for chamada. Guardar mentalmente para essa hora.
+Confirmar se `identidade/design-guide.md` está preenchido (sem `_(a definir)_` em cores/fontes principais). **Não mencionar no reporte** se está vazio — só vira problema quando uma skill visual for chamada. Guardar mentalmente para essa hora.
 
 ### Passo 5: Síntese canônica (5-7 linhas)
 
@@ -90,7 +125,7 @@ O que vamos fazer?
 - Não listar quais arquivos foram lidos
 - Não confirmar leitura
 - Não fazer outras perguntas além das do Passo 5
-- Se `_negocio/identidade/design-guide.md` estiver em branco, não mencionar (vira problema só em skill visual)
+- Se `identidade/design-guide.md` estiver em branco, não mencionar (vira problema só em skill visual)
 - Não repetir o reporte se a sessão já fez Sessão Zero (heurística: se a primeira mensagem desta sessão já foi um reporte canônico, não duplicar)
 
 ## Regras
@@ -111,8 +146,10 @@ E parar. Não tentar adivinhar contexto.
 ## Falhas conhecidas
 
 - **YAML frontmatter quebrado** em `_memoria/*.md`: reportar arquivo + linha + oferecer `/atualizar` pra reconciliar.
-- **`_negocio/PROMPT_MASTER_HANDOFF.md` ausente** em projeto que não é template-pasta-mãe: tratar como "sem handoff anterior" — não erro.
+- **`PROMPT_MASTER_HANDOFF.md` ausente** em projeto que não é template-pasta-mãe: tratar como "sem handoff anterior" — não erro.
 - **`.claude/skills/` com < 10 entradas:** sinal de propagação incompleta. Sugerir `/atualizar-kodai`.
+- **KODAI canon ausente (`KODAI/AGENTS.md` OU `KODAI/docs/STRATEGIC-NORTH.md`):** IA pode hesitar em decisões estratégicas (modelo de negócio, pricing, posicionamento). Avisar usuário e sugerir verificação do clone.
+- **MEMORY.md sem seção "⭐ CRÍTICAS":** IA não sabe quais memórias priorizar leitura. Sugerir reorganização do índice.
 
 ## Relação com `/check-in`
 
