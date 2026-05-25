@@ -1,13 +1,37 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-25 (sessão pós-Navortech — pull + ativação 19 skills + 3 hooks novos)
+> Última atualização: 2026-05-25 (sessão pós-Navortech MASSIVA — 9 commits pasta-mãe + 3 commits upstream + agentes-ia foundation + absorção Liam Ottley + fluxo brutos)
 
 ---
 
 ## Brief atual
 
-Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 skills técnicas, 8 hooks). KOD.AI 0.6.0-dev sincronizado (upstream commit `e9ea7e6`).
+Workspace pessoal de Davi Scholze. SCHOLZE-STACK implantado (18 agentes, ~20 skills técnicas, 8 hooks). KOD.AI 0.6.0-dev sincronizado (upstream commit `85b2e00`).
+
+**Sessão 2026-05-25 — RECONCILIAÇÃO MASSIVA + AGENTES IA + LIAM OTTLEY (em andamento):**
+
+Sequência: pull KODAI (18 commits novos da Navortech via outro PC) → ativação 19 skills + 3 hooks → resolução conflito SDD via 6 commands delegate → apaga 20 stubs (clean code) → log-rotation política universal + hook → agentes-ia foundation completa (contexto + 6 packs + skill `/criar-agente` + perfil) → absorção curada Liam Ottley (+1 conceito + Voice Agent + scripts venda) → fluxo brutos formalizado (`_brutos-novos/` gitignored).
+
+**Métricas da sessão:**
+- 9 commits pasta-mãe locais (todos aguardando push — bloqueio C1 PAT)
+- 3 commits upstream KOD.AI pushed (`6ca94f9`, `7dcc96b`, `85b2e00`)
+- Skills: 89 → 72 (eliminou 20 stubs, manteve só skills funcionais ou DRAFT genuíno)
+- Hooks: 5 → 9 ativos (3 novos KODAI Navortech + log-rotation novo)
+- Contextos-domínio: 8 → 9 (+`agentes-ia-construcao` DRAFT v0.1.1 com 10 conceitos)
+- Packs upstream: 12 → 18 (+6 `ia/agentes-*` STUB)
+- NotebookLMs: 79 → 81 (+1 Infra Contextual + 1 Liam Ottley)
+- Memória persistente: `project_kodai.md` reescrito; `feedback_fluxo_brutos.md` criado
+
+**Decisões estratégicas:**
+1. **KOD.AI é Infraestrutura Contextual Universal pra agentes IA** — direção explícita formalizada em `KODAI/docs/decisoes/2026-05-25_kodai-infra-agentes-ia-universal.md`. Vendor-neutral via LiteLLM, progressive disclosure tier 1→5.
+2. **Absorção curada > absorção verbatim** — do Liam Ottley peguei só 3 itens (AAA→AIOS evolução + Voice + scripts venda). Rejeitei explicitamente 6 itens (funil YouTube, Skool, garantia 50%, Hostinger, "AIOS 7 dias" claim, lock-in n8n).
+3. **Fluxo brutos formalizado** — Davi salva em `_brutos-novos/` gitignored; IA processa + move pra `inbox-davi/<data>-<tema>/`. Memória persistente registrada.
+4. **Clean code KOD.AI** — apaguei 18 stubs SCHOLZE-STACK + 2 duplicados; só ficou skill com implementação real OU DRAFT/STUB com lineage v1 + critério PASS_FUNCIONAL explícito.
+
+**Sessão 2026-05-21 (sessão 4 — virada de foco KOD.AI prático + piloto dojo):**
+
+**Insight central:** KOD.AI evolui na prática, não em pesquisa. Foco mudou pra colocar KOD.AI em uso REAL → dojo virou primeiro piloto, Navortech foi segundo (concluído 2026-05-23).
 
 **Sessão 2026-05-21 (concluída):**
 - `git pull` upstream KOD.AI (47 arquivos) + `/atualizar-kodai` total (10 skills + 6 rules propagadas)
@@ -111,27 +135,26 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 
 ## Próxima ação
 
-**Amanhã 2026-05-22 — frente única confirmada:**
+**Hoje 2026-05-25 — sequência restante da sessão massiva:**
 
-**Auditar Navortech-Desenvolvimento** via `/auditar-projeto` + `/upstream-update` end-to-end (segundo piloto KOD.AI). Plano detalhado em `inbox-davi/2026-05-22-plano-nv-dev.md` (gerado na sessão 3 de 2026-05-21). Tempo estimado: 60-90min. Requer estar na máquina correta com acesso ao repo Navortech.
+1. **Fase 2 (em andamento):** Resolver C1 (PAT exposto) → Davi revoga em github.com/settings/tokens + gera novo + reconfiguro remote sem token no URL + push 9 commits pasta-mãe
+2. **Fase 3:** Conversa sobre dojo-familia-scholze (NÃO codar direto — Davi quer alinhar onde parou + o que quer agora antes de scaffolding/implementação)
+3. **Opcional se der tempo:** Clonar repo Navortech aqui pra começar criar agentes IA substituindo Omnismart (provider externo de agentes que Davi quer substituir)
 
-**Pull amanhã na NV-Dev funciona pra:** KOD.AI upstream (13 commits desta sessão pushed) + repo dojo (todos pushed). **NÃO funciona pra:** pasta-mãe `dev-pessoal` (5 commits locais bloqueados por C1 PAT exposto — isolado a esta máquina).
+**Loop de captura validado end-to-end** na sessão sexta 2026-05-23 (Navortech): `/auditar-projeto` → `/absorver-contexto` → `/upstream-update` → propagação automática via `git pull` + `/atualizar-kodai`. 18 commits geraram nesta pasta-mãe.
 
-**Loop de captura de evoluções da NV-Dev pro upstream KOD.AI já implementado:** `/auditar-projeto` (8 fases) → `/absorver-contexto` ou `/absorver-referencia` (curadoria 4 buckets) → `/upstream-update` (modelo A funcional, anti-pollution 7 SIM) → propagação automática pra outras instalações via `git pull`.
-
-**Após Navortech (a decidir):**
-- Validar end-to-end as 4 skills novas DRAFT criadas hoje em uso real (próximas execuções promovem DRAFT → FUNCIONAL)
-- Continuar piloto dojo: `/brainstorming` arquitetura `features_habilitadas` por tenant (modelo de venda revisado exige)
-- Implementar modelo de venda revisado (template de proposta + onboarding humano protocol + suporte tiered)
-- Promover outros packs DRAFT → FUNCIONAL com aprendizados dos pilotos
-- Retomar Decon Fase 1 (mapeamento Domínio Denize)
+**Próximas sessões (decisão consciente após dojo):**
+- Validar end-to-end skills DRAFT em uso real (`/criar-agente`, `/proposta-cliente`, `/espelhar`, `/pedir-contexto`, `/status-decisao`) → promove DRAFT → FUNCIONAL
+- Implementar primeiro agente real (Decon? Dojô? cliente novo via Navortech?) → promove `agentes-ia-construcao` + 6 packs `ia/agentes-*` STUB → FUNCIONAL
+- Absorver vídeo YouTube `w0H1-b044KY` (Liam Ottley) via `/absorver-midia` → refinamento dos conceitos agentes-ia
+- Decon Fase 1 (mapeamento Domínio Denize via áudio transcrito — D1 da fila)
+- Promover packs `infra/supabase-config-maxima` + `infra/vercel-config-maxima` DRAFT → FUNCIONAL com Evidence Bloc
 
 **Frentes adiadas (mas viva):**
-- Sintetizar vídeos Kelvin Cleto (5 sínteses já existem desde sessão 3 — K21 RESOLVIDO)
-- Decon Fase 1 (aguardando decisão pós-Navortech)
 - Hook PostToolUse "intelligent" pra disparar `/espelhar` automaticamente em momentos-chave (roadmap)
 - Pack `seguranca/pentest-automated` (sem urgência pré-MVP)
 - Mapear OnMat + Kimono + outros concorrentes (precisa NotebookLM dedicado OU material manual via `/pedir-contexto`)
+- Templates concretos dos 4 padrões prontos de agente (Customer Support, Research, Sales CRM, Business Monitor) — só após primeiro caso real
 
 ---
 
@@ -145,8 +168,10 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 
 ## Decisões pendentes
 
-- Stack final Dojô (confirmado? React Native + Expo?)
-- Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens (C2 da fila crítica)
+- ~~Stack final Dojô~~ RESOLVIDO 2026-05-21 sessão 4: React Native + Expo + TypeScript + Supabase + Asaas (confirmado em `gestao-academia-esportiva-br/conceitos/stack-tecnica-mobile-saas-vertical.md`)
+- Token GitHub antigo `ghp_Zht254O3...` — revogar em github.com/settings/tokens (C2 da fila crítica) — **resolução agendada pra Fase 2 desta sessão (hoje 2026-05-25)**
+- PAT atual `ghp_QUCC...fBRdi` exposto no remote URL pasta-mãe — **rotacionar agora na Fase 2**
+- Foco pós-dojo (Decon Fase 1 OU primeiro agente real? OU Navortech-Omnismart replacement?) — decidir após conversa dojo hoje
 - ~~KOD.AI: manter em Repositorios/ ou criar alias na raiz?~~ RESOLVIDO: movido para raiz `KODAI/` (spec 2026-05-15)
 - ~~Paths hardcoded KODAI~~ RESOLVIDO (verificado 2026-05-21 — já parametrizados upstream)
 

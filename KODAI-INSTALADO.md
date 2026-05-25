@@ -2,7 +2,7 @@
 
 > Inventário do que foi instalado via KOD.AI /instalar.
 > Atualizar sempre que um pack ou contexto-domínio for adicionado/removido.
-> Última atualização: 2026-05-25 (sync upstream 0.6.0-dev commit 80f5f07 — +19 skills, +3 hooks JS, +5 contextos-domínio universais via Navortech + 6 commands delegate SDD + remoção 2 stubs duplicados)
+> Última atualização: 2026-05-25 sessão pós-Navortech + absorção agentes-ia + Liam Ottley (sync upstream 0.6.0-dev commit 85b2e00 — 19 skills + 3 hooks JS Navortech + 6 commands delegate SDD + remoção 20 stubs + log-rotation v1.0 + agentes-ia foundation completa + absorção Liam Ottley curada + fluxo brutos `_brutos-novos/`)
 
 ---
 
@@ -111,7 +111,7 @@ Total: **6 hooks JS KOD.AI + 3 hooks Python SCHOLZE** = 9 hooks ativos.
 
 | Domínio | Status | Path no KOD.AI | Origem |
 |---|---|---|---|
-| **agentes-ia-construcao** 🆕 | **DRAFT v0.1.0 (+ 9 conceitos)** | `KODAI/3-CONTEXTOS-DOMINIO/agentes-ia-construcao/` | **Davi 2026-05-25 (doc estratégico "Infra Contextual Universal")** |
+| **agentes-ia-construcao** 🆕 | **DRAFT v0.1.1 (+ 10 conceitos + 2 NotebookLMs)** | `KODAI/3-CONTEXTOS-DOMINIO/agentes-ia-construcao/` | **Davi 2026-05-25 (doc "Infra Contextual Universal" + absorção curada Liam Ottley)** |
 | ai-ecosystem-strategy | DRAFT (+ lineage v1) | `KODAI/3-CONTEXTOS-DOMINIO/ai-ecosystem-strategy/` | absorção a16z (2026-05-20) |
 | competitive-intelligence | DRAFT (+ lineage v1 + Kelvin + 3 concorrentes) | `KODAI/3-CONTEXTOS-DOMINIO/competitive-intelligence/` | absorção (2026-05-20) + análises (2026-05-21) |
 | sistemas-empresariais-br | DRAFT (+ lineage v1 + Bucket B) | `KODAI/3-CONTEXTOS-DOMINIO/sistemas-empresariais-br/` | Davi 2026-05-21 (par doc+notebook 26782f74) |

@@ -19,20 +19,23 @@
 3. **Depois:** decidir próximos (continuar dojo → FUNCIONAL via Evidence Bloc OU outras frentes do KOD.AI)
 4. Decon Fase 1 + KOD.AI v0.2.0 (`ia/agente-ia-humanizado`) + outros itens DRAFT → **adiados** até decisão pós-Navortech
 
-## 🚧 Frentes do KOD.AI propostas pra próxima evolução (sessão 4 análise honesta KOD.AI vs fluxo desejado)
-
-**ATUALIZADO 2026-05-21 sessão 4 final:** 4 skills CRIADAS (DRAFT pushed). Restantes: 1 hook + 1 pack.
+## 🚧 Frentes do KOD.AI (atualizado 2026-05-25 sessão massiva pós-Navortech + agentes-ia + Liam)
 
 | Frente | Tipo | Custo | Status |
 |---|---|---|---|
-| **`/pedir-contexto`** | Skill | M | ✅ **CRIADA DRAFT** (commit 28227bc, propagada runtime) — aguarda 3 usos reais pra FUNCIONAL |
-| **`/proposta-cliente`** | Skill | L | ✅ **CRIADA DRAFT** (commit 28227bc, propagada runtime) — aguarda 2 propostas reais |
-| **`/espelhar`** | Skill | M | ✅ **CRIADA DRAFT** (commit 7bac71b, propagada runtime) — aguarda 3 sessões com espelhamento |
-| **`/status-decisao`** | Skill | S | ✅ **CRIADA DRAFT** (commit f568188, propagada runtime) — dogfooding aplicado nos 4 manifests novos |
-| **Hook PostToolUse "intelligent"** pra `/espelhar` auto | Hook JS | M | ⏳ Roadmap (sem urgência — `/espelhar` manual funciona) |
-| **`seguranca/pentest-automated`** | Pack | L | ⏳ Pendente (sem urgência pré-MVP) |
-| **Validar 4 skills DRAFT em uso real** | (tarefa) | varia | ⏳ Próximas sessões — promove DRAFT → FUNCIONAL |
-| **Mapear OnMat + Kimono + outros concorrentes** | (tarefa) | M | ⏳ Aguarda NotebookLM dedicado OU material manual via `/pedir-contexto` |
+| **`/pedir-contexto`** | Skill | M | DRAFT — aguarda 3 usos reais pra FUNCIONAL |
+| **`/proposta-cliente`** | Skill | L | DRAFT — aguarda 2 propostas reais |
+| **`/espelhar`** | Skill | M | DRAFT — rodada 1x nesta sessão (2026-05-25); aguarda 2+ usos pra FUNCIONAL |
+| **`/status-decisao`** | Skill | S | DRAFT — dogfooding aplicado nos 4 manifests novos |
+| **`/criar-agente`** 🆕 | Skill | L | DRAFT (criada 2026-05-25, commit `14c6be1`) — aguarda 2 execuções end-to-end |
+| **Contexto-domínio `agentes-ia-construcao`** 🆕 | Contexto | XL | DRAFT v0.1.1 (10 conceitos + 2 NotebookLMs + spec) — aguarda primeiro agente real em produção |
+| **6 packs `ia/agentes-*`** 🆕 | Packs | XL | STUB (manifests + READMEs) — aguardam Evidence Bloc por bloco |
+| **Política `log-rotation` v1.0 + hook** 🆕 | Política + Hook | M | FUNCIONAL upstream (`6ca94f9`) — smoke test passou nesta pasta-mãe |
+| **6 commands SDD delegate** 🆕 | Commands | S | FUNCIONAL pasta-mãe (resolve conflito com user-global) |
+| **Hook PostToolUse "intelligent"** pra `/espelhar` auto | Hook JS | M | Roadmap (sem urgência — `/espelhar` manual funciona) |
+| **`seguranca/pentest-automated`** | Pack | L | Pendente (sem urgência pré-MVP) |
+| **Vídeo YouTube w0H1-b044KY (Liam)** | Bruto | S | Pendente `/absorver-midia` — próxima sessão |
+| **Mapear OnMat + Kimono + outros concorrentes** | Tarefa | M | Aguarda NotebookLM dedicado OU material manual |
 
 ---
 
@@ -40,8 +43,8 @@
 
 | # | Pendência | Projeto | Bloqueia? |
 |---|---|---|---|
-| C1 | **PAT exposto no commit local `4db5ae4`** da pasta-mãe — push bloqueado pelo GitHub Push Protection. Revogar token + sanitizar `.claude/settings.local.json:80` + `git reset --mixed HEAD~3` + recommit + adicionar `.claude/settings.local.json` ao `.gitignore` | Pasta-mãe | Push de 4 commits locais (`4db5ae4`, `79b5a65`, `e336246`, `c34dc4b`) |
-| C2 | **Revogar token GitHub antigo `ghp_Zht254O3...`** referenciado em commit antigo | Segurança | Risco de credencial em histórico |
+| **C1** ⚠️ | **PAT atual `ghp_QUCC...fBRdi` exposto no remote URL** da pasta-mãe (`git remote -v` mostra em plaintext). Resolução: revogar PAT atual + gerar novo + `git remote set-url origin https://github.com/Davi-Scholze/dev-pessoal.git` (sem token) + configurar credential helper Windows OU `gh auth login` | Pasta-mãe | Push de **9 commits locais** desta sessão (`fa56bab`, `ccf86bc`, `fca38a6`, `8b269f1`, `c5b8454`, `04f9483`, `14c6be1`, `939fc13`, `9319f8c`). **Resolução agendada pra hoje 2026-05-25 Fase 2.** |
+| **C2** | **Revogar token GitHub antigo `ghp_Zht254O3...`** em github.com/settings/tokens (mencionado em commits antigos) | Segurança | Risco permanente de credencial vazada |
 
 ---
 

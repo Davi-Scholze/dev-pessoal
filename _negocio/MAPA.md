@@ -1,15 +1,15 @@
 # MAPA — Projetos Dev Pessoais
 
 > Entrada rápida + mapa detalhado consolidado. Leia ANTES de qualquer outro arquivo.
-> Atualizado: 2026-05-25 (sync KOD.AI 0.6.0-dev commit `80f5f07` pós-Navortech + 19 skills + 3 hooks JS novos ativados)
+> Atualizado: 2026-05-25 sessão massiva pós-Navortech + agentes-ia + Liam (sync KOD.AI 0.6.0-dev commit `85b2e00`)
 
 ## TL;DR
 
-Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI 0.6.0-dev sincronizado pós-Navortech (2ª instância KODAI rodando em Navortech-Desenvolvimento). 3-4 projetos ativos.
+Espaço central de desenvolvimento pessoal de Davi Scholze. SCHOLZE-STACK 100% implantado. KOD.AI 0.6.0-dev como **Infraestrutura Contextual Universal pra agentes IA** (direção estratégica formalizada 2026-05-25). 2 instâncias KODAI rodando (pasta-mãe + Navortech-Desenvolvimento). 3-4 projetos ativos.
 
 ## Estado atual
 
-**2026-05-25:** KOD.AI 0.6.0-dev (`80f5f07`). Pasta-mãe com **91 skills** + 8 rules path-scoped + **8 hooks ativos** (5 KOD.AI JS + 3 SCHOLZE Python). Pipeline SDD canônico universal (`/spec /break /plan /execute /review /complete`) propagado. Auditoria Navortech-Desenvolvimento concluída sexta 2026-05-23 — KODAI instalado lá como 2º piloto + pasta Davi+KODAI legado removidos (segundo confirmação humana). Próximo foco a decidir entre: continuar dojo (J3 — implementação real do app) OU Decon Fase 1 (D1 — transcrição Denize) OU validar 4 skills DRAFT em uso real.
+**2026-05-25:** KOD.AI 0.6.0-dev (`85b2e00`). Pasta-mãe com **72 skills** (era 89, apaguei 20 stubs clean code) + 8 rules path-scoped + **9 hooks ativos** (6 KOD.AI JS + 3 SCHOLZE Python — incluindo `auto-log-rotation` novo) + 6 commands SDD delegate + 9 contextos-domínio upstream (incluindo `agentes-ia-construcao` DRAFT v0.1.1 com 10 conceitos + 2 NotebookLMs) + 18 packs upstream (incluindo 6 `ia/agentes-*` STUB novos). Fluxo brutos formalizado via `_brutos-novos/` gitignored. Próxima ação imediata: resolver C1 (PAT exposto bloqueia push de 9 commits locais) → conversa sobre dojo → eventualmente clonar Navortech aqui pra agentes IA substituindo Omnismart.
 
 ## Prioridade dos projetos
 

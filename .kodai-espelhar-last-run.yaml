@@ -1,0 +1,54 @@
+last_run: 2026-05-25T11:00:00-03:00
+last_commit_sha_pasta_mae: 9319f8c
+last_commit_sha_kodai_upstream: 85b2e00
+mudancas_categorizadas:
+  skills_criadas: 1  # /criar-agente
+  skills_removidas: 20  # 18 stubs SCHOLZE + 2 duplicados (spec-driven-dev + debug-systematic)
+  commands_criados: 6  # spec/break/plan/execute/review/complete delegate
+  contextos_criados: 1  # agentes-ia-construcao
+  contextos_atualizados: 1  # agentes-ia-construcao v0.1.0 → v0.1.1 (Liam absorção)
+  conceitos_criados: 10  # 9 originais + aios-vs-aaa-evolucao-comercial
+  packs_criados: 6  # ia/agentes-llm-core, tools-mcp, memory, orchestration, rag-knowledge, infra-deploy
+  packs_populados: 1  # comercial/modelos-venda-ia (scripts venda Liam)
+  perfis_criados: 1  # agentes-builder.yaml
+  politicas_criadas: 1  # log-rotation v1.0
+  hooks_criados: 1  # auto-log-rotation
+  hooks_propagados: 3  # check-upstream-age, auto-suggest-skills, poluicao-detector
+  pendencias_resolvidas: 1  # K4 Navortech
+  pendencias_novas: 6  # agentes-ia DRAFT, 6 packs STUB, vídeo Liam, hook intelligent, etc
+  mudancas_foco: 1  # KOD.AI = Infraestrutura Contextual Universal pra agentes IA
+  brutos_capturados: 2  # Infra Contextual Universal + Liam Ottley
+  notebooks_ativados: 2  # 10eac452 (Infra) + 684bc705 (Liam)
+arquivos_atualizados_pasta_mae:
+  - _negocio/PROMPT_MASTER_HANDOFF.md
+  - _negocio/PENDENCIAS.md
+  - _negocio/MAPA.md
+  - KODAI-INSTALADO.md
+  - .claude/settings.json
+  - .claude/skills/criar-agente/* (propagada)
+  - .claude/skills/<19 skills novas>/* (propagadas)
+  - .claude/commands/* (6 novos)
+  - .claude/hooks/* (3 novos)
+  - .gitignore
+  - _brutos-novos/README.md
+  - _dev/skills-stubs-arquivo.md
+  - _negocio/identidade/design-tokens.json (movido)
+  - inbox-davi/2026-05-25-infra-contextual-universal-agentes-ia/*
+  - inbox-davi/2026-05-25-liam-ottley-aaa-estrategico/*
+arquivos_atualizados_kodai_upstream:
+  - 1-ESQUELETO/politicas/log-rotation.md
+  - 1-ESQUELETO/hooks/auto-log-rotation.{js,manifest.yaml}
+  - 3-CONTEXTOS-DOMINIO/agentes-ia-construcao/* (13 arquivos)
+  - 2-PACKS/packs/ia/agentes-*/manifest.yaml + README.md (12 arquivos)
+  - 2-PACKS/packs/comercial/modelos-venda-ia/scripts-venda-discovery-demo-proposta.md
+  - 1-ESQUELETO/skills-universais/criar-agente/*
+  - 0-INSTALACAO/perfis/agentes-builder.yaml
+  - AGENTS.md (seção nova "KOD.AI como Infraestrutura Contextual Universal pra Agentes IA")
+  - docs/decisoes/2026-05-25_kodai-infra-agentes-ia-universal.md
+memoria_persistente_atualizada:
+  - project_kodai.md (reescrito completo)
+  - feedback_fluxo_brutos.md (criado)
+  - MEMORY.md (índice atualizado)
+proxima_execucao_sugerida: |
+  Após Fase 2 (push completo) + Fase 3 (conversa dojo), rodar /espelhar novamente
+  pra capturar decisões da conversa do dojo nos arquivos vivos.
