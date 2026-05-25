@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-25 (sessão pós-Navortech MASSIVA — 9 commits pasta-mãe + 3 commits upstream + agentes-ia foundation + absorção Liam Ottley + fluxo brutos)
+> Última atualização: 2026-05-25 **TARDE — sessão Fase 0 dojo COMPLETA** (17 commits dojo + 3 memórias críticas novas ⭐ + refactor unified + Vercel production live)
 
 ---
 
@@ -135,7 +135,60 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 
 ## Próxima ação
 
-**Sessão 2026-05-25 encerrando após reconciliação massiva (Davi vai dar `/clear`).**
+**Sessão 2026-05-25 TARDE — Fase 0 dojo 100% COMPLETA com Evidence Bloc:**
+
+### O que rolou nesta sessão (continuação tarde — execução completa Fase 0)
+1. Skill `/abrir` Sessão Zero carregando 5 memórias críticas + KODAI canon
+2. `/spec` Fase 0 setup dojo scaffold (12 tasks atômicas + DAG + checkpoints + stop-criteria)
+3. `/break` decompondo em 12 tasks + estimativa 9h30min
+4. `/plan` com 9 fases + 7 checkpoints + 4 stop-criteria
+5. `/execute` rodou T1-T11:
+   - **T1 preflight** — Node 24 + npm 11 + gh keyring funcionais
+   - **T2 monorepo** — npm workspaces + `.gitignore` blindado
+   - **T3-T5 packages** — `@dojo-fs/{ui,lib,supabase}` tipados (shadcn + zod schemas + Supabase client factory)
+   - **T6 apps/site** — Next.js 15 + App Router + landing pública SSR
+   - **T7 apps/app** — Vite + React 19 + PWA (depois deletado em refactor unified)
+   - **T8 Supabase** — project criado sa-east-1 + migration 0001_init_multi_tenant aplicada via Management API (6/6 PASS) + types gerados
+   - **T9 i18n** — i18next pt-BR/en + LanguageSwitch
+   - **T10 CI + Vercel** — GitHub Actions verde + 2 projects criados via API + GitHub App Vercel instalado
+   - **REFACTOR UNIFIED** — Davi rejeitou multi-app ("ter dois links é a maior burra"), consolidei em single-app Next.js + Serwist + dashboard absorvido
+   - **T11 docs** — CLAUDE.md reescrito + README.md criado + ARQUITETURA-MESTRE v1.1 com reversão documentada
+6. `/complete` — **Evidence Bloc 9 categorias + 19 critérios + lessons learned + tech debt registrada**
+
+### 3 memórias ⭐ CRÍTICAS novas (próxima Sessão Zero carrega)
+- `feedback_pedir_permissao_acoes_externas` — antes de email/SMS/cobrança/post pedir permissão textual
+- `feedback_tudo_dentro_do_repo_do_sistema` — secrets no `.env.local` do repo, não em `Documents/`
+- `feedback_default_single_app_unified` — 1 Next.js cobre tudo, não multi-app
+
+### URLs production (dojô case 0)
+- **Repo:** https://github.com/Davi-Scholze/dojo-familia-scholze (private, 17 commits Fase 0)
+- **Vercel:** https://dojofs-davi-scholzes-projects.vercel.app (Hobby tier, auto-deploy push em master)
+- **Supabase:** project `mubcbbrwoeblvqaiebou` em sa-east-1 (Free tier, 2 tables + RLS multi-tenant)
+- **CI:** GitHub Actions verde, run 26413463584
+
+### Próxima sessão dojo — Sprint 1
+Spec a criar em `docs/decisoes/2026-05-XX_sprint-1-auth-cadastro.md`:
+- Auth Magic Link real (`/login` com Supabase browser client)
+- Middleware Next.js gating `/dashboard` (redirect se sem sessão)
+- Form cadastro professor + criação dojo
+- Form cadastro alunos básico
+- Migration 0002 (turmas + alunos detalhados — DDL exige OK textual Davi)
+- Atualizar policies RLS pra novas tables
+
+### Tech debt registrada (limpa antes/durante Sprint 1)
+- 2 moderate vulnerabilities postcss interno Next.js (aguardar bump natural)
+- `<img>` em `/dashboard/page.tsx` → trocar por `<Image>` Next.js
+- Lighthouse PWA + SEO scores medir manualmente
+- Pasta física `apps/app/` vazia pode persistir até Davi fechar IDE (Git já removeu do tree)
+- Domínio `dojofamiliascholze.com.br` aguarda primeira venda real
+
+### Dívidas no upstream KOD.AI
+- Pack canônico `dev/pwa-nextjs-unified-saas/` substituindo DRAFTs antigos `dev/pwa-vite-react` + `dev/pwa-nextjs-ssr`
+- Política universal `secrets-organization-multi-cliente.md` em `1-ESQUELETO/politicas/`
+
+---
+
+## Histórico — sessão 2026-05-25 manhã (pré-Fase 0)
 
 ### O que rolou nesta sessão completa
 1. Pull KODAI upstream (18 commits da Navortech) + ativação 19 skills + 3 hooks
