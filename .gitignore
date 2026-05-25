@@ -57,3 +57,12 @@ inbox-*/**/audio.opus
 inbox-*/**/audio.m4a
 inbox-*/**/audio.mp3
 inbox-*/**/audio.wav
+
+# === Adicionado por KOD.AI em 2026-05-25 (origem: feedback Davi fluxo brutos) ===
+# Pasta de drop pra brutos que Davi gera (pesquisa Claude Chrome / NotebookLM .md export).
+# Davi salva qualquer .md/.pdf/.txt aqui SEM pensar em path/nome.
+# IA processa via /capturar + /ativar-notebooklm + /absorver-contexto,
+# move pra inbox-davi/<data>-<tema>/ correto. Local-only (nao polui git/raiz).
+_brutos-novos/*
+!_brutos-novos/README.md
+!_brutos-novos/.gitkeep
