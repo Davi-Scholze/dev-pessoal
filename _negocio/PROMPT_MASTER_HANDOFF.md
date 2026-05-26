@@ -167,18 +167,44 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 - **F** Meta próxima sessão: construir atendente IA
 - **G** Automação pessoal Davi: LinkedIn auto-update via API
 
-### Ordem sugerida próxima sessão (Davi decide)
+### ORDEM REAL DECIDIDA por Davi (não negociar)
 
-| Prioridade | Item | Custo | Impacto |
-|---|---|---|---|
-| 🥇 P0 | A1 Magic Link debug | 30min | Desbloqueia fluxo |
-| 🥇 P0 | A2 Aplicar animações já existentes | 1h | 40→60% |
-| 🥈 P1 | A3 Mobile hamburger | 30min | UX mobile |
-| 🥈 P1 | A7 Dashboard atualizado | 2h | Consistência |
-| 🥉 P2 | F1 Atendente IA | 4-8h | Meta Davi |
-| 🥉 P2 | C investigar plugins mercado | 1-2h cada | Capacidade |
-| 🥉 P2 | D1 SDD aplicabilidade | 30min decisão | Modo trabalho |
-| ⚫ P3 | A4-A9, B, G | varia | Refinamento + automation |
+**Davi disse textual:** *"antes de continuarmos com o dojo-familia-scholze de onde paramos, nós alimentamos, estruturamos e aplicamos os contextos e objetivos universais e gerais do KODAI, revisamos tudo para garantir que o KODAI vai sempre entregar perfeição e fazemos as coisas que mandei anteriormente, só depois que tudo estiver 100% arrumado, implementado, testado, ativo e validado seguiremos com o dojo de onde paramos."*
+
+**Sequência fixa:**
+
+1. **PRIMEIRO (manhã/dia):** Meta-evolução KOD.AI até 100% arrumado/testado/validado:
+   - **B.1+B.2** Audit profundo skills+agents + eliminar duplicatas/conflitos
+   - **C.1-C.6** Instalar+testar plugins mercado (skill-creator, superpowers, get-shit-done, /review+/ultrareview, frontend-design, Impeccable)
+   - **I.1-I.3** Validar `/absorver-midia` funcional + testar com vídeo Davi `g5NBAkfO-ks` ("O Playbook Invisível Para Escalar Sua Empresa Com IA em 2026")
+   - **H.1-H.2** Política `resiliencia-sem-llm.md` upstream + memória crítica nova "IA é opcional não obrigatória"
+   - **B.4** Audit absorção notebooks NotebookLM (79 entradas)
+   - **B.5** Audit LGPD nos projetos consumidores
+   - **B.6** Workflow Framer Motion ← vídeos YouTube
+   - **D.1** Política `quando-usar-sdd.md` (modos: argila/sprint/fix)
+   - **D.2-D.4** Fluxo agilidade + testes tempo real
+   - **G.1** Skill `/atualizar-linkedin` (opcional)
+
+2. **SEGUNDO** (só após Davi aprovar textualmente "KOD.AI 100% pronto"): continuar dojo Sprint 1a → 1b → 1c
+   - **A.1** Magic Link debug
+   - **A.2** Aplicar animações Framer Motion já existentes
+   - **A.3** Mobile nav hamburger
+   - **A.7** /dashboard atualizado
+   - **A.4-A.9** Refinamento + Sprint 1b/1c
+
+3. **F.1** atendente IA (bonus se sobrar tempo)
+
+### Critérios "100% arrumado" pra desbloquear volta ao dojo
+
+- [ ] Todas skills KOD.AI mapeadas em `KODAI/docs/SKILLS-DEEP-MAP.md`
+- [ ] Zero duplicatas/conflitos identificados
+- [ ] Plugins mercado instalados E testados E integrados
+- [ ] `/absorver-midia` testado E funcional com vídeo Davi absorvido
+- [ ] Política `resiliencia-sem-llm.md` upstream criada
+- [ ] Política `quando-usar-sdd.md` upstream criada
+- [ ] Audit notebooks completo (gaps mapeados)
+- [ ] Audit LGPD completo (gaps mapeados)
+- [ ] Davi aprovou textualmente "KOD.AI 100% pronto, pode voltar pro dojo"
 
 ### 5 memórias ⭐ críticas ativas (carregam toda Sessão Zero)
 

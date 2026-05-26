@@ -70,6 +70,9 @@ URL prod: https://dojofs-davi-scholzes-projects.vercel.app
 | **Audit KOD.AI absorveu TODOS notebooks** 🆕 NOITE | Meta-framework | M | Cruzar library NotebookLM (79 entradas) × contextos-domínio × packs. Reportar gaps. Davi pergunta: "se alimentou deles?" |
 | **Audit LGPD nos projetos consumidores** 🆕 NOITE | Auditoria | M | Cada projeto KOD.AI tem mapa LGPD? `lgpd-auditor` agent é invocado em forms novos? Pack `seguranca/lgpd-by-design` existe + aplicado? |
 | **Skill `/atualizar-linkedin`** 🆕 NOITE | Skill nova | L | Integração LinkedIn API + auto-summarize commits/decisões em posts profissionais + drafts pra Davi revisar. Logar KOD.AI ao LinkedIn. Automação pessoal Davi. |
+| **Política `resiliencia-sem-llm.md`** 🆕 NOITE-2 | Política universal | M | Princípio canônico: todo sistema KOD.AI deve rodar **independente de LLM** em runtime crítico. IA é "molho", não "carne". Workflows core (login, presença, mensalidade) funcionam se OpenAI/Anthropic/Gemini cair. Alinha com regra-de-ouro L1-antes-L3 + bootstrap radical. Davi 2026-05-25 noite. |
+| **Validar skill `/absorver-midia` funcional** 🆕 NOITE-2 | Skill KOD.AI | M | Confirmar yt-dlp + faster-whisper + ffmpeg instalados + spec D1-D9 implementada + testar com vídeo Davi `g5NBAkfO-ks` ("O Playbook Invisível Para Escalar Sua Empresa Com IA em 2026"). Skill é DRAFT atual — virar FUNCIONAL com Evidence Bloc. |
+| **Memória crítica ⭐ "IA é opcional, não obrigatória"** 🆕 NOITE-2 | Memória persistente | S | Princípio canônico arquitetural KOD.AI: sistemas devem funcionar sem LLM. Davi 2026-05-25: "se der algum problema com as LLMs o sistema roda independentemente de IAs". |
 
 ---
 

@@ -237,6 +237,126 @@ Davi: *"Está todas ativas? Quero as que eu n tiver ainda"* — significa: insta
 
 ---
 
+## VERBATIM DAVI (continuação — 2 itens extras pré-/clear)
+
+> 1. https://youtu.be/g5NBAkfO-ks?si=jOc6TN-3uWw9-ZD2 -- KODAI precisa ter a capacidade de fazer exatamente isso. Transcrever, estudar, pegar mais exemplos aplicar...
+>
+> 2. Com KODAI posso criar os sistemas com IA agentes mais automatizado e independente mas ao mesmo tempo, se der algum problema com as LLMS o sistema roda independentemente de IAs também, ou seja, o sistema é eficiente e seguro
+>
+> Só mais esses, salve tudo novamente... ai vou dar clear e encerrar a sessão ai amanhã, antes de continuarmos com o dojo-familia-scholze de onde paramos, nós alimentamos, estruturamos e aplicamos os contextos e objetivos universais e gerais do KODAI, revisamos tudo para garantir que o KODAI vai sempre entregar perfeição e fazemos as coisas que mandei anteriormente, só depois que tudo estiver 100% arrumado, implementado, testado, ativo e validado seguiremos com o dojo de onde paramos.
+
+---
+
+## BUCKET H — Resiliência arquitetural (IA opcional, não obrigatória)
+
+**Davi verbatim:** *"Com KODAI posso criar os sistemas com IA agentes mais automatizado e independente mas ao mesmo tempo, se der algum problema com as LLMs o sistema roda independentemente de IAs também, ou seja, o sistema é eficiente e seguro"*
+
+### H.1 Princípio arquitetural canônico KOD.AI a adicionar
+
+Todo sistema KOD.AI deve seguir camadas de fallback:
+
+1. **Camada base** — código tradicional Next.js + Supabase + funções determinísticas. **NÃO depende de LLM em runtime crítico.**
+2. **Camada IA-assistiva** — chatbot, análise, sugestões, copilots. **Opcional, falha graciosamente.**
+3. **Camada IA-autônoma (L3)** — agentes, automação ponta-a-ponta. **Última prioridade, só após L1+L2 sólidos.**
+
+**Workflows core sempre rodam sem IA:**
+- Login Magic Link, cadastro, presença, mensalidades, certificados, calendário
+- Se OpenAI/Anthropic/Gemini cai → sistema continua funcionando
+- IA é "molho", não "carne"
+
+**Alinha com:**
+- `STRATEGIC-NORTH.md` v1.4 regra-de-ouro (L1 antes L3)
+- Memória `feedback_realidade_financeira_davi` (bootstrap)
+- Política upstream `regra-ouro-l1-antes-de-l3.md`
+
+### H.2 Ação próxima sessão
+
+- Auditar dojo Sprint 1a: tudo que tem é L1 (sem dependência LLM)? ✓ confirmar
+- Criar política `1-ESQUELETO/politicas/resiliencia-sem-llm.md` upstream KOD.AI
+- Documentar checklist: pra cada feature nova, perguntar "funciona se OpenAI cair?"
+- Memória crítica nova: princípio "IA é opcional, não obrigatória"
+
+---
+
+## BUCKET I — Capacidade KOD.AI absorver vídeos do YouTube
+
+**Davi verbatim:** *"https://youtu.be/g5NBAkfO-ks -- KODAI precisa ter a capacidade de fazer exatamente isso. Transcrever, estudar, pegar mais exemplos aplicar..."*
+
+### I.1 Vídeo de referência
+
+- **URL:** https://youtu.be/g5NBAkfO-ks
+- **Título:** *"O Playbook Invisível Para Escalar Sua Empresa Com IA em 2026 (Construa você mesmo)"*
+- **Tema:** Estratégias pra escalar empresa com IA em 2026, construir próprio (DIY)
+- **Relevância pro Dojô/KOD.AI:** alinha com modelo de negócio agência IA-first SMB + bootstrap radical Davi
+- **Status:** absorver via skill `/absorver-midia` em sessão futura
+
+### I.2 Capacidade necessária do KOD.AI
+
+Skill `/absorver-midia` DRAFT já existe no upstream `KODAI/1-ESQUELETO/skills-universais/absorver-midia/` (criada 2026-05-20, mencionada em AGENTS.md linha 117). Pipeline 7 fases declarado:
+- yt-dlp download URL YouTube
+- faster-whisper transcrição áudio local
+- ffmpeg scene-change extração frames-chave
+- Claude vision descrição multimodal
+- síntese estruturada (narrativa + decisões + tópicos)
+- inbox-davi/<data>-<tema>/ pronto pra `/absorver-contexto`
+
+**Status real a confirmar próxima sessão:**
+- Skill é FUNCIONAL ou DRAFT/STUB?
+- yt-dlp + faster-whisper + ffmpeg estão instalados na máquina?
+- Spec D1-D9 em `KODAI/docs/decisoes/2026-05-20_skill-absorver-midia.md` foi implementada?
+- Testar com o vídeo Davi (g5NBAkfO-ks) como Evidence Bloc
+
+### I.3 Workflow desejado
+
+Quando Davi cola URL YouTube no chat:
+1. IA detecta URL → invoca `/absorver-midia` automaticamente
+2. Pipeline roda em background → output em `inbox-davi/<data>-<tema>/`
+3. IA reporta síntese + sugere próximos passos (`/absorver-contexto` se for material reutilizável, `/absorver-referencia` se for framework pra portar)
+4. Davi aprova absorção bucket-a-bucket (template `REFERENCE-ABSORB.md` existe upstream)
+
+---
+
+## ORDEM REAL PRÓXIMA SESSÃO — DECISÃO DAVI 2026-05-25 noite
+
+**Davi declarou explicitamente:** *"antes de continuarmos com o dojo-familia-scholze de onde paramos, nós alimentamos, estruturamos e aplicamos os contextos e objetivos universais e gerais do KODAI, revisamos tudo para garantir que o KODAI vai sempre entregar perfeição e fazemos as coisas que mandei anteriormente, só depois que tudo estiver 100% arrumado, implementado, testado, ativo e validado seguiremos com o dojo de onde paramos."*
+
+### Sequência decidida
+
+1. **PRIMEIRO** (manhã/dia): meta-evolução KOD.AI
+   - **B.1+B.2** Audit profundo skills+agents (pesquisa web + docs + mapear uso + eliminar duplicatas/conflitos)
+   - **C.1-C.6** Investigar + instalar plugins mercado (skill-creator, superpowers, get-shit-done, /review+/ultrareview, frontend-design, Impeccable)
+   - **I.1-I.3** Validar `/absorver-midia` funcional + testar com vídeo Davi
+   - **H.1-H.2** Política `resiliencia-sem-llm.md` upstream + memória crítica
+   - **B.4** Audit absorção notebooks NotebookLM (79 entradas)
+   - **B.5** Audit LGPD nos projetos consumidores
+   - **B.6** Workflow Framer Motion ← vídeos YouTube (compor com `/absorver-midia`)
+   - **D.1** Política `quando-usar-sdd.md` (3 modos: argila / sprint / fix)
+   - **D.2-D.4** Definir fluxo agilidade + testes tempo real + pedir contexto + retrospectiva
+   - **G.1** Skill `/atualizar-linkedin` (opcional, se sobrar tempo)
+
+2. **SEGUNDO** (após KOD.AI 100% arrumado/testado/validado): continuar dojo
+   - **A.1** Magic Link debug
+   - **A.2** Aplicar animações Framer Motion já existentes
+   - **A.3** Mobile nav hamburger
+   - **A.7** /dashboard atualizado
+   - **A.4-A.9** Refinamento + Sprint 1b/1c
+
+3. **Bonus se sobrar tempo:** F.1 atendente IA
+
+### Critério de "100% arrumado" pra liberar volta ao dojo
+
+- [ ] Todas skills KOD.AI mapeadas e documentadas em `KODAI/docs/SKILLS-DEEP-MAP.md`
+- [ ] Zero duplicatas/conflitos identificados
+- [ ] Plugins mercado instalados E testados E integrados ao KOD.AI
+- [ ] `/absorver-midia` testado E funcional com 1+ vídeo absorvido
+- [ ] Política `resiliencia-sem-llm.md` upstream criada
+- [ ] Política `quando-usar-sdd.md` upstream criada
+- [ ] Audit notebooks completo (relatório do que falta absorver)
+- [ ] Audit LGPD completo (gaps mapeados)
+- [ ] Davi aprovou textualmente "KOD.AI 100% pronto, pode voltar pro dojo"
+
+---
+
 ## ORDEM SUGERIDA PRÓXIMA SESSÃO
 
 Não decido — Davi escolhe. Mas em ordem de impacto vs custo:
