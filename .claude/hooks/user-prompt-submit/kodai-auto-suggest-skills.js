@@ -130,6 +130,52 @@ process.stdin.on('end', () => {
       // Status decisão (acompanhamento)
       { re: /\b(status.*decis|onde est[aá] essa decis|atualizar status|decis(a|ã)o pendente)\b/i,
         skill: '/status-decisao', motivo: 'atualizar status de decisão em docs/decisoes/' },
+
+      // LGPD / Compliance (skills novas D12 — 2026-05-26)
+      { re: /\b(lgpd|ripd|art\.?\s*37|tratamento.*dados|dpo|encarregado|registro.*opera)\b/i,
+        skill: '/lgpd-ripd', motivo: 'gerar RIPD adaptado ao stack — Art. 37 LGPD (skill criada D12)' },
+      { re: /\b(dsr|art\.?\s*18|direito.*titular|deletar.*dados|exportar.*dados|portabilidade.*dados|consentimento.*revog)\b/i,
+        skill: '/lgpd-dsr-endpoint', motivo: 'gerar endpoint /api/lgpd/dsr — Art. 18 LGPD (skill criada D12)' },
+      { re: /\b(menor|crian[cç]a|aluno|art\.?\s*14|dados.*saude|alergia|biometria)\b/i,
+        skill: '/lgpd-ripd + agent lgpd-auditor', motivo: 'regime especial Art. 14 (menor) + Art. 11 (sensível) — RIPD + audit obrigatório' },
+      { re: /\b(honeypot|disclaimer|cookie banner|consentimento form|checkbox lgpd)\b/i,
+        skill: 'pack seguranca/lgpd-by-design/recipes', motivo: 'recipe pronto pra form público LGPD-compliant (pack criado D12)' },
+
+      // UI / Design upgrade (plugins instalados 2026-05-26)
+      { re: /\b(landing|hero|estilo visual|estetica|brutalist|maximalist|playful|luxury|design system|brand)\b/i,
+        skill: '/frontend-design (plugin Anthropic)', motivo: 'intenção estética ANTES de codar UI (plugin instalado 2026-05-26)' },
+      { re: /\b(impeccable|typeset|colorize|audit ui|critique ui|polish ui)\b/i,
+        skill: '/impeccable audit|polish|critique|typeset|colorize (plugin Bakaus)', motivo: '7 domínios design + 27 anti-padrões (plugin v3.1.1 instalado 2026-05-26)' },
+
+      // GSD audit cluster (28 mantidas — críticas marcadas ⭐)
+      { re: /\b(milestone|fechar vers[aã]o|release v\d|fechar sprint)\b/i,
+        skill: '/gsd-new-milestone OR /gsd-complete-milestone OR /gsd-audit-milestone', motivo: 'milestone-scope: cerimônia de versão (KOD.AI cobre feature-scope)' },
+      { re: /\b(audit.*fix|corrigir issues|automated fix|auto.?fix)\b/i,
+        skill: '/gsd-audit-fix ⭐', motivo: 'audit-to-fix pipeline automatizado (KOD.AI não tem equivalente)' },
+      { re: /\b(forensic|post.?mortem|workflow failed|investigar falha)\b/i,
+        skill: '/gsd-forensics ⭐', motivo: 'post-mortem GSD workflow failure (KOD.AI não tem equivalente)' },
+      { re: /\b(ship|criar pr|abrir pr|track merge|push.*branch)\b/i,
+        skill: '/gsd-ship ⭐ OR /finishing-a-development-branch', motivo: 'GSD ship pra PR automation; KOD.AI finishing pra cleanup' },
+      { re: /\b(uat|user acceptance|conversational test|testar feature)\b/i,
+        skill: '/gsd-verify-work (conversational) + /qa-verifier (adversarial)', motivo: 'dual quality gate UAT + adversarial matrix' },
+      { re: /\b(autonomous|rodar tudo|automatico|sem parar|deixa rodar)\b/i,
+        skill: '/gsd-autonomous', motivo: 'autonomous mode end-to-end (KOD.AI sempre HITL — usar GSD se quer automation)' },
+      { re: /\b(sketch|prot[oó]tipo html|mockup throwaway)\b/i,
+        skill: '/gsd-sketch', motivo: 'protótipo HTML throwaway pra UI rápida' },
+      { re: /\b(spike|experimentar|validar viabilidade tecnica|time.?box)\b/i,
+        skill: '/gsd-spike', motivo: 'exploração técnica time-boxed' },
+      { re: /\b(graphify|knowledge graph|dependencias visualiz)\b/i,
+        skill: '/gsd-graphify', motivo: 'knowledge graph do projeto (único)' },
+      { re: /\b(mapear codebase|stack doc|architecture doc|gerar readme)\b/i,
+        skill: '/gsd-map-codebase OR /gsd-docs-update', motivo: 'codebase intelligence + doc auto-generation' },
+
+      // Meeting analyzer (pack STUB criado D4 — Kelvin Cleto)
+      { re: /\b(reuni(a|ã)o|call|extracao|follow.?up|objec(a|ã)o|pain.?point|wins celebrations)\b/i,
+        skill: 'pack ia/agentes-meeting-analyzer (STUB)', motivo: 'schema 9 categorias pra extrair inteligência de reuniões (pack STUB criado 2026-05-26)' },
+
+      // Matriz de uso QUANDO-GSD-VS-KODAI (referência humana)
+      { re: /\b(qual skill|que skill usar|skill apropriada|gsd ou kodai|quando usar)\b/i,
+        skill: 'consultar KODAI/docs/QUANDO-GSD-VS-KODAI.md', motivo: 'matriz canônica de decisão skill-por-situação (criada 2026-05-26)' },
     ];
 
     for (const p of patterns) {
