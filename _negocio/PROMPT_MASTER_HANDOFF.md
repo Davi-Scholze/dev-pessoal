@@ -1,7 +1,7 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-25 **TARDE — sessão Fase 0 dojo COMPLETA** (17 commits dojo + 3 memórias críticas novas ⭐ + refactor unified + Vercel production live)
+> Última atualização: 2026-05-25 **NOITE — Sprint 1a dojo 40% + backlog massivo capturado** (redesign multi-section + login split + 5 memórias críticas + hook UI-cycle ATIVO + postmortem + 13 observações Davi salvadas)
 
 ---
 
@@ -135,7 +135,74 @@ KOD.AI upstream agora tem **4 contextos-domínio**, **8 conceitos** em competiti
 
 ## Próxima ação
 
-**Sessão 2026-05-25 TARDE — Fase 0 dojo 100% COMPLETA com Evidence Bloc:**
+**Sessão 2026-05-25 NOITE — Sprint 1a dojo 40% + backlog massivo Davi:**
+
+### Onde paramos AGORA (estado real)
+
+- Fase 0 dojo: 100% (sessão tarde) — Evidence Bloc fechado, single-app Next.js + Supabase + Vercel + CI verde
+- **Sprint 1a dojo: 40% percebido pelo Davi** (sessão noite) — redesign landing multi-section (6 seções: header sticky + hero cinematográfico + sobre + modalidades + filosofia + CTA + footer) + login split-screen com foto B&W + navegação real entre páginas + 4 fotos Unsplash livres
+- **URL prod live:** https://dojofs-davi-scholzes-projects.vercel.app
+- Davi disse: *"de 0,0001% saiu para 40%"* — ainda falta 60%
+
+### O que rolou hoje à noite (após sessão tarde)
+
+1. **Postmortem UI-cycle violation** documentado em `_negocio/POSTMORTEM-2026-05-25-ui-cycle-violation.md` (Parte 1 audit + Parte 2 causas raiz + Parte 3 plano em 5 camadas)
+2. **Hook `enforce-ui-cycle.js`** criado em `.claude/hooks/pre-tool-use/` — bloqueia Edit/Write em UI sem ack do marker `.claude/.ui-cycle-acknowledged` (10min validity). Smoke test 5/5 PASS. Bloqueou edit de fato 1x na sessão.
+3. **Settings.json registra hook** PreToolUse com matcher Edit|Write|MultiEdit
+4. **Memória ⭐ NOVA #1:** `feedback_invocar_skills_design_obrigatorio` — sempre invocar frontend-designer + design-reviewer + ver/dev-browser pra UI
+5. **Memória ⭐ NOVA #2:** `feedback_estudar_refs_antes_de_codar_ui` — WebFetch refs + buscar fotos stock + SITE multi-section + smoke estrutural
+6. **Primeira tentativa redesign falhou** — agents leram código sem ver refs → 0,0001% melhoria
+7. **Segunda tentativa** — WebFetch 4 refs + 4 fotos Unsplash CDN validadas + landing 5 seções + login split-screen → 40% Davi aprovou
+
+### Backlog massivo Davi (capturado verbatim + organizado)
+
+**Arquivo:** `_negocio/inbox-davi/2026-05-25-backlog-pos-sprint1a-40pct.md` (13 observações Davi + 7 buckets)
+
+**7 buckets:**
+- **A** Sprint 1a dojo: 8 itens A1-A9 que faltam (Magic Link debug + animações não aplicadas + mobile hamburger + fotos reais + páginas dedicadas + vídeo bg + dashboard atualizado + header tech debt + Sprint 1b/1c)
+- **B** Meta-evolução KOD.AI: 6 itens (aprofundar uso skills + eliminar duplicatas + usar todo poder + audit notebooks + LGPD nos projetos + workflow Framer Motion ← YouTube)
+- **C** Skills mercado a investigar: 6 plugins (`/skill-creator` oficial + `/superpowers` + get-shit-done + `/review`+`/ultrareview` + frontend-design plugin + Impeccable.style)
+- **D** Metodologia: SDD aplicabilidade (modo argila vs sprint formal vs fix) + agilidade testes tempo real + IA pedir contexto + retrospectiva
+- **E** Features avançadas: facescan + post Instagram automático marcando alunos
+- **F** Meta próxima sessão: construir atendente IA
+- **G** Automação pessoal Davi: LinkedIn auto-update via API
+
+### Ordem sugerida próxima sessão (Davi decide)
+
+| Prioridade | Item | Custo | Impacto |
+|---|---|---|---|
+| 🥇 P0 | A1 Magic Link debug | 30min | Desbloqueia fluxo |
+| 🥇 P0 | A2 Aplicar animações já existentes | 1h | 40→60% |
+| 🥈 P1 | A3 Mobile hamburger | 30min | UX mobile |
+| 🥈 P1 | A7 Dashboard atualizado | 2h | Consistência |
+| 🥉 P2 | F1 Atendente IA | 4-8h | Meta Davi |
+| 🥉 P2 | C investigar plugins mercado | 1-2h cada | Capacidade |
+| 🥉 P2 | D1 SDD aplicabilidade | 30min decisão | Modo trabalho |
+| ⚫ P3 | A4-A9, B, G | varia | Refinamento + automation |
+
+### 5 memórias ⭐ críticas ativas (carregam toda Sessão Zero)
+
+1. `feedback_modelo_negocio_kodai_consolidado` — agência + framework
+2. `feedback_realidade_financeira_davi` — bootstrap radical
+3. `feedback_executar_nao_delegar_setup` — automação via PAT/API
+4. `feedback_pedir_permissao_acoes_externas` — antes de email/SMS/post/cobrança
+5. `feedback_tudo_dentro_do_repo_do_sistema` — secrets `.env.local` repo
+6. `feedback_default_single_app_unified` — 1 Next.js cobre tudo
+7. `feedback_invocar_skills_design_obrigatorio` — frontend-designer + design-reviewer obrigatórios
+8. `feedback_estudar_refs_antes_de_codar_ui` — WebFetch refs + fotos + multi-section + smoke estrutural
+
+### Hooks KOD.AI ativos
+
+- `enforce-ui-cycle.js` (PreToolUse Edit|Write|MultiEdit) — **bloqueia mecanicamente**
+- `auto-suggest-skills.js` (UserPromptSubmit) — sugestões contextuais
+- `inject-warning.js` (UserPromptSubmit) — políticas
+- `check-completion-claims.js` (Stop) — Iron Law
+- `block-dangerous.py` + `pre-commit-guard.js` (PreToolUse Bash) — segurança
+- `poluicao-detector.js` + `auto-log-rotation.js` (PostToolUse) — higiene
+
+---
+
+## Histórico — sessão 2026-05-25 TARDE (Fase 0 dojo COMPLETA)
 
 ### O que rolou nesta sessão (continuação tarde — execução completa Fase 0)
 1. Skill `/abrir` Sessão Zero carregando 5 memórias críticas + KODAI canon

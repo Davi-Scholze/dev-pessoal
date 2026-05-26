@@ -6,13 +6,28 @@
 
 ---
 
-## 🎯 Foco atual (revisado 2026-05-25 sessão massiva final — posicionamento KOD.AI consolidado)
+## 🎯 Foco atual (atualizado 2026-05-25 NOITE — Sprint 1a dojo 40% + backlog massivo capturado)
 
-**KOD.AI = agência IA SMB BR + framework open-source de mesmo nome.** Davi = fundador.
+**Sprint 1a dojo: 40% percebido pelo Davi após redesign multi-section + login split-screen + fotos Unsplash + navegação.**
 
-**Próxima sessão (pós-/clear):** desenvolver dojo case 0 (pai, sem cobrar) + outreach professor já conversado em paralelo. Bootstrap radical zero capital. Cada cliente = instância dedicada. Pricing canônico STRATEGIC-NORTH v1.4 (R$ 8-25k setup + R$ 3-15k/mês).
+URL prod: https://dojofs-davi-scholzes-projects.vercel.app
 
-**Skill `/abrir` v2 evoluída nesta sessão** garante que próxima Sessão Zero carrega KODAI canon + memórias críticas — Davi não precisa relembrar tudo toda vez.
+**Próxima sessão (Davi escolhe ordem):**
+- **A1** Magic Link debug (não funciona com email real)
+- **A2** Aplicar animações Framer Motion já existentes na nova landing (pula 40→60%)
+- **A3** Mobile nav hamburger
+- **A7** /dashboard atualizado pro mesmo nível visual
+- **F1** Construir atendente IA (meta declarada Davi)
+
+**Backlog completo capturado em:** `_negocio/inbox-davi/2026-05-25-backlog-pos-sprint1a-40pct.md` (13 observações Davi verbatim + 7 buckets organizados).
+
+**KOD.AI evolução crítica salvada hoje:**
+- Memória ⭐ `feedback_invocar_skills_design_obrigatorio` (sessão tarde)
+- Memória ⭐ `feedback_estudar_refs_antes_de_codar_ui` (sessão noite)
+- Hook `enforce-ui-cycle.js` ATIVO em `.claude/hooks/pre-tool-use/`
+- Postmortem `POSTMORTEM-2026-05-25-ui-cycle-violation.md`
+
+**Foco anterior (histórico):** KOD.AI = agência IA SMB BR + framework open-source. Davi = fundador. Cada cliente = instância dedicada. Pricing STRATEGIC-NORTH v1.4.
 
 ## 🎯 Foco anterior (histórico — 2026-05-21 sessão 4 — continuação após Kicksite + visão de venda revisada)
 
@@ -49,6 +64,12 @@
 | **Atualizar skill `/break` upstream** 🆕 | Skill KOD.AI | S | Adicionar template obrigatório no `/break`: se spec toca UI, criar sub-tasks de design (frontend-designer mockup + dev-browser screenshot + design-reviewer audit) ANTES das tasks de implementação. Origem: mesmo postmortem 2026-05-25. |
 | **Atualizar skill `/execute` upstream** 🆕 | Skill KOD.AI | S | Adicionar gate pré-task: se task vai tocar UI sem task de design correspondente no plano, ABORT + voltar pro `/break`. Composição com hook `enforce-ui-cycle.js`. Origem: mesmo postmortem. |
 | **Atualizar hook `auto-suggest-skills.js` upstream** 🆕 | Hook KOD.AI | S | Adicionar patterns detectando intent visual/design/tela/componente/layout no prompt do Davi → sugerir `frontend-designer` agent + `tailwind-shadcn-scaffold` + `dev-browser`/`ver` skills. Origem: postmortem. |
+| **Audit profundo skills+agents KOD.AI** 🆕 NOITE | Meta-framework | XL | Pesquisar web + docs pra entender 100% cada ferramenta (`/skill-creator`, `/superpowers`, `/review`, `/ultrareview`, Impeccable, etc), mapear quando usar cada uma, eliminar conflitos/duplicatas, garantir KOD.AI usa todo poder em todos projetos. Davi 2026-05-25 noite. |
+| **Política `quando-usar-sdd.md` upstream** 🆕 NOITE | Política KOD.AI | M | Definir 3 modos: "argila" (descoberta livre sem SDD formal), "sprint formal" (SDD canônico completo), "fix/refactor pequeno" (commit direto). Davi sentiu que SDD atrasa em fase inicial "moldando argila". |
+| **Workflow Framer Motion ← YouTube vídeo** 🆕 NOITE | Skill nova KOD.AI | L | Skill que recebe URL YouTube + ponto específico no vídeo, extrai curva de animação (easing, duração, eixo), gera variant Framer Motion adaptado desktop+mobile. Compor com `/absorver-midia`. Davi 2026-05-25 noite. |
+| **Audit KOD.AI absorveu TODOS notebooks** 🆕 NOITE | Meta-framework | M | Cruzar library NotebookLM (79 entradas) × contextos-domínio × packs. Reportar gaps. Davi pergunta: "se alimentou deles?" |
+| **Audit LGPD nos projetos consumidores** 🆕 NOITE | Auditoria | M | Cada projeto KOD.AI tem mapa LGPD? `lgpd-auditor` agent é invocado em forms novos? Pack `seguranca/lgpd-by-design` existe + aplicado? |
+| **Skill `/atualizar-linkedin`** 🆕 NOITE | Skill nova | L | Integração LinkedIn API + auto-summarize commits/decisões em posts profissionais + drafts pra Davi revisar. Logar KOD.AI ao LinkedIn. Automação pessoal Davi. |
 
 ---
 
