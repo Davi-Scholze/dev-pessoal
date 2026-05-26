@@ -1,7 +1,59 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-26 **META-EVOLUÇÃO KOD.AI — Fase 1 backlog 9/10 frentes fechadas** (6 commits upstream + 1 commit pasta-mãe + 2 plugins instalados + 14 decisões Davi pendentes)
+> Última atualização: 2026-05-26 noite — **CONTRATO-DE-TRABALHO estabelecido + absorção Decision Maker + Textura Pipeline + brief v8 Dojô lockado**
+
+---
+
+## Sessão 2026-05-26 noite — CONTRATO + Absorção Design + Brief v8 Dojô
+
+> **Formato resumo curto** (canonizado em [`CONTRATO-DE-TRABALHO.md`](../CONTRATO-DE-TRABALHO.md) seção Persistência).
+
+### Estado atual
+
+- **Dojô landing v7 em prod** (commit `f65e508`) — fix rejeição v6 aplicado (kanji ambient removido, bgImages athletes B&W, 2 cards modalidades restaurados em /sobre). URL: https://dojofs-davi-scholzes-projects.vercel.app
+- **Brief v8 lockado** retroativamente em `Repositorios/dojo-familia-scholze/_negocio/contextos/briefs/2026-05-26_landing-publico-v8.md` — 6 decisões + 3 buckets + 3 lógicas + 4 prompts ready-to-use
+- **CONTRATO DE TRABALHO** estabelecido como precedência máxima — fluxo iterativo 5 etapas + 6 NÃOs + 8 SIMs + 6 gates de controle humano
+- **KOD.AI upstream** ganhou skill `design-brief-locker` + pack `website-premium-animated` (commit `1a0568c` em https://github.com/Davi-Scholze/kod-ai)
+- **Pasta inbox/** criada em Dojô pra fluxo estruturado de fotos/refs/vídeos com template README
+
+### Decisões tomadas nesta sessão
+
+1. **Absorver Decision Maker (Textura) + Pipeline 11 fases** — viraram skill + pack upstream KOD.AI. Resolve a raiz do v6 ruim (pulei brief).
+2. **Atualizar regra `ui-cycle-trigger.md` v1.0→v1.1** — adiciona Fase 0 BRIEF obrigatória antes do VER existente. Atualização propagada em pasta-mãe + KODAI upstream.
+3. **CONTRATO DE TRABALHO Davi ↔ IA** — Davi propôs texto integral, IA formalizou estrutura, Davi validou. Lei eterna em qualquer projeto pessoal dele. Precedência máxima.
+4. **5 decisões pra v8 Dojô fechadas:**
+   - (1) Fotos: estrutura `_negocio/identidade/inbox/<data>_<sessão>/` com template README. Esquece Midjourney ($).
+   - (2) Display font: trocar Cormorant Garamond por **Fraunces** (Google Fonts free) ou Editorial New se Davi quiser
+   - (3) Cerejeira: **Nano Banana** (sugestão Davi — gera pétala B&W, IA anima via Framer Motion). Free no Google AI Studio.
+   - (4) Headline: IA roda Prompt 1, gera 3 variações, Davi escolhe
+   - (5) Marcação aula: agente no site (formulário 4 perguntas) + Supabase + **CallMeBot WhatsApp** notifica pai (free) + email backup
+
+### Pendências
+
+- [ ] **Davi mandar fotos do pai** em `Repositorios/dojo-familia-scholze/_negocio/identidade/inbox/<data>_sessao-fotos-sensei/` (template README pronto pra preencher)
+- [ ] **Davi gerar pétalas cerejeira B&W no Nano Banana** (Google AI Studio free) e jogar em `inbox/<data>_assets-ia/` — prompt PT-BR otimizado a entregar
+- [ ] IA implementar v8 do Dojô aplicando brief lockado (após fotos + cerejeira chegarem OU após Davi dar OK pra começar pelo que não depende deles)
+- [ ] IA gerar 3 variações de headline (Prompt 1 do brief v8) pra Davi escolher
+- [ ] IA implementar agente-marcação no site (Sprint nova — Supabase + form + CallMeBot + email) — adia pra depois da v8 visual
+- [ ] Promover policy `copy-banned-words` DRAFT → FUNCIONAL após 3 usos reais da skill design-brief-locker (KODAI upstream)
+- [ ] Vídeo loop judô B&W (pendente original) — adia ou substitui pela cerejeira Nano Banana
+
+### Próximos passos (ordem quando Davi voltar)
+
+1. Davi dá `/clear`, abre nova sessão no terminal VS Code
+2. IA roda Sessão Zero (`/abrir`) — lê CONTRATO + memória crítica nova + handoff + brief v8
+3. IA primeira mensagem: 3 links (prod / preview último commit / dev local quando rodar) + status
+4. IA pergunta: começa pelo que não depende de Davi (Fraunces + headline + remover últimos kanji + smoke test) OU espera fotos + cerejeira primeiro?
+
+### Riscos conhecidos
+
+- **CONTRATO ainda não testado em condição real** — primeira sessão pós-contrato vai validar se eu (IA) consigo respeitar fluxo iterativo sem regredir pra modo "executora automática"
+- **Brief v8 tem 5 decisões pendentes** — se Davi mandar "começa logo" sem responder essas 5, vou produzir output parcial/genérico de novo
+- **Foto real do pai depende de Davi** — sem ela, hero v8 continua com stock Unsplash (compromisso aceitável temporário, mas brief lockou "faixa real")
+- **CallMeBot free tier sem SLA** — se cair em produção real do agente-marcação, leads ficam parados (mitigação: email backup obrigatório, refatorar pra WhatsApp Business API Meta se volume justificar)
+
+---
 
 ---
 

@@ -1,7 +1,7 @@
 # CLAUDE.md — Projetos Dev Pessoais
 > Regras globais de IA para todos os projetos pessoais de Davi Scholze.
 > Leia este arquivo no início de cada sessão.
-> Última atualização: 2026-05-25
+> Última atualização: 2026-05-26 (precedência 0 — CONTRATO-DE-TRABALHO.md adicionado)
 
 ## Quem sou eu
 - **Nome:** Davi Pereira Scholze
@@ -12,8 +12,12 @@
 
 ## Leitura obrigatória (ordem)
 
-> ⭐ **CRÍTICO 2026-05-25:** IA deve ler ATIVAMENTE os 4 documentos canônicos abaixo na Sessão Zero (`/abrir`).
+> ⭐ **CRÍTICO 2026-05-25:** IA deve ler ATIVAMENTE os documentos canônicos abaixo na Sessão Zero (`/abrir`).
 > Se ignorar, hesita em decisões estratégicas + força usuário a relembrar tudo toda sessão.
+
+### ⭐⭐ PRECEDÊNCIA MÁXIMA (lei eterna Davi ↔ IA — 2026-05-26)
+
+0. **[`CONTRATO-DE-TRABALHO.md`](CONTRATO-DE-TRABALHO.md)** — fluxo iterativo obrigatório (Davi explica → IA propõe → IA explica plano → Davi valida → IA executa). Gates de controle humano sobre arquitetura/regras/segurança/integrações. **Sobrescreve qualquer outra regra em caso de conflito.**
 
 ### Canônicos KOD.AI (obrigatório se `KODAI/` clonado na raiz)
 
@@ -23,7 +27,7 @@
 ### Canônicos pasta-mãe consumidora
 
 3. **`_negocio/MAPA.md`** — visão geral + estado atual
-4. **`_negocio/PROMPT_MASTER_HANDOFF.md`** — estado vivo da última sessão
+4. **`_negocio/PROMPT_MASTER_HANDOFF.md`** — estado vivo da última sessão (formato resumo curto definido no CONTRATO seção "Persistência")
 5. **`.claude/rules/regras-sessao.md`** — regras operacionais
 
 ### Memórias persistentes ⭐ CRÍTICAS (auto-load via MEMORY.md)
