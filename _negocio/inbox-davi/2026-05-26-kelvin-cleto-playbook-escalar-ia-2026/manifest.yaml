@@ -1,0 +1,69 @@
+type: midia-absorvida
+source: https://youtu.be/g5NBAkfO-ks
+titulo: "O Playbook Invisível Para Escalar Sua Empresa Com IA em 2026 (Construa você mesmo)"
+autor: Kelvin Cleto
+autoria: externa
+tema_slug: kelvin-cleto-playbook-escalar-ia-2026
+data_captura: 2026-05-26
+data_publicacao: 2026-05-26
+duracao_sec: 1395  # 23:15
+language: pt-br
+
+# Concorrente A canônico do KOD.AI — mapeado em competitive-intelligence/conceitos/kelvin-cleto-vs-kodai.md
+contexto_kodai:
+  concorrente_mapeado_em: 3-CONTEXTOS-DOMINIO/competitive-intelligence/conceitos/kelvin-cleto-vs-kodai.md
+  notas:
+    - "Kelvin Cleto = Concorrente A (vertical L1+L2 BR) — STRATEGIC-NORTH.md v1.3 §Concorrentes"
+    - "Convergência estratégica 70% com KOD.AI (já documentada)"
+    - "Vídeo publicado HOJE 2026-05-26 — frente fresca"
+    - "Workshop pago 'Sistema Operacional de IA' 30/05 — funil deste vídeo"
+
+pipeline:
+  fase_1_preflight: ok
+  fase_2_download: ok (50.18 MiB em 2s via yt-dlp 2026.03.17)
+  fase_3_audio_transcript: in-progress (faster-whisper 1.2.1 modelo small int8 CPU)
+  fase_4_frames: ok (15/15 extraídos via ffmpeg scene-change threshold 0.4)
+  fase_5_descricao_multimodal: ok (Claude vision direto em todos os frames)
+  fase_6_sintese: parcial (visual completa; textual aguarda Fase 3)
+  fase_7_manifest_log: this file
+
+artifacts:
+  source: source.mp4 (50.18 MiB)
+  source_metadata: source.info.json
+  source_thumbnail: source.webp
+  audio: audio.opus (5.4 MiB, 32kbps opus)
+  transcript: transcript.md (aguardando — Fase 3 in-progress)
+  frames_count: 15
+  frames_descriptions: frames/descriptions.md
+  sintese: sintese.md (parcial — atualizar quando transcript chegar)
+
+status: synthesized-pending-transcript-integration
+proximo_passo: aguardar transcript → integrar em sintese.md → decisão Davi sobre absorção
+
+absorcao_recomendada:
+  bucket_sugerido: contexto-dominio + competitive-intelligence (refresh)
+  paths_relevantes:
+    - "3-CONTEXTOS-DOMINIO/competitive-intelligence/conceitos/kelvin-cleto-vs-kodai.md (atualizar com material novo)"
+    - "3-CONTEXTOS-DOMINIO/agentes-ia-construcao/ (cross-ref — Kelvin posiciona stack 'Cérebro + Agentes')"
+  anti_pollution_flags:
+    - "Material EXTERNO — atribuição obrigatória"
+    - "Trechos verbatim (quotes) precisam paráfrase n-gram ≥5 antes de absorção"
+    - "Branding Kelvin (Growth AI, Accelera 360) NÃO copiar — só usar como referência mapeada"
+  skill_proxima: /absorver-referencia inbox-davi/2026-05-26-kelvin-cleto-playbook-escalar-ia-2026/
+  justificativa: |
+    Vídeo é teaser + funil pra workshop pago. Convergência estratégica 70%
+    com KOD.AI (já documentada). Material novo desta sessão: arquitetura
+    "Cérebro + Agentes" + filosofia "Usar → Quebrar → Refazer" + extrações
+    JSON estruturadas em 7 categorias (Claude Code based) + Growth AI como
+    SaaS próprio do concorrente.
+
+evidence_bloc:
+  smoke_test_skill: PASS PARCIAL (5/7 fases até agora; Fase 3 in-progress)
+  validador: Claude Opus 4.7 em sessão 2026-05-26
+  comandos_executados:
+    - "yt-dlp --print metadata → título + duração + autor confirmados"
+    - "yt-dlp download → source.mp4 50.18 MiB"
+    - "ffmpeg -vn -acodec libopus -b:a 32k → audio.opus 5.4 MiB"
+    - "ffmpeg -vf scene-change 0.4 -frames 15 → 15 frames extraídos"
+    - "Read multimodal × 15 → frames/descriptions.md"
+    - "faster-whisper small int8 CPU → transcript.md (background b87dr5hg1)"

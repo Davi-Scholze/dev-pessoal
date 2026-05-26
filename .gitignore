@@ -73,3 +73,20 @@ _brutos-novos/*
 # pra Edit/Write em arquivos visuais (.tsx/.jsx). Expira em 10 minutos.
 # Local-only — não polui repo.
 .claude/.ui-cycle-acknowledged
+
+# === Adicionado por KOD.AI em 2026-05-26 (origem: /absorver-midia smoke test Kelvin Cleto) ===
+# Patterns anteriores (linhas 50-59) usam "inbox-*/**" sem prefixo **/ — só capturam
+# inbox-* na raiz. Davi usa _negocio/inbox-davi/<data>-<tema>/, então precisa **/
+# prefix pra qualquer profundidade. Aditivo (não remove os anteriores).
+**/inbox-*/**/source.mp4
+**/inbox-*/**/source.webm
+**/inbox-*/**/source.mov
+**/inbox-*/**/source.mkv
+**/inbox-*/**/source.avi
+**/inbox-*/**/source.m4v
+**/inbox-*/**/source.webp
+**/inbox-*/**/source.jpg
+**/inbox-*/**/audio.opus
+**/inbox-*/**/audio.m4a
+**/inbox-*/**/audio.mp3
+**/inbox-*/**/audio.wav
