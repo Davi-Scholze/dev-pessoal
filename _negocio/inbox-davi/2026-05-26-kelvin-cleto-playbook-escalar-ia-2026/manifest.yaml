@@ -19,26 +19,26 @@ contexto_kodai:
     - "Workshop pago 'Sistema Operacional de IA' 30/05 — funil deste vídeo"
 
 pipeline:
-  fase_1_preflight: ok
-  fase_2_download: ok (50.18 MiB em 2s via yt-dlp 2026.03.17)
-  fase_3_audio_transcript: in-progress (faster-whisper 1.2.1 modelo small int8 CPU)
-  fase_4_frames: ok (15/15 extraídos via ffmpeg scene-change threshold 0.4)
-  fase_5_descricao_multimodal: ok (Claude vision direto em todos os frames)
-  fase_6_sintese: parcial (visual completa; textual aguarda Fase 3)
-  fase_7_manifest_log: this file
+  fase_1_preflight: PASS
+  fase_2_download: PASS (50.18 MiB em 2s via yt-dlp 2026.03.17)
+  fase_3_audio_transcript: PASS (faster-whisper 1.2.1 small int8 CPU; 1395.5s; 660 linhas; lang pt prob 1.00)
+  fase_4_frames: PASS (15/15 via ffmpeg scene-change threshold 0.4)
+  fase_5_descricao_multimodal: PASS (Claude vision direto em 15 frames)
+  fase_6_sintese: PASS (17 insights + cross-ref + verbatim integrados)
+  fase_7_manifest_log: PASS (this file)
 
 artifacts:
-  source: source.mp4 (50.18 MiB)
-  source_metadata: source.info.json
-  source_thumbnail: source.webp
-  audio: audio.opus (5.4 MiB, 32kbps opus)
-  transcript: transcript.md (aguardando — Fase 3 in-progress)
+  source: source.mp4 (50.18 MiB, gitignored)
+  source_metadata: source.info.json (commitado)
+  source_thumbnail: source.webp (gitignored)
+  audio: audio.opus (5.4 MiB, gitignored)
+  transcript: transcript.md (37 KiB, 660 linhas, COMMITADO)
   frames_count: 15
   frames_descriptions: frames/descriptions.md
-  sintese: sintese.md (parcial — atualizar quando transcript chegar)
+  sintese: sintese.md (FUNCIONAL — atualizada com transcript integrado)
 
-status: synthesized-pending-transcript-integration
-proximo_passo: aguardar transcript → integrar em sintese.md → decisão Davi sobre absorção
+status: synthesized-ready-for-absorption
+proximo_passo: decisão Davi → /absorver-referencia OR arquivar inbox-only
 
 absorcao_recomendada:
   bucket_sugerido: contexto-dominio + competitive-intelligence (refresh)
