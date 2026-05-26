@@ -51,3 +51,29 @@ Edição de arquivos visuais — componentes React/Vue/Svelte, CSS, HTML, templa
 - `skills/ver/` — implementa passo 1 do ciclo
 - `skills/dev-browser/` — Playwright MCP wrapper
 - `politicas/imagens.md` — onde os screenshots vão
+
+## Enforcement mecânico (2026-05-25 — pós-postmortem violação Sprint 1a dojo)
+
+Esta regra **NÃO É MAIS apenas texto**. Hook ativo bloqueia mecanicamente Edit/Write em UI sem invocação prévia de design skills:
+
+- **Hook:** `.claude/hooks/pre-tool-use/enforce-ui-cycle.js` (pasta-mãe consumidora)
+- **Registrado em:** `.claude/settings.json` PreToolUse com matcher `Edit|Write|MultiEdit`
+- **Comportamento:** intercepta toda chamada `Edit`/`Write`/`MultiEdit` cujo `file_path` bate em pattern UI (`.tsx`/`.jsx`/`.vue`/`.svelte`/`components/`/`app/`/`pages/`). Se IA não criou marker `.claude/.ui-cycle-acknowledged` (modificado nos últimos 10 min), retorna `exit 2` (bloqueia) com mensagem detalhada listando skills/agents obrigatórios.
+
+### Como bypassar legitimamente (após cumprir o ciclo)
+
+1. Invocar **agent `frontend-designer`** (gera componente seguindo design tokens) OU skill `tailwind-shadcn-scaffold`
+2. Se arquivo existir: invocar skill `ver` OU `dev-browser` (screenshot antes via Playwright MCP)
+3. `Write` em `.claude/.ui-cycle-acknowledged` com 1 linha descritiva (vira marker timestamp)
+4. Implementar/editar o arquivo UI (hook libera por 10 min)
+5. Antes de declarar done: invocar agent `design-reviewer` (audit Awwwards/Mobbin + axe-core)
+
+### Por que enforcement mecânico
+
+Sprint 1a dojo (2026-05-25) violou esta regra **15× em 1 dia** — texto sem hook não freia o IA quando pipeline SDD (`/spec→/execute`) está rodando. A memória crítica ⭐ `feedback_invocar_skills_design_obrigatorio.md` é PREVENTIVA (lembra IA em sessões futuras); este hook é CORRETIVO (atua na própria sessão).
+
+Postmortem completo: `_negocio/POSTMORTEM-2026-05-25-ui-cycle-violation.md`.
+
+### Dívida upstream KODAI
+
+Propagar hook + atualizações nas skills `/break` e `/execute` upstream em sessão futura via `/upstream-update` (registrada em `_negocio/PENDENCIAS.md`).

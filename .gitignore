@@ -66,3 +66,10 @@ inbox-*/**/audio.wav
 _brutos-novos/*
 !_brutos-novos/README.md
 !_brutos-novos/.gitkeep
+
+# === Adicionado por KOD.AI em 2026-05-25 (origem: postmortem-2026-05-25-ui-cycle-violation) ===
+# Marker timestamp criado pelo IA após invocar design skills/agents (frontend-designer,
+# tailwind-shadcn-scaffold, dev-browser, ver) — destrava o hook enforce-ui-cycle.js
+# pra Edit/Write em arquivos visuais (.tsx/.jsx). Expira em 10 minutos.
+# Local-only — não polui repo.
+.claude/.ui-cycle-acknowledged

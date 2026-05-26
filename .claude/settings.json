@@ -27,6 +27,15 @@
             "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/pre-tool-use/kodai-pre-commit-guard.js\""
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/usuario/Documents/Projetos Dev Pessoais/.claude/hooks/pre-tool-use/enforce-ui-cycle.js\""
+          }
+        ]
       }
     ],
     "PostToolUse": [

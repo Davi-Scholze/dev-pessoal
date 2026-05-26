@@ -44,6 +44,11 @@
 | **`seguranca/pentest-automated`** | Pack | L | Pendente (sem urgência pré-MVP) |
 | **Vídeo YouTube w0H1-b044KY (Liam)** | Bruto | S | Pendente `/absorver-midia` — próxima sessão |
 | **Mapear OnMat + Kimono + outros concorrentes** | Tarefa | M | Aguarda NotebookLM dedicado OU material manual |
+| **Política `secrets-organization-multi-cliente.md`** 🆕 | Política universal | M | Subir pro upstream KODAI consolidando princípio "tudo dentro do repo" + estrutura `.env.local` canônica + `.gitignore` blindado + workflow CI. Origem: incidente 2026-05-25 sessão Fase 0 dojo (memória `feedback_tudo_dentro_do_repo_do_sistema`) |
+| **Hook upstream `enforce-ui-cycle.js`** 🆕 | Hook KOD.AI | M | Subir hook + settings.json template + atualização da regra path-scoped `ui-cycle-trigger.md` com seção "Enforcement mecânico" pra upstream `KODAI/1-ESQUELETO/hooks/` + `0-INSTALACAO/templates/`. Origem: postmortem 2026-05-25 Sprint 1a dojo (15 violações da regra em 1 dia). Memória crítica ⭐ `feedback_invocar_skills_design_obrigatorio`. |
+| **Atualizar skill `/break` upstream** 🆕 | Skill KOD.AI | S | Adicionar template obrigatório no `/break`: se spec toca UI, criar sub-tasks de design (frontend-designer mockup + dev-browser screenshot + design-reviewer audit) ANTES das tasks de implementação. Origem: mesmo postmortem 2026-05-25. |
+| **Atualizar skill `/execute` upstream** 🆕 | Skill KOD.AI | S | Adicionar gate pré-task: se task vai tocar UI sem task de design correspondente no plano, ABORT + voltar pro `/break`. Composição com hook `enforce-ui-cycle.js`. Origem: mesmo postmortem. |
+| **Atualizar hook `auto-suggest-skills.js` upstream** 🆕 | Hook KOD.AI | S | Adicionar patterns detectando intent visual/design/tela/componente/layout no prompt do Davi → sugerir `frontend-designer` agent + `tailwind-shadcn-scaffold` + `dev-browser`/`ver` skills. Origem: postmortem. |
 
 ---
 
