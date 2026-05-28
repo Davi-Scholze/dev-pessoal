@@ -68,14 +68,23 @@
 
 **5 frentes confirmadas FALSO-POSITIVO** (já existiam no KOD.AI desde 2026-05-22): pack carrossel, pack google-ads, densificação /seo, LGPD pack `seguranca/lgpd-by-design` DRAFT, skills LGPD upstream DRAFT. Aplicar regra "verificar antes de criar" economizou criação de ~1500+ linhas duplicadas.
 
-### Pendências restantes (6 frentes — todas dependem de Davi presente OU sessão longa dedicada)
+### Pendências restantes (após segunda rodada — só 2 frentes não-preparáveis)
 
-- [ ] **Plano absorção NotebookLM P0** — preencher 3 contextos vazios + 7 CNTX UNI Meta (precisa decisão Davi sobre prazo dedicado 4-8h)
-- [ ] **Audit 15 DRAFTs → FUNCIONAL** com Evidence Bloc (sessão longa de validação em casos reais)
-- [ ] **Testar plugin `get-shit-done-cc`** em projeto isolado (precisa projeto novo + 1 semana de uso)
-- [ ] **Absorver scripts auxiliares do skill-creator Anthropic** (sessão dedicada)
-- [ ] **`/brainstorming` modelo de negócio KOD.AI** — open-core vs paid vs serviço (licença Apache 2.0 já decidida) — DAVI PRESENTE obrigatório
-- [ ] **`/brainstorming` contexto-profundo K2** — pesquisa NotebookLM destravada — DAVI PRESENTE obrigatório
+**4 frentes preparadas assincronamente nesta sessão estendida** (commit `2c5ed78` upstream KOD.AI):
+
+| Frente | Doc preparado | Tipo |
+|---|---|---|
+| **F13** Plano absorção NotebookLM P0 | `docs/NOTEBOOKLM-ABSORPTION-PLAN-P0-2026-05-28.md` | Plano executável 6-8h em 3 fases A/B/C (Davi escolhe modo) |
+| **F14** Audit 15 DRAFTs | `docs/AUDIT-DRAFTS-2026-05-28.md` | 30 DRAFTs em 4 buckets — recomendação: Bucket A em batch (8 promoções, 3-4h) |
+| **F17** Modelo de negócio | `docs/decisoes/2026-05-28_modelo-de-negocio-recomendacao.md` | 4 opções analisadas + recomendação fundamentada Híbrido Open-Core + Premium |
+| **F18** Contexto-profundo K2 | `docs/decisoes/2026-05-28_contexto-profundo-K2-brainstorming-agenda.md` | Agenda brainstorming 60-90min + atalho pragmático 1 turno texto |
+
+Davi lê cada doc e responde "ok / ajusta X / discordo prefiro Y" — economiza partir do zero.
+
+**2 frentes REAIS pendentes (não-preparáveis assincronamente):**
+
+- [ ] **F15 Testar plugin `get-shit-done-cc`** — exige projeto isolado real + 1 semana de uso
+- [ ] **F16 Absorver scripts auxiliares do skill-creator Anthropic** — exige research externa via WebFetch + tempo dedicado
 
 ### Próximos passos quando Davi voltar
 
