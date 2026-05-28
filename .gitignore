@@ -90,3 +90,12 @@ _brutos-novos/*
 **/inbox-*/**/audio.m4a
 **/inbox-*/**/audio.mp3
 **/inbox-*/**/audio.wav
+
+# === Adicionado por KOD.AI em 2026-05-28 (origem: politica imagens.md + feedback Davi) ===
+# Bloqueia PNGs/JPGs soltos na raiz (acidentalmente esquecidos).
+# Davi 2026-05-28 verbatim: "n podemos n iludir com backup de foto e print,
+# isso não funciona, precisamos sempre apagar e deixar tudo limpo".
+# Permitido só em pastas explícitas (inbox-davi/, contextos/, evidencias/, etc).
+/*.png
+/*.jpg
+/*.jpeg
