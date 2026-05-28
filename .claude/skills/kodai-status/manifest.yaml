@@ -1,0 +1,59 @@
+name: kodai-status
+version: 0.1.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-23
+updated: 2026-05-28
+
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Sensibilidade: publico
+
+description: >
+  Reporta estado completo do KOD.AI nesta pasta: versão, onda atual (1/2/3),
+  contagem de skills/rules/hooks ativos, pendências de instalação, drift do
+  clone KODAI/. Skill DETERMINÍSTICA (sem dedução) — usa comandos reais
+  (Test-Path, Get-ChildItem, git log) e cita números.
+
+triggers:
+  - /kodai-status
+  - kodai status
+  - kodai doctor
+  - o que tá instalado do kodai
+  - ver estado kodai
+  - está tudo OK kodai
+  - qual versão do kodai
+  - troubleshoot kodai
+
+allowed-tools:
+  - Read
+  - Bash
+  - Glob
+
+quality_gates:
+  - "Output em 8-12 linhas no formato canônico (sem prosa adicional)"
+  - "TODOS os números vêm de comando real (Test-Path, Get-ChildItem, git log) — ZERO hardcode"
+  - "Sugestão de próxima ação contextual (baseada nos checks reais)"
+  - "Distingue 3 estados (KODAI ausente / clonado-não-instalado / instalado)"
+  - "Não modifica nada (read-only)"
+  - "Detecta drift do upstream via git rev-list (não confia em data manual)"
+
+related:
+  - ../kodai-rollback/SKILL.md
+  - ../atualizar-kodai/SKILL.md
+  - ../instalar/SKILL.md
+  - ../../regras-base.md (regra 11 honestidade em claims)
+
+quando_promover_draft_funcional:
+  - testado_em_2_pastas_consumidoras_reais: true
+  - distingue_3_estados_corretamente: true
+  - output_canonico_em_8_a_12_linhas: true
+  - drift_upstream_detectado_corretamente: true
+  - evidence_bloc_em_complete: true
+
+origem: >
+  Skill criada 2026-05-23 como resposta ao gap D1 do piloto Navortech-Desenvolvimento.
+  Operacionaliza princípio fundacional 2Co 12:9-10 — fraqueza "sem visibilidade do estado"
+  vira força "reporte factual em 1 comando".
+  Manifest criado 2026-05-28 (audit Davi pós-leitura MazyOS).

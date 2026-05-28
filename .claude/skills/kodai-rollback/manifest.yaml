@@ -1,0 +1,59 @@
+name: kodai-rollback
+version: 0.1.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-23
+updated: 2026-05-28
+
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Sensibilidade: publico
+
+description: >
+  Desfaz instalação KOD.AI (parcial ou completa) lendo `KODAI-INSTALADO.md`
+  como inventário. Modo `--dry-run` (default) lista o que SERÁ apagado.
+  Modo `--apply` exige confirmação literal "confirmo rollback". Preserva
+  100% do que NÃO foi criado pelo KOD.AI. Snapshot automático em
+  `.kodai-rollback-<data>.json` antes do apply pra meta-rollback.
+
+triggers:
+  - /kodai-rollback
+  - rollback kodai
+  - desinstalar kodai
+  - remover kodai
+  - me arrependi
+  - kodai está atrapalhando
+  - após /instalar que deu errado
+
+allowed-tools:
+  - Read
+  - Bash
+  - Glob
+  - Write
+
+quality_gates:
+  - "Default = --dry-run (nenhuma deleção sem confirmação literal)"
+  - "Apply requer string exata 'confirmo rollback' do usuário"
+  - "Snapshot pre-apply OBRIGATÓRIO antes de qualquer deleção"
+  - "Distingue arquivos KOD.AI (do inventário) vs arquivos pré-existentes (preservar)"
+  - "Evidence Bloc final lista tudo deletado + tudo preservado"
+  - "Documenta meta-rollback (como desfazer o rollback)"
+
+related:
+  - ../kodai-status/SKILL.md
+  - ../instalar/SKILL.md
+  - ../atualizar-kodai/SKILL.md
+  - ../../regras-base.md (regra 11 honestidade em claims)
+
+quando_promover_draft_funcional:
+  - testado_em_2_pastas_consumidoras_reais: true
+  - snapshot_e_meta_rollback_validados: true
+  - 4_estados_distinguidos_corretamente: true
+  - evidence_bloc_em_complete: true
+
+origem: >
+  Skill criada 2026-05-23 como resposta ao gap D2 do piloto Navortech-Desenvolvimento.
+  Operacionaliza princípio fundacional 2Co 12:9-10 — fraqueza "sem reversão se der ruim"
+  vira força "reversão multi-camada com snapshot + Evidence Bloc completo".
+  Manifest criado 2026-05-28 (audit Davi pós-leitura MazyOS).

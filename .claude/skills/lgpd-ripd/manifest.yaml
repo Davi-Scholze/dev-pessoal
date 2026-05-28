@@ -1,0 +1,68 @@
+name: lgpd-ripd
+version: 0.1.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-25
+updated: 2026-05-28
+
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Sensibilidade: publico
+
+description: >
+  Gera RIPD (Registro de Operações de Tratamento de Dados Pessoais — LGPD Art. 37)
+  adaptado ao stack do projeto consumidor. Lê schemas (Supabase, Postgres, Prisma,
+  Drizzle), detecta campos PII (email, nome, CPF, telefone, endereço, biometria,
+  saúde), classifica por categoria (comum/sensível/menor), sugere base legal LGPD
+  apropriada por finalidade, identifica sub-processadores via .env (Supabase,
+  Vercel, Asaas, Stripe, Anthropic, OpenAI, etc), gera RIPD esqueleto em
+  `docs/lgpd/ripd.md` pronto pra publicação `/legal/privacidade`.
+
+triggers:
+  - /lgpd-ripd
+  - criar RIPD
+  - preciso documentar LGPD
+  - compliance Art. 37
+  - tratamento de dados
+  - documentar PII do sistema
+  - RIPD esqueleto
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+tier: employee
+reports_to: null
+
+quality_gates:
+  - "PII detectada em ≥1 tabela do schema (se 0, alerta — confirmar não-existência)"
+  - "Base legal LGPD declarada explicitamente por finalidade"
+  - "Sub-processadores enumerados a partir de .env / dependencies / hosting"
+  - "Regime especial Art. 14 (menores) detectado se aplicável"
+  - "Regime sensível Art. 11 (saúde, biometria, raça, religião, orientação) detectado se aplicável"
+  - "Canal de exercício de direitos declarado (email mínimo)"
+
+related:
+  - ../lgpd-dsr-endpoint/SKILL.md
+  - ../../politicas/lgpd.md
+  - ../../../2-PACKS/packs/seguranca/lgpd-by-design/
+  - ../../../3-CONTEXTOS-DOMINIO/gestao-academia-esportiva-br/conceitos/lgpd-menor-saas-educacao.md
+
+quando_promover_draft_funcional:
+  - smoke_test_em_2_projetos_consumidores: dojo + decon
+  - ripd_gerado_validado_por_leitura_humana: true
+  - deteccao_pii_acima_95_pct_accuracy: true
+  - sub_processadores_enumerados_em_3_stacks: true
+  - evidence_bloc_em_complete: true
+
+origem: >
+  Davi backlog 2026-05-25 noite item B.5. Audit LGPD-AUDIT-PROJETOS-CONSUMIDORES.md
+  (commit b6400f3) confirmou: 3/3 projetos não-conformes; skill referenciada em
+  conceito-domínio dojo mas NÃO EXISTIA. Esta skill operacionaliza a lacuna.
+  Manifest criado 2026-05-28 (audit Davi pós-leitura MazyOS).

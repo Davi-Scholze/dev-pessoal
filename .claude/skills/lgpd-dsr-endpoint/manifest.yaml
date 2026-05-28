@@ -1,0 +1,72 @@
+name: lgpd-dsr-endpoint
+version: 0.1.0
+type: skill-universal
+status: DRAFT
+created: 2026-05-25
+updated: 2026-05-28
+
+Tipo: skill
+Eixo: orchestration
+Escopo: global
+Sensibilidade: publico
+
+description: >
+  Gera endpoint `/api/lgpd/dsr` (Data Subject Request) que atende os 9 direitos
+  do titular LGPD Art. 18: confirmação, acesso, correção, anonimização, portabilidade,
+  eliminação, informação compartilhamento, revogação consentimento. Detecta stack
+  (Next.js Route Handler, Express, FastAPI, NestJS) + ORM (Supabase, Prisma, Drizzle,
+  SQLAlchemy) e gera código pronto + tests + schema da tabela `consentimentos_lgpd`
+  (se ausente). Inclui rate limiting + auth obrigatória + audit log + delivery
+  signed link 7 dias.
+
+triggers:
+  - /lgpd-dsr-endpoint
+  - criar endpoint DSR
+  - Art. 18 LGPD
+  - direito acesso/deleção/portabilidade
+  - implementar exercício de direitos LGPD
+  - LGPD DSR
+  - endpoint titular dados
+
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+
+tier: employee
+reports_to: null
+
+quality_gates:
+  - "Endpoint requer autenticação obrigatória (não-anônimo)"
+  - "Rate limiting aplicado (3 req/dia/user default)"
+  - "Audit log persistente (tabela `dsr_log` ou append-only file)"
+  - "Tabela `consentimentos_lgpd` existe (ou migration criada)"
+  - "DPO notificado por email a cada request"
+  - "Prazo de resposta declarado: ≤15 dias úteis (Art. 19 §1º)"
+  - "Output (export) entregue via signed URL 7 dias de validade"
+  - "Testes cobrem 4 ações principais (acesso, correção, deleção, portabilidade)"
+
+related:
+  - ../lgpd-ripd/SKILL.md
+  - ../../politicas/lgpd.md
+  - ../../../2-PACKS/packs/seguranca/lgpd-by-design/
+  - ../../../3-CONTEXTOS-DOMINIO/lgpd-seguranca-universal/
+
+quando_promover_draft_funcional:
+  - smoke_test_em_projeto_real: dojo Sprint 4
+  - todos_7_actions_funcionais: true
+  - rate_limit_testado_contra_abuse: true
+  - dpo_notification_confirmada: true
+  - signed_url_expiracao_testada: true
+  - hard_delete_pos_grace_testado: true
+  - evidence_bloc_em_complete: true
+
+origem: >
+  Davi backlog 2026-05-25 noite item B.5. Audit LGPD-AUDIT-PROJETOS-CONSUMIDORES.md
+  (commit b6400f3) confirmou skill referenciada em lgpd-menor-saas-educacao.md mas
+  NÃO EXISTENTE. Esta skill operacionaliza Art. 18 LGPD.
+  Manifest criado 2026-05-28 (audit Davi pós-leitura MazyOS).
