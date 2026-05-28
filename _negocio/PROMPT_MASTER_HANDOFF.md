@@ -69,6 +69,55 @@
 
 ---
 
+## Sessão 2026-05-28 (continuação) — 5 tópicos Davi + regra crítica "verificar antes de criar"
+
+### Eventos
+
+1. **Davi mandou 5 tópicos** (extensions VS Code + modos Claude + escolha modelo + fechar sessão + fluxo criação)
+2. **IA começou a executar criando 2 políticas prolixas** (`modos-claude-code.md` 260L + `escolha-de-modelo.md` 207L) sem auditar o que já existia
+3. **Davi interrompeu** — pediu feedback do que entendi antes de continuar
+4. **Davi estabeleceu regra crítica:** *"criar muitas coisas novas polui, o ideal é sempre verificar se já existe algo do tipo e melhorar isso"* — vale pra todos os tópicos
+5. **Memória crítica nova:** `feedback_verificar_existente_antes_criar.md` — agora no MEMORY.md seção ⭐ CRÍTICAS
+6. **Audit honesto dos 5 tópicos** revelou que KOD.AI já tinha quase tudo:
+   - T1: `kodai-status` + `auditar-projeto` + `instalar` + `atualizar-kodai` cobrem health check; faltava `.vscode/extensions.json`
+   - T2: gap real (sem doc sobre modos Claude Code) — mas precisava SIMPLES
+   - T3: gap real (sem doc escolha modelo) — mas precisava SIMPLES
+   - T4: `/espelhar` + `/salvar` + `/atualizar` + `/complete` + `auto-instrucao-pipeline` já cobrem TUDO — não criar `/fechar-sessao`
+   - T5: `quando-usar-sdd.md` + `gsd-sketch` cobrem; sub-Sketch que eu adicionei estava prolixo
+
+### Ações corretivas executadas
+
+| # | Ação | Resultado |
+|---|---|---|
+| 1 | Deletei pasta vazia `1-ESQUELETO/skills-universais/fechar-sessao/` | Limpa |
+| 2 | Reescrevi `modos-claude-code.md` 260L → **43L** | Simples e direto |
+| 3 | Reescrevi `escolha-de-modelo.md` 207L → **37L** | Tabela + regra |
+| 4 | Simplifiquei sub-Sketch em `quando-usar-sdd.md` ~40L → **8L** | 4 bullets |
+| 5 | Criei `1-ESQUELETO/templates/pasta-mae/.vscode/extensions.json` (12 extensions canônicas) | Propagável via `/instalar` |
+| 6 | Adicionei Fase 6 em `/espelhar` SKILL.md (detecta drift, sugere `/clear`) | +15 linhas, sem skill nova |
+
+### Commits upstream KOD.AI (3 novos)
+
+- `9ea139c` refactor(politicas): simplifica 3 políticas
+- `facf13f` feat(template-pasta-mae): .vscode/extensions.json
+- `b2bddd6` feat(espelhar): Fase 6 drift detection
+
+### Próximos passos quando Davi voltar
+
+1. Davi `/clear`, nova sessão `/abrir`
+2. Sessão Zero vai carregar a NOVA memória crítica ⭐ `feedback_verificar_existente_antes_criar`
+3. IA pergunta direção: P1 do MazyOS audit (marketing skills) OU Dojô v8 OU outra frente
+4. **Toda criação futura passa pelo filtro "já existe? → melhorar antes de criar"**
+
+### Lições aprendidas (pra próximas sessões)
+
+- **Auto Mode ≠ permissão pra decidir criação estrutural sem alinhar.** Auto Mode é pra execução de plano alinhado.
+- **Davi prefere tópicos em sequência + IA processa TODOS via TodoWrite** — funcionou bem hoje
+- **Davi cobra simplicidade** — 200+ linhas de política é prolixo. ≤50L é o teto.
+- **Verificar > Criar.** Sempre. Vale pra skills/políticas/packs/contextos/agents/templates.
+
+---
+
 ---
 
 ## Sessão 2026-05-26 noite — CONTRATO + Absorção Design + Brief v8 Dojô
