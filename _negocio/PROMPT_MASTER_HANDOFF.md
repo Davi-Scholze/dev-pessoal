@@ -130,11 +130,14 @@ Lição: audit desatualiza em dias quando KOD.AI evolui ativamente. Skill `/audi
 - Taxa absorção NotebookLM: 8 → **17 absorvidos** de 81 total (10% → 21% explícito)
 - Decisão estrutural: NÃO criar contexto-domínio `kodai-meta-claude/` dedicado (esses notebooks alimentam HARNESS, não conhecimento de negócio)
 
-### Pendências restantes (3 frentes)
+### Pendências restantes (1 frente)
 
-- [ ] **F15 Testar plugin `get-shit-done-cc`** — exige projeto isolado real + 1 semana de uso
-- [ ] **F16 Absorver scripts auxiliares do `skill-creator` Anthropic** — exige research externa via WebFetch + tempo dedicado
-- [ ] **F18 K2 spec piloto Decon CS** — Davi valida recomendação A+B (Anthropic Cache + NotebookLM) em 1 turno texto e eu crio spec piloto
+- [ ] **F15 Testar plugin `get-shit-done-cc`** — exige projeto isolado real + 1 semana de uso (não-preparável assincronamente)
+
+**F16 + F18 preparados na quinta rodada** (commit `1d4f395` upstream KOD.AI):
+
+- **F16 Plano absorção skill-creator** — `docs/decisoes/2026-05-28_absorver-skill-creator-anthropic-plano.md` com 3 ondas (2h / 5-6h / 6-8h). Onda 1 recomendada: schema formal SKILL.md + validate-skill.py portado + atribuição. Apache 2.0 ↔ Apache 2.0 compatibilidade total.
+- **F18 Spec piloto Decon CS** — `docs/decisoes/2026-05-28_contexto-profundo-K2-spec-piloto-decon-cs.md` com workflow 4 fases (Davi coleta 5 áudios 30min + IA transcreve/extrai 1.5h + IA build agent 1.5h + Davi smoke test 5 perguntas 1h). Total: 2h Davi + 3.5h IA + <$1. Bloqueio LGPD: RIPD esqueleto pré-piloto (~1h).
 
 ### Próxima ação atualizada (Davi escolhe quando voltar)
 
