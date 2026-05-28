@@ -1,7 +1,73 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-26 noite — **CONTRATO-DE-TRABALHO estabelecido + absorção Decision Maker + Textura Pipeline + brief v8 Dojô lockado**
+> Última atualização: 2026-05-28 — **Análise MazyOS + 4 Quick Wins KOD.AI executados**
+
+---
+
+## Sessão 2026-05-28 — Análise MazyOS + Quick Wins meta-evolução KOD.AI
+
+> **Formato resumo curto** (canonizado em [`CONTRATO-DE-TRABALHO.md`](../CONTRATO-DE-TRABALHO.md) seção Persistência).
+
+### Estado atual
+
+- **KOD.AI v0.6.0-dev** sincronizado upstream com 4 commits novos hoje (`74f557c`, `3a74d4b`, `9cb5f95`, `5217276`), 2 commits pasta-mãe pushed
+- **MazyOS analisado 100% + apagado** (`Repositorios/MazyOS/` removido pós-extração completa)
+- **Catalogos inline criados** em `KODAI/1-ESQUELETO/catalogos/` (skills-externas.md + ferramentas.md) absorvendo formato MazyOS com lineage v1
+- **SKILLS-DEEP-MAP v1.1** reconciliado — KOD.AI está 94% governado, não 17% como v1.0 estimou. Sem crise sistêmica.
+- **4 manifests criados + 2 skills LGPD propagadas** pra pasta-mãe (kodai-rollback, kodai-status, lgpd-dsr-endpoint, lgpd-ripd)
+- **Dojô v7** continua em prod URL `https://dojofs-davi-scholzes-projects.vercel.app` (commit `f65e508`) — sessão tarde não tocou Dojô
+
+### Decisões tomadas nesta sessão
+
+1. **Análise pré-delete (F1-F5)** — antes de apagar MazyOS, extrair 9 princípios canônicos pra inbox + comparativo lado-a-lado + audit honesto + retorno geral
+2. **MazyOS é mais simples/bonito/vendável; KOD.AI é mais profundo/escalável/defensável** — domínios diferentes (MazyOS=marketing SMB; KOD.AI=dev+marketing+governance)
+3. **4-5 lacunas reais vs MazyOS identificadas:** `/carrossel` HTML+PNG render, `/anuncio-google` CSV Editor, pipeline marketing amarrado, catalogos inline (✓ fechado hoje), estilo visual base fallback
+4. **Quick Wins (3h, ROI altíssimo) executados imediatamente** — não criei coisas novas estruturais, validei o que já tinha. 4 manifests + SKILLS-DEEP-MAP v1.1 + 2 catálogos novos
+5. **Não absorver do MazyOS:** modelo monolítico, ausência de hooks/agents/contextos-domínio, tom muito informal
+
+### Pendências (consolidadas após Quick Wins)
+
+**P0 da sessão (concluídas ✓):**
+- [X] Análise 100% MazyOS + delete
+- [X] 4 manifests criados (kodai-rollback, kodai-status, lgpd-dsr-endpoint, lgpd-ripd)
+- [X] SKILLS-DEEP-MAP v1.1 fingerprint real
+- [X] Catálogos inline (skills-externas.md + ferramentas.md)
+- [X] 6 commits granulares + push upstream + pasta-mãe
+
+**P1 (próximas sessões — Davi decide ordem):**
+- [ ] Pipeline marketing amarrado — pack `marketing/pipeline-conteudo-amarrado/` + atualizar 5 skills declarando handoff_in/out
+- [ ] Skill `/carrossel` HTML+PNG — re-implementar como pack `marketing/carrossel-instagram-render/` com lineage v1 source MazyOS
+- [ ] Skill `/anuncio-google` — pack `marketing/google-ads-csv-editor/`
+- [ ] Densificar `/seo` 8 passos com WebSearch+WebFetch reais
+- [ ] Pack `design/estilo-visual-base-fallback/` (Inter + paleta sóbria + 6 layouts)
+- [ ] Decisão: absorver 18 agents pro upstream OU manter pasta-mãe local
+- [ ] Audit smoke test 15 DRAFTs → promover pra FUNCIONAL com Evidence Bloc
+
+**P2 (Davi backlog 2026-05-26 noite ainda pendente):**
+- [ ] Davi mandar fotos do pai em `Repositorios/dojo-familia-scholze/_negocio/identidade/inbox/`
+- [ ] Davi gerar pétalas cerejeira B&W (Nano Banana)
+- [ ] IA implementar v8 do Dojô aplicando brief lockado
+- [ ] IA gerar 3 variações de headline (Prompt 1 do brief v8)
+- [ ] Implementar agente-marcação (Supabase + form + CallMeBot + email)
+
+### Próximos passos (ordem quando Davi voltar)
+
+1. Davi dá `/clear`, abre nova sessão
+2. IA roda Sessão Zero `/abrir` — carrega CONTRATO + memória crítica + handoff + 4 docs novos de hoje
+3. IA primeira mensagem: status atual + pergunta:
+   - (a) Atacar P1 (skills marketing absorvidas: pipeline + carrossel + anuncio-google + seo + estilo fallback)
+   - (b) Voltar pro Dojô v8 (esperar fotos + cerejeira ou começar pelo que não depende)
+   - (c) Decidir frente 18 agents
+
+### Riscos conhecidos
+
+- **Lacunas vs MazyOS identificadas mas NÃO IMPLEMENTADAS** — cliente SMB que precisa "post Instagram hoje" ainda não tem caminho amarrado no KOD.AI
+- **15 DRAFTs sem Evidence Bloc** — várias já rodaram em produção mas falta formalização Iron Law
+- **18 agents continuam não-absorvidos upstream** — outros consumidores (Navortech-Dev, futuros clientes) não recebem agents na instalação
+- **CONTRATO de trabalho respeitado nesta sessão** — apresentei plano 5 fases antes de executar, Davi validou ("Pode seguir"), executei. Auto Mode ativo nas Quick Wins (decisões razoáveis sem pausar) — funcionou bem.
+
+---
 
 ---
 
