@@ -109,15 +109,39 @@ Aplicação da regra "verificar antes de criar" evitou 6-8h de trabalho duplicad
 
 Lição: audit desatualiza em dias quando KOD.AI evolui ativamente. Skill `/audit-notebooklm-coverage` (criada hoje na frente 12) deve virar gate obrigatório antes de planos NotebookLM futuros.
 
-### Próxima ação atualizada
+### Quarta rodada execução — 3 frentes adicionais fechadas
 
-Davi escolhe entre 5 caminhos prontos pra executar (em ordem de ROI):
+**F17 implementado** (commit `48b81b6` upstream KOD.AI):
+- `LICENSE` Proprietária → Apache License 2.0 + LICENSE HISTORY documentando troca
+- `NOTICE` com atribuição completa + dependências terceiros + 'NOT A CONTRIBUTION' clause
+- `CONTRIBUTING.md` com guia 6 tipos contribuição + pipeline SDD + anti-pollution + status honesto + Conventional Commits + trusted contributors path
+- Trademark KOD.AI permanece propriedade Davi Scholze (Section 6)
 
-1. **Fase B NotebookLM** — cherry-pick 1.5-2h. Vinculação 7 CNTX UNI Meta no AGENTS.md + agentes-ia-construcao. RECOMENDADO.
-2. **Promoção Bucket A residual** — atualizar evidências em 3 skills (espelhar/status-decisao/kodai-rollback) sem promover. 30min.
-3. **Modelo de negócio** (F17) — leia `docs/decisoes/2026-05-28_modelo-de-negocio-recomendacao.md` + valida Híbrido Open-Core. Implementa LICENSE Apache 2.0 + CONTRIBUTING.md.
-4. **K2 brainstorming** (F18) — leia agenda + decide caso piloto Decon CS. Atalho 1 turno texto possível.
-5. **Dojô v8** — espera fotos pai + cerejeira conversão WebM. Ou começa pelo que não depende.
+**Cerejeira Dojô convertida** (no inbox v8):
+- `cerejeira-original.mp4` 3.6MB (preservado como bruto sagrado)
+- `cerejeira-720p.webm` 1.6MB (alternativa qualidade)
+- `cerejeira-480p.webm` **524KB** (RECOMENDADO — 85% redução, dentro da meta <500KB)
+- README com snippet HTML pronto + cuidados `prefers-reduced-motion`
+
+**Fase B NotebookLM fechada** (commit `d213b0a` upstream KOD.AI):
+- Audit reportava 7 CNTX UNI Meta órfãos. Verificação real encontrou **9**
+- Vinculados em `agentes-ia-construcao/notebooklm.md` v1.0
+- Manifest agentes-ia-construcao v0.1.0 → v0.2.0 com campo `notebooklm_meta_references` (9 entries)
+- Taxa absorção NotebookLM: 8 → **17 absorvidos** de 81 total (10% → 21% explícito)
+- Decisão estrutural: NÃO criar contexto-domínio `kodai-meta-claude/` dedicado (esses notebooks alimentam HARNESS, não conhecimento de negócio)
+
+### Pendências restantes (3 frentes)
+
+- [ ] **F15 Testar plugin `get-shit-done-cc`** — exige projeto isolado real + 1 semana de uso
+- [ ] **F16 Absorver scripts auxiliares do `skill-creator` Anthropic** — exige research externa via WebFetch + tempo dedicado
+- [ ] **F18 K2 spec piloto Decon CS** — Davi valida recomendação A+B (Anthropic Cache + NotebookLM) em 1 turno texto e eu crio spec piloto
+
+### Próxima ação atualizada (Davi escolhe quando voltar)
+
+1. **F18 atalho 1 turno** — você diz "ok A+B + Decon CS" e eu crio spec piloto + executo 1ª iteração. ~30 min.
+2. **Fase C NotebookLM** — expandir `contabilidade-br/` + `responsividade-mobile-first/` (2.5-3.5h, aguarda trigger natural Decon/Dojô)
+3. **Dojô v8** — começa implementação landing usando cerejeira 480p + fotos pai (quando chegarem). Brief v8 lockado + cerejeira pronta = sem bloqueio visual.
+4. **F15/F16** — projetos paralelos quando houver banda.
 
 ### Próximos passos quando Davi voltar
 
