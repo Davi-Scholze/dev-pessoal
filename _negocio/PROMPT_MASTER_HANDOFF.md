@@ -49,22 +49,47 @@
 - [ ] `/brainstorming` modelo de negócio KOD.AI (open-core vs paid vs serviço — licença Apache 2.0 já decidida)
 - [ ] `/brainstorming` contexto-profundo K2
 
-### Pendência crítica pra Davi decidir
+### Atualização final (sessão fechada com 14/20 frentes)
 
-**🚨 Push da pasta-mãe pendente** — KOD.AI já tá sincronizado upstream (5 commits pushed). Submodule pointer + memória nova `feedback_recomendar_antes_de_perguntar.md` + atualização deste handoff + atualização PENDENCIAS.md precisam ser commitados na pasta-mãe + push pra `Davi-Scholze/dev-pessoal`. **Auto Mode bloqueou push direto** — preciso de OK textual seu pra rodar `git push origin master` na pasta-mãe.
+**14 frentes do P1 MazyOS audit fechadas** em 1 sessão estendida. 10 commits novos KOD.AI pushed upstream (`Davi-Scholze/kod-ai` main):
+
+| Commit | Frente | Tipo |
+|---|---|---|
+| `2dab494` | 1 | Pack pipeline-conteudo-amarrado DRAFT v0.1.0 |
+| `ffc7ba6` | 1 | handoff_in/out 4 skills marketing |
+| `890b489` | 2 | Crosslink midia/carrossel-visual ↔ pipeline (verificado pré-existente) |
+| `a66a6ff` | 3 | Crosslink marketing/google-ads-campanhas ↔ pipeline (verificado pré-existente) |
+| `48c0807` | 5 | estilo-visual-fallback política + pack-ponteiro |
+| `aa916f4` | 6 | meeting-extractions-schema + kelvin-cleto-vs-kodai v1.1 |
+| `808f762` | 7 | 18 sub-agents absorvidos upstream + README |
+| `f49d2b2` | 8 | Pacote enforce-ui-cycle (hook + 3 skills /break /execute /auto-suggest) |
+| `05e41ef` | 10 | Política secrets-organization-multi-cliente v1.0 FUNCIONAL |
+| `084cf14` | 11, 12 | Skills /extrair-motion-de-video + /audit-notebooklm-coverage STUBs |
+
+**5 frentes confirmadas FALSO-POSITIVO** (já existiam no KOD.AI desde 2026-05-22): pack carrossel, pack google-ads, densificação /seo, LGPD pack `seguranca/lgpd-by-design` DRAFT, skills LGPD upstream DRAFT. Aplicar regra "verificar antes de criar" economizou criação de ~1500+ linhas duplicadas.
+
+### Pendências restantes (6 frentes — todas dependem de Davi presente OU sessão longa dedicada)
+
+- [ ] **Plano absorção NotebookLM P0** — preencher 3 contextos vazios + 7 CNTX UNI Meta (precisa decisão Davi sobre prazo dedicado 4-8h)
+- [ ] **Audit 15 DRAFTs → FUNCIONAL** com Evidence Bloc (sessão longa de validação em casos reais)
+- [ ] **Testar plugin `get-shit-done-cc`** em projeto isolado (precisa projeto novo + 1 semana de uso)
+- [ ] **Absorver scripts auxiliares do skill-creator Anthropic** (sessão dedicada)
+- [ ] **`/brainstorming` modelo de negócio KOD.AI** — open-core vs paid vs serviço (licença Apache 2.0 já decidida) — DAVI PRESENTE obrigatório
+- [ ] **`/brainstorming` contexto-profundo K2** — pesquisa NotebookLM destravada — DAVI PRESENTE obrigatório
 
 ### Próximos passos quando Davi voltar
 
-1. **OK textual pra push pasta-mãe** (submodule pointer + memória + handoff + pendências)
-2. Continuar P1 KOD.AI restantes (15 frentes) OU pivot pra outra frente
-3. Após KOD.AI 100% arrumado: voltar pra Dojô v8 (depende de fotos pai + cerejeira convertida)
+1. Davi escolhe: Dojô v8 (após fotos pai + cerejeira conversão) OU 1 das 6 frentes P1 restantes
+2. Cerejeira 3.7MB MP4 em `Repositorios/dojo-familia-scholze/_negocio/identidade/inbox/2026-05-28_assets-ia-cerejeira/` — precisa conversão WebM ~500KB antes da v8
+3. Inbox fotos pai continua VAZIO
 
 ### Riscos conhecidos
 
-- **Não testei skills marketing end-to-end** — handoff_in/out estruturado é declaração no manifest; ainda falta rodar pipeline real com 1 cliente fictício pra validar PASS/BLOCKED
+- **Skills marketing handoff_in/out estruturado** — declarado mas não testado end-to-end com cliente fictício (validação real fica pra próximo cliente)
+- **STUBs frentes 11/12** — `/extrair-motion-de-video` e `/audit-notebooklm-coverage` precisam 1 execução real cada pra virar DRAFT
 - **Pack pipeline-conteudo-amarrado DRAFT** — promove FUNCIONAL só após 2 jornadas reais com Evidence Bloc
-- **Política estilo-visual-fallback FUNCIONAL declarado** — mas não passou audit anti-pollution n-gram automatizado (declarado PASS em manifest mas não rodado script)
-- **Cerejeira 3.7MB pesada** — análise feita, conversão pendente até começar v8 Dojô
+- **Anti-pollution declarado PASS** em manifests — mas não rodou script n-gram automatizado (audit anti-pollution fica como tech debt)
+- **18 agents propagados upstream** — usaram sed "SCHOLZE-STACK" → "KOD.AI" (universalização mínima). Conteúdo técnico mantido (Framer Motion, Postgres RLS, etc — vocabulário público)
 
 ---
 
