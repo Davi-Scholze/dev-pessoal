@@ -86,6 +86,39 @@ Davi lê cada doc e responde "ok / ajusta X / discordo prefiro Y" — economiza 
 - [ ] **F15 Testar plugin `get-shit-done-cc`** — exige projeto isolado real + 1 semana de uso
 - [ ] **F16 Absorver scripts auxiliares do skill-creator Anthropic** — exige research externa via WebFetch + tempo dedicado
 
+### Terceira rodada execução (final da sessão estendida)
+
+**3 promoções DRAFT → FUNCIONAL** com Evidence Bloc real (commit `9153a37` upstream KOD.AI):
+
+- `auditar-projeto` v1.0 → v1.1 FUNCIONAL (piloto Navortech-Desenvolvimento + 9 commits upstream + 5 contextos absorvidos)
+- `kodai-status` v0.1.0 → v1.0 FUNCIONAL (7+ Sessões Zero entre 2026-05-23 e 2026-05-28 + drift detection)
+- `novo-projeto` v1.0.0 → v1.1.0 FUNCIONAL (3+ projetos reais distintos: dojo + decon + Navortech pilotos)
+
+4 skills mantém DRAFT honestamente (Iron Law não cumprida ainda): kodai-rollback, espelhar, status-decisao, pack `comercial/modelos-venda-ia`.
+
+**Achado crítico Audit NotebookLM** (commit `a40dd54` upstream KOD.AI):
+
+3 contextos reportados como "VAZIO" no audit 2026-05-26 **NÃO ESTAVAM vazios** — ganharam conteúdo entre 26-28:
+- `lgpd-seguranca-universal/`: 1545 linhas em 6 arquivos
+- `contabilidade-br/`: DOMINIO + 1 conceito
+- `responsividade-mobile-first/`: DOMINIO + 1 conceito
+
+Aplicação da regra "verificar antes de criar" evitou 6-8h de trabalho duplicado. **6ª aplicação nesta sessão** (frentes 2, 3, 4, 5, 9, F13).
+
+**Plano F13 revisado**: Fase A CANCELADA, Fase B mantida (1.5-2h), Fase C revisada (expansão, não criação, 2.5-3.5h). Total: 4-5.5h vs 7-8h original (~40% redução).
+
+Lição: audit desatualiza em dias quando KOD.AI evolui ativamente. Skill `/audit-notebooklm-coverage` (criada hoje na frente 12) deve virar gate obrigatório antes de planos NotebookLM futuros.
+
+### Próxima ação atualizada
+
+Davi escolhe entre 5 caminhos prontos pra executar (em ordem de ROI):
+
+1. **Fase B NotebookLM** — cherry-pick 1.5-2h. Vinculação 7 CNTX UNI Meta no AGENTS.md + agentes-ia-construcao. RECOMENDADO.
+2. **Promoção Bucket A residual** — atualizar evidências em 3 skills (espelhar/status-decisao/kodai-rollback) sem promover. 30min.
+3. **Modelo de negócio** (F17) — leia `docs/decisoes/2026-05-28_modelo-de-negocio-recomendacao.md` + valida Híbrido Open-Core. Implementa LICENSE Apache 2.0 + CONTRIBUTING.md.
+4. **K2 brainstorming** (F18) — leia agenda + decide caso piloto Decon CS. Atalho 1 turno texto possível.
+5. **Dojô v8** — espera fotos pai + cerejeira conversão WebM. Ou começa pelo que não depende.
+
 ### Próximos passos quando Davi voltar
 
 1. Davi escolhe: Dojô v8 (após fotos pai + cerejeira conversão) OU 1 das 6 frentes P1 restantes
