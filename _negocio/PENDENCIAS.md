@@ -1,8 +1,16 @@
 # PENDENCIAS — Projetos Dev Pessoais
 
 > Matriz **única e consolidada** de tudo aberto (KOD.AI + projetos + pessoal).
-> Última consolidação: 2026-05-21 sessão 4 (virada de foco KOD.AI prático + piloto dojo Fase 3 completa).
+> Última consolidação: **2026-05-28 tarde** — Frentes 1-5 do P1 MazyOS audit fechadas (5 commits KOD.AI pushed). 15 frentes P1 restantes.
 > Cabeça > 7 itens P0 = sinal de overload. Pare, priorize, reduza.
+
+## 🎯 Foco atual (atualizado 2026-05-28 TARDE — meta-evolução KOD.AI em execução)
+
+**P1 MazyOS audit:** 5/20 frentes fechadas hoje (1 pipeline-conteudo-amarrado + 2 verificadas pré-existentes + 1 falso-positivo + 1 política estilo-visual-fallback). **15 frentes P1 restantes** — Kelvin Cleto absorver, 18 agents upstream, enforce-ui-cycle pacote, LGPD pack, secrets-organization política, /extrair-motion-de-video skill, /audit-notebooklm-coverage skill, NotebookLM P0 absorção, audit 15 DRAFTs, get-shit-done-cc teste, skill-creator scripts, /brainstorming modelo negócio + contexto-profundo.
+
+**Bloqueio C3 NOVO:** push pasta-mãe pendente (submodule pointer + memória nova + handoff + pendências) — Auto Mode bloqueou, precisa OK textual Davi.
+
+**Dojô v8:** aguardando KOD.AI 100% arrumado + fotos pai + cerejeira convertida (3.7MB MP4 → WebM ~500KB).
 
 ---
 
