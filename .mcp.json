@@ -33,6 +33,14 @@
         "C:/Users/usuario/AppData/Local/playwright-mcp/",
         "--isolated"
       ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "time": {
+      "command": "uvx",
+      "args": ["mcp-server-time"]
     }
   }
 }
