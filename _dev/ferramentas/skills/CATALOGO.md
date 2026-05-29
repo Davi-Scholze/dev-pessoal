@@ -75,6 +75,11 @@
 **Quando usar:** Interfaces memoráveis, mágicas ou incomuns
 **Ativar:** "faz algo impressionante visualmente" ou `/antigravity`
 
+### gerar-midia
+**Uso:** Gera imagem/vídeo por IA via Higgsfield (35+ modelos: z_image, Nano Banana, Seedance, Kling, Veo 3, Sora 2). Gate de custo obrigatório (`generate cost` dry-run antes de gastar)
+**Quando usar:** Precisa de asset visual gerado por IA pra site, carrossel ou animação. Pré-req: `higgsfield auth login` (você loga). Free ~10 créditos/dia
+**Ativar:** "gera uma imagem/vídeo de X" ou `/gerar-midia` — fonte canônica: KODAI `2-PACKS/packs/midia/higgsfield-media-gen/`
+
 ---
 
 ## Skills de Produtividade
