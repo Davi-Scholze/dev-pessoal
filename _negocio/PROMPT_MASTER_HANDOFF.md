@@ -1,7 +1,73 @@
 # PROMPT MASTER HANDOFF — Projetos Dev Pessoais
 
 > Estado vivo. Atualize ao final de cada sessão significativa.
-> Última atualização: 2026-05-28 tarde — **Frentes 1-5 do P1 MazyOS audit executadas (5 commits KOD.AI pushed)**
+> Última atualização: 2026-05-28 noite — **Sprint 1b dojô app operacional COMPLETO (8 commits pushed, em prod Vercel)**
+
+---
+
+## Sessão 2026-05-28 noite — Sprint 1b dojô app operacional COMPLETO ✓
+
+Sessão focada 100% em `Repositorios/dojo-familia-scholze` (Davi pediu separação rígida de contextos — KOD.AI fica pra sessão separada).
+
+### O que foi feito (T1→T7 plano Sprint 1b, 8 commits pushed)
+
+| # | Task | Commit | Resultado |
+|---|---|---|---|
+| T1 | Migration 0003 — schema operacional | `6df44a1` | 5 tables novas (alunos+turmas+aluno_turma+aulas+presencas) + 12 colunas em dojos + 5 colunas em profiles + 17 RLS policies tenant isolation + 6 triggers updated_at autoset. Smoke test 12/12 PASS via `scripts/validate-migration-0003.mjs`. |
+| T2 | Schemas Zod + Supabase types | `716fcb5` | 5 schemas em `@dojo-fs/lib/schemas/` (dojo+aluno+turma+aula+presenca) + supabase-js upgrade 2.47→2.106 + script reusável `scripts/gen-supabase-types.mjs` |
+| T3 | Onboarding `/dashboard/onboarding` | `550dd50` | Server Action cria profile (role=professor) + UPDATE dojo singleton (na ordem certa pra RLS); auto-redirect quando profile.dojo_id ja existe |
+| T4 | CRUD alunos mobile-first | `d2ff354` | `/dashboard/alunos` lista + `/dashboard/alunos/novo` form em 5 cards (Identificação + Treino + Contato + Saúde + Observações). `superRefine` Zod bloqueia menor sem responsável (UI responsável = Sprint 1c) |
+| T5 | CRUD turmas mobile-first | `1494d74` | `/dashboard/turmas` lista timeline + `/dashboard/turmas/nova` form. Horário recorrente simplificado: 7 checkboxes dias × 1 par HH:MM. Cor: 6 swatches predefinidos |
+| T6 | Lista presença aula hoje | `ef4b892` | `/dashboard/presenca/hoje` com lazy upsert de aulas (UNIQUE turma_id+data+horario_inicio) + useOptimistic toggle presente/ausente/justificada. Aviso prévio RSVP destacado com AlertTriangle dojo-red |
+| T7 | Dashboard timeline + dados reais | `c4b6312` | Substitui métricas zeradas por queries reais (count alunos/turmas/aulas hoje); timeline mini de aulas hoje; 4 SectionCards (3 Sprint 1b funcionais + 1 Sprint 3 placeholder) |
+| T8 | Build PASS + push | `b2b15b1` | `next build` 17 rotas geradas em 8s. 8 commits pushed `b9fdf50..b2b15b1`. Vercel deploy automático ativo em https://dojofs-davi-scholzes-projects.vercel.app |
+
+### URLs pra testar (em prod)
+
+- `/login` — Magic Link
+- `/dashboard` — após login, dashboard com timeline + módulos
+- `/dashboard/onboarding` — onde user sem profile cai automaticamente
+- `/dashboard/alunos` + `/dashboard/alunos/novo`
+- `/dashboard/turmas` + `/dashboard/turmas/nova`
+- `/dashboard/presenca/hoje`
+
+### Como testar fluxo completo (no celular do Davi)
+
+1. **Login Magic Link:** entrar em `/login` → pedir Magic Link com email REAL → abrir email no celular → clicar link → cair em `/dashboard`
+2. **Primeira vez:** `/dashboard` redireciona `/dashboard/onboarding` (porque profile.dojo_id é null no primeiro login)
+3. **Onboarding:** preencher form (Sobre você + Seu Dojô) → submit → cai em `/dashboard`
+4. **Dashboard:** mostra welcome + métricas reais (0 alunos / 0 turmas / 0 aulas hoje) + 4 SectionCards
+5. **Cadastrar 1 turma:** `/dashboard/turmas/nova` → preencher → escolher dia da semana = HOJE → criar
+6. **Cadastrar 2 alunos adultos:** `/dashboard/alunos/novo` (2x) — sem responsavel, > 18 anos
+7. **Voltar `/dashboard`:** métricas atualizadas + timeline mostra a aula
+8. **`/dashboard/presenca/hoje`:** ver aula + alunos matriculados (vazio se não matriculei — UI matrícula é Sprint 1c, vou adicionar)
+
+⚠ **Falta UI de matrícula aluno→turma** (Sprint 1b cobriu CRUDs separados mas não a relação `aluno_turma`). Pra ver presença funcionando 100%, Davi pode matricular via Supabase Studio temporariamente, ou eu adiciono na próxima sessão como T9 do Sprint 1b extended.
+
+### Decisões arquiteturais documentadas nos commits
+
+- `responsavel_profile_id` NULLABLE: menor sem responsavel bloqueado via Zod superRefine (não via CHECK constraint — `CURRENT_DATE` não é IMMUTABLE em CHECK)
+- Aulas geradas lazy via UPSERT no UNIQUE constraint (`turma_id, data, horario_inicio`)
+- `horario_recorrente` jsonb array (vs schema rígido — premature optimization pra MVP)
+- `faixa_atual` texto livre (Sprint 1c pode migrar pra FK seed quando alertas de graduação entram)
+- Single-app Next.js (não 2 apps — memória `feedback_default_single_app_unified`)
+- Tech debt documentado: cast `(supabase.from("X") as any)` em todos `.insert/.update` — TS inference quebra com Database type regenerado + supabase-js v2 (ESLint passa, valida Zod antes). Refatorar quando v3 chegar.
+
+### Pendências Sprint 1c (próxima sessão dojô)
+
+- [ ] **UI matrícula aluno↔turma** (multi-select alunos em /turmas/[id] OU /alunos/[id]/turmas) — desbloqueia presença end-to-end real
+- [ ] **Edit individual** `/dashboard/alunos/[id]` e `/dashboard/turmas/[id]` (Sprint 1b só implementou novo + lista)
+- [ ] **UI de responsável** + fluxo cadastro menor (desbloqueia crianças)
+- [ ] **Fechamento da aula** (botão em /presenca/hoje pra marcar planejamento_cumprido + observações gerais)
+- [ ] **Graduação** — Sprint 2 conforme ARQUITETURA-MESTRE
+- [ ] **Asaas/Financeiro** — Sprint 3
+
+### Riscos conhecidos
+
+- `as any` casts em 6 lugares — tech debt; refatorar quando upgrade supabase-js v3 OR custom typed helpers em `@dojo-fs/supabase` (Sprint 1c+)
+- Sem UI de matrícula = `/presenca/hoje` mostra "0 matriculados" mesmo com alunos cadastrados (gap funcional declarado)
+- Edit alunos/turmas adiado pra Sprint 1c (cadastro sem edit funciona pra teste piloto pai, mas precisa antes de venda externa)
+- Smoke test mobile-first via dispositivo real do Davi (não Playwright sintético) — opção A escolhida pelo Davi
 
 ---
 
